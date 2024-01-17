@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:25:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/17 20:32:18 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/17 20:41:22 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ static void	remove_one_children_node(t_typetree typetree, t_any address)
 	else
 		aux = typetree->rtree;
 	free(typetree->address);
-	free(typetree);
-	// return aux
+	typetree->address = aux->address;
+	typetree->ltree = aux->ltree;
+	typetree->rtree = aux->rtree;
+	typetree->height -= 1;
+	free(aux);
 }
 
 static void	another_helper(t_typetree typetree, t_any address)
