@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memtree_create.c                                   :+:      :+:    :+:   */
+/*   typetree_create.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 15:33:22 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/15 15:46:19 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/17 13:34:02 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/17 14:55:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memtree.h"
+#include "typetree.h"
 
-t_memtree	memtree_create(t_any address)
+t_typetree	typetree_create(t_typetree parent, t_any address)
 {
-	t_memtree	memtree;
+	t_typetree	typetree;
 
-	memtree = malloc(sizeof(struct s_memtree));
-	if (memtree == NULL)
+	typetree = malloc(sizeof(struct s_typetree));
+	if (typetree == NULL)
 	{
-		memtree_destroy(memtree_get());
+		typetree_destroy();
 		return (NULL);
 	}
-	memtree->address = address;
-	memtree->height = 0;
-	memtree->left_child = NULL;
-	memtree->right_child = NULL;
-	return (memtree);
+	typetree->height = 0;
+	typetree->parent = parent;
+	typetree->ltree = NULL;
+	typetree->rtree = NULL;
+	typetree->address = address;
+	return (typetree);
 }

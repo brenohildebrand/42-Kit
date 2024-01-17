@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memtree_search.c                                   :+:      :+:    :+:   */
+/*   typetree_get.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/15 16:50:42 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/15 16:52:22 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/17 13:26:10 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/17 14:53:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memtree.h"
+#include "typetree.h"
 
-int	memtree_search(t_memtree memtree, t_any address)
+t_typetree	*typetree_get(void)
 {
-	if (memtree == NULL)
-		return (0);
-	else if (address < memtree->address)
-		return (memtree_search());
-	else if (address > memt)
+	static t_typetree	typetree = NULL;
+
+	return (&typetree);
 }

@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memtree_get.c                                      :+:      :+:    :+:   */
+/*   typecode.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 16:39:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/12 18:50:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/17 09:46:52 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/17 10:03:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memtree.h"
+#ifndef TYPECODE_H
+# define TYPECODE_H
 
-t_memtree	memtree_get(void)
-{
-	static struct s_memtree	memtree;
+typedef struct s_typecode	*t_typecode;
 
-	return (&memtree);
-}
+struct s_typecode {
+	unsigned int	value;
+};
+
+#endif
