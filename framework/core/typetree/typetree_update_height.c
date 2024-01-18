@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   typetree_create.c                                  :+:      :+:    :+:   */
+/*   typetree_update_height.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 13:34:02 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 18:07:03 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/18 13:22:15 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/18 15:46:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "typetree.h"
 
-t_typetree	typetree_create(t_any address)
+void	typetree_update_height(t_typetree typetree)
 {
-	t_typetree	typetree;
+	int	lheight;
+	int	rheight;
 
-	typetree = malloc(sizeof(struct s_typetree));
-	if (typetree == NULL)
+	lheight = typetree_get_height(typetree->ltree);
+	rheight = typetree_get_height(typetree->rtree);
+	if (lheight > rheight)
 	{
-		typetree_destroy();
-		return (NULL);
+		typetree->height = 1 + lheight;
 	}
-	typetree->height = 1;
-	typetree->ltree = NULL;
-	typetree->rtree = NULL;
-	typetree->address = address;
-	return (typetree);
+	else
+	{
+		typetree->height = 1 + rheight;
+	}
 }

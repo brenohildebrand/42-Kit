@@ -6,120 +6,64 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:25:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 10:46:03 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:01:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "typetree.h"
 
-static void	remove_two_children_node(t_typetree typetree, t_any address)
+static t_any	another_helper(t_typetree *typetree)
 {
-	t_typetree aux;
-	
-	aux = typetree->ltree;
-	while (aux->rtree != NULL)
-		aux = aux->rtree;
-	typetree->address = aux->address;
-	aux->address = address;
-	if (aux == typetree->ltree)
-		aux->parent->ltree = aux->ltree;
-	else
-		aux->parent->rtree = aux->ltree;
-	aux->parent->height -= 1;
-	free(aux->address);
-	free(aux);
-	aux = typetree->ltree;
-	while (aux->rtree != NULL)
-	{
-		typetree_rebalance(typetree);
-		aux = aux->rtree;
-	}
-}
+	t_typetree	min_root;
+	t_any		min_address;
 
-static void	remove_one_children_node(t_typetree typetree, t_any address)
-{
-	if (typetree->ltree != NULL)
+	if ((*typetree)->ltree == NULL)
 	{
-		if (typetree->parent)
-		{
-			if (typetree->address < typetree->parent->address)
-				typetree->parent->ltree = typetree->ltree;
-			else
-				typetree->parent->rtree = typetree->ltree;
-		}
+		min_root = *typetree;
+		min_address = (*typetree)->address;
+		*typetree = min_root->rtree;
+		// free(min_root->address);
+		free(min_root);
 	}
 	else
 	{
-		if (typetree->parent)
-		{
-			if (typetree->address < typetree->parent->address)
-				typetree->parent->ltree = typetree->rtree;
-			else
-				typetree->parent->rtree = typetree->rtree;
-		}
+		min_address = another_helper(&((*typetree)->ltree));
 	}
-	typetree->parent->height -= 1;
-	typetree_rebalance(typetree->parent);
-	free(typetree->address);
-	free(typetree);
+	typetree_rebalance(typetree);
+	return (min_address);
 }
 
-static void	another_helper(t_typetree typetree, t_any address)
+static void	helper(t_typetree *typetree, t_any address)
 {
-	if (typetree->ltree == NULL && typetree->rtree == NULL)
-	{
-		if (typetree->parent)
-		{
-			if (typetree->address < typetree->parent->address)
-				typetree->parent->ltree = NULL;
-			else
-				typetree->parent->rtree = NULL;	
-		}
-		free(typetree->address)
-		free(typetree);
-	}
-	else if (typetree->ltree != NULL && typetree->rtree != NULL)
-	{
-		remove_two_children_node(typetree, address);
-	}
-	else
-	{
-		remove_one_children_node(typetree, address);	
-	}
-}
+	t_typetree	old_root;
 
-static void	helper(t_typetree typetree, t_any address)
-{
-	if (typetree == NULL)
-	{
+	if (*typetree == NULL)
 		return ;
-	}
-	else if (typetree->address == address)
+	else if ((*typetree)->address == address)
 	{
-		another_helper(typetree, address);
+		if ((*typetree)->rtree != NULL)
+		{
+			(*typetree)->address = another_helper(&((*typetree)->rtree));
+		}
+		else
+		{
+			old_root = *typetree;
+			*typetree = (*typetree)->ltree;
+			// free(old_root->address);
+			free(old_root);
+		}
 	}
-	else if (address < typetree->address)
-	{
-		helper(typetree->ltree, address);
-	}
-	else if (address > typetree->address)
-	{
-		helper(typetree->rtree, address);
-	}
-	if (typetree->ltree->height > typetree->rtree->height)
-		typetree->height = 1 + typetree->ltree->height;
-	else
-		typetree->height = 1 + typetree->rtree->height; 
+	else if (address < (*typetree)->address)
+		helper(&((*typetree)->ltree), address);
+	else if (address > (*typetree)->address)
+		helper(&((*typetree)->rtree), address);
 	typetree_rebalance(typetree);
 }
 
 void	typetree_delete(t_any address)
 {
 	t_typetree	*typetree;
-	t_typetree	max_min;
 
 	typetree = typetree_get();
-	if (typetree == NULL)
-		return ;
-	helper(*typetree, address);
+	helper(typetree, address);
 }

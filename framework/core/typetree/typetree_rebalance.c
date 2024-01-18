@@ -6,123 +6,96 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:30:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 11:03:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/18 18:43:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "typetree.h"
 
-static void	left_rotate(t_typetree typetree)
-{
-	
-}
-
-static void	right_rotate(t_typetree typetree)
+static void	left_rotate(t_typetree *typetree)
 {
 	t_typetree	y;
 	t_typetree	x;
 	t_typetree	b;
 	
-	y = typetree;
+	y = *typetree;
+	x = y->rtree;
+	b = x->ltree;
+	
+	y->rtree = b;
+	x->ltree = y;
+	*typetree = x;
+
+	typetree_update_height((*typetree)->ltree);
+	typetree_update_height(*typetree);
+}
+
+static void	right_rotate(t_typetree *typetree)
+{
+	t_typetree	y;
+	t_typetree	x;
+	t_typetree	b;
+	
+	y = *typetree;
 	x = y->ltree;
 	b = x->rtree;
 	
 	y->ltree = b;
 	x->rtree = y;
-	if (typetree->address < typetree->parent->address)
-		typetree->parent->ltree = x;
+	*typetree = x;
+
+	typetree_update_height((*typetree)->rtree);
+	typetree_update_height(*typetree);
+}
+
+static void	rebalance_left(t_typetree *typetree)
+{
+	int	lgrandheight;
+	int	rgrandheight;
+
+	lgrandheight = typetree_get_height((*typetree)->ltree->ltree);
+	rgrandheight = typetree_get_height((*typetree)->ltree->rtree);
+	if (lgrandheight >= rgrandheight)
+	{
+		right_rotate(typetree);
+	}
 	else
-		typetree->parent->rtree = x;
-	// fix heights
-	if (y->ltree->height > y->rtree->height)
+	{
+		left_rotate(&((*typetree)->rtree));
+		right_rotate(typetree);
+	}
 }
 
-void	typetree_rebalance(t_typetree typetree)
+static void	rebalance_right(t_typetree *typetree)
 {
-	if (typetree == NULL)
+	int	lgrandheight;
+	int	rgrandheight;
+
+	lgrandheight = typetree_get_height((*typetree)->rtree->ltree);
+	rgrandheight = typetree_get_height((*typetree)->rtree->rtree);
+	if (rgrandheight >= lgrandheight)
+	{
+		left_rotate(typetree);
+	}
+	else
+	{
+		right_rotate(&((*typetree)->ltree));
+		left_rotate(typetree);
+	}
+}
+
+void	typetree_rebalance(t_typetree *typetree)
+{
+	int	lheight;
+	int	rheight;
+
+	if ((*typetree) == NULL)
 		return ;
-	if (typetree->ltree->height - typetree->rtree->height > 1)
-	{
-		if (typetree->ltree->ltree->height > typetree->ltree->rtree->height)
-			left_rotate(typetree);
-		else
-		{
-			right_rotate(typetree->ltree);
-			left_rotate(typetree);
-		}
-	}
-	else if (typetree->rtree->height - typetree->ltree->height > 1)
-	{
-		if (typetree->rtree->rtree->height > typetree->rtree->ltree->height)
-			right_rotate(typetree);
-		else
-		{
-			left_rotate(typetree->rtree);
-			right_rotate(typetree);
-		}
-	}
-	// update height
-}
-
-/* rotate child[d] to root */
-/* assumes child[d] exists */
-/* Picture:
-*
-*     y            x
-*    / \   <==>   / \
-*   x   C        A   y
-*  / \              / \
-* A   B            B   C
-*
-*/
-static void
-avlRotate(AvlTree *root, int d)
-{
-	AvlTree oldRoot;
-	AvlTree newRoot;
-	AvlTree oldMiddle;
-
-	oldRoot = *root;
-	newRoot = oldRoot->child[d];
-	oldMiddle = newRoot->child[!d];
-   
-  	oldRoot->child[d] = oldMiddle;
-  	newRoot->child[!d] = oldRoot;
- 	*root = newRoot;
-  
- 	/* update heights */
- 	avlFixHeight((*root)->child[!d]);   /* old root */
-	avlFixHeight(*root);                /* new root */
-}
-
-/* rebalance at node if necessary */
-/* also fixes height */
-static void
-avlRebalance(AvlTree *t)
-{
-    int d;
-
-    if(*t != AVL_EMPTY) {
-        for(d = 0; d < 2; d++) {
-            /* maybe child[d] is now too tall */
-            if(avlGetHeight((*t)->child[d]) > avlGetHeight((*t)->child[!d]) + 1) {
-                /* imbalanced! */
-                /* how to fix it? */
-                /* need to look for taller grandchild of child[d] */
-                if(avlGetHeight((*t)->child[d]->child[d]) > avlGetHeight((*t)->child[d]->child[!d])) {
-                    /* same direction grandchild wins, do single rotation */
-                    avlRotate(t, d);
-                } else {
-                    /* opposite direction grandchild moves up, do double rotation */
-                    avlRotate(&(*t)->child[d], !d);
-                    avlRotate(t, d);
-                }
-
-                return;   /* avlRotate called avlFixHeight */
-            }
-        }
-                  
-        /* update height */
-        avlFixHeight(*t);
-    }
+	lheight = typetree_get_height((*typetree)->ltree);
+	rheight = typetree_get_height((*typetree)->rtree);
+	if (lheight - rheight > 1)
+		rebalance_left(typetree);
+	else if (rheight - lheight > 1)
+		rebalance_right(typetree);
+	typetree_update_height(*typetree);	
 }

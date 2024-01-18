@@ -6,21 +6,26 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:56:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/17 15:58:13 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:33:11 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "typetree.h"
+
+static void	helper(t_typetree typetree)
+{
+	if (typetree == NULL)
+		return ;
+	helper(typetree->ltree);
+	helper(typetree->rtree);
+	// free(typetree->address);
+	free(typetree);
+}
 
 void	typetree_destroy(void)
 {
 	t_typetree	*typetree;
 
 	typetree = typetree_get();
-	if (typetree == NULL)
-		return ;
-	typetree_destroy((*typetree)->ltree);
-	typetree_destroy((*typetree)->rtree);
-	free((*typetree)->address);
-	free(*typetree);
+	helper(*typetree);
 }

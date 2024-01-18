@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:42:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/17 16:26:18 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/18 17:45:04 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,20 @@ typedef void					*t_any;
 typedef struct s_typetree		*t_typetree;
 
 struct s_typetree {
-	t_typetree		parent;
 	t_typetree		ltree;
 	t_typetree		rtree;
 	t_any			address;
-	unsigned int	height;	
+	int	height;	
 };
 
 t_typetree	*typetree_get(void);
-t_typetree	typetree_create(t_typetree parent, t_any address);
+t_typetree	typetree_create(t_any address);
 void		typetree_destroy(void);
 void		typetree_insert(t_any address);
 void		typetree_delete(t_any address);
-void		typetree_rebalance(t_typetree typetree);
-
-// try not to use typetreenode
+void		typetree_rebalance(t_typetree *typetree);
+void		typetree_update_height(t_typetree typetree);
+int			typetree_get_height(t_typetree typetree);
+void		typetree_print(void);
 
 #endif

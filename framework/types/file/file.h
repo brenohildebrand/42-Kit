@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   typetree_create.c                                  :+:      :+:    :+:   */
+/*   file.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 13:34:02 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 18:07:03 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/18 19:18:33 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/18 19:22:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "typetree.h"
+#ifndef FILE_H
+# define FILE_H
 
-t_typetree	typetree_create(t_any address)
-{
-	t_typetree	typetree;
+typedef struct s_file	*t_file;
 
-	typetree = malloc(sizeof(struct s_typetree));
-	if (typetree == NULL)
-	{
-		typetree_destroy();
-		return (NULL);
-	}
-	typetree->height = 1;
-	typetree->ltree = NULL;
-	typetree->rtree = NULL;
-	typetree->address = address;
-	return (typetree);
-}
+struct s_file {
+	t_vector	content;
+	void		*cursor;
+};
+
+t_file	file_create(char *path);
+void	file_destroy(void);
+
+void	file_convert_to_map(t_file file);
+
+file_
+
+#endif

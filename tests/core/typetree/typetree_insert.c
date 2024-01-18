@@ -5,41 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 15:35:24 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 15:00:55 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/18 15:32:23 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/18 18:49:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "typetree.h"
+#include <stdio.h>
 
-static void	helper(t_typetree *typetree, t_any address)
+#define SIZE 10
+
+int	main(void)
 {
-	if (*typetree == NULL)
+	for (long long int i = 1; i <= 100; i++)
 	{
-		*typetree = typetree_create(address);
+		typetree_insert((void *)i);
 	}
-	else if (address == (*typetree)->address)
+	for (long long int i = 1; i <= 100; i++)
 	{
-		return ;
+		typetree_delete((void *)i);
 	}
-	else
-	{
-		if (address < (*typetree)->address)
-		{
-			helper(&((*typetree)->ltree), address);
-		}
-		else
-		{
-			helper(&((*typetree)->rtree), address);
-		}
-		typetree_rebalance(typetree);
-	}
-}
-
-void	typetree_insert(t_any address)
-{
-	t_typetree	*typetree;
-
-	typetree = typetree_get();
-	helper(typetree, address);
+	return (0);
 }
