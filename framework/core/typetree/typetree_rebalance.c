@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:30:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/17 20:56:20 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/18 11:03:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,22 @@ static void	left_rotate(t_typetree typetree)
 
 static void	right_rotate(t_typetree typetree)
 {
+	t_typetree	y;
+	t_typetree	x;
+	t_typetree	b;
 	
+	y = typetree;
+	x = y->ltree;
+	b = x->rtree;
+	
+	y->ltree = b;
+	x->rtree = y;
+	if (typetree->address < typetree->parent->address)
+		typetree->parent->ltree = x;
+	else
+		typetree->parent->rtree = x;
+	// fix heights
+	if (y->ltree->height > y->rtree->height)
 }
 
 void	typetree_rebalance(t_typetree typetree)
