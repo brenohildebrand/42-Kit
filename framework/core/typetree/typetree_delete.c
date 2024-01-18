@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:25:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/17 20:41:22 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/18 10:46:03 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,60 @@ static void	remove_two_children_node(t_typetree typetree, t_any address)
 		aux = aux->rtree;
 	typetree->address = aux->address;
 	aux->address = address;
-	typetree_delete(typetree->ltree, address);
+	if (aux == typetree->ltree)
+		aux->parent->ltree = aux->ltree;
+	else
+		aux->parent->rtree = aux->ltree;
+	aux->parent->height -= 1;
+	free(aux->address);
+	free(aux);
+	aux = typetree->ltree;
+	while (aux->rtree != NULL)
+	{
+		typetree_rebalance(typetree);
+		aux = aux->rtree;
+	}
 }
 
 static void	remove_one_children_node(t_typetree typetree, t_any address)
 {
-	t_typetree	aux;
-
 	if (typetree->ltree != NULL)
-		aux = typetree->ltree;
+	{
+		if (typetree->parent)
+		{
+			if (typetree->address < typetree->parent->address)
+				typetree->parent->ltree = typetree->ltree;
+			else
+				typetree->parent->rtree = typetree->ltree;
+		}
+	}
 	else
-		aux = typetree->rtree;
+	{
+		if (typetree->parent)
+		{
+			if (typetree->address < typetree->parent->address)
+				typetree->parent->ltree = typetree->rtree;
+			else
+				typetree->parent->rtree = typetree->rtree;
+		}
+	}
+	typetree->parent->height -= 1;
+	typetree_rebalance(typetree->parent);
 	free(typetree->address);
-	typetree->address = aux->address;
-	typetree->ltree = aux->ltree;
-	typetree->rtree = aux->rtree;
-	typetree->height -= 1;
-	free(aux);
+	free(typetree);
 }
 
 static void	another_helper(t_typetree typetree, t_any address)
 {
 	if (typetree->ltree == NULL && typetree->rtree == NULL)
 	{
+		if (typetree->parent)
+		{
+			if (typetree->address < typetree->parent->address)
+				typetree->parent->ltree = NULL;
+			else
+				typetree->parent->rtree = NULL;	
+		}
 		free(typetree->address)
 		free(typetree);
 	}
