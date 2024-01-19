@@ -6,13 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:34:02 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 18:07:03 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/19 09:24:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "typetree.h"
 
-t_typetree	typetree_create(t_any address)
+t_typetree	typetree_create(t_typedata typedata, t_any address)
 {
 	t_typetree	typetree;
 
@@ -26,5 +26,6 @@ t_typetree	typetree_create(t_any address)
 	typetree->ltree = NULL;
 	typetree->rtree = NULL;
 	typetree->address = address;
+	typetree->typedata = typedata;
 	return (typetree);
 }

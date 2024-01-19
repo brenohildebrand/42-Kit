@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ok.c                                               :+:      :+:    :+:   */
+/*   integer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:47:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 01:50:21 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 10:57:38 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/19 10:59:27 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "kit.h"
+#include "integer.h"
 
-int	main(void)
+t_typedata	integer(void)
 {
-	t_vector	v;
+	static struct s_typedata	integer_typedata = {
+		.create = (t_any (*)(void))integer_create,
+		.destroy = (void (*)(t_any))integer_destroy,
+		.size = sizeof(int)
+	};
 
-	v = new(vector);
-	delete(v);
-
-	v = vector_create();
-	vector_destroy();
+	return (&integer_typedata);
 }

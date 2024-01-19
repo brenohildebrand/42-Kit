@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kit.h                                              :+:      :+:    :+:   */
+/*   integer.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:17:03 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 11:24:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 10:54:35 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/19 11:33:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KIT_H
-# define KIT_H
+#ifndef INTEGER_H
+# define INTEGER_H
 
-# include "typetree.h"
+# include "kit.h"
 
-# include <stdlib.h>
+typedef int	*t_integer;
 
-typedef void	*t_any;
-
-t_any	allocate(t_typesize size);
-void	deallocate(t_any address);
-
-t_any	new(t_typedata (*type)(void));
-void	delete(t_any address);
-t_any	copy(t_any address);
-
-t_any	create(t_typedata (*type)(void));
-void	destroy(t_any address);
+t_typedata	integer(void);
+t_integer	integer_create(void);
+void		integer_destroy(t_integer integer);
+void		integer_init(t_integer integer, int value);
 
 #endif

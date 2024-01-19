@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kit.h                                              :+:      :+:    :+:   */
+/*   character.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:17:03 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 11:24:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 11:03:44 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/19 11:11:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KIT_H
-# define KIT_H
+#ifndef CHARACTER_H
+# define CHARACTER_H
 
-# include "typetree.h"
+# include "kit.h"
 
-# include <stdlib.h>
+typedef char	*t_character;
 
-typedef void	*t_any;
-
-t_any	allocate(t_typesize size);
-void	deallocate(t_any address);
-
-t_any	new(t_typedata (*type)(void));
-void	delete(t_any address);
-t_any	copy(t_any address);
-
-t_any	create(t_typedata (*type)(void));
-void	destroy(t_any address);
+t_typedata	character(void);
+t_character	character_create(void);
+void		character_destroy(t_character character);
+void		character_init(t_character character, char value);
 
 #endif

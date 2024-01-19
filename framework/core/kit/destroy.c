@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   kit.h                                              :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:17:03 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 11:24:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 10:11:48 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/19 10:51:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KIT_H
-# define KIT_H
+#include "kit.h"
 
-# include "typetree.h"
+void	destroy(t_any address)
+{
+	t_typedata	typedata;
 
-# include <stdlib.h>
-
-typedef void	*t_any;
-
-t_any	allocate(t_typesize size);
-void	deallocate(t_any address);
-
-t_any	new(t_typedata (*type)(void));
-void	delete(t_any address);
-t_any	copy(t_any address);
-
-t_any	create(t_typedata (*type)(void));
-void	destroy(t_any address);
-
-#endif
+	typedata = typetree_search(address);
+	if (typedata == NULL)
+		typetree_delete(address);
+	else
+		typedata->destroy(address);
+}
