@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:01:23 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 11:01:57 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/19 11:47:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	integer_init(t_integer integer, int value)
 {
-	*integer = value;	
+	*integer = value;
 }

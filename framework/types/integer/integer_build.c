@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   integer_build.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 11:16:46 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 11:56:28 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 11:55:21 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/19 11:56:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
 #include "integer.h"
 
-int	main(void)
+t_integer	integer_build(int value)
 {
-	t_vector	vector;
 	t_integer	integer;
-
-	vector = vector_create();
-	integer = integer_build(6);
-	vector_push(vector, integer);
-	integer = integer_build(10);
-	vector_push(vector, integer);
-	vector_destroy(vector);
-	return (0);
+	
+	integer = integer_create();
+	integer_init(integer, value);
+	return (integer);
 }
