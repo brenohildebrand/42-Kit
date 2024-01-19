@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   typedata.h                                         :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 10:04:00 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 02:09:51 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 02:05:40 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/19 02:11:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPEDATA_H
-# define TYPEDATA_H
+#include "vector.h"
 
-/* Remember that the typecode is the address of the typedata of
-each type. */
+t_typedata	vector(void)
+{
+	static struct s_typedata	vector_typedata = {
+		.typecreate = (t_any (*)(void))vector_create,
+		.typedestroy = (void (*)(t_any))vector_destroy,
+		.size = sizeof(struct s_vector);
+	};
 
-typedef void				*t_any;
-typedef struct s_typedata	*t_typedata;
-
-typedef t_any (*)(void)		t_typecreate;
-typedef void (*)(t_any)		t_typedestroy;
-typedef unsigned int		t_typesize;
-
-struct s_typedata {
-	t_typecreate	create;
-	t_typedestroy	destroy;
-	t_typesize		size;
-};
-
-#endif
+	return (&vector_typedata);
+}
