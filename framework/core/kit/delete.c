@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   typecode.h                                         :+:      :+:    :+:   */
+/*   delete.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 09:46:52 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/17 10:03:47 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 01:21:40 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/19 01:54:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPECODE_H
-# define TYPECODE_H
+#include "kit.h"
 
-typedef struct s_typecode	*t_typecode;
-
-struct s_typecode {
-	unsigned int	value;
-};
-
-#endif
+void	delete(t_any address)
+{
+	typetree_delete(address);
+}

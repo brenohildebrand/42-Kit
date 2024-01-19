@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   typetree_print.c                                   :+:      :+:    :+:   */
+/*   kit.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 17:45:10 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 17:48:13 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 01:17:03 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/19 01:59:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "typetree.h"
-#include <stdio.h>
+#ifndef KIT_H
+# define KIT_H
 
-void	helper(t_typetree typetree)
-{
-	if (typetree == NULL)
-		return;
-	helper(typetree->ltree);
-	printf("%p\n", typetree->address);
-	helper(typetree->rtree);	
-}
+# include "typetree.h"
+# include "typemap.h"
 
-void	typetree_print(void)
-{
-	t_typetree	*typetree;
+# include <stdlib.h>
 
-	typetree = typetree_get();
-	helper(*typetree);
-}
+typedef void	*t_any;
+
+t_any	new(t_typedata (*type)(void));
+void	delete(t_any address);
+
+#endif

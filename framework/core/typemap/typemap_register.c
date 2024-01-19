@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_create.c                                    :+:      :+:    :+:   */
+/*   typemap_register.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 23:47:22 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/17 09:42:36 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 00:46:10 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/19 00:52:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "typemap.h"
 
-t_string	string_create(char *literal)
+void	typemap_register(t_typecode key, t_typedata value)
 {
-	t_string	string;
-
-	if (!typemap_find(string_get_typecode()))
-		typemap_insert(42, string_get_typeinfo());
-	string = type_create();
-	string->content = 
-	
-	return (string);
+	if (key->value == 0)
+	{
+		write("An error occured.", 18); 
+		write("Zero is the only INVALID typecode value.", 41);
+		write("You better check your typecodes.\n", 34);
+		typetree_destroy();
+		exit(1);
+	}
+	if (!typemap_find(key))
+		typemap_insert(key, value);
 }

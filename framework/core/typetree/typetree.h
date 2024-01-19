@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:42:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 17:45:04 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/19 00:54:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ void		typetree_delete(t_any address);
 void		typetree_rebalance(t_typetree *typetree);
 void		typetree_update_height(t_typetree typetree);
 int			typetree_get_height(t_typetree typetree);
-void		typetree_print(void);
 
 #endif

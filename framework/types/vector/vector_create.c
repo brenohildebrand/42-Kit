@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   typedata.h                                         :+:      :+:    :+:   */
+/*   vector_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/17 10:04:00 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 01:55:55 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 00:59:42 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/19 02:01:34 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPEDATA_H
-# define TYPEDATA_H
+#include "vector.h"
 
-typedef void				*t_any;
-typedef struct s_typedata	*t_typedata;
+t_vector	vector_create(void)
+{
+	t_vector	vector;
 
-typedef unsigned int		t_typecode;
-typedef (*create)(void)		t_typecreate;
-typedef (*destroy)(t_any)	t_typedestroy;
-typedef unsigned int		t_typesize;
-
-struct s_typedata {
-	t_typecode		code;
-	t_typecreate	create;
-	t_typedestroy	destroy;
-	t_typesize		size;
-};
-
-#endif
+	vector = (t_vector)new(vector);
+	vector->content = NULL;
+	vector->length = 0;
+	vector->size = 0;
+	return (vector);
+}

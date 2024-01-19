@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 19:30:45 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/17 13:14:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/19 01:26:29 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ need to call typetree_destroy() at the end of every program. */
 
 # include "typecode.h"
 # include "typedata.h"
+# include "typetree.h"
+
+# include <unistd.h>
+# include <stdlib.h>
 
 # define TYPEMAP_MAX_ENTRIES 997
 
@@ -49,5 +53,6 @@ t_typemap		typemap_get(void);
 unsigned int	typemap_hash(t_typecode key);
 void			typemap_insert(t_typecode key, t_typedata value);
 t_typedata		typemap_find(t_typecode key);
+void			typemap_register(t_typedata typedata);
 
 #endif

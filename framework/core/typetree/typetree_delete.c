@@ -6,12 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:25:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 23:07:50 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/19 00:54:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "typetree.h"
-#include <stdio.h>
 
 static t_any	another_helper(t_typetree *typetree)
 {
