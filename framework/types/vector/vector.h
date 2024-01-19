@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file.h                                             :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 19:18:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 19:22:43 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/18 22:41:19 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/18 22:43:41 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILE_H
-# define FILE_H
+#ifndef VECTOR_H
+# define VECTOR_H
 
-typedef struct s_file	*t_file;
+# include "typetree.h"
+# include "typemap.h"
 
-struct s_file {
-	t_vector	content;
-	void		*cursor;
+typedef struct s_vector	*t_vector;
+
+struct s_vector {
+	unsigned int	size;
+	unsigned int	length;
+	t_any			*any;
 };
 
-t_file	file_create(char *path);
-void	file_destroy(void);
-
-void	file_convert_to_map(t_file file);
-
-file_
+vector_create()
 
 #endif

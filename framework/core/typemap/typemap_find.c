@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 12:05:10 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/17 12:13:22 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/18 23:03:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_typedata	typemap_find(t_typecode key)
 
 	typemap = typemap_get();
 	hash = typemap_hash(key);
-	while (typemap->entries[hash].key != key)
+	while (typemap->entries[hash].key && typemap->entries[hash].key != key)
 	{
 		hash++;
 		if (hash == TYPEMAP_MAX_ENTRIES - 1)

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:56:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 22:21:51 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/18 23:07:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	helper(t_typetree typetree)
 		return ;
 	helper(typetree->ltree);
 	helper(typetree->rtree);
-	// free(typetree->address);
+	free(typetree->address);
 	free(typetree);
 }
 
