@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:30:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 18:43:26 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:35:03 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	rebalance_left(t_typetree *typetree)
 	}
 	else
 	{
-		left_rotate(&((*typetree)->rtree));
+		left_rotate(&((*typetree)->ltree));
 		right_rotate(typetree);
 	}
 }
@@ -79,7 +79,7 @@ static void	rebalance_right(t_typetree *typetree)
 	}
 	else
 	{
-		right_rotate(&((*typetree)->ltree));
+		right_rotate(&((*typetree)->rtree));
 		left_rotate(typetree);
 	}
 }
