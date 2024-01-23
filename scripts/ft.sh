@@ -17,17 +17,17 @@ case $1 in
     "check")
         ./check.sh "${@:2}"
         ;;
-    "create")
-        ./create.sh "${@:2}"
-        ;;
-    "ft")
-        ./ft.sh "${@:2}"
+    "init")
+        ./init.sh "${@:2}"
         ;;
     "submit")
         ./submit.sh "${@:2}"
         ;;
     "test")
         ./test.sh "${@:2}"
+        ;;
+    "version")
+        ./version.sh "${@:2}"
         ;;
     *)
         echo "Unknown command: $1"
