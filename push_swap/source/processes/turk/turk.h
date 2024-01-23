@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   character_build.c                                  :+:      :+:    :+:   */
+/*   turk.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 22:57:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 20:59:57 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/23 08:57:45 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/23 08:57:57 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "character.h"
+#ifndef TURK_H
+# define TURK_H
 
-t_character	character_build(char value)
-{
-	t_character	type;
 
-	type = character_create();
-	character_init(type, value);
-	return (type);
-}
+
+#endif

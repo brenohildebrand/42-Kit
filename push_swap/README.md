@@ -5,7 +5,4 @@ This project was developed during my journey at [42 São Paulo](https://github.c
 </br>
 </br>
 
-
-<h1 align="center">ft_framework</h1>
-
-I've created this project to help me with 42 projects.
+<h1 align="center">ft_push_swap</h1>

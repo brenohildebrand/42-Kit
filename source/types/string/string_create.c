@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   character_build.c                                  :+:      :+:    :+:   */
+/*   string_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 22:57:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 20:59:57 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/22 20:44:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/22 20:46:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "character.h"
+#include "string.h"
 
-t_character	character_build(char value)
+t_string	string_create(void)
 {
-	t_character	type;
+	t_string	s;
 
-	type = character_create();
-	character_init(type, value);
-	return (type);
+	s = (t_string)new(string);
+	s->content = NULL;
+	s->length = 0;
+	s->max_length = 0;
+	return (s);
 }

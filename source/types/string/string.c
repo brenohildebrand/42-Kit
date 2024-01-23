@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   character_build.c                                  :+:      :+:    :+:   */
+/*   string.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 22:57:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 20:59:57 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/22 20:43:27 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/22 20:44:51 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "character.h"
+#include "string.h"
 
-t_character	character_build(char value)
+t_typedata	string(void)
 {
-	t_character	type;
+	static struct s_typedata	string_typedata = {
+		.create = (t_any (*)(void))string_create,
+		.destroy = (void (*)(t_any))string_destroy,
+		.size = sizeof(struct s_string)	
+	};
 
-	type = character_create();
-	character_init(type, value);
-	return (type);
+	return (&string_typedata);
 }

@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   character_build.c                                  :+:      :+:    :+:   */
+/*   initialize_stack_a.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 22:57:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 20:59:57 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/23 03:13:51 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/23 04:55:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "character.h"
+#include "push_swap.h"
 
-t_character	character_build(char value)
+void	initialize_stack_a(t_stack a, char *argv[])
 {
-	t_character	type;
+	unsigned int	i;
 
-	type = character_create();
-	character_init(type, value);
-	return (type);
+	i = 1;
+	while (argv[i])
+		i++;
+	while (i > 0)
+	{
+		stack_push(a, ft_atoi(argv[i]));
+		i--;
+	}
 }

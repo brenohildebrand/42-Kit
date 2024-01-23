@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   character_build.c                                  :+:      :+:    :+:   */
+/*   string_destroy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 22:57:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 20:59:57 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/22 21:59:59 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/22 22:39:41 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "character.h"
+#include "string.h"
 
-t_character	character_build(char value)
+void	string_destroy(t_string string)
 {
-	t_character	type;
-
-	type = character_create();
-	character_init(type, value);
-	return (type);
+	deallocate(string->content);
+	delete(string);
 }

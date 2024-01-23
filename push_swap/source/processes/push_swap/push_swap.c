@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   character_build.c                                  :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 22:57:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 20:59:57 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/22 21:05:48 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/23 07:33:11 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "character.h"
+#include "push_swap.h"
 
-t_character	character_build(char value)
+int	main(int argc, char *argv[])
 {
-	t_character	type;
-
-	type = character_create();
-	character_init(type, value);
-	return (type);
+	t_stack	a;
+	t_stack	b;
+	
+	validate_arguments(argc, argv);
+	a = stack_create();
+	b = stack_create();
+	initialize_stack_a(a, argv);
+	turk(a, b);
+	stack_destroy(a);
+	stack_destroy(b);
+	return (0);
 }

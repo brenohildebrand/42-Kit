@@ -1,22 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   character_build.c                                  :+:      :+:    :+:   */
+/*   validate_arguments.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 22:57:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 20:59:57 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/23 03:13:34 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/23 04:49:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "character.h"
+#include "push_swap.h"
 
-t_character	character_build(char value)
+void	validate_arguments(int argc, char *argv)
 {
-	t_character	type;
+	unsigned int	i;
+	unsigned int	j;
 
-	type = character_create();
-	character_init(type, value);
-	return (type);
+	if (argc == 0)
+	{
+		write("Usage: ./push_swap <list of numbers>\n", 38);
+		exit(1);
+	}
+	i = 1;
+	while (i < argc)
+	{
+		j = 0;
+		while(argv[i][j])
+		{
+			if (argv[i][j] < '0' || argv[i][j] > '9')
+			{
+				write("The numbers should only contain digits.\n", 41);
+				exit(1);
+			}
+			j++;
+		}
+		i++;
+	}
 }
