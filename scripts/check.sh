@@ -4,7 +4,10 @@ PROJECTPWD=$OLDPWD
 SCRIPTPWD=$PWD
 FRAMEWORKPWD=$(dirname $SCRIPTPWD)
 
-norminette ../source
-
-cd $PROJECTPWD
-echo 'TODO: run norminette on project source.'
+if [ "$PROJECTPWD" = "$FRAMEWORKPWD" ]; then
+	cd $FRAMEWORKPWD
+	norminette ./source
+else
+	cd $PROJECTPWD
+	norminette ./source
+fi

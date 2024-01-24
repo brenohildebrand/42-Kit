@@ -5,7 +5,7 @@ SCRIPTPWD=$PWD
 FRAMEWORKPWD=$(dirname $SCRIPTPWD)
 
 if [ "$PROJECTPWD" = "$FRAMEWORKPWD" ]; then
-	echo "You're in the framework directory. Nothing done."
+	echo "You're in the ft_framework directory. Nothing done."
 	exit 0
 else
 	cd $PROJECTPWD

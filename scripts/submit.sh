@@ -6,28 +6,58 @@ FRAMEWORKPWD=$(dirname $SCRIPTPWD)
 
 echo "TODO: submit.sh"
 
-PROJECTPWD=$OLDPWD
-SCRIPTPWD=$PWD
+if [ "$PROJECTPWD" = "$FRAMEWORKPWD" ]; then
+	echo "You're in the ft_framework directory. Nothing done."
+	exit 0
+else
+	if [ $# -ne 1 ]; then
+		echo "Missing vogsphere url. Try again with 'ft submit <vogsphere-url>'."
+	fi
 
-cd $PROJECTPWD
-mkdir -p submit
+	cd $PROJECTPWD
 
-mkdir -p submit/lib
-mkdir -p submit/lib/ft_framework
-mkdir -p submit/lib/ft_framework/source
-mkdir -p submit/lib/ft_framework/objects
-cp -r ${SCRIPTPWD}/../source submit/lib/ft_framework/source
+	norminette ./source
 
-cp -r ./source ./submit/source
+	if [ $? -ne 0 ]; then
+		exit 1
+	fi
 
-touch Makefile
-echo '
+	mkdir -p submit
 
-' > Makefile
+	mkdir -p submit/lib
+	mkdir -p submit/lib/ft_framework
+	mkdir -p submit/lib/ft_framework/source
+	mkdir -p submit/lib/ft_framework/objects
+	cp -r ${FRAMEWORKPWD}/source submit/lib/ft_framework/source
 
-cd submit
-git init
-git remote add origin ${1}
-git add .
-git commit -m 'ez'
-git push
+	mkdir -p submit/source
+	cp -r ./source ./submit/source
+
+	touch Makefile
+	echo '
+	# TODO: Makefile
+	' > Makefile
+
+	while true; do
+		read -p "Are you sure you want to submit? (yes/no): " ANSWER
+
+		case "$ANSWER" in
+			"yes")
+				cd submit
+				git init
+				git remote add origin ${1}
+				git add .
+				git commit -m 'ez'
+				git push
+				break
+				;;
+			"no")
+				echo "Aborting."
+				break
+				;;
+			*)
+				echo "Please enter 'yes' or 'no'."
+				;;
+		esac
+	done
+fi
