@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:30:29 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 23:04:21 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:05:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ t_any	copy(t_any address)
 	any = typedata->create();
 	i = 0;
 	while (i < typedata->size)
-		((unsigned char *)any)[i] = ((unsigned char *)address)[i]; 
+		((unsigned char *)any)[i] = ((unsigned char *)address)[i];
 	return (any);
 }

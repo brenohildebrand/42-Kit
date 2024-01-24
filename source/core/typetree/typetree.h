@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:42:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 09:31:31 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:06:54 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 If something goes wrong in that process the typetree destroys itself and
 the program terminates. */
 
-#include "typedata.h"
+# include "typedata.h"
 
-#include <stdlib.h>
+# include <stdlib.h>
 
 typedef void					*t_any;
 typedef struct s_typetree		*t_typetree;
@@ -29,7 +29,7 @@ struct s_typetree {
 	t_typetree		rtree;
 	t_any			address;
 	t_typedata		typedata;
-	int	height;	
+	int				height;
 };
 
 t_typetree	*typetree_get(void);

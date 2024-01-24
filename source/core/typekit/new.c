@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 01:21:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 23:04:33 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:06:32 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_any	new(t_typedata (*type)(void))
 {
 	t_typedata	typedata;
 	t_any		address;
-	
+
 	typedata = type();
 	address = malloc(typedata->size);
 	if (address == NULL)

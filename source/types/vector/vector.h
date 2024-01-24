@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:u bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:41:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 23:05:06 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:10:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ struct s_vector {
 	unsigned int	length;
 	unsigned int	max_length;
 };
-
 
 t_typedata	vector(void);
 t_vector	vector_create(void);

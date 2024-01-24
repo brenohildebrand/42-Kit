@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:30:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/18 22:35:03 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/24 11:08:18 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@ static void	left_rotate(t_typetree *typetree)
 	t_typetree	y;
 	t_typetree	x;
 	t_typetree	b;
-	
+
 	y = *typetree;
 	x = y->rtree;
 	b = x->ltree;
-	
 	y->rtree = b;
 	x->ltree = y;
 	*typetree = x;
-
 	typetree_update_height((*typetree)->ltree);
 	typetree_update_height(*typetree);
 }
@@ -35,15 +33,13 @@ static void	right_rotate(t_typetree *typetree)
 	t_typetree	y;
 	t_typetree	x;
 	t_typetree	b;
-	
+
 	y = *typetree;
 	x = y->ltree;
 	b = x->rtree;
-	
 	y->ltree = b;
 	x->rtree = y;
 	*typetree = x;
-
 	typetree_update_height((*typetree)->rtree);
 	typetree_update_height(*typetree);
 }
@@ -97,5 +93,5 @@ void	typetree_rebalance(t_typetree *typetree)
 		rebalance_left(typetree);
 	else if (rheight - lheight > 1)
 		rebalance_right(typetree);
-	typetree_update_height(*typetree);	
+	typetree_update_height(*typetree);
 }
