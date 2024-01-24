@@ -1,7 +1,8 @@
 #!/bin/bash
 
-echo "TODO: check.sh"
+PROJECTPWD=$OLDPWD
+SCRIPTPWD=$PWD
 
-# run the norminette for every file under source
-
-norminette source
+norminette ../source
+cd $PROJECTPWD
+echo 'TODO: run norminette on project source.'
