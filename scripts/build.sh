@@ -2,6 +2,7 @@
 
 PROJECTPWD=$OLDPWD
 SCRIPTPWD=$PWD
+FRAMEWORKPWD=$(dirname $SCRIPTPWD)
 
 # build ft_framework
 mkdir -p ../objects

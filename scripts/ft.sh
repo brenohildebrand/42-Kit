@@ -1,7 +1,10 @@
 #!/bin/bash
 
-script_dir="$(dirname "$0")"
-cd ${script_dir}
+PROJECTPWD=$PWD
+SCRIPTPWD=$(dirname $0)
+FRAMEWORKPWD=$(dirname $SCRIPTPWD)
+
+cd $SCRIPTPWD
 
 # Check if an argument is provided
 if [ $# -eq 0 ]; then
