@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:03:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/23 08:57:31 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/24 17:43:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@
 
 void	validate_arguments(int argc, char *argv[]);
 void	initialize_stack_a(t_stack a, char *argv[]);
-void	turk(t_stack a, t_stack b);
 
 #endif
