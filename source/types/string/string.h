@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:35:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 21:59:51 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:59:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRING_H
 # define STRING_H
 
-# include "typekit.h"
+# include "framework.h"
 
 typedef struct s_string	*t_string;
 

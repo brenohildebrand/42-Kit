@@ -4,8 +4,6 @@ PROJECTPWD=$OLDPWD
 SCRIPTPWD=$PWD
 FRAMEWORKPWD=$(dirname $SCRIPTPWD)
 
-echo "TODO: submit.sh"
-
 if [ "$PROJECTPWD" = "$FRAMEWORKPWD" ]; then
 	echo "You're in the ft_framework directory. Nothing done."
 	exit 0

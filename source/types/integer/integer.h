@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:54:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/19 23:04:59 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:59:36 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTEGER_H
 # define INTEGER_H
 
-# include "typekit.h"
+# include "framework.h"
 
 typedef int	*t_integer;
 

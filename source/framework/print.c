@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   allocate.c                                         :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 10:28:38 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/24 11:05:18 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/25 04:50:03 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/25 04:51:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "typekit.h"
+#include "framework.h"
 
-t_any	allocate(t_typesize size)
+void	print(char *cstring)
 {
-	t_any	address;
+	unsigned int	len;
 
-	address = malloc(size);
-	if (address == NULL)
-	{
-		typetree_destroy();
-		exit(1);
-	}
-	typetree_insert(NULL, address);
-	return (address);
+	len = 0;
+	while (cstring[len])
+		len++;
+	write(1, cstring, len);
 }

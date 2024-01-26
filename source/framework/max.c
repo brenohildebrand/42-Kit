@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy.c                                             :+:      :+:    :+:   */
+/*   max.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 09:30:29 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/24 11:05:44 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/25 04:51:40 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/25 17:58:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "typekit.h"
+#include "framework.h"
 
-t_any	copy(t_any address)
+int	max(int a, int b)
 {
-	t_any			any;
-	t_typedata		typedata;
-	unsigned int	i;
-
-	typedata = typetree_search(address);
-	any = typedata->create();
-	i = 0;
-	while (i < typedata->size)
-		((unsigned char *)any)[i] = ((unsigned char *)address)[i];
-	return (any);
+	if (a > b)
+		return (a);
+	else
+		return (b);
 }

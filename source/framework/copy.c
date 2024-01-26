@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new.c                                              :+:      :+:    :+:   */
+/*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:21:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/24 11:06:32 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 09:30:29 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/24 23:23:27 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "typekit.h"
+#include "framework.h"
 
-t_any	new(t_typedata (*type)(void))
+t_any	copy(t_any address)
 {
-	t_typedata	typedata;
-	t_any		address;
+	t_any			any;
+	t_typedata		typedata;
+	unsigned int	i;
 
-	typedata = type();
-	address = malloc(typedata->size);
-	if (address == NULL)
-	{
-		typetree_destroy();
-		exit(1);
-	}
-	typetree_insert(typedata, address);
-	return (address);
+	typedata = typetree_search(address);
+	any = typedata->create();
+	i = 0;
+	while (i < typedata->size)
+		((unsigned char *)any)[i] = ((unsigned char *)address)[i];
+	return (any);
 }

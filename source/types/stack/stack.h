@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 22:44:29 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 22:51:22 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/25 17:59:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STACK_H
 # define STACK_H
 
-# include "typekit.h"
+# include "framework.h"
 
 typedef struct s_stack	*t_stack;
 

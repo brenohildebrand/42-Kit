@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:41:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/24 11:10:24 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:00:16 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
 
-# include "typekit.h"
+# include "framework.h"
 
 typedef struct s_vector	*t_vector;
 

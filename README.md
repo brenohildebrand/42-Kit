@@ -8,4 +8,4 @@
 
 <h1 align="center">ft_framework</h1>
 
-I've created this project to help me on my journey at 42. I was used to having a framework like React or Svelte to help me with my projects. Also, I was used to a language like Javascript. So out of frustation ft_framework was born.
+I was used to having a framework like React or Svelte to help me on projects. I was also used to high-level languages like Javascript and Lua. At 42 I had to work with C on a daily basis. So out of frustation ft_framework was born.

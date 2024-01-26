@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cint.h                                             :+:      :+:    :+:   */
+/*   max.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 18:18:29 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/24 18:23:49 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/25 18:03:45 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/25 18:07:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CINT_H
-# define CINT_H
+#include "framework.h"
 
-/* Since int is a primitive type in C we don't have a typedef. */
-
-// typedef int	*t_cint;
-
-// t_typedata	cint(void);
-// int			cint_min(int a, int b);
-// int			cint_max(int a, int b);
-
-#endif
+int	main(void)
+{
+	if (max(1, 2) != 2)
+		return (1);
+	if (max(2, 1) != 2)
+		return (1);
+	if (max(1, 1) != 1)
+		return (1);
+	return (0);
+}
