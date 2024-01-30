@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 23:19:14 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/25 04:52:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/01/30 16:41:18 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,5 @@ t_any		create(t_typedata (*type)(void));
 void		destroy(t_any address);
 
 void		print(char *cstring);
-int			max(int a, int b);
-int			min(int a, int b);
 
 #endif
