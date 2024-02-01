@@ -1,6 +1,6 @@
 # Guide
 
-Welcome! This is the right place to learn how ft_framework works.
+Welcome! This is the right place to learn how ft_framework works. After reading it you should know the patterns and the main functions one need to have a good time 
 
 ## Overview
 
