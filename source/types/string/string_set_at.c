@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_build.c                                     :+:      :+:    :+:   */
+/*   string_set_at.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 21:57:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/01 16:07:32 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/01 15:39:46 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/01 16:10:34 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-t_string	string_build(t_i8 *value)
+void	string_set_at(t_string string, t_u32 index, t_i8 value)
 {
-	t_string	s;
-
-	s = string_create();
-	string_init(s, value);
-	return (s);
+	if (index < string->length)
+	{
+		string->content[index] = value;
+	}
+	else
+		return ;
 }

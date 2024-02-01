@@ -11,7 +11,7 @@ if [ "$PROJECTPWD" = "$FRAMEWORKPWD" ]; then
 	for FILEPWD in ./tests/framework/*.c; do
 		NAME=$(basename $FILEPWD | sed 's/\.c$//')
 		gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g $FILEPWD ./source/framework/*.c ./source/types/**/*.c -iquote ./source/framework $(find ./source/types -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
-		valgrind --quiet --error-exitcode=1 "./build/${NAME}"
+		valgrind --quiet --leak-check=full --show-leak-kinds=all --error-exitcode=1 "./build/${NAME}"
 		if [ $? -eq 0 ]; then
 			printf "%-20s\t\e[32mOK\e[0m\n" "${NAME}:"
 			rm "./build/${NAME}"
@@ -22,7 +22,7 @@ if [ "$PROJECTPWD" = "$FRAMEWORKPWD" ]; then
 	for FILEPWD in ./tests/types/**/*.c; do
 		NAME=$(basename $FILEPWD | sed 's/\.c$//')
 		gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g $FILEPWD ./source/framework/*.c ./source/types/**/*.c -iquote ./source/framework $(find ./source/types -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
-		valgrind --quiet --error-exitcode=1 "./build/${NAME}"
+		valgrind --quiet --leak-check=full --show-leak-kinds=all --error-exitcode=1 "./build/${NAME}"
 		if [ $? -eq 0 ]; then
 			printf "%-20s\t\e[32mOK\e[0m\n" "${NAME}:"
 			rm "./build/${NAME}"
@@ -35,7 +35,7 @@ else
 	for FILEPWD in ./tests/processes/**/*; do
 		NAME=$(basename $FILEPWD | sed 's/\.c$//')
 		gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g $FILEPWD ./source/processes/**/*.c ./source/types/**/*.c ${FRAMEWORKPWD}/source/framework/**/*.c ${FRAMEWORKPWD}/source/types/**/*.c $(find ./source/processes -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/framework" -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/types" -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
-		valgrind --quiet --error-exitcode=1 "./build/${NAME}"
+		valgrind --quiet --leak-check=full --show-leak-kinds=all --error-exitcode=1 "./build/${NAME}"
 		if [ $? -eq 0 ]; then
 			printf "%-20s\t\e[32mOK\e[0m\n" "${NAME}:"
 			rm "./build/${NAME}"
@@ -46,7 +46,7 @@ else
 	for FILE in ./tests/types/**/*; do
 		NAME=$(basename $FILEPWD | sed 's/\.c$//')
 		gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g $FILEPWD ./source/processes/**/*.c ./source/types/**/*.c ${FRAMEWORKPWD}/source/framework/**/*.c ${FRAMEWORKPWD}/source/types/**/*.c $(find ./source/processes -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/framework" -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/types" -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
-		valgrind --quiet --error-exitcode=1 "./build/${NAME}"
+		valgrind --quiet --leak-check=full --show-leak-kinds=all --error-exitcode=1 "./build/${NAME}"
 		if [ $? -eq 0 ]; then
 			printf "%-20s\t\e[32mOK\e[0m\n" "${NAME}:"
 			rm "./build/${NAME}"

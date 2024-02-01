@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_build.c                                     :+:      :+:    :+:   */
+/*   string_iterate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 21:57:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/01 16:07:32 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/01 15:49:24 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/01 16:08:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-t_string	string_build(t_i8 *value)
-{
-	t_string	s;
+void	string_iterate(
+	t_string string, 
+	void (*callback)(t_i8, t_any), 
+	t_any argument
+){
+	t_u32	i;
 
-	s = string_create();
-	string_init(s, value);
-	return (s);
+	i = 0;
+	while (i < string->length)
+	{
+		callback(string->content[i], argument);
+		i++;
+	}
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   integer.c                                          :+:      :+:    :+:   */
+/*   string_get_content.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/24 15:53:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/24 15:53:24 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/01 15:34:47 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/01 16:09:51 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "integer.h"
+#include "string.h"
 
-int	main(void)
+t_i8	*string_get_content(t_string string)
 {
-	return (0);
+	return (string->content);
 }

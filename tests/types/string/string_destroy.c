@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_build.c                                     :+:      :+:    :+:   */
+/*   string_destroy.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 21:57:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/01 16:07:32 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/01 16:42:56 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/01 16:57:54 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-t_string	string_build(t_i8 *value)
+int	main(void)
 {
-	t_string	s;
+	t_string	string;
 
-	s = string_create();
-	string_init(s, value);
-	return (s);
+	string = string_build("hello string!");
+	string_destroy(string);
+	return (0);
 }

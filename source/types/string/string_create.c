@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:44:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 20:46:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:31:14 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ t_string	string_create(void)
 	s->content = NULL;
 	s->length = 0;
 	s->max_length = 0;
+	s->cursor = NULL;
 	return (s);
 }

@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_build.c                                     :+:      :+:    :+:   */
+/*   string_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 21:57:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/01 16:07:32 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/01 15:53:57 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/01 15:59:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-t_string	string_build(t_i8 *value)
+int	main(void)
 {
-	t_string	s;
+	t_string	string;
 
-	s = string_create();
-	string_init(s, value);
-	return (s);
+	string = string_create();
+	if (string->content != 0)
+		return (1);
+	if (string->length != 0)
+		return (1);
+	if (string->max_length != 0)
+		return (1);
+	if (string->cursor != 0)
+		return (1);
+	string_destroy(string);
+	return (0);
 }

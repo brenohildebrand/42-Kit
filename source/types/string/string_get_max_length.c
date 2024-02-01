@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_build.c                                     :+:      :+:    :+:   */
+/*   string_get_max_length.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 21:57:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/01 16:07:32 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/01 15:36:17 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/01 15:36:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-t_string	string_build(t_i8 *value)
+t_u32	string_get_max_length(t_string string)
 {
-	t_string	s;
-
-	s = string_create();
-	string_init(s, value);
-	return (s);
+	return (string->max_length);	
 }

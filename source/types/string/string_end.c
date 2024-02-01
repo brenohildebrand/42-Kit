@@ -1,24 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   max.c                                              :+:      :+:    :+:   */
+/*   string_end.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 18:03:45 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/25 18:07:47 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/01 15:46:02 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/01 16:37:37 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "framework.h"
+#include "string.h"
 
-int	main(void)
+t_i8	string_end(t_string string)
 {
-	if (max(1, 2) != 2)
-		return (1);
-	if (max(2, 1) != 2)
-		return (1);
-	if (max(1, 1) != 1)
-		return (1);
-	return (0);
+	string->cursor = string->content + (string->length - 1);
+	return (*(string->cursor));
 }
