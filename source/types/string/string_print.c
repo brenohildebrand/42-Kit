@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   string_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/25 04:50:03 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/31 16:48:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/31 13:35:56 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/31 13:38:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "framework.h"
+#include "string.h"
 
-void	print(char *cstring)
+void	string_print(t_string string)
 {
-	unsigned int	len;
-
-	len = 0;
-	while (cstring[len])
-		len++;
-	write(1, cstring, len);
-	write(1, "\n", 1);
+	write(1, string->content, string->length);
 }

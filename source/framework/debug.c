@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.h                                           :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 20:35:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/31 13:35:49 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/31 15:47:28 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/01/31 16:53:17 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRING_H
-# define STRING_H
+#include "framework.h"
 
-# include "framework.h"
+#ifdef DEBUG
 
-typedef struct s_string	*t_string;
+void	debug(char *cstring)
+{
+	write(1, "\033[1;34m", 7);
+	write(1, "[DEBUG] ", 8);
+	write(1, "\033[0m", 4);
+	print(cstring);
+}
 
-struct s_string {
-	char			*content;
-	unsigned int	length;
-	unsigned int	max_length;
-};
+#else
 
-t_typedata	string(void);
-t_string	string_create(void);
-void		string_init(t_string string, char *value);
-t_string	string_build(char *value);
-void		string_destroy(t_string string);
-
-void		string_print(t_string string);
+void	debug(char *cstring)
+{
+	(void)cstring;
+}
 
 #endif

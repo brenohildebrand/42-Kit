@@ -20,8 +20,14 @@ case $1 in
     "check")
         ./check.sh "${@:2}"
         ;;
+    "debug")
+        ./debug.sh "${@:2}"
+        ;;
     "init")
         ./init.sh "${@:2}"
+        ;;
+    "run")
+        ./run.sh "${@:2}"
         ;;
     "submit")
         ./submit.sh "${@:2}"
