@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:35:20 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/01 15:36:09 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:14:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 t_u32	string_get_length(t_string string)
 {
-	return (string->length);	
+	return (string->length);
 }

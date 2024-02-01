@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:36:17 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/01 15:36:59 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:14:34 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 t_u32	string_get_max_length(t_string string)
 {
-	return (string->max_length);	
+	return (string->max_length);
 }

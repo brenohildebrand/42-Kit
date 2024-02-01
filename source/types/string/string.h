@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:35:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/01 16:10:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:14:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ t_i8		string_previous(t_string string);
 t_i8		string_end(t_string string);
 
 // -- Iterators (callback)
-void		string_iterate(t_string string, void (*callback)(t_i8, t_any), t_any argument);
+void		string_iterate(
+				t_string string,
+				void (*callback)(t_i8, t_any),
+				t_any argument);
 
 // -- Custom
 void		string_print(t_string string);

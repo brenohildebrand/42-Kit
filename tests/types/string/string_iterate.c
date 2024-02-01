@@ -5,24 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 15:49:24 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/01 17:15:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/01 17:03:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/01 17:13:38 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-void	string_iterate(
-	t_string string,
-	void (*callback)(t_i8, t_any),
-	t_any argument
-){
-	t_u32	i;
+void	assert_letter(t_i8 value, t_any argument)
+{
+	static t_i32	index = 0;
+	t_string		string;
 
-	i = 0;
-	while (i < string->length)
-	{
-		callback(string->content[i], argument);
-		i++;
-	}
+	string = (t_string)(argument);
+	if (value != string->content[index])
+		exit(1);
+	index++;
+}
+
+int	main(void)
+{
+	t_string	string;
+
+	string = string_build("hello string!");
+	string_iterate(string, assert_letter, string);
+	string_destroy(string);
+	return (0);
 }
