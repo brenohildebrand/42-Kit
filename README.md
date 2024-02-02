@@ -8,4 +8,4 @@
 
 <h1 align="center">ft_framework</h1>
 
-I was used to having a framework like React or Svelte to help me on projects. I was also used to high-level languages like Javascript and Lua. At 42 I had to work with C on a daily basis. So out of frustation ft_framework was born.
+You may be curious about all this. It's not an official project from 42 and it's not the type of code you just compile and run. Yet it's pretty awesome and can make you more productive. If it seems like the type of thing you'd be interested in just read the following [guide](/docs/GUIDE.md) and have fun!
