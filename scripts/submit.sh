@@ -9,7 +9,8 @@ if [ "$PROJECTPWD" = "$FRAMEWORKPWD" ]; then
 	exit 0
 else
 	if [ $# -ne 1 ]; then
-		echo "Missing vogsphere url. Try again with 'ft submit <vogsphere-url>'."
+		echo "Usage: trillian submit <vogsphere-url>."
+		exit 1
 	fi
 
 	cd $PROJECTPWD
