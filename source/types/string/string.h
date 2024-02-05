@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:35:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/03 18:35:43 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/04 21:31:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_u32		string_get_max_length(t_string string);
 // -- Iterators
 // -- (index)
 t_i8		string_get(t_string string, t_u32 index);
-void		string_set_at(t_string string, t_u32 index, t_i8 value);
+void		string_set(t_string string, t_u32 index, t_i8 value);
 // -- (cursor)
 t_i8		string_start(t_string string);
 t_i8		string_next(t_string string);
