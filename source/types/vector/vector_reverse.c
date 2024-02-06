@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:04:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/06 16:05:50 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:07:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	vector_reverse(t_vector vector)
 {
-	t_vector	new_vector;
+	t_u32	i;
 
-	new_vector = vector_build();
-	while (vector_get_length(vector))
-		vector_push(new_vector, vector_pop(vector));
+	i = 0;
+	while (i < vector_get_length(vector))
+	{
+		vector_push(vector, vector_shift(vector));
+		i++;
+	}
 }
