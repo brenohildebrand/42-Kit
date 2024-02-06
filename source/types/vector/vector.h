@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:41:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/02 04:22:28 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:04:04 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void		vector_iterate(
 void		vector_push(t_vector vector, t_any value);
 void		vector_pop(t_vector vector);
 void		vector_expand(t_vector vector);
+void		vector_reverse(t_vector vector);
 
 #endif
