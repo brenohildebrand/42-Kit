@@ -8,7 +8,7 @@ This is the official guide to the *ft_framework*. I hope you have a great time h
 
 I was struggling with C. I wanted to use hash tables. Oh, but they don't exist. Dynamic arrays? Sorry, what's that? Maybe a string? Unfortunately that's not happening. Hmm. And what about memory management? Can I just exit the program and be happy? No, there may be a leak. Oh, so can I just call one function and be free? No, it's not how it works. Damn it!
 
-I wanted to be able to focus on the problem. I just hate it to keep paying attention to those little grinning details that nobody cares about when using a more high level language like Python.
+I wanted to be able to focus on the problem. I just hate it to keep paying attention to those nitty-gritty details that nobody cares about when using a more high level language like Python.
 
 So out of frustation I started looking for solutions. I experimented quite a lot before getting to something cool. I tried different approaches and tried to combine them in many ways. Fun fact is I got inspired to create a programming language. It seems like a rewarding adventure. Maybe one day. Who knows? Anyways, I got to something I'm proud of.
 
@@ -30,6 +30,8 @@ And create an alias for the script located at `scripts/ft.sh`. Call it trillian 
 
 ## Bring your best towel!
 
+non-destructive  
+ft_type() is the signature function  
 
 
 ## Go hack it!
