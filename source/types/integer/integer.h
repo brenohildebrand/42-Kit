@@ -6,21 +6,20 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:54:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/25 17:59:36 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/07 23:43:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INTEGER_H
 # define INTEGER_H
 
-# include "framework.h"
+typedef struct s_integer	*t_integer;
 
-typedef int	*t_integer;
+struct s_integer {
+	int	value;
+};
 
-t_typedata	integer(void);
-t_integer	integer_create(void);
-void		integer_init(t_integer integer, int value);
-t_integer	integer_build(int value);
+t_integer	integer_create(int value);
 void		integer_destroy(t_integer integer);
 
 #endif

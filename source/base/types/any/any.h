@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 20:54:08 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:11:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define ANY_H
 
 typedef void	*t_any;
-
-t_type	ft_any(void);
 
 t_any	any_create(unsigned int size);
 void	any_destroy(t_any instance);

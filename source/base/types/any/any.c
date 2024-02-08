@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   any.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:21:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:13:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/07 15:48:09 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/07 20:59:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "delete.h"
+#include "any.h"
 
-void	delete(t_any any)
+t_type	any(void)
 {
-	trillian_delete(any);
+	return (NULL);
 }

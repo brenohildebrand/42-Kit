@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   assert.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:21:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:13:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/07 23:51:31 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/07 23:52:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "delete.h"
+#ifndef ASSERT_H
+# define ASSERT_H
 
-void	delete(t_any any)
-{
-	trillian_delete(any);
-}
+void	assert(int condition);
+
+#endif

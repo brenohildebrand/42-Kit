@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:22:16 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 13:22:02 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/07 23:52:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "framework.h"
+#include "error.h"
 
 void	error(char *cstring)
 {
@@ -18,6 +18,6 @@ void	error(char *cstring)
 	write(1, "[ERROR] ", 8);
 	write(1, "\033[0m", 4);
 	print(cstring);
-	typetree_destroy();
+	trillian_destroy();
 	exit(1);
 }

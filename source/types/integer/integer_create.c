@@ -6,17 +6,21 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:59:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/24 11:08:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/07 23:50:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "integer.h"
 
-t_integer	integer_create(void)
+t_integer	integer_create(int value)
 {
-	t_integer	i;
+	static struct s_type	type = {
+		.destroy = (void (*)(t_any))integer_destroy,
+		.size = sizeof(int)
+	};
+	t_integer				integer;
 
-	i = (t_integer)new(integer);
-	*i = 0;
-	return (i);
+	integer = (t_integer)new(&type);
+	integer->value = value;
+	return (integer);
 }

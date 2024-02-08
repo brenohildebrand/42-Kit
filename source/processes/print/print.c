@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 04:50:03 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/31 16:48:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:22:16 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "framework.h"
+#include "print.h"
 
 void	print(char *cstring)
 {

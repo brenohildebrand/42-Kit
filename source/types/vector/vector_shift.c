@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   vector_shift.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:21:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:13:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/08 13:26:37 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/08 13:33:13 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "delete.h"
+#include "vector.h"
 
-void	delete(t_any any)
+t_any	vector_shift(t_vector vector)
 {
-	trillian_delete(any);
+	t_any	any;
+
+	if (vector->content[vector->start] == NULL)
+		return (NULL);
+	any = vector->content[vector->start];
+	vector->content[vector->start] = NULL;
+	vector->start++;
+	vector->length--;
+	return (any);
 }

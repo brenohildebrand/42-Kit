@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   typetree_get_height.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:21:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:13:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/18 13:33:34 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/07 21:17:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "delete.h"
+#include "trillian.h"
 
-void	delete(t_any any)
+int	trillian_get_height(t_trillian trillian)
 {
-	trillian_delete(any);
+	if (trillian == NULL)
+	{
+		return (0);
+	}
+	else
+	{
+		return (trillian->height);
+	}
 }

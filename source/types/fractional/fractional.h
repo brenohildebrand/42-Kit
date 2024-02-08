@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   fractional.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:21:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:13:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/07 23:45:27 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/07 23:47:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "delete.h"
+#ifndef FRACTIONAL_H
+# define FRACTIONAL_H
 
-void	delete(t_any any)
-{
-	trillian_delete(any);
-}
+typedef struct s_fractional	*t_fractional;
+
+struct s_fractional {
+	double	value;
+};
+
+t_fractional	fractional_create(double value);
+void			fractional_destroy(t_fractional fractional);
+
+#endif

@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   vector_unshift.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:21:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:13:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/08 13:30:05 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/08 13:33:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "delete.h"
+#include "vector.h"
 
-void	delete(t_any any)
+void	vector_unshift(t_vector vector, t_any value)
 {
-	trillian_delete(any);
+	if (vector->length + 1 > vector->max_length * (3 / 4) ||
+		vector->start == 0)
+	{
+		vector_expand(vector);
+	}
+	vector->content[vector->start - 1] = value;
+	vector->start--;
+	vector->length++;
 }

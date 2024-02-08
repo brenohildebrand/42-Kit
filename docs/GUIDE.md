@@ -30,9 +30,12 @@ And create an alias for the script located at `scripts/ft.sh`. Call it trillian 
 
 ## Bring your best towel!
 
-non-destructive  
-ft_type() is the signature function  
+explain types  
+processes are everything else  
 
+system call errors will make the program to exit  
+if you want to avoid that check for whatever you need before calling the function  
+(i.e. check if path exists before creating a file)
 
 ## Go hack it!
 

@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:47:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/31 16:53:17 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/07 21:22:31 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "framework.h"
+#include "debug.h"
 
 #ifdef DEBUG
 

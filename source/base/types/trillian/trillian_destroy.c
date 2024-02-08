@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   typetree_destroy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:21:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:13:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/17 14:56:09 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/07 21:17:21 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "delete.h"
+#include "trillian.h"
 
-void	delete(t_any any)
+static void	helper(t_trillian trillian)
 {
-	trillian_delete(any);
+	if (trillian == NULL)
+		return ;
+	helper(trillian->ltree);
+	helper(trillian->rtree);
+	free(trillian->address);
+	free(trillian);
+}
+
+void	trillian_destroy(void)
+{
+	t_trillian	*trillian;
+
+	trillian = trillian_get();
+	helper(*trillian);
 }

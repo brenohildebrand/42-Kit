@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   delete.c                                           :+:      :+:    :+:   */
+/*   vector_set.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:21:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:13:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/08 13:46:21 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/08 13:48:31 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "delete.h"
+#include "vector.h"
 
-void	delete(t_any any)
+// -- Set
+// -- Destroys the value at index and overwrites it with value.
+
+void	vector_set(t_vector vector, unsigned int index, t_any value)
 {
-	trillian_delete(any);
+	if (index >= vector->length)
+		return ;
+	any_destroy(vector->content[vector->start + index]);
+	vector->content[vector->start + index] = value;	
 }

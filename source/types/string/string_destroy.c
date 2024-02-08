@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:59:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/24 11:09:30 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:53:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	string_destroy(t_string string)
 {
-	deallocate(string->content);
+	vector_destroy(string->content);
 	delete(string);
 }

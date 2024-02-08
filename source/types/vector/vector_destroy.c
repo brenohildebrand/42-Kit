@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 01:09:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/24 11:10:59 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:48:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 void	vector_destroy(t_vector vector)
 {
-	while (vector->length)
-		vector_pop(vector);
-	deallocate(vector->content);
+	unsigned int	i;
+
+	i = vector->start;
+	while (i < vector->end)
+	{
+		any_destroy(vector->content[i]);
+		i++;
+	}
+	any_destroy(content);
 	delete(vector);
 }
