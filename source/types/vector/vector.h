@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:41:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/08 17:24:30 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/09 22:22:07 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct s_vector	*t_vector;
 
 struct s_vector {
-	t_any			content;
+	t_any			*content;
 	unsigned int	start;
 	unsigned int	end;
 	unsigned int	length;

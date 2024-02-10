@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.c                                           :+:      :+:    :+:   */
+/*   deallocate.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/22 20:43:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/01/22 20:44:51 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/09 22:53:52 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/09 22:54:04 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#ifndef DEALLOCATE_H
+# define DEALLOCATE_H
 
-t_typedata	string(void)
-{
-	static struct s_typedata	string_typedata = {
-		.create = (t_any (*)(void))string_create,
-		.destroy = (void (*)(t_any))string_destroy,
-		.size = sizeof(struct s_string)	
-	};
+void	deallocate(void *pointer);
 
-	return (&string_typedata);
-}
+#endif

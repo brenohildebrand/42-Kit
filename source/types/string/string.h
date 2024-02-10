@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:35:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/08 16:10:34 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/09 23:50:49 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ struct s_string {
 t_string	string_create(char *cstring);
 void		string_destroy(t_string string);
 
+// -- Get/Set
+char		string_get(t_string string, unsigned int index);
+
 // -- Operations
+int			string_is_int(t_string string);
+int			string_to_int(t_string string);
 
 #endif

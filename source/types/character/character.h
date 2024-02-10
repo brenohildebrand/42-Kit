@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 11:03:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 23:45:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/09 23:25:03 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ struct s_character {
 
 t_character	character_create(char value);
 void		character_destroy(t_character character);
+
+char		character_get(t_character character);
 
 #endif

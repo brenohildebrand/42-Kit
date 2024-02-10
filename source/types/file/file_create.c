@@ -6,13 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:26:16 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/08 17:20:24 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/09 21:18:34 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "file.h"
 
-static char	*realloc(char *buffer, unsigned int new_buffer_size)
+static char	*realloc_buffer(char *buffer, unsigned int new_buffer_size)
 {
 	char			*new_buffer;
 	unsigned int	i;
@@ -33,7 +33,7 @@ static char	*realloc(char *buffer, unsigned int new_buffer_size)
 static char	*read_file(int fd)
 {
 	char			*buffer;
-	unsigned int	bytes_read;
+	int				bytes_read;
 	unsigned int	buffer_size;
 	
 	buffer_size = 16;
@@ -46,7 +46,7 @@ static char	*read_file(int fd)
 		if (bytes_read == -1)
 			error("Couldn't read file.");
 		buffer_size = buffer_size * 2;
-		buffer = realloc(buffer, buffer_size);
+		buffer = realloc_buffer(buffer, buffer_size);
 	}
 	return (buffer);
 }

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:19:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/08 13:15:22 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/09 23:03:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	vector_expand(t_vector vector)
 	vector->max_length = vector->max_length * 2;
 	new_start = (vector->max_length - vector->length) / 2;
 	new_end = new_start + vector->length - 1;
-	new_content = any_create(vector->max_length * sizeof(t_any));
+	new_content = allocate(vector->max_length * sizeof(t_any));
 	i = 0;
 	while (i < vector->length)
 	{
@@ -30,7 +30,7 @@ void	vector_expand(t_vector vector)
 			((unsigned char *)vector->content)[i + vector->start];
 		i++;
 	}
-	any_destroy(vector->content);
+	deallocate(vector->content);
 	vector->start = new_start;
 	vector->end = new_end;
 	vector->content = new_content;

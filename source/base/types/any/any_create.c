@@ -6,24 +6,22 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 20:47:31 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:25:58 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/09 22:05:32 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "any.h"
 
-t_any	any_create(unsigned int size)
+t_any	any_create(t_type type)
 {
-	t_any	instance;
+	t_any	any;
 
-	instance = malloc(size);
-	if (instance == NULL)
+	any = malloc(type->size);
+	if (any == NULL)
 	{
 		trillian_destroy();
 		exit(1);
 	}
-	trillian_insert(NULL, instance);
-	while (size--)
-		((unsigned char *)instance)[size] = 0;
-	return (instance);
+	trillian_insert(type, any);
+	return (any);
 }

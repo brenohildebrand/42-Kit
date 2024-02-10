@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 01:09:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/08 11:48:28 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/09 23:01:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	vector_destroy(t_vector vector)
 		any_destroy(vector->content[i]);
 		i++;
 	}
-	any_destroy(content);
+	deallocate(vector->content);
 	delete(vector);
 }
