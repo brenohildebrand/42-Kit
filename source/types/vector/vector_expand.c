@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:19:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/09 23:03:20 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:02:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	vector_expand(t_vector vector)
 {
-	t_any			new_content;
-	unsigned int	new_start;
-	unsigned int	new_end;
-	unsigned int	i;
+	t_any	new_content;
+	int		new_start;
+	int		new_end;
+	int		i;
 
 	vector->max_length = vector->max_length * 2;
 	new_start = (vector->max_length - vector->length) / 2;

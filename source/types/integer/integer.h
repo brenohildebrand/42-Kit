@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 10:54:35 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 23:43:19 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/10 01:39:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ struct s_integer {
 
 t_integer	integer_create(int value);
 void		integer_destroy(t_integer integer);
+
+int			integer_get(t_integer integer);
 
 #endif

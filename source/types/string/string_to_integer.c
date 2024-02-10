@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_to_int.c                                    :+:      :+:    :+:   */
+/*   string_to_integer.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:27:02 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/10 00:06:27 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:05:32 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-int	string_to_int(t_string string)
+t_integer	string_to_integer(t_string string)
 {
 	long long int	number;
 	long long int	signal;
-	unsigned int	i;
+	int				i;
 
 	number = 0;
 	signal = 1;
@@ -34,5 +34,5 @@ int	string_to_int(t_string string)
 			error("Invalid conversion from string to int.");
 		i++;
 	}
-	return (number * signal);
+	return (integer_create(number * signal));
 }

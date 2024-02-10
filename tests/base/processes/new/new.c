@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_get.c                                       :+:      :+:    :+:   */
+/*   new.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 23:51:15 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/10 15:03:42 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/10 15:04:17 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/10 15:04:25 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "string.h"
+#include "new.h"
 
-char		string_get(t_string string, int index)
+int	main(void)
 {
-	return (character_get((t_character)vector_get(string->content, index)));
+	return (0);
 }

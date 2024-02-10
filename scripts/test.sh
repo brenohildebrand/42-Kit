@@ -20,7 +20,7 @@ framework_test() {
 project_test() {
 	FILEPWD=${1}
 	NAME=$(basename $FILEPWD | sed 's/\.c$//')
-	gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g $FILEPWD -include ft_framework.h ./source/processes/**/*.c ./source/types/**/*.c ${FRAMEWORKPWD}/source/framework/*.c ${FRAMEWORKPWD}/source/types/**/*.c $(find ./source/processes -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') -iquote ${FRAMEWORKPWD}/source/framework $(find "${FRAMEWORKPWD}/source/types" -mindepth 1 -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
+	gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g $FILEPWD -include ft_framework.h ./source/processes/**/*.c ./source/types/**/*.c $(find ./source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') -iquote "${FRAMEWORKPWD}/includes" $(find "${FRAMEWORKPWD}/source/base/processes" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/base/types" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/processes" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/types" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
 	valgrind --quiet --leak-check=full --show-leak-kinds=all --error-exitcode=1 "./build/${NAME}"
 	if [ $? -eq 0 ]; then
 		printf "%-20s\t\e[32mOK\e[0m\n" "${NAME}:"

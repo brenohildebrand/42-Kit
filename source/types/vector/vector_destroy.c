@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 01:09:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/09 23:01:43 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:02:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	vector_destroy(t_vector vector)
 {
-	unsigned int	i;
+	int	i;
 
 	i = vector->start;
 	while (i < vector->end)

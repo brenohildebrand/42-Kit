@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 22:17:36 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/09 23:52:55 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:05:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	string_is_int(t_string string)
 {
 	long long int	number;
 	long long int	signal;
-	unsigned int	i;
+	int				i;
 
 	number = 0;
 	signal = 1;
