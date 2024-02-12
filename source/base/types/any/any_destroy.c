@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:42:45 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/09 22:07:04 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/10 22:54:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	any_destroy(t_any any)
 	}
 	else
 	{
-		type->destroy(any);		
+		type->destroy(any);
 	}
 }

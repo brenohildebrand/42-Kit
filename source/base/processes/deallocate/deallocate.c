@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 22:52:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/09 22:53:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:02:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	deallocate(void *pointer)
 {
-	free(pointer);
+	trillian_delete(pointer);
 }

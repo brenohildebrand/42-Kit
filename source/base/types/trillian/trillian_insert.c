@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   typetree_insert.c                                  :+:      :+:    :+:   */
+/*   trillian_insert.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 15:35:24 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:18:12 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/12 15:09:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	trillian_insert(t_type type, t_any address)
 
 	trillian = trillian_get();
 	helper(trillian, type, address);
+	// trillian_print();
 }

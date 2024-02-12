@@ -7,7 +7,8 @@ FRAMEWORKPWD=$(dirname $SCRIPTPWD)
 framework_test() {
 	FILEPWD=${1}
 	NAME=$(basename $FILEPWD | sed 's/\.c$//')
-	gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g $FILEPWD -include ft_framework.h ./source/base/processes/**/*.c ./source/base/types/**/*.c ./source/processes/**/*.c ./source/types/**/*.c -iquote ./includes $(find ./source/base/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/base/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
+	# gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g $FILEPWD -include ft_framework.h ./source/base/processes/**/*.c ./source/base/types/**/*.c ./source/processes/**/*.c ./source/types/**/*.c -iquote ./includes $(find ./source/base/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/base/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
+	gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g -include ft_framework.h $FILEPWD ./build/libframework.a -iquote ./includes $(find ./source/base/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/base/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
 	valgrind --quiet --leak-check=full --show-leak-kinds=all --error-exitcode=1 "./build/${NAME}"
 	if [ $? -eq 0 ]; then
 		printf "%-20s\t\e[32mOK\e[0m\n" "${NAME}:"
@@ -20,7 +21,7 @@ framework_test() {
 project_test() {
 	FILEPWD=${1}
 	NAME=$(basename $FILEPWD | sed 's/\.c$//')
-	gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g $FILEPWD -include ft_framework.h ./source/processes/**/*.c ./source/types/**/*.c $(find ./source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') -iquote "${FRAMEWORKPWD}/includes" $(find "${FRAMEWORKPWD}/source/base/processes" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/base/types" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/processes" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/types" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
+	gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g -include ft_framework.h $FILEPWD ./source/processes/**/*.c ./source/types/**/*.c $(find ./source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') -iquote "${FRAMEWORKPWD}/includes" $(find "${FRAMEWORKPWD}/source/base/processes" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/base/types" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/processes" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/types" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') "${FRAMEWORKPWD}/build/libframework.a"
 	valgrind --quiet --leak-check=full --show-leak-kinds=all --error-exitcode=1 "./build/${NAME}"
 	if [ $? -eq 0 ]; then
 		printf "%-20s\t\e[32mOK\e[0m\n" "${NAME}:"
@@ -29,6 +30,13 @@ project_test() {
 		printf "%-20s\t\e[31mKO\e[0m\n" "${NAME}:"
 	fi
 }
+
+# create the framework static library first
+cd $FRAMEWORKPWD
+mkdir -p ./objects
+cd ./objects
+gcc -Wall -Wextra -Werror -include ft_framework.h -c -g ../source/base/processes/**/*.c ../source/base/types/**/*.c ../source/processes/**/*.c ../source/types/**/*.c -iquote ../includes $(find ../source/base/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/base/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
+ar rcs ../build/libframework.a ../objects/*.o
 
 shopt -s nullglob
 

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 23:48:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 23:50:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:04:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_fractional	fractional_create(double value)
 {
 	static struct s_type	type = {
+		.name = "fractional",
 		.destroy = (void (*)(t_any))fractional_destroy,
 		.size = sizeof(struct s_fractional)
 	};

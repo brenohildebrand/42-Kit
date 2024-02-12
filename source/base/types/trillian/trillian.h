@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:42:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/07 21:18:28 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:16:54 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ void		trillian_rebalance(t_trillian *trillian);
 void		trillian_update_height(t_trillian trillian);
 int			trillian_get_height(t_trillian trillian);
 t_type		trillian_search(t_any address);
+void		trillian_print(void);
 
 #endif

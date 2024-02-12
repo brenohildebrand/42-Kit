@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:26:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/08 13:33:13 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/12 14:59:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_any	vector_shift(t_vector vector)
 {
 	t_any	any;
 
-	if (vector->content[vector->start] == NULL)
+	if (vector->end < vector->start)
 		return (NULL);
 	any = vector->content[vector->start];
 	vector->content[vector->start] = NULL;

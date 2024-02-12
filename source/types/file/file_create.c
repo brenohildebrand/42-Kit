@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:26:16 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/09 21:18:34 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:04:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static t_string	file_to_string(char *path)
 t_file	file_create(char *path)
 {
 	static struct s_type	type = {
+		.name = "file",
 		.destroy = (void (*)(t_any))file_destroy,
 		.size = sizeof(struct s_file)
 	};

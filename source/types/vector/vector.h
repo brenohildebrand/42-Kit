@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:41:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/10 15:02:04 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/10 15:45:45 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void		vector_unshift(t_vector vector, t_any value);
 t_any		vector_shift(t_vector vector);
 void		vector_expand(t_vector vector);
 void		vector_reverse(t_vector vector);
+int			vector_get_length(t_vector vector);
 
 #endif
