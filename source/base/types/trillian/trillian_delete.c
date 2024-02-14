@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 16:25:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/12 15:09:58 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:21:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,4 @@ void	trillian_delete(t_any address)
 
 	trillian = trillian_get();
 	helper(trillian, address);
-	// trillian_print();
 }

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:30:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/12 15:07:58 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:26:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	vector_unshift(t_vector vector, t_any value)
 {
-	if (vector->length + 1 > (vector->max_length * 3) / 4 ||
+	if (vector->length + 1 > (vector->max_length * 3) / 4 || \
 		vector->start == 0)
 	{
 		vector_expand(vector);

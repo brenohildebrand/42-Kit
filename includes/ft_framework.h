@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:13:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/09 22:59:11 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:43:21 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include "allocate.h"
 # include "deallocate.h"
 
-# include "type.h"
 # include "trillian.h"
 # include "any.h"
 

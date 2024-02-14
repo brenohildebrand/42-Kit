@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 16:26:16 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/11 21:04:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:29:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*read_file(int fd)
 	char			*buffer;
 	int				bytes_read;
 	unsigned int	buffer_size;
-	
+
 	buffer_size = 16;
 	buffer = malloc(buffer_size * sizeof(char));
 	if (buffer == NULL)
@@ -76,9 +76,9 @@ t_file	file_create(char *path)
 		.size = sizeof(struct s_file)
 	};
 	t_file					file;
-	
+
 	file = (t_file)new(&type);
 	file->path = string_create(path);
 	file->content = file_to_string(path);
-	return (file); 
+	return (file);
 }

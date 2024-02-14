@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:46:21 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/11 00:59:25 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:26:48 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ void	vector_set(t_vector vector, int index, t_any value)
 {
 	if (index >= vector->length)
 		return ;
-	vector->content[vector->start + index] = value;	
+	vector->content[vector->start + index] = value;
 }

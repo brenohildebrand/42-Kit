@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:44:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/11 21:05:05 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:27:14 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_string	string_create(char *cstring)
 	};
 	t_string				string;
 
-	string = (t_string)new(&type);	
+	string = (t_string)new(&type);
 	string->content = vector_create();
 	while (*cstring)
 	{
