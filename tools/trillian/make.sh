@@ -6,7 +6,6 @@
 PROJECT=$OLDPWD
 FRAMEWORK=$PWD
 
-if [ "$PROJECT" == "$FRAMEWORK" ]; then
 HEADER="\
 # **************************************************************************** #
 #                                                                              #
@@ -160,6 +159,27 @@ $LATEST_RULES
 $DEBUG_RULES
 $([ "$RELEASE_NAME" == "latest" ] && echo -n "" || echo -n $RELEASE_RULES )
 EOF
-else
-	echo 'TODO: Makefile for projects.'
+
+# Exit if trillian was called from the ft_framework folder.
+if [ "$PROJECT" == "$FRAMEWORK" ]; then
+	exit 0
 fi
+
+source ./config/.env
+
+cd $PROJECT
+
+HEADER="\
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: $ft_username <bhildebr@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: $(date +'%Y/%m/%d %H:%M:%S') by $ft_username          #+#    #+#              #
+#    Updated: $(date +'%Y/%m/%d %H:%M:%S') by $ft_username         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #"
+
+echo 'TODO: Makefile for projects.'
