@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# This script is responsible for generating and updating the Makefile
-# for ft_framework.
+# This script is responsible for generating and updating the Makefiles for your
+# projects and also for ft_framework itself.
 
+PROJECT=$OLDPWD
+FRAMEWORK=$PWD
+
+if [ "$PROJECT" == "$FRAMEWORK" ]; then
 HEADER="\
 # **************************************************************************** #
 #                                                                              #
@@ -156,3 +160,6 @@ $LATEST_RULES
 $DEBUG_RULES
 $([ "$RELEASE_NAME" == "latest" ] && echo -n "" || echo -n $RELEASE_RULES )
 EOF
+else
+	echo 'TODO: Makefile for projects.'
+fi
