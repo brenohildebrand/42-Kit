@@ -38,6 +38,9 @@ case $1 in
     "init")
         ./tools/trillian/init.sh "${@:2}"
         ;;
+    "make")
+        ./tools/trillian/make.sh "${@:2}"
+        ;;
     "run")
         ./tools/trillian/run.sh "${@:2}"
         ;;
