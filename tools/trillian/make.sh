@@ -175,11 +175,31 @@ HEADER="\
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: $ft_username <bhildebr@student.42.fr>          +#+  +:+       +#+         #
+#    By: $(printf "%-42s\n" "$ft_username <$ft_username@student.42.fr>") +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: $(date +'%Y/%m/%d %H:%M:%S') by $ft_username          #+#    #+#              #
-#    Updated: $(date +'%Y/%m/%d %H:%M:%S') by $ft_username         ###   ########.fr        #
+#    Created: $(date +'%Y/%m/%d %H:%M:%S') by $(printf "%-17s\n" "$ft_username") #+#    #+#              #
+#    Updated: $(date +'%Y/%m/%d %H:%M:%S') by $(printf "%-16s\n" "$ft_username") ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #"
+
+NAME=$(basename "$PROJECT" | sed 's/^ft_//')
+RELEASE_NAME="latest"
+
+BUILD="./build/releases/latest/bin/$NAME"
+DEBUG="./build/debug/bin/$NAME"
+RELEASE="./build/releases/$RELEASE_NAME/bin/$NAME"
+
+CC="gcc"
+CFLAGS="-Wall -Wextra -Werror -std=c99"
+CPATHS="\\
+	-include trillian.h \\
+	-include any.h \\
+$(find $FRAMEWORK/source -type f -name '*.h' -exec basename {} \; | sed 's/.*/\t-include & \\/' | sed '/trillian\.h/d' | sed '/any\.h/d')
+$(find $FRAMEWORK/source/base/processes -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /')
+$(find $FRAMEWORK/source/base/types -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /')
+$(find $FRAMEWORK/source/processes -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /')
+$(find $FRAMEWORK/source/types -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /' | sed '$s/ \\//')"
+$(find ./source/processes -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /')
+$(find ./source/types -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /' | sed '$s/ \\//')"
 
 echo 'TODO: Makefile for projects.'
