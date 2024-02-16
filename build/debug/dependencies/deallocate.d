@@ -1,4 +1,4 @@
-build/releases/latest/objects/deallocate.o: \
+build/debug/objects/deallocate.o: \
  source/base/processes/deallocate/deallocate.c \
  source/base/types/trillian/trillian.h source/base/types/any/any.h \
  source/base/processes/allocate/allocate.h \

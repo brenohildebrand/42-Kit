@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/16 09:43:14 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/16 09:43:14 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/16 11:12:36 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/16 11:12:36 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,11 @@
 # See the source code to learn more.
 
 NAME = libtrillian.a
-RELEASE = latest
+RELEASE_NAME = latest
+
+BUILD = ./build/releases/latest/bin/libtrillian.a
+DEBUG = ./build/debug/bin/libtrillian.a
+RELEASE = ./build/releases/latest/bin/libtrillian.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c99
@@ -198,7 +202,7 @@ DEPENDENCIES = \
 
 LATEST_DIR = ./build/releases/latest
 DEBUG_DIR = ./build/debug
-RELEASE_DIR = ./build/releases/$(RELEASE)
+RELEASE_DIR = ./build/releases/$(RELEASE_NAME)
 
 LATEST_OBJECTS = $(addprefix $(LATEST_DIR)/objects/, $(OBJECTS))
 LATEST_DEPENDENCIES = $(addprefix $(LATEST_DIR)/dependencies/, $(DEPENDENCIES))
@@ -211,21 +215,18 @@ RELEASE_DEPENDENCIES = $(addprefix $(RELEASE_DIR)/dependencies/, $(DEPENDENCIES)
 
 all: build
 
-build: $(LATEST_OBJECTS)
-	@mkdir -p $(LATEST_DIR)
-	@ar rcs $(LATEST_DIR)/bin/$(NAME) $(LATEST_OBJECTS)
-
-debug: CFLAGS += -DDEBUG -g
-debug: $(DEBUG_OBJECTS)
-	@mkdir -p $(DEBUG_DIR)
-	@ar rcs $(DEBUG_DIR)/bin/$(NAME) $(DEBUG_OBJECTS)
-
-release: CFLAGS += -03
-release: $(RELEASE_OBJECTS)
-	@mkdir -p $(RELEASE_DIR)
-	@rcs $(RELEASE_DIR)/bin/$(NAME) $(RELEASE_OBJECTS)
-
 $(NAME): build
+
+build: $(BUILD)
+$(BUILD): $(LATEST_OBJECTS) | $(LATEST_DIR)
+	@ar rcs $(LATEST_DIR)/bin/$(NAME) $?
+
+debug: $(DEBUG)
+$(DEBUG): CFLAGS += -DDEBUG -g
+$(DEBUG): $(DEBUG_OBJECTS) | $(DEBUG_DIR)
+	@ar rcs $(DEBUG_DIR)/bin/$(NAME) $?
+
+release: build
 
 clean:
 	@$(RM) $(LATEST_OBJECTS)

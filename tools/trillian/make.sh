@@ -17,7 +17,11 @@ HEADER="\
 # **************************************************************************** #"
 
 NAME="libtrillian.a"
-RELEASE="latest"
+RELEASE_NAME="latest"
+
+BUILD="./build/releases/latest/bin/$NAME"
+DEBUG="./build/debug/bin/$NAME"
+RELEASE="./build/releases/$RELEASE_NAME/bin/$NAME"
 
 CC="gcc"
 CFLAGS="-Wall -Wextra -Werror -std=c99"
@@ -76,6 +80,10 @@ $HEADER
 # See the source code to learn more.
 
 NAME = $NAME
+RELEASE_NAME = $RELEASE_NAME
+
+BUILD = $BUILD
+DEBUG = $DEBUG
 RELEASE = $RELEASE
 
 CC = $CC
@@ -90,7 +98,7 @@ DEPENDENCIES = $DEPENDENCIES
 
 LATEST_DIR = ./build/releases/latest
 DEBUG_DIR = ./build/debug
-RELEASE_DIR = ./build/releases/\$(RELEASE)
+RELEASE_DIR = ./build/releases/\$(RELEASE_NAME)
 
 LATEST_OBJECTS = \$(addprefix \$(LATEST_DIR)/objects/, \$(OBJECTS))
 LATEST_DEPENDENCIES = \$(addprefix \$(LATEST_DIR)/dependencies/, \$(DEPENDENCIES))
@@ -103,21 +111,28 @@ RELEASE_DEPENDENCIES = \$(addprefix \$(RELEASE_DIR)/dependencies/, \$(DEPENDENCI
 
 all: build
 
-build: \$(LATEST_OBJECTS)
-	@mkdir -p \$(LATEST_DIR)
-	@ar rcs \$(LATEST_DIR)/bin/\$(NAME) \$(LATEST_OBJECTS)
-
-debug: CFLAGS += -DDEBUG -g
-debug: \$(DEBUG_OBJECTS)
-	@mkdir -p \$(DEBUG_DIR)
-	@ar rcs \$(DEBUG_DIR)/bin/\$(NAME) \$(DEBUG_OBJECTS)
-
-release: CFLAGS += -03
-release: \$(RELEASE_OBJECTS)
-	@mkdir -p \$(RELEASE_DIR)
-	@rcs \$(RELEASE_DIR)/bin/\$(NAME) \$(RELEASE_OBJECTS)
-
 \$(NAME): build
+
+build: \$(BUILD)
+\$(BUILD): \$(LATEST_OBJECTS) | \$(LATEST_DIR)
+	@ar rcs \$(LATEST_DIR)/bin/\$(NAME) \$?
+
+debug: \$(DEBUG)
+\$(DEBUG): CFLAGS += -DDEBUG -g
+\$(DEBUG): \$(DEBUG_OBJECTS) | \$(DEBUG_DIR)
+	@ar rcs \$(DEBUG_DIR)/bin/\$(NAME) \$?
+
+$(if [[ "$RELEASE_NAME" == "latest" ]]; then
+	echo "\
+release: build"
+else
+	echo "\
+release: \$(RELEASE)
+\$(RELEASE): CFLAGS += -03
+\$(RELEASE): \$(RELEASE_OBJECTS) | \$(RELEASE_DIR) 	
+@ar rcs \$(RELEASE_DIR)/bin/\$(NAME) \$?"
+fi
+)
 
 clean:
 	@\$(RM) \$(LATEST_OBJECTS)
@@ -139,5 +154,5 @@ re: fclean all
 
 $LATEST_RULES
 $DEBUG_RULES
-$([ "$RELEASE" == "latest" ] && echo -n "" || echo -n $RELEASE )
+$([ "$RELEASE_NAME" == "latest" ] && echo -n "" || echo -n $RELEASE_RULES )
 EOF
