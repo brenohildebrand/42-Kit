@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 23:42:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/13 15:32:26 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/16 09:25:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,18 @@
 // -- If something goes wrong in that process trillian will destroy itself and
 // -- the program terminates.
 
-# include "type.h"
-# include "any.h"
-
 # include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
+
+typedef void					*t_any;
+typedef struct s_type			*t_type;
+
+struct s_type {
+	char			*name;
+	void			(*destroy)(t_any);
+	unsigned int	size;
+};
 
 typedef struct s_trillian		*t_trillian;
 
