@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# This script will submit your code to vogsphere. It will create a folder
+# called submit and will put your code there. It will check for norminette
+# and will create a proper Makefile for you.
+
+echo "TODO"
+
+exit 0
+
 PROJECTPWD=$OLDPWD
 SCRIPTPWD=$PWD
 FRAMEWORKPWD=$(dirname $SCRIPTPWD)

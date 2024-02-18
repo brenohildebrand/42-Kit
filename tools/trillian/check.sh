@@ -1,13 +1,15 @@
 #!/bin/bash
 
-PROJECTPWD=$OLDPWD
-SCRIPTPWD=$PWD
-FRAMEWORKPWD=$(dirname $SCRIPTPWD)
+# This script will check the norm on the source code of the ft_framework or
+# on the current project.
 
-if [ "$PROJECTPWD" = "$FRAMEWORKPWD" ]; then
-	cd $FRAMEWORKPWD
+PROJECT=$OLDPWD
+FRAMEWORK=$PWD
+
+if [ "$PROJECT" == "$FRAMEWORK" ]; then
+	cd $FRAMEWORK
 	norminette ./source
 else
-	cd $PROJECTPWD
+	cd $PROJECT
 	norminette ./source
 fi

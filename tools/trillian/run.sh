@@ -1,9 +1,16 @@
 #!/bin/bash
 
-PROJECTPWD=$OLDPWD
-SCRIPTPWD=$PWD
-FRAMEWORKPWD=$(dirname $SCRIPTPWD)
+# This script will run the latest build of the project. If it doesn't exist it
+# will call 'trillian build' before running it.
 
-cd $PROJECTPWD
+PROJECT=$OLDPWD
+FRAMEWORK=$PWD
+
+cd $PROJECT
 NAME=$(basename $PROJECTPWD | sed "s/^ft_//")
-./build/${NAME} "${@:1}"
+TARGET="./build/releases/latest/bin/${NAME}"
+if [ ! -f $TARGET ]; then
+	trillian build
+fi
+
+$TARGET "${@:1}"

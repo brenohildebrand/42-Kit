@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo "TODO"
+
+exit 0
+
 PROJECTPWD=$OLDPWD
 SCRIPTPWD=$PWD
 FRAMEWORKPWD=$(dirname $SCRIPTPWD)

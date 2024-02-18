@@ -73,9 +73,6 @@ $release_object: $source
 "
 done
 
-# DEBUG_RULES
-# RELEASE_RULES
-
 cat << EOF > ./Makefile
 $HEADER
 
@@ -133,7 +130,7 @@ else
 release: \$(RELEASE)
 \$(RELEASE): CFLAGS += -03
 \$(RELEASE): \$(RELEASE_OBJECTS) | \$(RELEASE_DIR) 	
-@ar rcs \$(RELEASE_DIR)/bin/\$(NAME) \$?"
+	@ar rcs \$(RELEASE_DIR)/bin/\$(NAME) \$?"
 fi
 )
 
@@ -185,21 +182,142 @@ HEADER="\
 NAME=$(basename "$PROJECT" | sed 's/^ft_//')
 RELEASE_NAME="latest"
 
+LIBTRILLIAN="$FRAMEWORK/build/releases/latest/bin/libtrillian.a"
+
 BUILD="./build/releases/latest/bin/$NAME"
 DEBUG="./build/debug/bin/$NAME"
 RELEASE="./build/releases/$RELEASE_NAME/bin/$NAME"
 
 CC="gcc"
-CFLAGS="-Wall -Wextra -Werror -std=c99"
+CFLAGS="-Wall -Wextra -Werror -std=c99 -D$NAME=main"
 CPATHS="\\
 	-include trillian.h \\
 	-include any.h \\
 $(find $FRAMEWORK/source -type f -name '*.h' -exec basename {} \; | sed 's/.*/\t-include & \\/' | sed '/trillian\.h/d' | sed '/any\.h/d')
-$(find $FRAMEWORK/source/base/processes -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /')
-$(find $FRAMEWORK/source/base/types -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /')
-$(find $FRAMEWORK/source/processes -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /')
-$(find $FRAMEWORK/source/types -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /' | sed '$s/ \\//')"
-$(find ./source/processes -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /')
-$(find ./source/types -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /' | sed '$s/ \\//')"
+$(find $FRAMEWORK/source/base/processes -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \;)
+$(find $FRAMEWORK/source/base/types -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \;)
+$(find $FRAMEWORK/source/processes -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \;)
+$(find $FRAMEWORK/source/types -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \;)
+$(find $PROJECT/source/processes -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \;)
+$(find $PROJECT/source/types -mindepth 1 -type d -exec echo -e '\t'-iquote {} \\ \; | sed '$s/ \\//')"
 
-echo 'TODO: Makefile for projects.'
+SOURCES="$(find ./source -type f -name "*.c" -exec echo {} \; | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+HEADERS="$(find ./source -type f -name "*.h" -exec basename {} \; | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+OBJECTS="$(find ./source -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.o/' | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+DEPENDENCIES="$(find ./source -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.d/' | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+
+for source in $(find ./source -type f -name "*.c" -exec echo {} \;); do
+	object=$(basename $source | sed 's/\.c/.o/')
+	dependency=$(basename $source | sed 's/\.c/.d/')
+
+	latest_object="\$(LATEST_DIR)/objects/$object"
+	latest_dependency="\$(LATEST_DIR)/dependencies/$dependency"
+
+	debug_object="\$(DEBUG_DIR)/objects/$object"
+	debug_dependency="\$(DEBUG_DIR)/dependencies/$dependency"
+
+	release_object="\$(RELEASE_DIR)/objects/$object"
+	release_dependency="\$(RELEASE_DIR)/dependencies/$dependency"
+
+	LATEST_RULES+="\
+$latest_object: $source
+	@\$(CC) \$(CFLAGS) \$(CPATHS) -MMD -MF $latest_dependency -c $source -o $latest_object
+
+"
+	DEBUG_RULES+="\
+$debug_object: $source
+	@\$(CC) \$(CFLAGS) \$(CPATHS) -MMD -MF $debug_dependency -c $source -o $debug_object
+
+"
+
+	RELEASE_RULES+="\
+$release_object: $source
+	@\$(CC) \$(CFLAGS) \$(CPATHS) -MMD -MF $release_dependency -c $source -o $release_object
+
+"
+done
+
+cat << EOF > $PROJECT/Makefile
+$HEADER
+
+NAME = $NAME
+RELEASE_NAME = $RELEASE_NAME
+
+LIBTRILLIAN = $LIBTRILLIAN
+
+BUILD = $BUILD
+DEBUG = $DEBUG
+RELEASE = $RELEASE
+
+CC = $CC
+CFLAGS = $CFLAGS
+CPATHS = $CPATHS
+
+SOURCES = $SOURCES
+
+HEADERS = $HEADERS
+
+OBJECTS = $OBJECTS
+
+DEPENDENCIES = $DEPENDENCIES
+
+LATEST_DIR = ./build/releases/latest
+DEBUG_DIR = ./build/debug
+RELEASE_DIR = ./build/releases/\$(RELEASE_NAME)
+
+LATEST_OBJECTS = \$(addprefix \$(LATEST_DIR)/objects/, \$(OBJECTS))
+LATEST_DEPENDENCIES = \$(addprefix \$(LATEST_DIR)/dependencies/, \$(DEPENDENCIES))
+
+DEBUG_OBJECTS = \$(addprefix \$(DEBUG_DIR)/objects/, \$(OBJECTS))
+DEBUG_DEPENDENCIES = \$(addprefix \$(DEBUG_DIR)/dependencies/, \$(DEPENDENCIES))
+
+RELEASE_OBJECTS = \$(addprefix \$(RELEASE_DIR)/objects/, \$(OBJECTS))
+RELEASE_DEPENDENCIES = \$(addprefix \$(RELEASE_DIR)/dependencies/, \$(DEPENDENCIES))
+
+all: build
+
+\$(NAME): build
+
+build: \$(BUILD)
+\$(BUILD): \$(LATEST_OBJECTS) | \$(LATEST_DIR)
+	@\$(CC) \$(CFLAGS) -o \$(LATEST_DIR)/bin/\$(NAME) \$(LATEST_OBJECTS) \$(LIBTRILLIAN)
+
+debug: \$(DEBUG)
+\$(DEBUG): CFLAGS += -DDEBUG -g
+\$(DEBUG): \$(DEBUG_OBJECTS) | \$(DEBUG_DIR)
+	@\$(CC) \$(CFLAGS) -o \$(DEBUG_DIR)/bin/\$(NAME) \$(DEBUG_OBJECTS) \$(LIBTRILLIAN)
+
+$(if [[ "$RELEASE_NAME" == "latest" ]]; then
+	echo "\
+release: build"
+else
+	echo "\
+release: \$(RELEASE)
+\$(RELEASE): CFLAGS += -03
+\$(RELEASE): \$(RELEASE_OBJECTS) | \$(RELEASE_DIR) 	
+	@\$(CC) \$(CFLAGS) -o \$(RELEASE_DIR)/bin/\$(NAME) \$(RELEASE_OBJECTS) \$(LIBTRILLIAN)"
+fi
+)
+
+clean:
+	@\$(RM) \$(LATEST_OBJECTS)
+	@\$(RM) \$(DEBUG_OBJECTS)
+	@\$(RM) \$(RELEASE_OBJECTS)
+
+fclean: clean
+	@\$(RM) \$(LATEST_DIR)/bin/\$(NAME)
+	@\$(RM) \$(DEBUG_DIR)/bin/\$(NAME)
+	@\$(RM) \$(RELEASE_DIR)/bin/\$(NAME)
+
+re: fclean all
+
+.PHONY: all build debug release \$(NAME) clean fclean re
+
+-include \$(LATEST_DEPENDENCIES)
+-include \$(DEBUG_DEPENDENCIES)
+-include \$(RELEASE_DEPENDENCIES)
+
+$LATEST_RULES
+$DEBUG_RULES
+$([ "$RELEASE_NAME" == "latest" ] && echo -n "" || echo -n $RELEASE_RULES )
+EOF

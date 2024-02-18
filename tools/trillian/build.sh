@@ -1,31 +1,31 @@
 #!/bin/bash
 
-PROJECTPWD=$OLDPWD
-SCRIPTPWD=$PWD
-FRAMEWORKPWD=$(dirname $SCRIPTPWD)
+# This script will call 'trillian make' and 'make build' meaning it will
+# recreate the Makefile and build the project for the latest release. 
 
-shopt -s nullglob
+PROJECT=$OLDPWD
+FRAMEWORK=$PWD
 
-if [ "$PROJECTPWD" = "$FRAMEWORKPWD" ]; then
-	cd $FRAMEWORKPWD
-	mkdir -p ./objects
-	cd ./objects
-	gcc -Wall -Wextra -Werror -include ft_framework.h -c -g ../source/base/processes/**/*.c ../source/base/types/**/*.c ../source/processes/**/*.c ../source/types/**/*.c -iquote ../includes $(find ../source/base/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/base/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
-	ar rcs ../build/libframework.a ../objects/*.o
-else
-	cd $FRAMEWORKPWD
-	mkdir -p ./objects
-	cd ./objects
-	gcc -Wall -Wextra -Werror -include ft_framework.h -c -g ../source/base/processes/**/*.c ../source/base/types/**/*.c ../source/processes/**/*.c ../source/types/**/*.c -iquote ../includes $(find ../source/base/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/base/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
-	ar rcs ../build/libframework.a ../objects/*.o
+source $FRAMEWORK/config/.env
 
-	cd $PROJECTPWD
-	NAME=$(basename $PROJECTPWD | sed "s/^ft_//")
-	mkdir -p ./build
-	mkdir -p ./objects
-	cd ./objects
-	gcc -Wall -Wextra -Werror -include ft_framework.h -D$NAME=main -c -g ../source/processes/**/*.c ../source/types/**/*.c $(find ../source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') -iquote "${FRAMEWORKPWD}/includes" $(find "${FRAMEWORKPWD}/source/base/processes" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/base/types" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/processes" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/types" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
-	gcc -Wall -Wextra -Werror -o "../build/$NAME" -g ../objects/*.o $FRAMEWORKPWD/build/libframework.a
-fi
+anime() {
+    local pid=$1
+    local message=$2
+    local delay=0.1
+    local chars="/-\|"
+	local index=0
 
-shopt -u nullglob
+    while ps -p $pid > /dev/null; do
+        printf "\r[%c] %s" "${chars:$index:1}" "$message"
+        sleep $delay
+		index=$(( (index + 1) % ${#chars} ))
+	done
+	printf "\r\033[K"
+}
+
+echo $trillian
+
+cd $PROJECT
+$trillian make
+# make build &
+# anime $! 'building...'

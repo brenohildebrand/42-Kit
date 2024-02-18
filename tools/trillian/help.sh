@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script will show information about how to use trillian.
+
 cat << EOF
 Trillian is a tool from ft_framework.
 If you want to learn more go to https://github.com/brenohildebrand/ft_framework.
