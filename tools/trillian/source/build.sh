@@ -3,12 +3,15 @@
 # This script will call 'trillian make' and 'make build' meaning it will
 # recreate the Makefile and build the project for the latest release. 
 
-PROJECT=$OLDPWD
-FRAMEWORK=$PWD
+build()
+{
+	cd $PROJECT
+	trillian make
+	make build > /dev/null 2>&1
+}
 
-source $FRAMEWORK/config/.env
-
-anime() {
+load() 
+{
     local pid=$1
     local message=$2
     local delay=0.1
@@ -23,9 +26,8 @@ anime() {
 	printf "\r\033[K"
 }
 
-echo $trillian
+PROJECT=$OLDPWD
+FRAMEWORK=$PWD
 
-cd $PROJECT
-$trillian make
-# make build &
-# anime $! 'building...'
+build &
+load $! "Building..."

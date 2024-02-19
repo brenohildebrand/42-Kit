@@ -8,24 +8,22 @@ install()
 {
 	sleep 2
 	git clone git@github.com:brenohildebrand/ft_framework.git ~/ft_framework > /dev/null 2>&1
-	sed -i "s/^TRILLIAN=.*/TRILLIAN=~\/ft_framework\//" ~/ft_framework/config/.env
-	sed -i "s/^FT_USERNAME=.*/FT_USERNAME=$FT_USERNAME/" ~/ft_framework/config/.env
 	current_shell=$(basename "$SHELL")
 	case "$current_shell" in
 		bash)
-			line="alias trillian=\"~/ft_framework/tools/trillian/trillian.sh\""
+			line="export PATH=\"\$HOME/ft_framework/tools/trillian/bin:\$PATH\""
 			if ! grep -q "$line" "$HOME/.bashrc"; then
 				echo $line >> ~/.bashrc
 			fi
 			;;
 		zsh)
-			line="alias trillian=\"~/ft_framework/tools/trillian/trillian.sh\""
+			line="export PATH=\"\$HOME/ft_framework/tools/trillian/bin:\$PATH\""
 			if ! grep -q "$line" "$HOME/.zshrc"; then
 				echo $line >> ~/.zshrc
 			fi
 			;;
 	esac
-	chmod +x ~/ft_framework/tools/trillian/*.sh
+	chmod +x ~/ft_framework/tools/trillian/source/*.sh
 	source ~/.bashrc
 }
 
@@ -77,100 +75,3 @@ load $! "Installing..."
 echo -e "\rInstallation completed."
 
 exit 0
-
-echo "Welcome to ft_framework. Are you sure you want to install it? (yes/no) "
-read answer
-
-cd $(dirname $0)
-source ../shared/input.sh
-source ../shared/colors.sh
-source ../shared/cursor.sh
-source ../shared/styles.sh
-
-# echo -e "${BOLD}ft_framework-0.0.0${RESET}"
-# echo -e "Installing..."
-
-tput cnorm
-
-echo -e "\e[?12;25h"
-
-type --text="\
-This is the official installer for ft_framework.
-If you are unsure how you ended up here, press 'esc' to exit. Otherwise, press 'enter' to continue."
-
-while true; do
-	character=$(get_character)
-	if [[ "$character" == $'\x1b' ]]; then
-		echo
-		exit 0
-	elif [[ "$character" == $'\x00' ]]; then
-		echo
-		break
-	fi
-done
-
-echo
-type --text="What's your username at 42?" --newline
-echo -n "Username: "
-read username
-
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-echo -e ${CLEAR_LINE}
-echo -e ${CLEAR_LINE}
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-
-while true; do
-	type --text="Are you sure your username is ${username}?" --newline
-	read -p "Answer: (yes/no) " answer
-	if [[ "$answer" == "yes" ]]; then
-		break
-	elif [[ "$answer" == "no" ]]; then
-		echo -e ${CURSOR_UP}
-		echo -e ${CLEAR_LINE}
-		echo -e ${CURSOR_UP}
-		type --text="What's your username at 42?" --newline
-		echo -n "Username: "
-		read username
-		echo -e ${CURSOR_UP}
-		echo -e ${CURSOR_UP}
-		echo -e ${CLEAR_LINE}
-		echo -e ${CLEAR_LINE}
-		echo -e ${CURSOR_UP}
-		echo -e ${CURSOR_UP}
-	else
-		echo -e ${CURSOR_UP}
-		echo -e ${CURSOR_UP}
-		echo -e ${CLEAR_LINE}
-		echo -e ${CLEAR_LINE}
-		echo -e ${CURSOR_UP}
-		echo -e ${CURSOR_UP}
-		type --text="You should answer with 'yes' or 'no'. "
-	fi
-done
-
-echo
-
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-echo -e ${CLEAR_LINE}
-echo -e ${CLEAR_LINE}
-echo -e ${CLEAR_LINE}
-echo -e ${CLEAR_LINE}
-echo -e ${CLEAR_LINE}
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-echo -e ${CURSOR_UP}
-type --text="So get ready because installation is... "
-type --text="Beep... "
-type --text="Boop... "
-type --text="INCOMING!" --newline
-
-echo -e "\e[?12l"

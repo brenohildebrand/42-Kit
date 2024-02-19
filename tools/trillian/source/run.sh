@@ -6,6 +6,10 @@
 PROJECT=$OLDPWD
 FRAMEWORK=$PWD
 
+if [[ "$PROJECT" == "$FRAMEWORK" ]]; then
+	exit 0
+fi
+
 cd $PROJECT
 NAME=$(basename $PROJECTPWD | sed "s/^ft_//")
 TARGET="./build/releases/latest/bin/${NAME}"
