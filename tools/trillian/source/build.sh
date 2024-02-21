@@ -7,7 +7,11 @@ build()
 {
 	cd $PROJECT
 	trillian make
-	make build > /dev/null 2>&1
+	output=$(make build 2>&1)
+	if [ $? -ne 0 ]; then
+		echo
+		echo "$output"
+	fi
 }
 
 load() 
@@ -23,6 +27,7 @@ load()
         sleep $delay
 		index=$(( (index + 1) % ${#chars} ))
 	done
+
 	printf "\r\033[K"
 }
 

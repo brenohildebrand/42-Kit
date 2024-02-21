@@ -6,6 +6,38 @@
 
 echo "TODO"
 
+PROJECT=$OLDPWD
+FRAMEWORK=$PWD
+
+if [[ "$PROJECT" == "$FRAMEWORK" ]]; then
+	exit 0
+fi
+
+cd $PROJECT
+
+trillian check
+
+mkdir -p submit
+mkdir -p submit/build
+mkdir -p submit/build/
+mkdir -p submit/lib
+mkdir -p submit/lib/ft_framework
+mkdir -p submit/lib/ft_framework/build
+mkdir -p submit/lib/ft_framework/build/debug
+mkdir -p submit/lib/ft_framework/build/releases
+mkdir -p submit/lib/ft_framework/build/debug/bin
+mkdir -p submit/lib/ft_framework/build/debug/objects
+mkdir -p submit/lib/ft_framework/build/debug/dependencies
+mkdir -p submit/lib/ft_framework/build/releases/latest
+mkdir -p submit/lib/ft_framework/build/releases/latest/bin
+mkdir -p submit/lib/ft_framework/build/releases/latest/objects
+mkdir -p submit/lib/ft_framework/build/releases/latest/dependencies
+
+cp -r $FRAMEWORK/source submit/lib/ft_framework/
+cp -r $PROJECT/source submit/
+
+# generate Makefiles
+
 exit 0
 
 PROJECTPWD=$OLDPWD

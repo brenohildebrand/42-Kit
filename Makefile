@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/18 21:12:34 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/18 21:12:34 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/21 12:14:55 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/21 12:14:55 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,24 +14,22 @@
 # See the source code to learn more.
 
 NAME = libtrillian.a
-RELEASE_NAME = latest
 
-BUILD = ./build/releases/latest/bin/libtrillian.a
 DEBUG = ./build/debug/bin/libtrillian.a
-RELEASE = ./build/releases/latest/bin/libtrillian.a
+DEFAULT = ./build/default/bin/libtrillian.a
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c99
 CPATHS = \
-	-include trillian.h \
+	-include memtree.h \
 	-include any.h \
 	-include allocate.h \
-	-include deallocate.h \
-	-include delete.h \
-	-include new.h \
 	-include assert.h \
+	-include deallocate.h \
 	-include debug.h \
+	-include delete.h \
 	-include error.h \
+	-include new.h \
 	-include print.h \
 	-include character.h \
 	-include file.h \
@@ -39,44 +37,37 @@ CPATHS = \
 	-include integer.h \
 	-include string.h \
 	-include vector.h \
-	-iquote ./source/base/processes/allocate \
-	-iquote ./source/base/processes/deallocate \
-	-iquote ./source/base/processes/delete \
-	-iquote ./source/base/processes/new \
-	-iquote ./source/base/types/any \
-	-iquote ./source/base/types/trillian \
-	-iquote ./source/processes/assert \
-	-iquote ./source/processes/debug \
-	-iquote ./source/processes/error \
-	-iquote ./source/processes/print \
+	-iquote ./source \
+	-iquote ./source/functions \
+	-iquote ./source/functions/allocate \
+	-iquote ./source/functions/assert \
+	-iquote ./source/functions/deallocate \
+	-iquote ./source/functions/debug \
+	-iquote ./source/functions/delete \
+	-iquote ./source/functions/error \
+	-iquote ./source/functions/new \
+	-iquote ./source/functions/print \
+	-iquote ./source/types \
+	-iquote ./source/types/any \
 	-iquote ./source/types/character \
 	-iquote ./source/types/file \
 	-iquote ./source/types/fractional \
 	-iquote ./source/types/integer \
+	-iquote ./source/types/memtree \
 	-iquote ./source/types/string \
 	-iquote ./source/types/vector
 
 SOURCES = \
-	./source/base/processes/allocate/allocate.c \
-	./source/base/processes/deallocate/deallocate.c \
-	./source/base/processes/delete/delete.c \
-	./source/base/processes/new/new.c \
-	./source/base/types/any/any_create.c \
-	./source/base/types/any/any_destroy.c \
-	./source/base/types/trillian/trillian_create.c \
-	./source/base/types/trillian/trillian_delete.c \
-	./source/base/types/trillian/trillian_destroy.c \
-	./source/base/types/trillian/trillian_get.c \
-	./source/base/types/trillian/trillian_get_height.c \
-	./source/base/types/trillian/trillian_insert.c \
-	./source/base/types/trillian/trillian_print.c \
-	./source/base/types/trillian/trillian_rebalance.c \
-	./source/base/types/trillian/trillian_search.c \
-	./source/base/types/trillian/trillian_update_height.c \
-	./source/processes/assert/assert.c \
-	./source/processes/debug/debug.c \
-	./source/processes/error/error.c \
-	./source/processes/print/print.c \
+	./source/functions/allocate/allocate.c \
+	./source/functions/assert/assert.c \
+	./source/functions/deallocate/deallocate.c \
+	./source/functions/debug/debug.c \
+	./source/functions/delete/delete.c \
+	./source/functions/error/error.c \
+	./source/functions/new/new.c \
+	./source/functions/print/print.c \
+	./source/types/any/any_create.c \
+	./source/types/any/any_destroy.c \
 	./source/types/character/character_create.c \
 	./source/types/character/character_destroy.c \
 	./source/types/character/character_get.c \
@@ -87,6 +78,16 @@ SOURCES = \
 	./source/types/integer/integer_create.c \
 	./source/types/integer/integer_destroy.c \
 	./source/types/integer/integer_get.c \
+	./source/types/memtree/memtree_create.c \
+	./source/types/memtree/memtree_delete.c \
+	./source/types/memtree/memtree_destroy.c \
+	./source/types/memtree/memtree_get.c \
+	./source/types/memtree/memtree_get_height.c \
+	./source/types/memtree/memtree_insert.c \
+	./source/types/memtree/memtree_print.c \
+	./source/types/memtree/memtree_rebalance.c \
+	./source/types/memtree/memtree_search.c \
+	./source/types/memtree/memtree_update_height.c \
 	./source/types/string/string_create.c \
 	./source/types/string/string_destroy.c \
 	./source/types/string/string_get.c \
@@ -106,25 +107,15 @@ SOURCES = \
 
 OBJECTS = \
 	allocate.o \
+	assert.o \
 	deallocate.o \
+	debug.o \
 	delete.o \
+	error.o \
 	new.o \
+	print.o \
 	any_create.o \
 	any_destroy.o \
-	trillian_create.o \
-	trillian_delete.o \
-	trillian_destroy.o \
-	trillian_get.o \
-	trillian_get_height.o \
-	trillian_insert.o \
-	trillian_print.o \
-	trillian_rebalance.o \
-	trillian_search.o \
-	trillian_update_height.o \
-	assert.o \
-	debug.o \
-	error.o \
-	print.o \
 	character_create.o \
 	character_destroy.o \
 	character_get.o \
@@ -135,6 +126,16 @@ OBJECTS = \
 	integer_create.o \
 	integer_destroy.o \
 	integer_get.o \
+	memtree_create.o \
+	memtree_delete.o \
+	memtree_destroy.o \
+	memtree_get.o \
+	memtree_get_height.o \
+	memtree_insert.o \
+	memtree_print.o \
+	memtree_rebalance.o \
+	memtree_search.o \
+	memtree_update_height.o \
 	string_create.o \
 	string_destroy.o \
 	string_get.o \
@@ -154,25 +155,15 @@ OBJECTS = \
 
 DEPENDENCIES = \
 	allocate.d \
+	assert.d \
 	deallocate.d \
+	debug.d \
 	delete.d \
+	error.d \
 	new.d \
+	print.d \
 	any_create.d \
 	any_destroy.d \
-	trillian_create.d \
-	trillian_delete.d \
-	trillian_destroy.d \
-	trillian_get.d \
-	trillian_get_height.d \
-	trillian_insert.d \
-	trillian_print.d \
-	trillian_rebalance.d \
-	trillian_search.d \
-	trillian_update_height.d \
-	assert.d \
-	debug.d \
-	error.d \
-	print.d \
 	character_create.d \
 	character_destroy.d \
 	character_get.d \
@@ -183,6 +174,16 @@ DEPENDENCIES = \
 	integer_create.d \
 	integer_destroy.d \
 	integer_get.d \
+	memtree_create.d \
+	memtree_delete.d \
+	memtree_destroy.d \
+	memtree_get.d \
+	memtree_get_height.d \
+	memtree_insert.d \
+	memtree_print.d \
+	memtree_rebalance.d \
+	memtree_search.d \
+	memtree_update_height.d \
 	string_create.d \
 	string_destroy.d \
 	string_get.d \
@@ -200,250 +201,211 @@ DEPENDENCIES = \
 	vector_shift.d \
 	vector_unshift.d
 
-LATEST_DIR = ./build/releases/latest
 DEBUG_DIR = ./build/debug
-RELEASE_DIR = ./build/releases/$(RELEASE_NAME)
-
-LATEST_OBJECTS = $(addprefix $(LATEST_DIR)/objects/, $(OBJECTS))
-LATEST_DEPENDENCIES = $(addprefix $(LATEST_DIR)/dependencies/, $(DEPENDENCIES))
+DEFAULT_DIR = ./build/default
 
 DEBUG_OBJECTS = $(addprefix $(DEBUG_DIR)/objects/, $(OBJECTS))
 DEBUG_DEPENDENCIES = $(addprefix $(DEBUG_DIR)/dependencies/, $(DEPENDENCIES))
 
-RELEASE_OBJECTS = $(addprefix $(RELEASE_DIR)/objects/, $(OBJECTS))
-RELEASE_DEPENDENCIES = $(addprefix $(RELEASE_DIR)/dependencies/, $(DEPENDENCIES))
+DEFAULT_OBJECTS = $(addprefix $(DEFAULT_DIR)/objects/, $(OBJECTS))
+DEFAULT_DEPENDENCIES = $(addprefix $(DEFAULT_DIR)/dependencies/, $(DEPENDENCIES))
 
 all: build
 
 $(NAME): build
-
-build: $(BUILD)
-$(BUILD): $(LATEST_OBJECTS) | $(LATEST_DIR)
-	@ar rcs $(LATEST_DIR)/bin/$(NAME) $?
 
 debug: $(DEBUG)
 $(DEBUG): CFLAGS += -DDEBUG -g
 $(DEBUG): $(DEBUG_OBJECTS) | $(DEBUG_DIR)
 	@ar rcs $(DEBUG_DIR)/bin/$(NAME) $?
 
-release: build
+build: $(DEFAULT)
+$(DEFAULT): $(DEFAULT_OBJECTS) | $(DEFAULT_DIR)
+	@ar rcs $(DEFAULT_DIR)/bin/$(NAME) $?
 
 clean:
-	@$(RM) $(LATEST_OBJECTS)
 	@$(RM) $(DEBUG_OBJECTS)
-	@$(RM) $(RELEASE_OBJECTS)
+	@$(RM) $(DEFAULT_OBJECTS)
 
 fclean: clean
-	@$(RM) $(LATEST_DIR)/bin/$(NAME)
 	@$(RM) $(DEBUG_DIR)/bin/$(NAME)
-	@$(RM) $(RELEASE_DIR)/bin/$(NAME)
+	@$(RM) $(DEFAULT_DIR)/bin/$(NAME)
 
 re: fclean all
 
 .PHONY: all build debug release $(NAME) clean fclean re
 
--include $(LATEST_DEPENDENCIES)
 -include $(DEBUG_DEPENDENCIES)
--include $(RELEASE_DEPENDENCIES)
+-include $(DEFAULT_DEPENDENCIES)
 
-$(LATEST_DIR)/objects/allocate.o: ./source/base/processes/allocate/allocate.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/allocate.d -c ./source/base/processes/allocate/allocate.c -o $(LATEST_DIR)/objects/allocate.o
+$(DEFAULT_DIR)/objects/allocate.o: ./source/functions/allocate/allocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/allocate.d -c ./source/functions/allocate/allocate.c -o $(DEFAULT_DIR)/objects/allocate.o
 
-$(LATEST_DIR)/objects/deallocate.o: ./source/base/processes/deallocate/deallocate.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/deallocate.d -c ./source/base/processes/deallocate/deallocate.c -o $(LATEST_DIR)/objects/deallocate.o
+$(DEFAULT_DIR)/objects/assert.o: ./source/functions/assert/assert.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/assert.d -c ./source/functions/assert/assert.c -o $(DEFAULT_DIR)/objects/assert.o
 
-$(LATEST_DIR)/objects/delete.o: ./source/base/processes/delete/delete.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/delete.d -c ./source/base/processes/delete/delete.c -o $(LATEST_DIR)/objects/delete.o
+$(DEFAULT_DIR)/objects/deallocate.o: ./source/functions/deallocate/deallocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/deallocate.d -c ./source/functions/deallocate/deallocate.c -o $(DEFAULT_DIR)/objects/deallocate.o
 
-$(LATEST_DIR)/objects/new.o: ./source/base/processes/new/new.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/new.d -c ./source/base/processes/new/new.c -o $(LATEST_DIR)/objects/new.o
+$(DEFAULT_DIR)/objects/debug.o: ./source/functions/debug/debug.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/debug.d -c ./source/functions/debug/debug.c -o $(DEFAULT_DIR)/objects/debug.o
 
-$(LATEST_DIR)/objects/any_create.o: ./source/base/types/any/any_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/any_create.d -c ./source/base/types/any/any_create.c -o $(LATEST_DIR)/objects/any_create.o
+$(DEFAULT_DIR)/objects/delete.o: ./source/functions/delete/delete.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/delete.d -c ./source/functions/delete/delete.c -o $(DEFAULT_DIR)/objects/delete.o
 
-$(LATEST_DIR)/objects/any_destroy.o: ./source/base/types/any/any_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/any_destroy.d -c ./source/base/types/any/any_destroy.c -o $(LATEST_DIR)/objects/any_destroy.o
+$(DEFAULT_DIR)/objects/error.o: ./source/functions/error/error.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/error.d -c ./source/functions/error/error.c -o $(DEFAULT_DIR)/objects/error.o
 
-$(LATEST_DIR)/objects/trillian_create.o: ./source/base/types/trillian/trillian_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/trillian_create.d -c ./source/base/types/trillian/trillian_create.c -o $(LATEST_DIR)/objects/trillian_create.o
+$(DEFAULT_DIR)/objects/new.o: ./source/functions/new/new.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/new.d -c ./source/functions/new/new.c -o $(DEFAULT_DIR)/objects/new.o
 
-$(LATEST_DIR)/objects/trillian_delete.o: ./source/base/types/trillian/trillian_delete.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/trillian_delete.d -c ./source/base/types/trillian/trillian_delete.c -o $(LATEST_DIR)/objects/trillian_delete.o
+$(DEFAULT_DIR)/objects/print.o: ./source/functions/print/print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/print.d -c ./source/functions/print/print.c -o $(DEFAULT_DIR)/objects/print.o
 
-$(LATEST_DIR)/objects/trillian_destroy.o: ./source/base/types/trillian/trillian_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/trillian_destroy.d -c ./source/base/types/trillian/trillian_destroy.c -o $(LATEST_DIR)/objects/trillian_destroy.o
+$(DEFAULT_DIR)/objects/any_create.o: ./source/types/any/any_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_create.d -c ./source/types/any/any_create.c -o $(DEFAULT_DIR)/objects/any_create.o
 
-$(LATEST_DIR)/objects/trillian_get.o: ./source/base/types/trillian/trillian_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/trillian_get.d -c ./source/base/types/trillian/trillian_get.c -o $(LATEST_DIR)/objects/trillian_get.o
+$(DEFAULT_DIR)/objects/any_destroy.o: ./source/types/any/any_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_destroy.d -c ./source/types/any/any_destroy.c -o $(DEFAULT_DIR)/objects/any_destroy.o
 
-$(LATEST_DIR)/objects/trillian_get_height.o: ./source/base/types/trillian/trillian_get_height.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/trillian_get_height.d -c ./source/base/types/trillian/trillian_get_height.c -o $(LATEST_DIR)/objects/trillian_get_height.o
+$(DEFAULT_DIR)/objects/character_create.o: ./source/types/character/character_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/character_create.d -c ./source/types/character/character_create.c -o $(DEFAULT_DIR)/objects/character_create.o
 
-$(LATEST_DIR)/objects/trillian_insert.o: ./source/base/types/trillian/trillian_insert.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/trillian_insert.d -c ./source/base/types/trillian/trillian_insert.c -o $(LATEST_DIR)/objects/trillian_insert.o
+$(DEFAULT_DIR)/objects/character_destroy.o: ./source/types/character/character_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/character_destroy.d -c ./source/types/character/character_destroy.c -o $(DEFAULT_DIR)/objects/character_destroy.o
 
-$(LATEST_DIR)/objects/trillian_print.o: ./source/base/types/trillian/trillian_print.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/trillian_print.d -c ./source/base/types/trillian/trillian_print.c -o $(LATEST_DIR)/objects/trillian_print.o
+$(DEFAULT_DIR)/objects/character_get.o: ./source/types/character/character_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/character_get.d -c ./source/types/character/character_get.c -o $(DEFAULT_DIR)/objects/character_get.o
 
-$(LATEST_DIR)/objects/trillian_rebalance.o: ./source/base/types/trillian/trillian_rebalance.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/trillian_rebalance.d -c ./source/base/types/trillian/trillian_rebalance.c -o $(LATEST_DIR)/objects/trillian_rebalance.o
+$(DEFAULT_DIR)/objects/file_create.o: ./source/types/file/file_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/file_create.d -c ./source/types/file/file_create.c -o $(DEFAULT_DIR)/objects/file_create.o
 
-$(LATEST_DIR)/objects/trillian_search.o: ./source/base/types/trillian/trillian_search.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/trillian_search.d -c ./source/base/types/trillian/trillian_search.c -o $(LATEST_DIR)/objects/trillian_search.o
+$(DEFAULT_DIR)/objects/file_destroy.o: ./source/types/file/file_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/file_destroy.d -c ./source/types/file/file_destroy.c -o $(DEFAULT_DIR)/objects/file_destroy.o
 
-$(LATEST_DIR)/objects/trillian_update_height.o: ./source/base/types/trillian/trillian_update_height.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/trillian_update_height.d -c ./source/base/types/trillian/trillian_update_height.c -o $(LATEST_DIR)/objects/trillian_update_height.o
+$(DEFAULT_DIR)/objects/fractional_create.o: ./source/types/fractional/fractional_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/fractional_create.d -c ./source/types/fractional/fractional_create.c -o $(DEFAULT_DIR)/objects/fractional_create.o
 
-$(LATEST_DIR)/objects/assert.o: ./source/processes/assert/assert.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/assert.d -c ./source/processes/assert/assert.c -o $(LATEST_DIR)/objects/assert.o
+$(DEFAULT_DIR)/objects/fractional_destroy.o: ./source/types/fractional/fractional_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/fractional_destroy.d -c ./source/types/fractional/fractional_destroy.c -o $(DEFAULT_DIR)/objects/fractional_destroy.o
 
-$(LATEST_DIR)/objects/debug.o: ./source/processes/debug/debug.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/debug.d -c ./source/processes/debug/debug.c -o $(LATEST_DIR)/objects/debug.o
+$(DEFAULT_DIR)/objects/integer_create.o: ./source/types/integer/integer_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/integer_create.d -c ./source/types/integer/integer_create.c -o $(DEFAULT_DIR)/objects/integer_create.o
 
-$(LATEST_DIR)/objects/error.o: ./source/processes/error/error.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/error.d -c ./source/processes/error/error.c -o $(LATEST_DIR)/objects/error.o
+$(DEFAULT_DIR)/objects/integer_destroy.o: ./source/types/integer/integer_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/integer_destroy.d -c ./source/types/integer/integer_destroy.c -o $(DEFAULT_DIR)/objects/integer_destroy.o
 
-$(LATEST_DIR)/objects/print.o: ./source/processes/print/print.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/print.d -c ./source/processes/print/print.c -o $(LATEST_DIR)/objects/print.o
+$(DEFAULT_DIR)/objects/integer_get.o: ./source/types/integer/integer_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/integer_get.d -c ./source/types/integer/integer_get.c -o $(DEFAULT_DIR)/objects/integer_get.o
 
-$(LATEST_DIR)/objects/character_create.o: ./source/types/character/character_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/character_create.d -c ./source/types/character/character_create.c -o $(LATEST_DIR)/objects/character_create.o
+$(DEFAULT_DIR)/objects/memtree_create.o: ./source/types/memtree/memtree_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_create.d -c ./source/types/memtree/memtree_create.c -o $(DEFAULT_DIR)/objects/memtree_create.o
 
-$(LATEST_DIR)/objects/character_destroy.o: ./source/types/character/character_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/character_destroy.d -c ./source/types/character/character_destroy.c -o $(LATEST_DIR)/objects/character_destroy.o
+$(DEFAULT_DIR)/objects/memtree_delete.o: ./source/types/memtree/memtree_delete.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_delete.d -c ./source/types/memtree/memtree_delete.c -o $(DEFAULT_DIR)/objects/memtree_delete.o
 
-$(LATEST_DIR)/objects/character_get.o: ./source/types/character/character_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/character_get.d -c ./source/types/character/character_get.c -o $(LATEST_DIR)/objects/character_get.o
+$(DEFAULT_DIR)/objects/memtree_destroy.o: ./source/types/memtree/memtree_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_destroy.d -c ./source/types/memtree/memtree_destroy.c -o $(DEFAULT_DIR)/objects/memtree_destroy.o
 
-$(LATEST_DIR)/objects/file_create.o: ./source/types/file/file_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/file_create.d -c ./source/types/file/file_create.c -o $(LATEST_DIR)/objects/file_create.o
+$(DEFAULT_DIR)/objects/memtree_get.o: ./source/types/memtree/memtree_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_get.d -c ./source/types/memtree/memtree_get.c -o $(DEFAULT_DIR)/objects/memtree_get.o
 
-$(LATEST_DIR)/objects/file_destroy.o: ./source/types/file/file_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/file_destroy.d -c ./source/types/file/file_destroy.c -o $(LATEST_DIR)/objects/file_destroy.o
+$(DEFAULT_DIR)/objects/memtree_get_height.o: ./source/types/memtree/memtree_get_height.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_get_height.d -c ./source/types/memtree/memtree_get_height.c -o $(DEFAULT_DIR)/objects/memtree_get_height.o
 
-$(LATEST_DIR)/objects/fractional_create.o: ./source/types/fractional/fractional_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/fractional_create.d -c ./source/types/fractional/fractional_create.c -o $(LATEST_DIR)/objects/fractional_create.o
+$(DEFAULT_DIR)/objects/memtree_insert.o: ./source/types/memtree/memtree_insert.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_insert.d -c ./source/types/memtree/memtree_insert.c -o $(DEFAULT_DIR)/objects/memtree_insert.o
 
-$(LATEST_DIR)/objects/fractional_destroy.o: ./source/types/fractional/fractional_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/fractional_destroy.d -c ./source/types/fractional/fractional_destroy.c -o $(LATEST_DIR)/objects/fractional_destroy.o
+$(DEFAULT_DIR)/objects/memtree_print.o: ./source/types/memtree/memtree_print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_print.d -c ./source/types/memtree/memtree_print.c -o $(DEFAULT_DIR)/objects/memtree_print.o
 
-$(LATEST_DIR)/objects/integer_create.o: ./source/types/integer/integer_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/integer_create.d -c ./source/types/integer/integer_create.c -o $(LATEST_DIR)/objects/integer_create.o
+$(DEFAULT_DIR)/objects/memtree_rebalance.o: ./source/types/memtree/memtree_rebalance.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_rebalance.d -c ./source/types/memtree/memtree_rebalance.c -o $(DEFAULT_DIR)/objects/memtree_rebalance.o
 
-$(LATEST_DIR)/objects/integer_destroy.o: ./source/types/integer/integer_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/integer_destroy.d -c ./source/types/integer/integer_destroy.c -o $(LATEST_DIR)/objects/integer_destroy.o
+$(DEFAULT_DIR)/objects/memtree_search.o: ./source/types/memtree/memtree_search.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_search.d -c ./source/types/memtree/memtree_search.c -o $(DEFAULT_DIR)/objects/memtree_search.o
 
-$(LATEST_DIR)/objects/integer_get.o: ./source/types/integer/integer_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/integer_get.d -c ./source/types/integer/integer_get.c -o $(LATEST_DIR)/objects/integer_get.o
+$(DEFAULT_DIR)/objects/memtree_update_height.o: ./source/types/memtree/memtree_update_height.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_update_height.d -c ./source/types/memtree/memtree_update_height.c -o $(DEFAULT_DIR)/objects/memtree_update_height.o
 
-$(LATEST_DIR)/objects/string_create.o: ./source/types/string/string_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/string_create.d -c ./source/types/string/string_create.c -o $(LATEST_DIR)/objects/string_create.o
+$(DEFAULT_DIR)/objects/string_create.o: ./source/types/string/string_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_create.d -c ./source/types/string/string_create.c -o $(DEFAULT_DIR)/objects/string_create.o
 
-$(LATEST_DIR)/objects/string_destroy.o: ./source/types/string/string_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/string_destroy.d -c ./source/types/string/string_destroy.c -o $(LATEST_DIR)/objects/string_destroy.o
+$(DEFAULT_DIR)/objects/string_destroy.o: ./source/types/string/string_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_destroy.d -c ./source/types/string/string_destroy.c -o $(DEFAULT_DIR)/objects/string_destroy.o
 
-$(LATEST_DIR)/objects/string_get.o: ./source/types/string/string_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/string_get.d -c ./source/types/string/string_get.c -o $(LATEST_DIR)/objects/string_get.o
+$(DEFAULT_DIR)/objects/string_get.o: ./source/types/string/string_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_get.d -c ./source/types/string/string_get.c -o $(DEFAULT_DIR)/objects/string_get.o
 
-$(LATEST_DIR)/objects/string_is_int.o: ./source/types/string/string_is_int.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/string_is_int.d -c ./source/types/string/string_is_int.c -o $(LATEST_DIR)/objects/string_is_int.o
+$(DEFAULT_DIR)/objects/string_is_int.o: ./source/types/string/string_is_int.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_is_int.d -c ./source/types/string/string_is_int.c -o $(DEFAULT_DIR)/objects/string_is_int.o
 
-$(LATEST_DIR)/objects/string_to_integer.o: ./source/types/string/string_to_integer.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/string_to_integer.d -c ./source/types/string/string_to_integer.c -o $(LATEST_DIR)/objects/string_to_integer.o
+$(DEFAULT_DIR)/objects/string_to_integer.o: ./source/types/string/string_to_integer.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_to_integer.d -c ./source/types/string/string_to_integer.c -o $(DEFAULT_DIR)/objects/string_to_integer.o
 
-$(LATEST_DIR)/objects/vector_create.o: ./source/types/vector/vector_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_create.d -c ./source/types/vector/vector_create.c -o $(LATEST_DIR)/objects/vector_create.o
+$(DEFAULT_DIR)/objects/vector_create.o: ./source/types/vector/vector_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_create.d -c ./source/types/vector/vector_create.c -o $(DEFAULT_DIR)/objects/vector_create.o
 
-$(LATEST_DIR)/objects/vector_destroy.o: ./source/types/vector/vector_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_destroy.d -c ./source/types/vector/vector_destroy.c -o $(LATEST_DIR)/objects/vector_destroy.o
+$(DEFAULT_DIR)/objects/vector_destroy.o: ./source/types/vector/vector_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_destroy.d -c ./source/types/vector/vector_destroy.c -o $(DEFAULT_DIR)/objects/vector_destroy.o
 
-$(LATEST_DIR)/objects/vector_expand.o: ./source/types/vector/vector_expand.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_expand.d -c ./source/types/vector/vector_expand.c -o $(LATEST_DIR)/objects/vector_expand.o
+$(DEFAULT_DIR)/objects/vector_expand.o: ./source/types/vector/vector_expand.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_expand.d -c ./source/types/vector/vector_expand.c -o $(DEFAULT_DIR)/objects/vector_expand.o
 
-$(LATEST_DIR)/objects/vector_get.o: ./source/types/vector/vector_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_get.d -c ./source/types/vector/vector_get.c -o $(LATEST_DIR)/objects/vector_get.o
+$(DEFAULT_DIR)/objects/vector_get.o: ./source/types/vector/vector_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_get.d -c ./source/types/vector/vector_get.c -o $(DEFAULT_DIR)/objects/vector_get.o
 
-$(LATEST_DIR)/objects/vector_get_length.o: ./source/types/vector/vector_get_length.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_get_length.d -c ./source/types/vector/vector_get_length.c -o $(LATEST_DIR)/objects/vector_get_length.o
+$(DEFAULT_DIR)/objects/vector_get_length.o: ./source/types/vector/vector_get_length.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_get_length.d -c ./source/types/vector/vector_get_length.c -o $(DEFAULT_DIR)/objects/vector_get_length.o
 
-$(LATEST_DIR)/objects/vector_pop.o: ./source/types/vector/vector_pop.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_pop.d -c ./source/types/vector/vector_pop.c -o $(LATEST_DIR)/objects/vector_pop.o
+$(DEFAULT_DIR)/objects/vector_pop.o: ./source/types/vector/vector_pop.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_pop.d -c ./source/types/vector/vector_pop.c -o $(DEFAULT_DIR)/objects/vector_pop.o
 
-$(LATEST_DIR)/objects/vector_push.o: ./source/types/vector/vector_push.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_push.d -c ./source/types/vector/vector_push.c -o $(LATEST_DIR)/objects/vector_push.o
+$(DEFAULT_DIR)/objects/vector_push.o: ./source/types/vector/vector_push.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_push.d -c ./source/types/vector/vector_push.c -o $(DEFAULT_DIR)/objects/vector_push.o
 
-$(LATEST_DIR)/objects/vector_reverse.o: ./source/types/vector/vector_reverse.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_reverse.d -c ./source/types/vector/vector_reverse.c -o $(LATEST_DIR)/objects/vector_reverse.o
+$(DEFAULT_DIR)/objects/vector_reverse.o: ./source/types/vector/vector_reverse.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_reverse.d -c ./source/types/vector/vector_reverse.c -o $(DEFAULT_DIR)/objects/vector_reverse.o
 
-$(LATEST_DIR)/objects/vector_set.o: ./source/types/vector/vector_set.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_set.d -c ./source/types/vector/vector_set.c -o $(LATEST_DIR)/objects/vector_set.o
+$(DEFAULT_DIR)/objects/vector_set.o: ./source/types/vector/vector_set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_set.d -c ./source/types/vector/vector_set.c -o $(DEFAULT_DIR)/objects/vector_set.o
 
-$(LATEST_DIR)/objects/vector_shift.o: ./source/types/vector/vector_shift.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_shift.d -c ./source/types/vector/vector_shift.c -o $(LATEST_DIR)/objects/vector_shift.o
+$(DEFAULT_DIR)/objects/vector_shift.o: ./source/types/vector/vector_shift.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_shift.d -c ./source/types/vector/vector_shift.c -o $(DEFAULT_DIR)/objects/vector_shift.o
 
-$(LATEST_DIR)/objects/vector_unshift.o: ./source/types/vector/vector_unshift.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(LATEST_DIR)/dependencies/vector_unshift.d -c ./source/types/vector/vector_unshift.c -o $(LATEST_DIR)/objects/vector_unshift.o
+$(DEFAULT_DIR)/objects/vector_unshift.o: ./source/types/vector/vector_unshift.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_unshift.d -c ./source/types/vector/vector_unshift.c -o $(DEFAULT_DIR)/objects/vector_unshift.o
 
 
-$(DEBUG_DIR)/objects/allocate.o: ./source/base/processes/allocate/allocate.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/allocate.d -c ./source/base/processes/allocate/allocate.c -o $(DEBUG_DIR)/objects/allocate.o
+$(DEBUG_DIR)/objects/allocate.o: ./source/functions/allocate/allocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/allocate.d -c ./source/functions/allocate/allocate.c -o $(DEBUG_DIR)/objects/allocate.o
 
-$(DEBUG_DIR)/objects/deallocate.o: ./source/base/processes/deallocate/deallocate.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/deallocate.d -c ./source/base/processes/deallocate/deallocate.c -o $(DEBUG_DIR)/objects/deallocate.o
+$(DEBUG_DIR)/objects/assert.o: ./source/functions/assert/assert.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/assert.d -c ./source/functions/assert/assert.c -o $(DEBUG_DIR)/objects/assert.o
 
-$(DEBUG_DIR)/objects/delete.o: ./source/base/processes/delete/delete.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/delete.d -c ./source/base/processes/delete/delete.c -o $(DEBUG_DIR)/objects/delete.o
+$(DEBUG_DIR)/objects/deallocate.o: ./source/functions/deallocate/deallocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/deallocate.d -c ./source/functions/deallocate/deallocate.c -o $(DEBUG_DIR)/objects/deallocate.o
 
-$(DEBUG_DIR)/objects/new.o: ./source/base/processes/new/new.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/new.d -c ./source/base/processes/new/new.c -o $(DEBUG_DIR)/objects/new.o
+$(DEBUG_DIR)/objects/debug.o: ./source/functions/debug/debug.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/debug.d -c ./source/functions/debug/debug.c -o $(DEBUG_DIR)/objects/debug.o
 
-$(DEBUG_DIR)/objects/any_create.o: ./source/base/types/any/any_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_create.d -c ./source/base/types/any/any_create.c -o $(DEBUG_DIR)/objects/any_create.o
+$(DEBUG_DIR)/objects/delete.o: ./source/functions/delete/delete.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/delete.d -c ./source/functions/delete/delete.c -o $(DEBUG_DIR)/objects/delete.o
 
-$(DEBUG_DIR)/objects/any_destroy.o: ./source/base/types/any/any_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_destroy.d -c ./source/base/types/any/any_destroy.c -o $(DEBUG_DIR)/objects/any_destroy.o
+$(DEBUG_DIR)/objects/error.o: ./source/functions/error/error.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/error.d -c ./source/functions/error/error.c -o $(DEBUG_DIR)/objects/error.o
 
-$(DEBUG_DIR)/objects/trillian_create.o: ./source/base/types/trillian/trillian_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/trillian_create.d -c ./source/base/types/trillian/trillian_create.c -o $(DEBUG_DIR)/objects/trillian_create.o
+$(DEBUG_DIR)/objects/new.o: ./source/functions/new/new.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/new.d -c ./source/functions/new/new.c -o $(DEBUG_DIR)/objects/new.o
 
-$(DEBUG_DIR)/objects/trillian_delete.o: ./source/base/types/trillian/trillian_delete.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/trillian_delete.d -c ./source/base/types/trillian/trillian_delete.c -o $(DEBUG_DIR)/objects/trillian_delete.o
+$(DEBUG_DIR)/objects/print.o: ./source/functions/print/print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/print.d -c ./source/functions/print/print.c -o $(DEBUG_DIR)/objects/print.o
 
-$(DEBUG_DIR)/objects/trillian_destroy.o: ./source/base/types/trillian/trillian_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/trillian_destroy.d -c ./source/base/types/trillian/trillian_destroy.c -o $(DEBUG_DIR)/objects/trillian_destroy.o
+$(DEBUG_DIR)/objects/any_create.o: ./source/types/any/any_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_create.d -c ./source/types/any/any_create.c -o $(DEBUG_DIR)/objects/any_create.o
 
-$(DEBUG_DIR)/objects/trillian_get.o: ./source/base/types/trillian/trillian_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/trillian_get.d -c ./source/base/types/trillian/trillian_get.c -o $(DEBUG_DIR)/objects/trillian_get.o
-
-$(DEBUG_DIR)/objects/trillian_get_height.o: ./source/base/types/trillian/trillian_get_height.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/trillian_get_height.d -c ./source/base/types/trillian/trillian_get_height.c -o $(DEBUG_DIR)/objects/trillian_get_height.o
-
-$(DEBUG_DIR)/objects/trillian_insert.o: ./source/base/types/trillian/trillian_insert.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/trillian_insert.d -c ./source/base/types/trillian/trillian_insert.c -o $(DEBUG_DIR)/objects/trillian_insert.o
-
-$(DEBUG_DIR)/objects/trillian_print.o: ./source/base/types/trillian/trillian_print.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/trillian_print.d -c ./source/base/types/trillian/trillian_print.c -o $(DEBUG_DIR)/objects/trillian_print.o
-
-$(DEBUG_DIR)/objects/trillian_rebalance.o: ./source/base/types/trillian/trillian_rebalance.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/trillian_rebalance.d -c ./source/base/types/trillian/trillian_rebalance.c -o $(DEBUG_DIR)/objects/trillian_rebalance.o
-
-$(DEBUG_DIR)/objects/trillian_search.o: ./source/base/types/trillian/trillian_search.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/trillian_search.d -c ./source/base/types/trillian/trillian_search.c -o $(DEBUG_DIR)/objects/trillian_search.o
-
-$(DEBUG_DIR)/objects/trillian_update_height.o: ./source/base/types/trillian/trillian_update_height.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/trillian_update_height.d -c ./source/base/types/trillian/trillian_update_height.c -o $(DEBUG_DIR)/objects/trillian_update_height.o
-
-$(DEBUG_DIR)/objects/assert.o: ./source/processes/assert/assert.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/assert.d -c ./source/processes/assert/assert.c -o $(DEBUG_DIR)/objects/assert.o
-
-$(DEBUG_DIR)/objects/debug.o: ./source/processes/debug/debug.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/debug.d -c ./source/processes/debug/debug.c -o $(DEBUG_DIR)/objects/debug.o
-
-$(DEBUG_DIR)/objects/error.o: ./source/processes/error/error.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/error.d -c ./source/processes/error/error.c -o $(DEBUG_DIR)/objects/error.o
-
-$(DEBUG_DIR)/objects/print.o: ./source/processes/print/print.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/print.d -c ./source/processes/print/print.c -o $(DEBUG_DIR)/objects/print.o
+$(DEBUG_DIR)/objects/any_destroy.o: ./source/types/any/any_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_destroy.d -c ./source/types/any/any_destroy.c -o $(DEBUG_DIR)/objects/any_destroy.o
 
 $(DEBUG_DIR)/objects/character_create.o: ./source/types/character/character_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/character_create.d -c ./source/types/character/character_create.c -o $(DEBUG_DIR)/objects/character_create.o
@@ -474,6 +436,36 @@ $(DEBUG_DIR)/objects/integer_destroy.o: ./source/types/integer/integer_destroy.c
 
 $(DEBUG_DIR)/objects/integer_get.o: ./source/types/integer/integer_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/integer_get.d -c ./source/types/integer/integer_get.c -o $(DEBUG_DIR)/objects/integer_get.o
+
+$(DEBUG_DIR)/objects/memtree_create.o: ./source/types/memtree/memtree_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_create.d -c ./source/types/memtree/memtree_create.c -o $(DEBUG_DIR)/objects/memtree_create.o
+
+$(DEBUG_DIR)/objects/memtree_delete.o: ./source/types/memtree/memtree_delete.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_delete.d -c ./source/types/memtree/memtree_delete.c -o $(DEBUG_DIR)/objects/memtree_delete.o
+
+$(DEBUG_DIR)/objects/memtree_destroy.o: ./source/types/memtree/memtree_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_destroy.d -c ./source/types/memtree/memtree_destroy.c -o $(DEBUG_DIR)/objects/memtree_destroy.o
+
+$(DEBUG_DIR)/objects/memtree_get.o: ./source/types/memtree/memtree_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_get.d -c ./source/types/memtree/memtree_get.c -o $(DEBUG_DIR)/objects/memtree_get.o
+
+$(DEBUG_DIR)/objects/memtree_get_height.o: ./source/types/memtree/memtree_get_height.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_get_height.d -c ./source/types/memtree/memtree_get_height.c -o $(DEBUG_DIR)/objects/memtree_get_height.o
+
+$(DEBUG_DIR)/objects/memtree_insert.o: ./source/types/memtree/memtree_insert.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_insert.d -c ./source/types/memtree/memtree_insert.c -o $(DEBUG_DIR)/objects/memtree_insert.o
+
+$(DEBUG_DIR)/objects/memtree_print.o: ./source/types/memtree/memtree_print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_print.d -c ./source/types/memtree/memtree_print.c -o $(DEBUG_DIR)/objects/memtree_print.o
+
+$(DEBUG_DIR)/objects/memtree_rebalance.o: ./source/types/memtree/memtree_rebalance.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_rebalance.d -c ./source/types/memtree/memtree_rebalance.c -o $(DEBUG_DIR)/objects/memtree_rebalance.o
+
+$(DEBUG_DIR)/objects/memtree_search.o: ./source/types/memtree/memtree_search.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_search.d -c ./source/types/memtree/memtree_search.c -o $(DEBUG_DIR)/objects/memtree_search.o
+
+$(DEBUG_DIR)/objects/memtree_update_height.o: ./source/types/memtree/memtree_update_height.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_update_height.d -c ./source/types/memtree/memtree_update_height.c -o $(DEBUG_DIR)/objects/memtree_update_height.o
 
 $(DEBUG_DIR)/objects/string_create.o: ./source/types/string/string_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_create.d -c ./source/types/string/string_create.c -o $(DEBUG_DIR)/objects/string_create.o
@@ -522,6 +514,5 @@ $(DEBUG_DIR)/objects/vector_shift.o: ./source/types/vector/vector_shift.c
 
 $(DEBUG_DIR)/objects/vector_unshift.o: ./source/types/vector/vector_unshift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_unshift.d -c ./source/types/vector/vector_unshift.c -o $(DEBUG_DIR)/objects/vector_unshift.o
-
 
 

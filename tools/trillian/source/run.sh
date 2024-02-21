@@ -11,8 +11,8 @@ if [[ "$PROJECT" == "$FRAMEWORK" ]]; then
 fi
 
 cd $PROJECT
-NAME=$(basename $PROJECTPWD | sed "s/^ft_//")
-TARGET="./build/releases/latest/bin/${NAME}"
+NAME=$(basename $PROJECT | sed "s/^ft_//")
+TARGET="./build/default/bin/${NAME}"
 if [ ! -f $TARGET ]; then
 	trillian build
 fi

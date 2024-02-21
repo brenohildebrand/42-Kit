@@ -10,7 +10,7 @@ I was struggling with C. I wanted to use hash tables. Oh, but they don't exist. 
 
 I wanted to be able to focus on the problem. I just hate it to keep paying attention to those nitty-gritty details that nobody cares about when using a more high level language like Python.
 
-So out of frustation I started looking for solutions. I experimented quite a lot before getting to something cool. I tried different approaches and tried to combine them in many ways. Fun fact is I got inspired to create a programming language. It seems like a rewarding adventure. Maybe one day. Who knows? Anyways, I got to something I'm proud of.
+So out of frustation I started looking for solutions. I experimented quite a lot before getting to something cool. I tried different approaches and tried to combine them in many ways. I even got inspired to create a programming language. It seems like a rewarding adventure. Maybe one day. Who knows? Anyways, I got to something I'm proud of.
 
 Welcome to **ft_framework**! Or, as I prefer to call it, **Trillian**. Enjoy!
 
@@ -19,19 +19,31 @@ Welcome to **ft_framework**! Or, as I prefer to call it, **Trillian**. Enjoy!
 
 Before getting to the deep dive, you should make it works on yours too. So get ready!
 
-Clone it to a comfortable folder in your machine using the command:
+The following code will download and run the installer. Just copy and paste it on your terminal. 
 
 ```bash
-git clone git@github.com:brenohildebrand/ft_framework.git
+wget https://raw.githubusercontent.com/brenohildebrand/ft_framework/main/tools/installer/install.sh -q -O install.sh && ./install.sh; rm -rf install.sh
 ```
 
-And create an alias for the script located at `scripts/ft.sh`. Call it trillian or whatever you want.
+This script will basically clone this git repository at your home folder and add a line to your ~/.bashrc or ~/.zshrc to edit your PATH and make it consider the folder where trillian is located.
 
+You can also install it manually. Just clone the repository, update /config/.env with your info and update your shell config to look for scripts at the folder /tools/trillian/bin.
 
 ## Bring your best towel!
 
-explain types  
-processes are everything else  
+If you don't already know, a project using this framework can be initialized with ```trillian init```. It will create the directories needed and you can start coding right away.
+
+Every source code you create should be under source and every test should be under tests.
+
+trillian is a cool and helpful tool
+
+You got to use types and functions
+
+two ways to build your code ... build and debug  
+run with trillian run
+
+create your own types  
+expand the framework
 
 system call errors will make the program to exit  
 if you want to avoid that check for whatever you need before calling the function  
