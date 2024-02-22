@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any.h                                              :+:      :+:    :+:   */
+/*   create.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 00:25:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 01:50:24 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 01:53:22 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANY_H
-# define ANY_H
+#include "functions.h"
 
-# include "memtree.h"
-
-typedef union u_any	t_any;
-
-union u_any {
-	int		cint;
-	char	*cstring;
+void	*create(t_type (*signature)(void))
+{
+	t_type	type;
 	void	*instance;
-};
 
-t_any	any_create(t_type type);
-void	any_destroy(t_any any);
-
-#endif
+	type = signature();
+	instance = new(type);
+	return (instance);
+}

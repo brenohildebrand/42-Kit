@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any.h                                              :+:      :+:    :+:   */
+/*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 00:25:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 01:11:19 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 01:53:35 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANY_H
-# define ANY_H
+#ifndef FUNCTIONS_H
+# define FUNCTIONS_H
 
-# include "memtree.h"
+# include <stdlib.h>
+# include <unistd.h>
 
-typedef union u_any	t_any;
-
-union u_any {
-	int		cint;
-	char	*cstring;
-	void	*instance;
-};
-
-t_any	any_create(t_type type);
-void	any_destroy(t_any any);
+void	*allocate(unsigned int size);
+void	assert(int condition);
+void	*create(t_type (*signature)(void));
+void	deallocate(void *pointer);
+void	debug(char *cstring);
+void	delete(void *instance);
+void	destroy(void *instance);
+void	error(char *cstring);
+void	*new(t_type type)
+void	print(char *cstring);
+void	warning(char *cstring);
 
 #endif

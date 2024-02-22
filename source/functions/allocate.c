@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any.h                                              :+:      :+:    :+:   */
+/*   allocate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 00:25:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/09 22:47:06 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 01:32:17 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANY_H
-# define ANY_H
+#include "functions.h"
 
-# include "memtree.h"
+void	*allocate(int size)
+{
+	void	*pointer;
 
-typedef union u_any	t_any;
-
-union u_any {
-	int		cint;
-	char	*cstring;
-	void	*instance;
-};
-
-t_any	any_create(t_type type);
-void	any_destroy(t_any any);
-
-#endif
+	assert(size > 0);
+	pointer = malloc(size);
+	assert(pointer != NULL);
+	memtree_insert(NULL, pointer);
+	return (pointer);
+}

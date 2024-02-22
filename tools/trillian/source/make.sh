@@ -19,7 +19,7 @@ HEADER="\
 #                                                                              #
 # **************************************************************************** #"
 
-NAME="libtrillian.a"
+NAME="libframework.a"
 
 DEBUG="./build/debug/bin/$NAME"
 DEFAULT="./build/default/bin/$NAME"
@@ -104,7 +104,9 @@ build: \$(DEFAULT)
 
 clean:
 	@\$(RM) \$(DEBUG_OBJECTS)
+	@\$(RM) \$(DEBUG_DEPENDENCIES)
 	@\$(RM) \$(DEFAULT_OBJECTS)
+	@\$(RM) \$(DEFAULT_DEPENDENCIES)
 
 fclean: clean
 	@\$(RM) \$(DEBUG_DIR)/bin/\$(NAME)
@@ -145,7 +147,8 @@ HEADER="\
 
 NAME=$(basename "$PROJECT" | sed 's/^ft_//')
 
-LIBTRILLIAN="$FRAMEWORK/build/default/bin/libtrillian.a"
+DEFAULT_LIBFRAMEWORK="$FRAMEWORK/build/default/bin/libframework.a"
+DEBUG_LIBFRAMEWORK="$FRAMEWORK/build/debug/bin/libframework.a"
 
 DEBUG="./build/debug/bin/$NAME"
 DEFAULT="./build/default/bin/$NAME"
@@ -191,7 +194,8 @@ $HEADER
 
 NAME = $NAME
 
-LIBTRILLIAN = $LIBTRILLIAN
+DEBUG_LIBFRAMEWORK = $DEBUG_LIBFRAMEWORK
+DEFAULT_LIBFRAMEWORK = $DEFAULT_LIBFRAMEWORK
 
 DEBUG = $DEBUG
 DEFAULT = $DEFAULT
@@ -221,21 +225,26 @@ all: build
 
 \$(NAME): build
 
-\$(LIBTRILLIAN):
+\$(DEBUG_LIBFRAMEWORK):
+	@make debug -C $FRAMEWORK
+
+\$(DEFAULT_LIBFRAMEWORK):
 	@make -C $FRAMEWORK
 
-debug: \$(LIBTRILLIAN) \$(DEBUG)
+debug: \$(DEBUG_LIBFRAMEWORK) \$(DEBUG)
 \$(DEBUG): CFLAGS += -DDEBUG -g
 \$(DEBUG): \$(DEBUG_OBJECTS) | \$(DEBUG_DIR)
-	@\$(CC) \$(CFLAGS) -o \$(DEBUG_DIR)/bin/\$(NAME) \$(DEBUG_OBJECTS) \$(LIBTRILLIAN)
+	@\$(CC) \$(CFLAGS) -o \$(DEBUG_DIR)/bin/\$(NAME) \$(DEBUG_OBJECTS) \$(DEBUG_LIBFRAMEWORK)
 
-build: \$(LIBTRILLIAN) \$(DEFAULT)
+build: \$(DEFAULT_LIBFRAMEWORK) \$(DEFAULT)
 \$(DEFAULT): \$(DEFAULT_OBJECTS) | \$(DEFAULT_DIR)
-	@\$(CC) \$(CFLAGS) -o \$(DEFAULT_DIR)/bin/\$(NAME) \$(DEFAULT_OBJECTS) \$(LIBTRILLIAN)
+	@\$(CC) \$(CFLAGS) -o \$(DEFAULT_DIR)/bin/\$(NAME) \$(DEFAULT_OBJECTS) \$(DEFAULT_LIBFRAMEWORK)
 
 clean:
 	@\$(RM) \$(DEBUG_OBJECTS)
+	@\$(RM) \$(DEBUG_DEPENDENCIES)
 	@\$(RM) \$(DEFAULT_OBJECTS)
+	@\$(RM) \$(DEFAULT_DEPENDENCIES)
 
 fclean: clean
 	@\$(RM) \$(DEBUG_DIR)/bin/\$(NAME)

@@ -17,17 +17,11 @@
 // -- If something goes wrong in that process memtree will destroy itself and
 // -- the program terminates.
 
+# include "type.h"
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-
-typedef struct s_type			*t_type;
-
-struct s_type {
-	char			*name;
-	void			(*destroy)(void *);
-	unsigned int	size;
-};
 
 typedef struct s_memtree		*t_memtree;
 

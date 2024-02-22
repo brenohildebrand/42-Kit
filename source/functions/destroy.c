@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any.h                                              :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 00:25:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 00:26:21 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 01:49:40 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANY_H
-# define ANY_H
+#include "functions.h"
 
-# include "memtree.h"
+void	destroy(void *instance)
+{
+	t_type	type;
 
-typedef union u_any	t_any;
-
-union u_any {
-	int		cint;
-	char	*cstring;
-	void	*instance;
-};
-
-t_any	any_create(t_type type);
-void	any_destroy(t_any any);
-
-#endif
+	type = memtree_search(instance);
+	assert(type != NULL);
+	assert(type->destroy != NULL);
+	type->destroy(instance);
+}

@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any.h                                              :+:      :+:    :+:   */
+/*   type.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 00:25:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 02:10:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANY_H
-# define ANY_H
+#ifndef TYPE_H
+# define TYPE_H
 
-# include "memtree.h"
+typedef struct s_type			*t_type;
 
-typedef union u_any	t_any;
-
-union u_any {
-	int		cint;
-	char	*cstring;
-	void	*instance;
+struct s_type {
+	char			*name;
+	void			*(*create)(t_any value);
+	void			(*destroy)(void *);
+	void			(*push)(t_any value);
+	unsigned int	size;
 };
-
-t_any	any_create(t_type type);
-void	any_destroy(t_any any);
 
 #endif

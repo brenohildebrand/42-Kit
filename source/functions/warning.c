@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any.h                                              :+:      :+:    :+:   */
+/*   warning.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 00:25:46 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 01:34:54 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 01:35:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANY_H
-# define ANY_H
+#include "functions.h"
 
-# include "memtree.h"
+#ifdef DEBUG
 
-typedef union u_any	t_any;
+void	warning(char *cstring)
+{
+	write(1, "\033[1;33m", 7);
+	write(1, "[WARNING] ", 8);
+	write(1, "\033[0m", 4);
+	print(cstring);
+}
 
-union u_any {
-	int		cint;
-	char	*cstring;
-	void	*instance;
-};
+#else
 
-t_any	any_create(t_type type);
-void	any_destroy(t_any any);
+void	warning(char *cstring)
+{
+	(void)cstring;
+}
 
 #endif

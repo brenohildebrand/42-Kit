@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 00:59:42 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/12 14:56:03 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/21 18:39:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ t_vector	vector_create(void)
 	static struct s_type	type = {
 		.name = "vector",
 		.destroy = (void (*)(t_any))vector_destroy,
-		.size = sizeof(struct s_vector)
+		.size = sizeof(struct s_vector),
+		.push = vector_push
 	};
 	t_vector				vector;
 
