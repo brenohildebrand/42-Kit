@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop.c                                             :+:      :+:    :+:   */
+/*   repeat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 01:08:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 02:44:26 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 18:11:30 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 18:12:18 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "loop.h"
+#include "functions.h"
 
-void	loop(int start, int end, void (*callback)(void))
+void	repeat(int n, void (*callback)(void))
 {
-	while (start <= end)
-	{
+	while (n--)
 		callback();
-		start++;
-	}
 }
-
-// loop
-
-// map
-// filter
-// reduce
-// foreach
-// take
-// drop
-// zip
-
-// copy (deep copy)
-// destructible (if you want a non-destructible just work with a copy)

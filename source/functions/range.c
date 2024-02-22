@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   range.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 18:32:14 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 18:18:19 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 18:09:06 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 18:11:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "functions.h"
 
-void	push(void *instance, t_any value)
+void	range(int start, int end, void (*callback)(int))
 {
-	t_type	type;
-
-	type = memtree_search(instance);
-	assert(type != NULL);
-	assert(type->push != NULL);
-	type->push(instance, value);
+	int	step;
+	
+	if (start > end)
+		step = -1;
+	else
+		step = 1;
+	while (start != end)
+	{
+		callback(start);
+		start += step;
+	}
 }

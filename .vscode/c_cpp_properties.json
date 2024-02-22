@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+			"forcedInclude": [
+				"${workspaceFolder}/source/types/type/type.h",
+				"${workspaceFolder}/source/types/memtree/memtree.h",
+				"${workspaceFolder}/source/types/any/any.h"
+			],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c99"
+        }
+    ],
+    "version": 4
+}

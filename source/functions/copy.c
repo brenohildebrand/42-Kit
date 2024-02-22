@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 18:32:14 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 18:18:19 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 17:46:32 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 17:48:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "functions.h"
 
-void	push(void *instance, t_any value)
+void	*copy(void	*instance)
 {
 	t_type	type;
 
 	type = memtree_search(instance);
 	assert(type != NULL);
-	assert(type->push != NULL);
-	type->push(instance, value);
+	assert(type->copy != NULL);
+	return (type->copy(instance));
 }
