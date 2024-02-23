@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_shift.c                                     :+:      :+:    :+:   */
+/*   table_create.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 13:26:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/12 14:59:33 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 22:57:47 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/23 01:58:51 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "table.h"
 
-t_any	vector_shift(t_vector vector)
+void	*table_create(void)
 {
-	t_any	any;
+	t_table	instance;
 
-	if (vector->end < vector->start)
-		return (NULL);
-	any = vector->content[vector->start];
-	vector->content[vector->start] = NULL;
-	vector->start++;
-	vector->length--;
-	return (any);
+	instance = (t_table)new(table);
+	instance->max_length = 16;
+	instance->entries = \
+		(t_any *)allocate(instance->max_length * sizeof(struct s_entry));
+	instance->length = 0;
+	return (instance);
 }

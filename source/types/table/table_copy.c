@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type.h                                             :+:      :+:    :+:   */
+/*   table_copy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:57:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 23:03:14 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 23:04:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_H
-# define TYPE_H
+#include "table.h"
 
-typedef struct s_type			*t_type;
+void	table_copy(t_table instance)
+{
+	t_table	copy;
 
-struct s_type {
-	char			*name;
-	unsigned int	size;
-	void			*(*create)(void);
-	void			(*destroy)(void *);
-	void			*(*init)(void *, t_any);
-	void			*(*copy)(void *);
-	t_any			(*get)(void *, t_any);
-	void			(*set)(void *, t_any, t_any);
-	void			(*push)(void *, t_any);
-	t_any			(*pop)(void *);
-};
-
-#endif
+	copy = create(table);
+	copy->entries = 
+}

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_push.c                                      :+:      :+:    :+:   */
+/*   collection_create.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 10:15:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/13 15:26:27 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 22:29:03 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:34:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "collection.h"
 
-void	vector_push(t_vector vector, t_any value)
+t_collection	collection_create(void)
 {
-	if (vector->length + 1 > (vector->max_length * 3) / 4 || \
-		vector->end == vector->max_length - 1)
-	{
-		vector_expand(vector);
-	}
-	vector->end++;
-	vector->content[vector->end] = value;
-	vector->length++;
+	t_collection	collection;
+
+	collection = (t_collection)new(collection);
+	collection->max_length = 16;
+	collection->content = \
+		(t_any *)allocate(collection->max_length * sizeof(t_any));
+	collection->length = 0;
+	collection->start = collection->max_length / 2;
+	collection->end = collection->start - 1;
+	return (collection);
 }

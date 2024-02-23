@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/21 14:44:54 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/21 14:44:54 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/22 21:01:40 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/22 21:01:40 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,49 +23,45 @@ CFLAGS = -Wall -Wextra -Werror -std=c99
 CPATHS = \
 	-include memtree.h \
 	-include any.h \
-	-include allocate.h \
-	-include assert.h \
-	-include deallocate.h \
-	-include debug.h \
-	-include delete.h \
-	-include error.h \
-	-include new.h \
-	-include print.h \
+	-include functions.h \
 	-include character.h \
 	-include file.h \
 	-include fractional.h \
 	-include integer.h \
 	-include string.h \
+	-include type.h \
 	-include vector.h \
 	-iquote ./source \
 	-iquote ./source/functions \
-	-iquote ./source/functions/allocate \
-	-iquote ./source/functions/assert \
-	-iquote ./source/functions/deallocate \
-	-iquote ./source/functions/debug \
-	-iquote ./source/functions/delete \
-	-iquote ./source/functions/error \
-	-iquote ./source/functions/new \
-	-iquote ./source/functions/print \
 	-iquote ./source/types \
 	-iquote ./source/types/any \
 	-iquote ./source/types/character \
 	-iquote ./source/types/file \
 	-iquote ./source/types/fractional \
+	-iquote ./source/types/gtable \
 	-iquote ./source/types/integer \
 	-iquote ./source/types/memtree \
 	-iquote ./source/types/string \
+	-iquote ./source/types/type \
 	-iquote ./source/types/vector
 
 SOURCES = \
-	./source/functions/allocate/allocate.c \
-	./source/functions/assert/assert.c \
-	./source/functions/deallocate/deallocate.c \
-	./source/functions/debug/debug.c \
-	./source/functions/delete/delete.c \
-	./source/functions/error/error.c \
-	./source/functions/new/new.c \
-	./source/functions/print/print.c \
+	./source/functions/allocate.c \
+	./source/functions/assert.c \
+	./source/functions/copy.c \
+	./source/functions/create.c \
+	./source/functions/deallocate.c \
+	./source/functions/debug.c \
+	./source/functions/delete.c \
+	./source/functions/destroy.c \
+	./source/functions/error.c \
+	./source/functions/init.c \
+	./source/functions/new.c \
+	./source/functions/print.c \
+	./source/functions/push.c \
+	./source/functions/range.c \
+	./source/functions/repeat.c \
+	./source/functions/warning.c \
 	./source/types/any/any_create.c \
 	./source/types/any/any_destroy.c \
 	./source/types/character/character_create.c \
@@ -108,12 +104,20 @@ SOURCES = \
 OBJECTS = \
 	allocate.o \
 	assert.o \
+	copy.o \
+	create.o \
 	deallocate.o \
 	debug.o \
 	delete.o \
+	destroy.o \
 	error.o \
+	init.o \
 	new.o \
 	print.o \
+	push.o \
+	range.o \
+	repeat.o \
+	warning.o \
 	any_create.o \
 	any_destroy.o \
 	character_create.o \
@@ -156,12 +160,20 @@ OBJECTS = \
 DEPENDENCIES = \
 	allocate.d \
 	assert.d \
+	copy.d \
+	create.d \
 	deallocate.d \
 	debug.d \
 	delete.d \
+	destroy.d \
 	error.d \
+	init.d \
 	new.d \
 	print.d \
+	push.d \
+	range.d \
+	repeat.d \
+	warning.d \
 	any_create.d \
 	any_destroy.d \
 	character_create.d \
@@ -203,12 +215,16 @@ DEPENDENCIES = \
 
 DEBUG_DIR = ./build/debug
 DEFAULT_DIR = ./build/default
+TESTS_DIR = ./build/tests
 
 DEBUG_OBJECTS = $(addprefix $(DEBUG_DIR)/objects/, $(OBJECTS))
 DEBUG_DEPENDENCIES = $(addprefix $(DEBUG_DIR)/dependencies/, $(DEPENDENCIES))
 
 DEFAULT_OBJECTS = $(addprefix $(DEFAULT_DIR)/objects/, $(OBJECTS))
 DEFAULT_DEPENDENCIES = $(addprefix $(DEFAULT_DIR)/dependencies/, $(DEPENDENCIES))
+
+TESTS_OBJECTS = $(addprefix $(TESTS_DIR)/objects/, $(OBJECTS))
+TESTS_DEPENDENCIES = $(addprefix $(TESTS_DIR)/dependencies/, $(DEPENDENCIES))
 
 all: build
 
@@ -222,6 +238,9 @@ $(DEBUG): $(DEBUG_OBJECTS) | $(DEBUG_DIR)
 build: $(DEFAULT)
 $(DEFAULT): $(DEFAULT_OBJECTS) | $(DEFAULT_DIR)
 	@ar rcs $(DEFAULT_DIR)/bin/$(NAME) $?
+
+test: build $(TESTS)
+$(TESTS): $(TESTS_OBJECTS) | $(TESTS_DIR)
 
 clean:
 	@$(RM) $(DEBUG_OBJECTS)
@@ -239,30 +258,55 @@ re: fclean all
 
 -include $(DEBUG_DEPENDENCIES)
 -include $(DEFAULT_DEPENDENCIES)
+-include $(TESTS_DEPENDENCIES)
 
-$(DEFAULT_DIR)/objects/allocate.o: ./source/functions/allocate/allocate.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/allocate.d -c ./source/functions/allocate/allocate.c -o $(DEFAULT_DIR)/objects/allocate.o
+$(DEFAULT_DIR)/objects/allocate.o: ./source/functions/allocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/allocate.d -c ./source/functions/allocate.c -o $(DEFAULT_DIR)/objects/allocate.o
 
-$(DEFAULT_DIR)/objects/assert.o: ./source/functions/assert/assert.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/assert.d -c ./source/functions/assert/assert.c -o $(DEFAULT_DIR)/objects/assert.o
+$(DEFAULT_DIR)/objects/assert.o: ./source/functions/assert.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/assert.d -c ./source/functions/assert.c -o $(DEFAULT_DIR)/objects/assert.o
 
-$(DEFAULT_DIR)/objects/deallocate.o: ./source/functions/deallocate/deallocate.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/deallocate.d -c ./source/functions/deallocate/deallocate.c -o $(DEFAULT_DIR)/objects/deallocate.o
+$(DEFAULT_DIR)/objects/copy.o: ./source/functions/copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/copy.d -c ./source/functions/copy.c -o $(DEFAULT_DIR)/objects/copy.o
 
-$(DEFAULT_DIR)/objects/debug.o: ./source/functions/debug/debug.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/debug.d -c ./source/functions/debug/debug.c -o $(DEFAULT_DIR)/objects/debug.o
+$(DEFAULT_DIR)/objects/create.o: ./source/functions/create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/create.d -c ./source/functions/create.c -o $(DEFAULT_DIR)/objects/create.o
 
-$(DEFAULT_DIR)/objects/delete.o: ./source/functions/delete/delete.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/delete.d -c ./source/functions/delete/delete.c -o $(DEFAULT_DIR)/objects/delete.o
+$(DEFAULT_DIR)/objects/deallocate.o: ./source/functions/deallocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/deallocate.d -c ./source/functions/deallocate.c -o $(DEFAULT_DIR)/objects/deallocate.o
 
-$(DEFAULT_DIR)/objects/error.o: ./source/functions/error/error.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/error.d -c ./source/functions/error/error.c -o $(DEFAULT_DIR)/objects/error.o
+$(DEFAULT_DIR)/objects/debug.o: ./source/functions/debug.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/debug.d -c ./source/functions/debug.c -o $(DEFAULT_DIR)/objects/debug.o
 
-$(DEFAULT_DIR)/objects/new.o: ./source/functions/new/new.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/new.d -c ./source/functions/new/new.c -o $(DEFAULT_DIR)/objects/new.o
+$(DEFAULT_DIR)/objects/delete.o: ./source/functions/delete.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/delete.d -c ./source/functions/delete.c -o $(DEFAULT_DIR)/objects/delete.o
 
-$(DEFAULT_DIR)/objects/print.o: ./source/functions/print/print.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/print.d -c ./source/functions/print/print.c -o $(DEFAULT_DIR)/objects/print.o
+$(DEFAULT_DIR)/objects/destroy.o: ./source/functions/destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/destroy.d -c ./source/functions/destroy.c -o $(DEFAULT_DIR)/objects/destroy.o
+
+$(DEFAULT_DIR)/objects/error.o: ./source/functions/error.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/error.d -c ./source/functions/error.c -o $(DEFAULT_DIR)/objects/error.o
+
+$(DEFAULT_DIR)/objects/init.o: ./source/functions/init.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/init.d -c ./source/functions/init.c -o $(DEFAULT_DIR)/objects/init.o
+
+$(DEFAULT_DIR)/objects/new.o: ./source/functions/new.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/new.d -c ./source/functions/new.c -o $(DEFAULT_DIR)/objects/new.o
+
+$(DEFAULT_DIR)/objects/print.o: ./source/functions/print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/print.d -c ./source/functions/print.c -o $(DEFAULT_DIR)/objects/print.o
+
+$(DEFAULT_DIR)/objects/push.o: ./source/functions/push.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/push.d -c ./source/functions/push.c -o $(DEFAULT_DIR)/objects/push.o
+
+$(DEFAULT_DIR)/objects/range.o: ./source/functions/range.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/range.d -c ./source/functions/range.c -o $(DEFAULT_DIR)/objects/range.o
+
+$(DEFAULT_DIR)/objects/repeat.o: ./source/functions/repeat.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/repeat.d -c ./source/functions/repeat.c -o $(DEFAULT_DIR)/objects/repeat.o
+
+$(DEFAULT_DIR)/objects/warning.o: ./source/functions/warning.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/warning.d -c ./source/functions/warning.c -o $(DEFAULT_DIR)/objects/warning.o
 
 $(DEFAULT_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_create.d -c ./source/types/any/any_create.c -o $(DEFAULT_DIR)/objects/any_create.o
@@ -379,29 +423,53 @@ $(DEFAULT_DIR)/objects/vector_unshift.o: ./source/types/vector/vector_unshift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_unshift.d -c ./source/types/vector/vector_unshift.c -o $(DEFAULT_DIR)/objects/vector_unshift.o
 
 
-$(DEBUG_DIR)/objects/allocate.o: ./source/functions/allocate/allocate.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/allocate.d -c ./source/functions/allocate/allocate.c -o $(DEBUG_DIR)/objects/allocate.o
+$(DEBUG_DIR)/objects/allocate.o: ./source/functions/allocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/allocate.d -c ./source/functions/allocate.c -o $(DEBUG_DIR)/objects/allocate.o
 
-$(DEBUG_DIR)/objects/assert.o: ./source/functions/assert/assert.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/assert.d -c ./source/functions/assert/assert.c -o $(DEBUG_DIR)/objects/assert.o
+$(DEBUG_DIR)/objects/assert.o: ./source/functions/assert.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/assert.d -c ./source/functions/assert.c -o $(DEBUG_DIR)/objects/assert.o
 
-$(DEBUG_DIR)/objects/deallocate.o: ./source/functions/deallocate/deallocate.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/deallocate.d -c ./source/functions/deallocate/deallocate.c -o $(DEBUG_DIR)/objects/deallocate.o
+$(DEBUG_DIR)/objects/copy.o: ./source/functions/copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/copy.d -c ./source/functions/copy.c -o $(DEBUG_DIR)/objects/copy.o
 
-$(DEBUG_DIR)/objects/debug.o: ./source/functions/debug/debug.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/debug.d -c ./source/functions/debug/debug.c -o $(DEBUG_DIR)/objects/debug.o
+$(DEBUG_DIR)/objects/create.o: ./source/functions/create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/create.d -c ./source/functions/create.c -o $(DEBUG_DIR)/objects/create.o
 
-$(DEBUG_DIR)/objects/delete.o: ./source/functions/delete/delete.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/delete.d -c ./source/functions/delete/delete.c -o $(DEBUG_DIR)/objects/delete.o
+$(DEBUG_DIR)/objects/deallocate.o: ./source/functions/deallocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/deallocate.d -c ./source/functions/deallocate.c -o $(DEBUG_DIR)/objects/deallocate.o
 
-$(DEBUG_DIR)/objects/error.o: ./source/functions/error/error.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/error.d -c ./source/functions/error/error.c -o $(DEBUG_DIR)/objects/error.o
+$(DEBUG_DIR)/objects/debug.o: ./source/functions/debug.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/debug.d -c ./source/functions/debug.c -o $(DEBUG_DIR)/objects/debug.o
 
-$(DEBUG_DIR)/objects/new.o: ./source/functions/new/new.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/new.d -c ./source/functions/new/new.c -o $(DEBUG_DIR)/objects/new.o
+$(DEBUG_DIR)/objects/delete.o: ./source/functions/delete.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/delete.d -c ./source/functions/delete.c -o $(DEBUG_DIR)/objects/delete.o
 
-$(DEBUG_DIR)/objects/print.o: ./source/functions/print/print.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/print.d -c ./source/functions/print/print.c -o $(DEBUG_DIR)/objects/print.o
+$(DEBUG_DIR)/objects/destroy.o: ./source/functions/destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/destroy.d -c ./source/functions/destroy.c -o $(DEBUG_DIR)/objects/destroy.o
+
+$(DEBUG_DIR)/objects/error.o: ./source/functions/error.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/error.d -c ./source/functions/error.c -o $(DEBUG_DIR)/objects/error.o
+
+$(DEBUG_DIR)/objects/init.o: ./source/functions/init.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/init.d -c ./source/functions/init.c -o $(DEBUG_DIR)/objects/init.o
+
+$(DEBUG_DIR)/objects/new.o: ./source/functions/new.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/new.d -c ./source/functions/new.c -o $(DEBUG_DIR)/objects/new.o
+
+$(DEBUG_DIR)/objects/print.o: ./source/functions/print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/print.d -c ./source/functions/print.c -o $(DEBUG_DIR)/objects/print.o
+
+$(DEBUG_DIR)/objects/push.o: ./source/functions/push.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/push.d -c ./source/functions/push.c -o $(DEBUG_DIR)/objects/push.o
+
+$(DEBUG_DIR)/objects/range.o: ./source/functions/range.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/range.d -c ./source/functions/range.c -o $(DEBUG_DIR)/objects/range.o
+
+$(DEBUG_DIR)/objects/repeat.o: ./source/functions/repeat.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/repeat.d -c ./source/functions/repeat.c -o $(DEBUG_DIR)/objects/repeat.o
+
+$(DEBUG_DIR)/objects/warning.o: ./source/functions/warning.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/warning.d -c ./source/functions/warning.c -o $(DEBUG_DIR)/objects/warning.o
 
 $(DEBUG_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_create.d -c ./source/types/any/any_create.c -o $(DEBUG_DIR)/objects/any_create.o
@@ -516,5 +584,22 @@ $(DEBUG_DIR)/objects/vector_shift.o: ./source/types/vector/vector_shift.c
 
 $(DEBUG_DIR)/objects/vector_unshift.o: ./source/types/vector/vector_unshift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_unshift.d -c ./source/types/vector/vector_unshift.c -o $(DEBUG_DIR)/objects/vector_unshift.o
+
+
+$(TESTS_DIR)/objects/allocate.o: ./tests/functions/allocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/allocate.d -c ./tests/functions/allocate.c -o $(TESTS_DIR)/objects/allocate.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/allocate.o $(DEFAULT) -o $(TESTS_DIR)/bin/allocate
+
+$(TESTS_DIR)/objects/trillian_delete.o: ./tests/types/trillian/trillian_delete.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/trillian_delete.d -c ./tests/types/trillian/trillian_delete.c -o $(TESTS_DIR)/objects/trillian_delete.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/trillian_delete.o $(DEFAULT) -o $(TESTS_DIR)/bin/trillian_delete
+
+$(TESTS_DIR)/objects/trillian_insert.o: ./tests/types/trillian/trillian_insert.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/trillian_insert.d -c ./tests/types/trillian/trillian_insert.c -o $(TESTS_DIR)/objects/trillian_insert.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/trillian_insert.o $(DEFAULT) -o $(TESTS_DIR)/bin/trillian_insert
+
+$(TESTS_DIR)/objects/trillian_search.o: ./tests/types/trillian/trillian_search.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/trillian_search.d -c ./tests/types/trillian/trillian_search.c -o $(TESTS_DIR)/objects/trillian_search.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/trillian_search.o $(DEFAULT) -o $(TESTS_DIR)/bin/trillian_search
 
 

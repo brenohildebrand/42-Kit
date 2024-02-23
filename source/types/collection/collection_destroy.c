@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type.h                                             :+:      :+:    :+:   */
+/*   collection_destroy.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:57:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 01:09:43 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:29:29 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_H
-# define TYPE_H
+#include "collection.h"
 
-typedef struct s_type			*t_type;
+void	collection_destroy(t_collection collection)
+{
+	int	i;
 
-struct s_type {
-	char			*name;
-	unsigned int	size;
-	void			*(*create)(void);
-	void			(*destroy)(void *);
-	void			*(*init)(void *, t_any);
-	void			*(*copy)(void *);
-	t_any			(*get)(void *, t_any);
-	void			(*set)(void *, t_any, t_any);
-	void			(*push)(void *, t_any);
-	t_any			(*pop)(void *);
-};
-
-#endif
+	i = collection->start;
+	while (i < collection->end)
+	{
+		any_destroy(collection->content[i]);
+		i++;
+	}
+	deallocate(collection->content);
+	delete(collection);
+}

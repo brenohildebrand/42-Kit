@@ -1,93 +1,47 @@
 #!/bin/bash
 
-echo "TODO"
+PROJECT=$OLDPWD
+FRAMEWORK=$PWD
+
+test()
+{
+	cd $FRAMEWORK
+	trillian make
+	output=$(make test 2>&1)
+	if [ $? -ne 0 ]; then
+		echo
+		echo "$output"
+	fi
+	for test in $(find ./build/tests/bin -type f -exec echo {} \;); do
+		name=$(basename $test)
+		printf "%21s:\t" $name
+		bash $test
+		if [ $? -eq 0 ]; then
+			printf "\033[1;32mOK\033[0m\n"
+		else
+			printf "\033[1;31mKO\033[0m\n"
+		fi
+	done
+}
+
+load() 
+{
+    local pid=$1
+    local message=$2
+    local delay=0.1
+    local chars="/-\|"
+	local index=0
+
+    while ps -p $pid > /dev/null; do
+        printf "\r[%c] %s" "${chars:$index:1}" "$message"
+        sleep $delay
+		index=$(( (index + 1) % ${#chars} ))
+	done
+
+	printf "\r\033[K"
+}
+
+test &
+load $! "Testing..."
 
 exit 0
-
-PROJECTPWD=$OLDPWD
-SCRIPTPWD=$PWD
-FRAMEWORKPWD=$(dirname $SCRIPTPWD)
-
-framework_test() {
-	FILEPWD=${1}
-	NAME=$(basename $FILEPWD | sed 's/\.c$//')
-	# gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g $FILEPWD -include ft_framework.h ./source/base/processes/**/*.c ./source/base/types/**/*.c ./source/processes/**/*.c ./source/types/**/*.c -iquote ./includes $(find ./source/base/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/base/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
-	gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g -include ft_framework.h $FILEPWD ./build/libframework.a -iquote ./includes $(find ./source/base/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/base/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
-	valgrind --quiet --leak-check=full --show-leak-kinds=all --error-exitcode=1 "./build/${NAME}"
-	if [ $? -eq 0 ]; then
-		printf "%-20s\t\e[32mOK\e[0m\n" "${NAME}:"
-		rm "./build/${NAME}"
-	else
-		printf "%-20s\t\e[31mKO\e[0m\n" "${NAME}:"
-	fi
-}
-
-project_test() {
-	FILEPWD=${1}
-	NAME=$(basename $FILEPWD | sed 's/\.c$//')
-	gcc -Wall -Wextra -Werror -o "./build/${NAME}" -g -include ft_framework.h $FILEPWD ./source/processes/**/*.c ./source/types/**/*.c $(find ./source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ./source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') -iquote "${FRAMEWORKPWD}/includes" $(find "${FRAMEWORKPWD}/source/base/processes" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/base/types" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/processes" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find "${FRAMEWORKPWD}/source/types" -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') "${FRAMEWORKPWD}/build/libframework.a"
-	valgrind --quiet --leak-check=full --show-leak-kinds=all --error-exitcode=1 "./build/${NAME}"
-	if [ $? -eq 0 ]; then
-		printf "%-20s\t\e[32mOK\e[0m\n" "${NAME}:"
-		rm "./build/${NAME}"
-	else
-		printf "%-20s\t\e[31mKO\e[0m\n" "${NAME}:"
-	fi
-}
-
-# create the framework static library first
-cd $FRAMEWORKPWD
-mkdir -p ./objects
-cd ./objects
-gcc -Wall -Wextra -Werror -include ft_framework.h -c -g ../source/base/processes/**/*.c ../source/base/types/**/*.c ../source/processes/**/*.c ../source/types/**/*.c -iquote ../includes $(find ../source/base/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/base/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/processes -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//') $(find ../source/types -type d -exec echo -iquote {} \; | tr '\n' ' ' | sed 's/.$//')
-ar rcs ../build/libframework.a ../objects/*.o
-
-shopt -s nullglob
-
-if [ "$PROJECTPWD" = "$FRAMEWORKPWD" ]; then
-	cd $FRAMEWORKPWD
-	if [ $# -gt 0 ]; then
-		for arg in "$@"; do
-			FILEPWD=$(find ./tests -type f -name "${arg}.c")
-			if [[ -n $FILEPWD ]]; then
-				framework_test $FILEPWD
-			else
-				echo "There is no test file called $arg."
-			fi
-		done
-	else
-		for FILEPWD in ./tests/base/processes/**/*.c; do
-			framework_test $FILEPWD
-		done
-		for FILEPWD in ./tests/base/types/**/*.c; do
-			framework_test $FILEPWD
-		done
-		for FILEPWD in ./tests/processes/**/*.c; do
-			framework_test $FILEPWD
-		done
-		for FILEPWD in ./tests/types/**/*.c; do
-			framework_test $FILEPWD
-		done
-	fi
-else
-	cd $PROJECTPWD
-	if [ $# -gt 0 ]; then
-		for arg in "$@"; do
-			FILEPWD=$(find ./tests -type f -name "${arg}.c")
-			if [[ -n $FILEPWD ]]; then
-				project_test $FILEPWD
-			else
-				echo "There is no test file called $arg."
-			fi
-		done
-	else
-		for FILEPWD in ./tests/processes/**/*.c; do
-			project_test $FILEPWD
-		done
-		for FILEPWD in ./tests/types/**/*.c; do
-			project_test $FILEPWD
-		done
-	fi
-fi
-
-shopt -u nullglob

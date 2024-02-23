@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type.h                                             :+:      :+:    :+:   */
+/*   collection_shift.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:57:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/08 13:26:37 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:30:08 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_H
-# define TYPE_H
+#include "collection.h"
 
-typedef struct s_type			*t_type;
+t_any	collection_shift(t_collection collection)
+{
+	t_any	any;
 
-struct s_type {
-	char			*name;
-	unsigned int	size;
-	void			*(*create)(void);
-	void			(*destroy)(void *);
-	void			*(*init)(void *, t_any);
-	void			*(*copy)(void *);
-	t_any			(*get)(void *, t_any);
-	void			(*set)(void *, t_any, t_any);
-	void			(*push)(void *, t_any);
-	t_any			(*pop)(void *);
-};
-
-#endif
+	if (collection->end < collection->start)
+		return (NULL);
+	any = collection->content[collection->start];
+	collection->content[collection->start] = NULL;
+	collection->start++;
+	collection->length--;
+	return (any);
+}

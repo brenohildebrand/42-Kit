@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type.h                                             :+:      :+:    :+:   */
+/*   table_hash.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:57:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 23:04:56 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/23 02:10:29 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_H
-# define TYPE_H
+#include "table.h"
 
-typedef struct s_type			*t_type;
+// -- According to ChatGPT this algorithm is called 'djb2'.
+int	table_hash(t_any key)
+{
+	unsigned char	*buffer;
+	int				i;
+	int				hash;
 
-struct s_type {
-	char			*name;
-	unsigned int	size;
-	void			*(*create)(void);
-	void			(*destroy)(void *);
-	void			*(*init)(void *, t_any);
-	void			*(*copy)(void *);
-	t_any			(*get)(void *, t_any);
-	void			(*set)(void *, t_any, t_any);
-	void			(*push)(void *, t_any);
-	t_any			(*pop)(void *);
-};
-
-#endif
+	hash = 5381;
+	buffer = (unsigned char *)&key;
+	i = 0;
+	while (i < sizeof(t_any))
+	{
+		hash = ((hash << 5) + hash) + buffer[i];
+	}
+	return (hash);
+}

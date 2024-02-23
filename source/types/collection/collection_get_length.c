@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_set.c                                       :+:      :+:    :+:   */
+/*   collection_get_length.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 13:46:21 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/13 15:26:48 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/10 15:45:51 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:29:39 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "collection.h"
 
-void	vector_set(t_vector vector, int index, t_any value)
+int	collection_get_length(t_collection collection)
 {
-	if (index >= vector->length)
-		return ;
-	vector->content[vector->start + index] = value;
+	return (collection->length);
 }

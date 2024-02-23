@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type.h                                             :+:      :+:    :+:   */
+/*   table.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:57:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 22:52:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:57:32 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_H
-# define TYPE_H
+#include "table.h"
 
-typedef struct s_type			*t_type;
+t_type	table(void)
+{
+	static struct s_type	type = {
+		.name = "table",
+		.size = sizeof(struct s_table),
+		.create = table_create,
+		.destroy = table_destroy,
+		.copy = table_copy,
+		.get = table_get,
+		.set = table_set
+	};
 
-struct s_type {
-	char			*name;
-	unsigned int	size;
-	void			*(*create)(void);
-	void			(*destroy)(void *);
-	void			*(*init)(void *, t_any);
-	void			*(*copy)(void *);
-	t_any			(*get)(void *, t_any);
-	void			(*set)(void *, t_any, t_any);
-	void			(*push)(void *, t_any);
-	t_any			(*pop)(void *);
-};
-
-#endif
+	return (&type);
+}

@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_get.c                                       :+:      :+:    :+:   */
+/*   table_destroy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 13:44:17 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/10 15:03:09 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 23:01:49 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/23 02:03:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "table.h"
 
-t_any	vector_get(t_vector vector, int index)
+void	table_destroy(t_table instance)
 {
-	if (index >= vector->length)
-		return (NULL);
-	return (vector->content[vector->start + index]);
+	deallocate(instance->entries);
+	delete(instance);
 }

@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_destroy.c                                   :+:      :+:    :+:   */
+/*   collection_unshift.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:09:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/12 12:46:23 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/08 13:30:05 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:30:13 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "collection.h"
 
-void	vector_destroy(t_vector vector)
+void	collection_unshift(t_collection collection, t_any value)
 {
-	int	i;
-
-	i = vector->start;
-	while (i < vector->end)
+	if (collection->length + 1 > (collection->max_length * 3) / 4 || \
+		collection->start == 0)
 	{
-		any_destroy(vector->content[i]);
-		i++;
+		collection_expand(collection);
 	}
-	deallocate(vector->content);
-	delete(vector);
+	collection->start--;
+	collection->content[collection->start] = value;
+	collection->length++;
 }

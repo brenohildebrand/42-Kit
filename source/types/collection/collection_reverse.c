@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_reverse.c                                   :+:      :+:    :+:   */
+/*   collection_reverse.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 16:04:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/10 15:03:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/22 22:29:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "collection.h"
 
-void	vector_reverse(t_vector vector)
+void	collection_reverse(t_collection collection)
 {
 	int	i;
 
 	i = 0;
-	while (i < vector->length)
+	while (i < collection->length)
 	{
-		vector_push(vector, vector_shift(vector));
+		collection_push(collection, collection_shift(collection));
 		i++;
 	}
 }
