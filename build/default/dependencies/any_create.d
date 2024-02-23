@@ -1,10 +1,7 @@
 build/default/objects/any_create.o: source/types/any/any_create.c \
- source/types/memtree/memtree.h source/types/any/any.h \
- source/functions/allocate/allocate.h source/functions/assert/assert.h \
- source/functions/deallocate/deallocate.h source/functions/debug/debug.h \
- source/functions/delete/delete.h source/functions/error/error.h \
- source/functions/new/new.h source/functions/print/print.h \
- source/types/character/character.h source/types/file/file.h \
- source/types/string/string.h source/types/vector/vector.h \
- source/types/integer/integer.h source/types/fractional/fractional.h \
- source/types/any/any.h
+ source/types/framework/framework.h source/types/table/table.h \
+ source/functions/functions.h source/types/any/any.h \
+ source/types/cdouble/cdouble.h source/types/cint/cint.h \
+ source/types/collection/collection.h source/types/cstring/cstring.h \
+ source/types/memtree/memtree.h source/types/string/string.h \
+ source/types/type/type.h source/types/any/any.h

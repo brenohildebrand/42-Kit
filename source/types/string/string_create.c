@@ -6,27 +6,19 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:44:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/13 15:27:14 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:51:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-t_string	string_create(char *cstring)
+t_string	string_create(void)
 {
-	static struct s_type	type = {
-		.name = "string",
-		.destroy = (void (*)(t_any))string_destroy,
-		.size = sizeof(struct s_string)	
-	};
-	t_string				string;
+	t_string	instance;
 
-	string = (t_string)new(&type);
-	string->content = vector_create();
-	while (*cstring)
-	{
-		vector_push(string->content, character_create(*cstring));
-		cstring++;
-	}
+	instance = new(string);
+	instance->max_length = 16;
+	instance->content = allocate(instance->max_length * sizeof(char));
+	instance->length = 0;
 	return (string);
 }

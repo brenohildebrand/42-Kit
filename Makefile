@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/22 21:01:40 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/22 21:01:40 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/23 18:57:36 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/23 19:00:57 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,29 +21,30 @@ DEFAULT = ./build/default/bin/libframework.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -std=c99
 CPATHS = \
-	-include memtree.h \
-	-include any.h \
+	-include framework.h \
 	-include functions.h \
-	-include character.h \
-	-include file.h \
-	-include fractional.h \
-	-include integer.h \
+	-include any.h \
+	-include cdouble.h \
+	-include cint.h \
+	-include collection.h \
+	-include cstring.h \
+	-include memtree.h \
 	-include string.h \
+	-include table.h \
 	-include type.h \
-	-include vector.h \
 	-iquote ./source \
 	-iquote ./source/functions \
 	-iquote ./source/types \
 	-iquote ./source/types/any \
-	-iquote ./source/types/character \
-	-iquote ./source/types/file \
-	-iquote ./source/types/fractional \
-	-iquote ./source/types/gtable \
-	-iquote ./source/types/integer \
+	-iquote ./source/types/cdouble \
+	-iquote ./source/types/cint \
+	-iquote ./source/types/collection \
+	-iquote ./source/types/cstring \
+	-iquote ./source/types/framework \
 	-iquote ./source/types/memtree \
 	-iquote ./source/types/string \
-	-iquote ./source/types/type \
-	-iquote ./source/types/vector
+	-iquote ./source/types/table \
+	-iquote ./source/types/type
 
 SOURCES = \
 	./source/functions/allocate.c \
@@ -55,25 +56,43 @@ SOURCES = \
 	./source/functions/delete.c \
 	./source/functions/destroy.c \
 	./source/functions/error.c \
+	./source/functions/getg.c \
 	./source/functions/init.c \
 	./source/functions/new.c \
 	./source/functions/print.c \
 	./source/functions/push.c \
 	./source/functions/range.c \
 	./source/functions/repeat.c \
+	./source/functions/setg.c \
 	./source/functions/warning.c \
+	./source/types/any/any.c \
+	./source/types/any/any_copy.c \
 	./source/types/any/any_create.c \
 	./source/types/any/any_destroy.c \
-	./source/types/character/character_create.c \
-	./source/types/character/character_destroy.c \
-	./source/types/character/character_get.c \
-	./source/types/file/file_create.c \
-	./source/types/file/file_destroy.c \
-	./source/types/fractional/fractional_create.c \
-	./source/types/fractional/fractional_destroy.c \
-	./source/types/integer/integer_create.c \
-	./source/types/integer/integer_destroy.c \
-	./source/types/integer/integer_get.c \
+	./source/types/cdouble/cdouble.c \
+	./source/types/cdouble/cdouble_to_any.c \
+	./source/types/cint/cint.c \
+	./source/types/cint/cint_abs.c \
+	./source/types/cint/cint_to_any.c \
+	./source/types/collection/collection.c \
+	./source/types/collection/collection_copy.c \
+	./source/types/collection/collection_create.c \
+	./source/types/collection/collection_destroy.c \
+	./source/types/collection/collection_expand.c \
+	./source/types/collection/collection_get.c \
+	./source/types/collection/collection_get_length.c \
+	./source/types/collection/collection_pop.c \
+	./source/types/collection/collection_push.c \
+	./source/types/collection/collection_reverse.c \
+	./source/types/collection/collection_set.c \
+	./source/types/collection/collection_shift.c \
+	./source/types/collection/collection_to_any.c \
+	./source/types/collection/collection_unshift.c \
+	./source/types/cstring/cstring.c \
+	./source/types/cstring/cstring_to_any.c \
+	./source/types/framework/framework_get.c \
+	./source/types/framework/framework_get_gtable.c \
+	./source/types/framework/framework_get_memtree.c \
 	./source/types/memtree/memtree_create.c \
 	./source/types/memtree/memtree_delete.c \
 	./source/types/memtree/memtree_destroy.c \
@@ -84,22 +103,22 @@ SOURCES = \
 	./source/types/memtree/memtree_rebalance.c \
 	./source/types/memtree/memtree_search.c \
 	./source/types/memtree/memtree_update_height.c \
+	./source/types/string/string.c \
+	./source/types/string/string_copy.c \
 	./source/types/string/string_create.c \
 	./source/types/string/string_destroy.c \
 	./source/types/string/string_get.c \
-	./source/types/string/string_is_int.c \
-	./source/types/string/string_to_integer.c \
-	./source/types/vector/vector_create.c \
-	./source/types/vector/vector_destroy.c \
-	./source/types/vector/vector_expand.c \
-	./source/types/vector/vector_get.c \
-	./source/types/vector/vector_get_length.c \
-	./source/types/vector/vector_pop.c \
-	./source/types/vector/vector_push.c \
-	./source/types/vector/vector_reverse.c \
-	./source/types/vector/vector_set.c \
-	./source/types/vector/vector_shift.c \
-	./source/types/vector/vector_unshift.c
+	./source/types/string/string_init.c \
+	./source/types/string/string_is_cint.c \
+	./source/types/string/string_to_cint.c \
+	./source/types/table/table.c \
+	./source/types/table/table_copy.c \
+	./source/types/table/table_create.c \
+	./source/types/table/table_destroy.c \
+	./source/types/table/table_expand.c \
+	./source/types/table/table_get.c \
+	./source/types/table/table_hash.c \
+	./source/types/table/table_set.c
 
 OBJECTS = \
 	allocate.o \
@@ -111,25 +130,43 @@ OBJECTS = \
 	delete.o \
 	destroy.o \
 	error.o \
+	getg.o \
 	init.o \
 	new.o \
 	print.o \
 	push.o \
 	range.o \
 	repeat.o \
+	setg.o \
 	warning.o \
+	any.o \
+	any_copy.o \
 	any_create.o \
 	any_destroy.o \
-	character_create.o \
-	character_destroy.o \
-	character_get.o \
-	file_create.o \
-	file_destroy.o \
-	fractional_create.o \
-	fractional_destroy.o \
-	integer_create.o \
-	integer_destroy.o \
-	integer_get.o \
+	cdouble.o \
+	cdouble_to_any.o \
+	cint.o \
+	cint_abs.o \
+	cint_to_any.o \
+	collection.o \
+	collection_copy.o \
+	collection_create.o \
+	collection_destroy.o \
+	collection_expand.o \
+	collection_get.o \
+	collection_get_length.o \
+	collection_pop.o \
+	collection_push.o \
+	collection_reverse.o \
+	collection_set.o \
+	collection_shift.o \
+	collection_to_any.o \
+	collection_unshift.o \
+	cstring.o \
+	cstring_to_any.o \
+	framework_get.o \
+	framework_get_gtable.o \
+	framework_get_memtree.o \
 	memtree_create.o \
 	memtree_delete.o \
 	memtree_destroy.o \
@@ -140,22 +177,22 @@ OBJECTS = \
 	memtree_rebalance.o \
 	memtree_search.o \
 	memtree_update_height.o \
+	string.o \
+	string_copy.o \
 	string_create.o \
 	string_destroy.o \
 	string_get.o \
-	string_is_int.o \
-	string_to_integer.o \
-	vector_create.o \
-	vector_destroy.o \
-	vector_expand.o \
-	vector_get.o \
-	vector_get_length.o \
-	vector_pop.o \
-	vector_push.o \
-	vector_reverse.o \
-	vector_set.o \
-	vector_shift.o \
-	vector_unshift.o
+	string_init.o \
+	string_is_cint.o \
+	string_to_cint.o \
+	table.o \
+	table_copy.o \
+	table_create.o \
+	table_destroy.o \
+	table_expand.o \
+	table_get.o \
+	table_hash.o \
+	table_set.o
 
 DEPENDENCIES = \
 	allocate.d \
@@ -167,25 +204,43 @@ DEPENDENCIES = \
 	delete.d \
 	destroy.d \
 	error.d \
+	getg.d \
 	init.d \
 	new.d \
 	print.d \
 	push.d \
 	range.d \
 	repeat.d \
+	setg.d \
 	warning.d \
+	any.d \
+	any_copy.d \
 	any_create.d \
 	any_destroy.d \
-	character_create.d \
-	character_destroy.d \
-	character_get.d \
-	file_create.d \
-	file_destroy.d \
-	fractional_create.d \
-	fractional_destroy.d \
-	integer_create.d \
-	integer_destroy.d \
-	integer_get.d \
+	cdouble.d \
+	cdouble_to_any.d \
+	cint.d \
+	cint_abs.d \
+	cint_to_any.d \
+	collection.d \
+	collection_copy.d \
+	collection_create.d \
+	collection_destroy.d \
+	collection_expand.d \
+	collection_get.d \
+	collection_get_length.d \
+	collection_pop.d \
+	collection_push.d \
+	collection_reverse.d \
+	collection_set.d \
+	collection_shift.d \
+	collection_to_any.d \
+	collection_unshift.d \
+	cstring.d \
+	cstring_to_any.d \
+	framework_get.d \
+	framework_get_gtable.d \
+	framework_get_memtree.d \
 	memtree_create.d \
 	memtree_delete.d \
 	memtree_destroy.d \
@@ -196,22 +251,22 @@ DEPENDENCIES = \
 	memtree_rebalance.d \
 	memtree_search.d \
 	memtree_update_height.d \
+	string.d \
+	string_copy.d \
 	string_create.d \
 	string_destroy.d \
 	string_get.d \
-	string_is_int.d \
-	string_to_integer.d \
-	vector_create.d \
-	vector_destroy.d \
-	vector_expand.d \
-	vector_get.d \
-	vector_get_length.d \
-	vector_pop.d \
-	vector_push.d \
-	vector_reverse.d \
-	vector_set.d \
-	vector_shift.d \
-	vector_unshift.d
+	string_init.d \
+	string_is_cint.d \
+	string_to_cint.d \
+	table.d \
+	table_copy.d \
+	table_create.d \
+	table_destroy.d \
+	table_expand.d \
+	table_get.d \
+	table_hash.d \
+	table_set.d
 
 DEBUG_DIR = ./build/debug
 DEFAULT_DIR = ./build/default
@@ -287,6 +342,9 @@ $(DEFAULT_DIR)/objects/destroy.o: ./source/functions/destroy.c
 $(DEFAULT_DIR)/objects/error.o: ./source/functions/error.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/error.d -c ./source/functions/error.c -o $(DEFAULT_DIR)/objects/error.o
 
+$(DEFAULT_DIR)/objects/getg.o: ./source/functions/getg.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/getg.d -c ./source/functions/getg.c -o $(DEFAULT_DIR)/objects/getg.o
+
 $(DEFAULT_DIR)/objects/init.o: ./source/functions/init.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/init.d -c ./source/functions/init.c -o $(DEFAULT_DIR)/objects/init.o
 
@@ -305,8 +363,17 @@ $(DEFAULT_DIR)/objects/range.o: ./source/functions/range.c
 $(DEFAULT_DIR)/objects/repeat.o: ./source/functions/repeat.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/repeat.d -c ./source/functions/repeat.c -o $(DEFAULT_DIR)/objects/repeat.o
 
+$(DEFAULT_DIR)/objects/setg.o: ./source/functions/setg.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/setg.d -c ./source/functions/setg.c -o $(DEFAULT_DIR)/objects/setg.o
+
 $(DEFAULT_DIR)/objects/warning.o: ./source/functions/warning.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/warning.d -c ./source/functions/warning.c -o $(DEFAULT_DIR)/objects/warning.o
+
+$(DEFAULT_DIR)/objects/any.o: ./source/types/any/any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any.d -c ./source/types/any/any.c -o $(DEFAULT_DIR)/objects/any.o
+
+$(DEFAULT_DIR)/objects/any_copy.o: ./source/types/any/any_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_copy.d -c ./source/types/any/any_copy.c -o $(DEFAULT_DIR)/objects/any_copy.o
 
 $(DEFAULT_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_create.d -c ./source/types/any/any_create.c -o $(DEFAULT_DIR)/objects/any_create.o
@@ -314,35 +381,77 @@ $(DEFAULT_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 $(DEFAULT_DIR)/objects/any_destroy.o: ./source/types/any/any_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_destroy.d -c ./source/types/any/any_destroy.c -o $(DEFAULT_DIR)/objects/any_destroy.o
 
-$(DEFAULT_DIR)/objects/character_create.o: ./source/types/character/character_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/character_create.d -c ./source/types/character/character_create.c -o $(DEFAULT_DIR)/objects/character_create.o
+$(DEFAULT_DIR)/objects/cdouble.o: ./source/types/cdouble/cdouble.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cdouble.d -c ./source/types/cdouble/cdouble.c -o $(DEFAULT_DIR)/objects/cdouble.o
 
-$(DEFAULT_DIR)/objects/character_destroy.o: ./source/types/character/character_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/character_destroy.d -c ./source/types/character/character_destroy.c -o $(DEFAULT_DIR)/objects/character_destroy.o
+$(DEFAULT_DIR)/objects/cdouble_to_any.o: ./source/types/cdouble/cdouble_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cdouble_to_any.d -c ./source/types/cdouble/cdouble_to_any.c -o $(DEFAULT_DIR)/objects/cdouble_to_any.o
 
-$(DEFAULT_DIR)/objects/character_get.o: ./source/types/character/character_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/character_get.d -c ./source/types/character/character_get.c -o $(DEFAULT_DIR)/objects/character_get.o
+$(DEFAULT_DIR)/objects/cint.o: ./source/types/cint/cint.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cint.d -c ./source/types/cint/cint.c -o $(DEFAULT_DIR)/objects/cint.o
 
-$(DEFAULT_DIR)/objects/file_create.o: ./source/types/file/file_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/file_create.d -c ./source/types/file/file_create.c -o $(DEFAULT_DIR)/objects/file_create.o
+$(DEFAULT_DIR)/objects/cint_abs.o: ./source/types/cint/cint_abs.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cint_abs.d -c ./source/types/cint/cint_abs.c -o $(DEFAULT_DIR)/objects/cint_abs.o
 
-$(DEFAULT_DIR)/objects/file_destroy.o: ./source/types/file/file_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/file_destroy.d -c ./source/types/file/file_destroy.c -o $(DEFAULT_DIR)/objects/file_destroy.o
+$(DEFAULT_DIR)/objects/cint_to_any.o: ./source/types/cint/cint_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cint_to_any.d -c ./source/types/cint/cint_to_any.c -o $(DEFAULT_DIR)/objects/cint_to_any.o
 
-$(DEFAULT_DIR)/objects/fractional_create.o: ./source/types/fractional/fractional_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/fractional_create.d -c ./source/types/fractional/fractional_create.c -o $(DEFAULT_DIR)/objects/fractional_create.o
+$(DEFAULT_DIR)/objects/collection.o: ./source/types/collection/collection.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection.d -c ./source/types/collection/collection.c -o $(DEFAULT_DIR)/objects/collection.o
 
-$(DEFAULT_DIR)/objects/fractional_destroy.o: ./source/types/fractional/fractional_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/fractional_destroy.d -c ./source/types/fractional/fractional_destroy.c -o $(DEFAULT_DIR)/objects/fractional_destroy.o
+$(DEFAULT_DIR)/objects/collection_copy.o: ./source/types/collection/collection_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_copy.d -c ./source/types/collection/collection_copy.c -o $(DEFAULT_DIR)/objects/collection_copy.o
 
-$(DEFAULT_DIR)/objects/integer_create.o: ./source/types/integer/integer_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/integer_create.d -c ./source/types/integer/integer_create.c -o $(DEFAULT_DIR)/objects/integer_create.o
+$(DEFAULT_DIR)/objects/collection_create.o: ./source/types/collection/collection_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_create.d -c ./source/types/collection/collection_create.c -o $(DEFAULT_DIR)/objects/collection_create.o
 
-$(DEFAULT_DIR)/objects/integer_destroy.o: ./source/types/integer/integer_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/integer_destroy.d -c ./source/types/integer/integer_destroy.c -o $(DEFAULT_DIR)/objects/integer_destroy.o
+$(DEFAULT_DIR)/objects/collection_destroy.o: ./source/types/collection/collection_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_destroy.d -c ./source/types/collection/collection_destroy.c -o $(DEFAULT_DIR)/objects/collection_destroy.o
 
-$(DEFAULT_DIR)/objects/integer_get.o: ./source/types/integer/integer_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/integer_get.d -c ./source/types/integer/integer_get.c -o $(DEFAULT_DIR)/objects/integer_get.o
+$(DEFAULT_DIR)/objects/collection_expand.o: ./source/types/collection/collection_expand.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_expand.d -c ./source/types/collection/collection_expand.c -o $(DEFAULT_DIR)/objects/collection_expand.o
+
+$(DEFAULT_DIR)/objects/collection_get.o: ./source/types/collection/collection_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_get.d -c ./source/types/collection/collection_get.c -o $(DEFAULT_DIR)/objects/collection_get.o
+
+$(DEFAULT_DIR)/objects/collection_get_length.o: ./source/types/collection/collection_get_length.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_get_length.d -c ./source/types/collection/collection_get_length.c -o $(DEFAULT_DIR)/objects/collection_get_length.o
+
+$(DEFAULT_DIR)/objects/collection_pop.o: ./source/types/collection/collection_pop.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_pop.d -c ./source/types/collection/collection_pop.c -o $(DEFAULT_DIR)/objects/collection_pop.o
+
+$(DEFAULT_DIR)/objects/collection_push.o: ./source/types/collection/collection_push.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_push.d -c ./source/types/collection/collection_push.c -o $(DEFAULT_DIR)/objects/collection_push.o
+
+$(DEFAULT_DIR)/objects/collection_reverse.o: ./source/types/collection/collection_reverse.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_reverse.d -c ./source/types/collection/collection_reverse.c -o $(DEFAULT_DIR)/objects/collection_reverse.o
+
+$(DEFAULT_DIR)/objects/collection_set.o: ./source/types/collection/collection_set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_set.d -c ./source/types/collection/collection_set.c -o $(DEFAULT_DIR)/objects/collection_set.o
+
+$(DEFAULT_DIR)/objects/collection_shift.o: ./source/types/collection/collection_shift.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_shift.d -c ./source/types/collection/collection_shift.c -o $(DEFAULT_DIR)/objects/collection_shift.o
+
+$(DEFAULT_DIR)/objects/collection_to_any.o: ./source/types/collection/collection_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_to_any.d -c ./source/types/collection/collection_to_any.c -o $(DEFAULT_DIR)/objects/collection_to_any.o
+
+$(DEFAULT_DIR)/objects/collection_unshift.o: ./source/types/collection/collection_unshift.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_unshift.d -c ./source/types/collection/collection_unshift.c -o $(DEFAULT_DIR)/objects/collection_unshift.o
+
+$(DEFAULT_DIR)/objects/cstring.o: ./source/types/cstring/cstring.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cstring.d -c ./source/types/cstring/cstring.c -o $(DEFAULT_DIR)/objects/cstring.o
+
+$(DEFAULT_DIR)/objects/cstring_to_any.o: ./source/types/cstring/cstring_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cstring_to_any.d -c ./source/types/cstring/cstring_to_any.c -o $(DEFAULT_DIR)/objects/cstring_to_any.o
+
+$(DEFAULT_DIR)/objects/framework_get.o: ./source/types/framework/framework_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_get.d -c ./source/types/framework/framework_get.c -o $(DEFAULT_DIR)/objects/framework_get.o
+
+$(DEFAULT_DIR)/objects/framework_get_gtable.o: ./source/types/framework/framework_get_gtable.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_get_gtable.d -c ./source/types/framework/framework_get_gtable.c -o $(DEFAULT_DIR)/objects/framework_get_gtable.o
+
+$(DEFAULT_DIR)/objects/framework_get_memtree.o: ./source/types/framework/framework_get_memtree.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_get_memtree.d -c ./source/types/framework/framework_get_memtree.c -o $(DEFAULT_DIR)/objects/framework_get_memtree.o
 
 $(DEFAULT_DIR)/objects/memtree_create.o: ./source/types/memtree/memtree_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_create.d -c ./source/types/memtree/memtree_create.c -o $(DEFAULT_DIR)/objects/memtree_create.o
@@ -374,6 +483,12 @@ $(DEFAULT_DIR)/objects/memtree_search.o: ./source/types/memtree/memtree_search.c
 $(DEFAULT_DIR)/objects/memtree_update_height.o: ./source/types/memtree/memtree_update_height.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_update_height.d -c ./source/types/memtree/memtree_update_height.c -o $(DEFAULT_DIR)/objects/memtree_update_height.o
 
+$(DEFAULT_DIR)/objects/string.o: ./source/types/string/string.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string.d -c ./source/types/string/string.c -o $(DEFAULT_DIR)/objects/string.o
+
+$(DEFAULT_DIR)/objects/string_copy.o: ./source/types/string/string_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_copy.d -c ./source/types/string/string_copy.c -o $(DEFAULT_DIR)/objects/string_copy.o
+
 $(DEFAULT_DIR)/objects/string_create.o: ./source/types/string/string_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_create.d -c ./source/types/string/string_create.c -o $(DEFAULT_DIR)/objects/string_create.o
 
@@ -383,44 +498,38 @@ $(DEFAULT_DIR)/objects/string_destroy.o: ./source/types/string/string_destroy.c
 $(DEFAULT_DIR)/objects/string_get.o: ./source/types/string/string_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_get.d -c ./source/types/string/string_get.c -o $(DEFAULT_DIR)/objects/string_get.o
 
-$(DEFAULT_DIR)/objects/string_is_int.o: ./source/types/string/string_is_int.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_is_int.d -c ./source/types/string/string_is_int.c -o $(DEFAULT_DIR)/objects/string_is_int.o
+$(DEFAULT_DIR)/objects/string_init.o: ./source/types/string/string_init.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_init.d -c ./source/types/string/string_init.c -o $(DEFAULT_DIR)/objects/string_init.o
 
-$(DEFAULT_DIR)/objects/string_to_integer.o: ./source/types/string/string_to_integer.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_to_integer.d -c ./source/types/string/string_to_integer.c -o $(DEFAULT_DIR)/objects/string_to_integer.o
+$(DEFAULT_DIR)/objects/string_is_cint.o: ./source/types/string/string_is_cint.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_is_cint.d -c ./source/types/string/string_is_cint.c -o $(DEFAULT_DIR)/objects/string_is_cint.o
 
-$(DEFAULT_DIR)/objects/vector_create.o: ./source/types/vector/vector_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_create.d -c ./source/types/vector/vector_create.c -o $(DEFAULT_DIR)/objects/vector_create.o
+$(DEFAULT_DIR)/objects/string_to_cint.o: ./source/types/string/string_to_cint.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_to_cint.d -c ./source/types/string/string_to_cint.c -o $(DEFAULT_DIR)/objects/string_to_cint.o
 
-$(DEFAULT_DIR)/objects/vector_destroy.o: ./source/types/vector/vector_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_destroy.d -c ./source/types/vector/vector_destroy.c -o $(DEFAULT_DIR)/objects/vector_destroy.o
+$(DEFAULT_DIR)/objects/table.o: ./source/types/table/table.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table.d -c ./source/types/table/table.c -o $(DEFAULT_DIR)/objects/table.o
 
-$(DEFAULT_DIR)/objects/vector_expand.o: ./source/types/vector/vector_expand.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_expand.d -c ./source/types/vector/vector_expand.c -o $(DEFAULT_DIR)/objects/vector_expand.o
+$(DEFAULT_DIR)/objects/table_copy.o: ./source/types/table/table_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_copy.d -c ./source/types/table/table_copy.c -o $(DEFAULT_DIR)/objects/table_copy.o
 
-$(DEFAULT_DIR)/objects/vector_get.o: ./source/types/vector/vector_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_get.d -c ./source/types/vector/vector_get.c -o $(DEFAULT_DIR)/objects/vector_get.o
+$(DEFAULT_DIR)/objects/table_create.o: ./source/types/table/table_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_create.d -c ./source/types/table/table_create.c -o $(DEFAULT_DIR)/objects/table_create.o
 
-$(DEFAULT_DIR)/objects/vector_get_length.o: ./source/types/vector/vector_get_length.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_get_length.d -c ./source/types/vector/vector_get_length.c -o $(DEFAULT_DIR)/objects/vector_get_length.o
+$(DEFAULT_DIR)/objects/table_destroy.o: ./source/types/table/table_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_destroy.d -c ./source/types/table/table_destroy.c -o $(DEFAULT_DIR)/objects/table_destroy.o
 
-$(DEFAULT_DIR)/objects/vector_pop.o: ./source/types/vector/vector_pop.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_pop.d -c ./source/types/vector/vector_pop.c -o $(DEFAULT_DIR)/objects/vector_pop.o
+$(DEFAULT_DIR)/objects/table_expand.o: ./source/types/table/table_expand.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_expand.d -c ./source/types/table/table_expand.c -o $(DEFAULT_DIR)/objects/table_expand.o
 
-$(DEFAULT_DIR)/objects/vector_push.o: ./source/types/vector/vector_push.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_push.d -c ./source/types/vector/vector_push.c -o $(DEFAULT_DIR)/objects/vector_push.o
+$(DEFAULT_DIR)/objects/table_get.o: ./source/types/table/table_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_get.d -c ./source/types/table/table_get.c -o $(DEFAULT_DIR)/objects/table_get.o
 
-$(DEFAULT_DIR)/objects/vector_reverse.o: ./source/types/vector/vector_reverse.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_reverse.d -c ./source/types/vector/vector_reverse.c -o $(DEFAULT_DIR)/objects/vector_reverse.o
+$(DEFAULT_DIR)/objects/table_hash.o: ./source/types/table/table_hash.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_hash.d -c ./source/types/table/table_hash.c -o $(DEFAULT_DIR)/objects/table_hash.o
 
-$(DEFAULT_DIR)/objects/vector_set.o: ./source/types/vector/vector_set.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_set.d -c ./source/types/vector/vector_set.c -o $(DEFAULT_DIR)/objects/vector_set.o
-
-$(DEFAULT_DIR)/objects/vector_shift.o: ./source/types/vector/vector_shift.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_shift.d -c ./source/types/vector/vector_shift.c -o $(DEFAULT_DIR)/objects/vector_shift.o
-
-$(DEFAULT_DIR)/objects/vector_unshift.o: ./source/types/vector/vector_unshift.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/vector_unshift.d -c ./source/types/vector/vector_unshift.c -o $(DEFAULT_DIR)/objects/vector_unshift.o
+$(DEFAULT_DIR)/objects/table_set.o: ./source/types/table/table_set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_set.d -c ./source/types/table/table_set.c -o $(DEFAULT_DIR)/objects/table_set.o
 
 
 $(DEBUG_DIR)/objects/allocate.o: ./source/functions/allocate.c
@@ -450,6 +559,9 @@ $(DEBUG_DIR)/objects/destroy.o: ./source/functions/destroy.c
 $(DEBUG_DIR)/objects/error.o: ./source/functions/error.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/error.d -c ./source/functions/error.c -o $(DEBUG_DIR)/objects/error.o
 
+$(DEBUG_DIR)/objects/getg.o: ./source/functions/getg.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/getg.d -c ./source/functions/getg.c -o $(DEBUG_DIR)/objects/getg.o
+
 $(DEBUG_DIR)/objects/init.o: ./source/functions/init.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/init.d -c ./source/functions/init.c -o $(DEBUG_DIR)/objects/init.o
 
@@ -468,8 +580,17 @@ $(DEBUG_DIR)/objects/range.o: ./source/functions/range.c
 $(DEBUG_DIR)/objects/repeat.o: ./source/functions/repeat.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/repeat.d -c ./source/functions/repeat.c -o $(DEBUG_DIR)/objects/repeat.o
 
+$(DEBUG_DIR)/objects/setg.o: ./source/functions/setg.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/setg.d -c ./source/functions/setg.c -o $(DEBUG_DIR)/objects/setg.o
+
 $(DEBUG_DIR)/objects/warning.o: ./source/functions/warning.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/warning.d -c ./source/functions/warning.c -o $(DEBUG_DIR)/objects/warning.o
+
+$(DEBUG_DIR)/objects/any.o: ./source/types/any/any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any.d -c ./source/types/any/any.c -o $(DEBUG_DIR)/objects/any.o
+
+$(DEBUG_DIR)/objects/any_copy.o: ./source/types/any/any_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_copy.d -c ./source/types/any/any_copy.c -o $(DEBUG_DIR)/objects/any_copy.o
 
 $(DEBUG_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_create.d -c ./source/types/any/any_create.c -o $(DEBUG_DIR)/objects/any_create.o
@@ -477,35 +598,77 @@ $(DEBUG_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 $(DEBUG_DIR)/objects/any_destroy.o: ./source/types/any/any_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_destroy.d -c ./source/types/any/any_destroy.c -o $(DEBUG_DIR)/objects/any_destroy.o
 
-$(DEBUG_DIR)/objects/character_create.o: ./source/types/character/character_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/character_create.d -c ./source/types/character/character_create.c -o $(DEBUG_DIR)/objects/character_create.o
+$(DEBUG_DIR)/objects/cdouble.o: ./source/types/cdouble/cdouble.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cdouble.d -c ./source/types/cdouble/cdouble.c -o $(DEBUG_DIR)/objects/cdouble.o
 
-$(DEBUG_DIR)/objects/character_destroy.o: ./source/types/character/character_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/character_destroy.d -c ./source/types/character/character_destroy.c -o $(DEBUG_DIR)/objects/character_destroy.o
+$(DEBUG_DIR)/objects/cdouble_to_any.o: ./source/types/cdouble/cdouble_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cdouble_to_any.d -c ./source/types/cdouble/cdouble_to_any.c -o $(DEBUG_DIR)/objects/cdouble_to_any.o
 
-$(DEBUG_DIR)/objects/character_get.o: ./source/types/character/character_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/character_get.d -c ./source/types/character/character_get.c -o $(DEBUG_DIR)/objects/character_get.o
+$(DEBUG_DIR)/objects/cint.o: ./source/types/cint/cint.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cint.d -c ./source/types/cint/cint.c -o $(DEBUG_DIR)/objects/cint.o
 
-$(DEBUG_DIR)/objects/file_create.o: ./source/types/file/file_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/file_create.d -c ./source/types/file/file_create.c -o $(DEBUG_DIR)/objects/file_create.o
+$(DEBUG_DIR)/objects/cint_abs.o: ./source/types/cint/cint_abs.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cint_abs.d -c ./source/types/cint/cint_abs.c -o $(DEBUG_DIR)/objects/cint_abs.o
 
-$(DEBUG_DIR)/objects/file_destroy.o: ./source/types/file/file_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/file_destroy.d -c ./source/types/file/file_destroy.c -o $(DEBUG_DIR)/objects/file_destroy.o
+$(DEBUG_DIR)/objects/cint_to_any.o: ./source/types/cint/cint_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cint_to_any.d -c ./source/types/cint/cint_to_any.c -o $(DEBUG_DIR)/objects/cint_to_any.o
 
-$(DEBUG_DIR)/objects/fractional_create.o: ./source/types/fractional/fractional_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/fractional_create.d -c ./source/types/fractional/fractional_create.c -o $(DEBUG_DIR)/objects/fractional_create.o
+$(DEBUG_DIR)/objects/collection.o: ./source/types/collection/collection.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection.d -c ./source/types/collection/collection.c -o $(DEBUG_DIR)/objects/collection.o
 
-$(DEBUG_DIR)/objects/fractional_destroy.o: ./source/types/fractional/fractional_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/fractional_destroy.d -c ./source/types/fractional/fractional_destroy.c -o $(DEBUG_DIR)/objects/fractional_destroy.o
+$(DEBUG_DIR)/objects/collection_copy.o: ./source/types/collection/collection_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_copy.d -c ./source/types/collection/collection_copy.c -o $(DEBUG_DIR)/objects/collection_copy.o
 
-$(DEBUG_DIR)/objects/integer_create.o: ./source/types/integer/integer_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/integer_create.d -c ./source/types/integer/integer_create.c -o $(DEBUG_DIR)/objects/integer_create.o
+$(DEBUG_DIR)/objects/collection_create.o: ./source/types/collection/collection_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_create.d -c ./source/types/collection/collection_create.c -o $(DEBUG_DIR)/objects/collection_create.o
 
-$(DEBUG_DIR)/objects/integer_destroy.o: ./source/types/integer/integer_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/integer_destroy.d -c ./source/types/integer/integer_destroy.c -o $(DEBUG_DIR)/objects/integer_destroy.o
+$(DEBUG_DIR)/objects/collection_destroy.o: ./source/types/collection/collection_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_destroy.d -c ./source/types/collection/collection_destroy.c -o $(DEBUG_DIR)/objects/collection_destroy.o
 
-$(DEBUG_DIR)/objects/integer_get.o: ./source/types/integer/integer_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/integer_get.d -c ./source/types/integer/integer_get.c -o $(DEBUG_DIR)/objects/integer_get.o
+$(DEBUG_DIR)/objects/collection_expand.o: ./source/types/collection/collection_expand.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_expand.d -c ./source/types/collection/collection_expand.c -o $(DEBUG_DIR)/objects/collection_expand.o
+
+$(DEBUG_DIR)/objects/collection_get.o: ./source/types/collection/collection_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_get.d -c ./source/types/collection/collection_get.c -o $(DEBUG_DIR)/objects/collection_get.o
+
+$(DEBUG_DIR)/objects/collection_get_length.o: ./source/types/collection/collection_get_length.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_get_length.d -c ./source/types/collection/collection_get_length.c -o $(DEBUG_DIR)/objects/collection_get_length.o
+
+$(DEBUG_DIR)/objects/collection_pop.o: ./source/types/collection/collection_pop.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_pop.d -c ./source/types/collection/collection_pop.c -o $(DEBUG_DIR)/objects/collection_pop.o
+
+$(DEBUG_DIR)/objects/collection_push.o: ./source/types/collection/collection_push.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_push.d -c ./source/types/collection/collection_push.c -o $(DEBUG_DIR)/objects/collection_push.o
+
+$(DEBUG_DIR)/objects/collection_reverse.o: ./source/types/collection/collection_reverse.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_reverse.d -c ./source/types/collection/collection_reverse.c -o $(DEBUG_DIR)/objects/collection_reverse.o
+
+$(DEBUG_DIR)/objects/collection_set.o: ./source/types/collection/collection_set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_set.d -c ./source/types/collection/collection_set.c -o $(DEBUG_DIR)/objects/collection_set.o
+
+$(DEBUG_DIR)/objects/collection_shift.o: ./source/types/collection/collection_shift.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_shift.d -c ./source/types/collection/collection_shift.c -o $(DEBUG_DIR)/objects/collection_shift.o
+
+$(DEBUG_DIR)/objects/collection_to_any.o: ./source/types/collection/collection_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_to_any.d -c ./source/types/collection/collection_to_any.c -o $(DEBUG_DIR)/objects/collection_to_any.o
+
+$(DEBUG_DIR)/objects/collection_unshift.o: ./source/types/collection/collection_unshift.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_unshift.d -c ./source/types/collection/collection_unshift.c -o $(DEBUG_DIR)/objects/collection_unshift.o
+
+$(DEBUG_DIR)/objects/cstring.o: ./source/types/cstring/cstring.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cstring.d -c ./source/types/cstring/cstring.c -o $(DEBUG_DIR)/objects/cstring.o
+
+$(DEBUG_DIR)/objects/cstring_to_any.o: ./source/types/cstring/cstring_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cstring_to_any.d -c ./source/types/cstring/cstring_to_any.c -o $(DEBUG_DIR)/objects/cstring_to_any.o
+
+$(DEBUG_DIR)/objects/framework_get.o: ./source/types/framework/framework_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_get.d -c ./source/types/framework/framework_get.c -o $(DEBUG_DIR)/objects/framework_get.o
+
+$(DEBUG_DIR)/objects/framework_get_gtable.o: ./source/types/framework/framework_get_gtable.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_get_gtable.d -c ./source/types/framework/framework_get_gtable.c -o $(DEBUG_DIR)/objects/framework_get_gtable.o
+
+$(DEBUG_DIR)/objects/framework_get_memtree.o: ./source/types/framework/framework_get_memtree.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_get_memtree.d -c ./source/types/framework/framework_get_memtree.c -o $(DEBUG_DIR)/objects/framework_get_memtree.o
 
 $(DEBUG_DIR)/objects/memtree_create.o: ./source/types/memtree/memtree_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_create.d -c ./source/types/memtree/memtree_create.c -o $(DEBUG_DIR)/objects/memtree_create.o
@@ -537,6 +700,12 @@ $(DEBUG_DIR)/objects/memtree_search.o: ./source/types/memtree/memtree_search.c
 $(DEBUG_DIR)/objects/memtree_update_height.o: ./source/types/memtree/memtree_update_height.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_update_height.d -c ./source/types/memtree/memtree_update_height.c -o $(DEBUG_DIR)/objects/memtree_update_height.o
 
+$(DEBUG_DIR)/objects/string.o: ./source/types/string/string.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string.d -c ./source/types/string/string.c -o $(DEBUG_DIR)/objects/string.o
+
+$(DEBUG_DIR)/objects/string_copy.o: ./source/types/string/string_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_copy.d -c ./source/types/string/string_copy.c -o $(DEBUG_DIR)/objects/string_copy.o
+
 $(DEBUG_DIR)/objects/string_create.o: ./source/types/string/string_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_create.d -c ./source/types/string/string_create.c -o $(DEBUG_DIR)/objects/string_create.o
 
@@ -546,60 +715,42 @@ $(DEBUG_DIR)/objects/string_destroy.o: ./source/types/string/string_destroy.c
 $(DEBUG_DIR)/objects/string_get.o: ./source/types/string/string_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_get.d -c ./source/types/string/string_get.c -o $(DEBUG_DIR)/objects/string_get.o
 
-$(DEBUG_DIR)/objects/string_is_int.o: ./source/types/string/string_is_int.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_is_int.d -c ./source/types/string/string_is_int.c -o $(DEBUG_DIR)/objects/string_is_int.o
+$(DEBUG_DIR)/objects/string_init.o: ./source/types/string/string_init.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_init.d -c ./source/types/string/string_init.c -o $(DEBUG_DIR)/objects/string_init.o
 
-$(DEBUG_DIR)/objects/string_to_integer.o: ./source/types/string/string_to_integer.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_to_integer.d -c ./source/types/string/string_to_integer.c -o $(DEBUG_DIR)/objects/string_to_integer.o
+$(DEBUG_DIR)/objects/string_is_cint.o: ./source/types/string/string_is_cint.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_is_cint.d -c ./source/types/string/string_is_cint.c -o $(DEBUG_DIR)/objects/string_is_cint.o
 
-$(DEBUG_DIR)/objects/vector_create.o: ./source/types/vector/vector_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_create.d -c ./source/types/vector/vector_create.c -o $(DEBUG_DIR)/objects/vector_create.o
+$(DEBUG_DIR)/objects/string_to_cint.o: ./source/types/string/string_to_cint.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_to_cint.d -c ./source/types/string/string_to_cint.c -o $(DEBUG_DIR)/objects/string_to_cint.o
 
-$(DEBUG_DIR)/objects/vector_destroy.o: ./source/types/vector/vector_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_destroy.d -c ./source/types/vector/vector_destroy.c -o $(DEBUG_DIR)/objects/vector_destroy.o
+$(DEBUG_DIR)/objects/table.o: ./source/types/table/table.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table.d -c ./source/types/table/table.c -o $(DEBUG_DIR)/objects/table.o
 
-$(DEBUG_DIR)/objects/vector_expand.o: ./source/types/vector/vector_expand.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_expand.d -c ./source/types/vector/vector_expand.c -o $(DEBUG_DIR)/objects/vector_expand.o
+$(DEBUG_DIR)/objects/table_copy.o: ./source/types/table/table_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_copy.d -c ./source/types/table/table_copy.c -o $(DEBUG_DIR)/objects/table_copy.o
 
-$(DEBUG_DIR)/objects/vector_get.o: ./source/types/vector/vector_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_get.d -c ./source/types/vector/vector_get.c -o $(DEBUG_DIR)/objects/vector_get.o
+$(DEBUG_DIR)/objects/table_create.o: ./source/types/table/table_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_create.d -c ./source/types/table/table_create.c -o $(DEBUG_DIR)/objects/table_create.o
 
-$(DEBUG_DIR)/objects/vector_get_length.o: ./source/types/vector/vector_get_length.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_get_length.d -c ./source/types/vector/vector_get_length.c -o $(DEBUG_DIR)/objects/vector_get_length.o
+$(DEBUG_DIR)/objects/table_destroy.o: ./source/types/table/table_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_destroy.d -c ./source/types/table/table_destroy.c -o $(DEBUG_DIR)/objects/table_destroy.o
 
-$(DEBUG_DIR)/objects/vector_pop.o: ./source/types/vector/vector_pop.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_pop.d -c ./source/types/vector/vector_pop.c -o $(DEBUG_DIR)/objects/vector_pop.o
+$(DEBUG_DIR)/objects/table_expand.o: ./source/types/table/table_expand.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_expand.d -c ./source/types/table/table_expand.c -o $(DEBUG_DIR)/objects/table_expand.o
 
-$(DEBUG_DIR)/objects/vector_push.o: ./source/types/vector/vector_push.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_push.d -c ./source/types/vector/vector_push.c -o $(DEBUG_DIR)/objects/vector_push.o
+$(DEBUG_DIR)/objects/table_get.o: ./source/types/table/table_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_get.d -c ./source/types/table/table_get.c -o $(DEBUG_DIR)/objects/table_get.o
 
-$(DEBUG_DIR)/objects/vector_reverse.o: ./source/types/vector/vector_reverse.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_reverse.d -c ./source/types/vector/vector_reverse.c -o $(DEBUG_DIR)/objects/vector_reverse.o
+$(DEBUG_DIR)/objects/table_hash.o: ./source/types/table/table_hash.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_hash.d -c ./source/types/table/table_hash.c -o $(DEBUG_DIR)/objects/table_hash.o
 
-$(DEBUG_DIR)/objects/vector_set.o: ./source/types/vector/vector_set.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_set.d -c ./source/types/vector/vector_set.c -o $(DEBUG_DIR)/objects/vector_set.o
-
-$(DEBUG_DIR)/objects/vector_shift.o: ./source/types/vector/vector_shift.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_shift.d -c ./source/types/vector/vector_shift.c -o $(DEBUG_DIR)/objects/vector_shift.o
-
-$(DEBUG_DIR)/objects/vector_unshift.o: ./source/types/vector/vector_unshift.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/vector_unshift.d -c ./source/types/vector/vector_unshift.c -o $(DEBUG_DIR)/objects/vector_unshift.o
+$(DEBUG_DIR)/objects/table_set.o: ./source/types/table/table_set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_set.d -c ./source/types/table/table_set.c -o $(DEBUG_DIR)/objects/table_set.o
 
 
-$(TESTS_DIR)/objects/allocate.o: ./tests/functions/allocate.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/allocate.d -c ./tests/functions/allocate.c -o $(TESTS_DIR)/objects/allocate.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/allocate.o $(DEFAULT) -o $(TESTS_DIR)/bin/allocate
-
-$(TESTS_DIR)/objects/trillian_delete.o: ./tests/types/trillian/trillian_delete.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/trillian_delete.d -c ./tests/types/trillian/trillian_delete.c -o $(TESTS_DIR)/objects/trillian_delete.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/trillian_delete.o $(DEFAULT) -o $(TESTS_DIR)/bin/trillian_delete
-
-$(TESTS_DIR)/objects/trillian_insert.o: ./tests/types/trillian/trillian_insert.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/trillian_insert.d -c ./tests/types/trillian/trillian_insert.c -o $(TESTS_DIR)/objects/trillian_insert.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/trillian_insert.o $(DEFAULT) -o $(TESTS_DIR)/bin/trillian_insert
-
-$(TESTS_DIR)/objects/trillian_search.o: ./tests/types/trillian/trillian_search.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/trillian_search.d -c ./tests/types/trillian/trillian_search.c -o $(TESTS_DIR)/objects/trillian_search.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/trillian_search.o $(DEFAULT) -o $(TESTS_DIR)/bin/trillian_search
+$(TESTS_DIR)/objects/whatever.o: ./tests/functions/whatever.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/whatever.d -c ./tests/functions/whatever.c -o $(TESTS_DIR)/objects/whatever.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/whatever.o $(DEFAULT) -o $(TESTS_DIR)/bin/whatever
 
 

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 22:29:03 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:34:52 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:20:22 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 t_collection	collection_create(void)
 {
-	t_collection	collection;
+	t_collection	instance;
 
-	collection = (t_collection)new(collection);
-	collection->max_length = 16;
-	collection->content = \
-		(t_any *)allocate(collection->max_length * sizeof(t_any));
-	collection->length = 0;
-	collection->start = collection->max_length / 2;
-	collection->end = collection->start - 1;
-	return (collection);
+	instance = (t_collection)new(collection);
+	instance->max_length = 16;
+	instance->content = \
+		(t_any *)allocate(instance->max_length * sizeof(t_any));
+	instance->length = 0;
+	instance->start = instance->max_length / 2;
+	instance->end = instance->start - 1;
+	return (instance);
 }

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 22:31:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:56:06 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:19:27 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ t_type	collection(void)
 	static struct s_type	type = {
 		.name = "collection",
 		.size = sizeof(struct s_collection),
-		.create = collection_create, 
-		.destroy = collection_destroy,
-		.copy = collection_copy,
+		.create = (void *(*)(void))collection_create, 
+		.destroy = (void (*)(void *))collection_destroy,
+		.copy = (void *(*)(void *))collection_copy,
 		// .get
 		// .set
-		.push = collection_push,
-		.pop = collection_pop
+		.push = (void (*)(void *, t_any))collection_push,
+		.pop = (t_any (*)(void *))collection_pop
 		// .shift
 		// .unshift
 	};

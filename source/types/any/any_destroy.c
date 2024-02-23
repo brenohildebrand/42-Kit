@@ -6,23 +6,31 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:42:45 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/21 12:10:14 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:42:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "any.h"
 
-void	any_destroy(t_any any)
-{
-	t_type	type;
+// -- Maybe use a flag in type.h to indicate it's a literal.
 
-	type = memtree_search(any);
-	if (type == NULL)
+void	any_destroy(t_any instance)
+{
+	if (instance->type == cint())
 	{
-		memtree_delete(any);
+		delete(instance);
+	}
+	else if (instance->type == cdouble())
+	{
+		delete(instance);
+	}
+	else if (instance->type == cstring())
+	{
+		delete(instance);
 	}
 	else
 	{
-		type->destroy(any);
+		destroy(instance->value.instance);
+		delete(instance);
 	}
 }

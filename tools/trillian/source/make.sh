@@ -27,9 +27,8 @@ DEBUG="./build/debug/bin/$NAME"
 CC="gcc"
 CFLAGS="-Wall -Wextra -Werror -std=c99"
 CPATHS="\\
-	-include memtree.h \\
-	-include any.h \\
-$(find ./source -type f -name '*.h' -exec basename {} \; | sed 's/.*/\t-include & \\/' | sed '/memtree\.h/d' | sed '/any\.h/d')
+	-include framework.h \\
+$(find ./source -type f -name '*.h' -exec basename {} \; | sed 's/.*/\t-include & \\/' | sed '/framework\.h/d')
 $(find ./source -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /' | sed '$s/ \\//')"
 
 SOURCES="$(find ./source -type f -name "*.c" -exec echo {} \; | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"

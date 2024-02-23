@@ -1,5 +1,10 @@
 {
 	"files.associations": {
-		"table.h": "c"
+		"table.h": "c",
+		"framework.h": "c",
+		"array": "c",
+		"string_view": "c",
+		"initializer_list": "c",
+		"utility": "c"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 23:07:25 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 01:06:48 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 14:39:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,29 @@
 
 void	table_set(t_table instance, t_any key, t_any value)
 {
-	int				hash;
-	int 			index;
-	t_table_entry	current;
+	int	hash;
 
-	hash = table_hash(key);
-	index = abs(hash % (instance->entries->length - 1));
-	current = collection_get(instance->entries, index);
-	while (current != NULL)
+	if (instance->length >= instance->max_length / 2)
 	{
-		// compare current.key with key
-		if (compare(current.key, key) == 0)
+		table_expand(instance);
+	}
+	hash = abs(table_hash(key) % (instance->max_length));
+	while (1)
+	{
+		if (instance->entries[hash].key == NULL)
 		{
-			collection_set(instance->entries, index, value);
+			instance->entries[hash].key = key;
+			instance->entries[hash].value = value;
+			break ;
 		}
-		index++;
-		if (index >= instance->entries->max_length)
+		else if (instance->entries[hash].key == key)
 		{
-			index = 0;
+			instance->entries[hash].value = value;
+			break ;
+		}
+		else
+		{
+			hash++;
 		}
 	}
 }

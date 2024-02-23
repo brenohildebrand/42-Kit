@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 22:26:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:31:15 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:11:19 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,14 @@ t_any			collection_shift(t_collection collection);
 void			collection_expand(t_collection collection);
 void			collection_reverse(t_collection collection);
 int				collection_get_length(t_collection collection);
+t_any			collection_to_any(t_collection instance);
+
+// map
+// filter
+// reduce
+// foreach
+// take
+// drop
+// zip
 
 #endif

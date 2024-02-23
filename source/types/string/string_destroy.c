@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 21:59:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/12 12:46:15 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:54:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "string.h"
 
-void	string_destroy(t_string string)
+void	string_destroy(t_string instance)
 {
-	vector_destroy(string->content);
-	delete(string);
+	deallocate(instance->content);
+	delete(instance);
 }

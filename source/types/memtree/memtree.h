@@ -17,11 +17,8 @@
 // -- If something goes wrong in that process memtree will destroy itself and
 // -- the program terminates.
 
-# include "type.h"
-
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 
 typedef struct s_memtree		*t_memtree;
 
