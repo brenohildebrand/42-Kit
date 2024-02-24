@@ -5,7 +5,5 @@ This project was developed during my journey at [42 São Paulo](https://github.c
 
 </br>
 
-<div style="padding:10px; border: 1px solid red;tex">
-	<div style="text-align: center; color: red"><strong>Important</strong></div>
-	This framework cannot be used directly in your projects since you need to have full ownership of your project's code.
-</div>
+> **Disclaimer**  
+Since you need full ownership of your projects, using this framework directly isn't possible. However, you can draw inspiration from it and develop your own version. Read the docs, play around a bit and if you decide to create something similar read this guide.

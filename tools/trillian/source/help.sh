@@ -37,3 +37,16 @@ Submit your code to vogsphere.
 $(echo -e "\e[1m")version:$(echo -e "\e[0m")
 Display the current version of the framework.
 EOF
+
+# init
+# build (build everything)
+# norm (runs norminette)
+# run (flags --debug, --default, --valgrind, --norm, --all)
+# debug (run the vscode debugger if using vscode, otherwise run gdb)
+# test (run all tests or just the ones specified)
+# version
+
+# submit (run norm, run tests, then submit)
+# give a full really cool output making the coder feel their code is ready.
+
+# set 
