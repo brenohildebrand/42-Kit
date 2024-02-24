@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/24 01:50:06 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/24 01:50:06 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/24 03:02:51 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/24 03:02:51 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,6 +66,7 @@ SOURCES = \
 	./source/functions/setg.c \
 	./source/functions/warning.c \
 	./source/types/any/any.c \
+	./source/types/any/any_as_cint.c \
 	./source/types/any/any_copy.c \
 	./source/types/any/any_create.c \
 	./source/types/any/any_destroy.c \
@@ -140,6 +141,7 @@ OBJECTS = \
 	setg.o \
 	warning.o \
 	any.o \
+	any_as_cint.o \
 	any_copy.o \
 	any_create.o \
 	any_destroy.o \
@@ -214,6 +216,7 @@ DEPENDENCIES = \
 	setg.d \
 	warning.d \
 	any.d \
+	any_as_cint.d \
 	any_copy.d \
 	any_create.d \
 	any_destroy.d \
@@ -269,13 +272,16 @@ DEPENDENCIES = \
 	table_set.d
 
 TESTS = \
-	build/tests/bin/whatever
+	build/tests/bin/cint \
+	build/tests/bin/collection
 
 TESTS_OBJECTS = \
-	build/tests/objects/whatever.o
+	build/tests/objects/cint.o \
+	build/tests/objects/collection.o
 
 TESTS_DEPENDENCIES = \
-	build/tests/dependencies/whatever.d
+	build/tests/dependencies/cint.d \
+	build/tests/dependencies/collection.d
 
 DEBUG_DIR = ./build/debug
 DEFAULT_DIR = ./build/default
@@ -380,6 +386,9 @@ $(DEFAULT_DIR)/objects/warning.o: ./source/functions/warning.c
 
 $(DEFAULT_DIR)/objects/any.o: ./source/types/any/any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any.d -c ./source/types/any/any.c -o $(DEFAULT_DIR)/objects/any.o
+
+$(DEFAULT_DIR)/objects/any_as_cint.o: ./source/types/any/any_as_cint.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_cint.d -c ./source/types/any/any_as_cint.c -o $(DEFAULT_DIR)/objects/any_as_cint.o
 
 $(DEFAULT_DIR)/objects/any_copy.o: ./source/types/any/any_copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_copy.d -c ./source/types/any/any_copy.c -o $(DEFAULT_DIR)/objects/any_copy.o
@@ -598,6 +607,9 @@ $(DEBUG_DIR)/objects/warning.o: ./source/functions/warning.c
 $(DEBUG_DIR)/objects/any.o: ./source/types/any/any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any.d -c ./source/types/any/any.c -o $(DEBUG_DIR)/objects/any.o
 
+$(DEBUG_DIR)/objects/any_as_cint.o: ./source/types/any/any_as_cint.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_cint.d -c ./source/types/any/any_as_cint.c -o $(DEBUG_DIR)/objects/any_as_cint.o
+
 $(DEBUG_DIR)/objects/any_copy.o: ./source/types/any/any_copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_copy.d -c ./source/types/any/any_copy.c -o $(DEBUG_DIR)/objects/any_copy.o
 
@@ -758,8 +770,12 @@ $(DEBUG_DIR)/objects/table_set.o: ./source/types/table/table_set.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_set.d -c ./source/types/table/table_set.c -o $(DEBUG_DIR)/objects/table_set.o
 
 
-$(TESTS_DIR)/objects/whatever.o: ./tests/functions/whatever.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/whatever.d -c ./tests/functions/whatever.c -o $(TESTS_DIR)/objects/whatever.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/whatever.o $(DEFAULT) -o $(TESTS_DIR)/bin/whatever
+$(TESTS_DIR)/objects/cint.o: ./tests/types/cint.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/cint.d -c ./tests/types/cint.c -o $(TESTS_DIR)/objects/cint.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/cint.o $(DEFAULT) -o $(TESTS_DIR)/bin/cint
+
+$(TESTS_DIR)/objects/collection.o: ./tests/types/collection.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/collection.d -c ./tests/types/collection.c -o $(TESTS_DIR)/objects/collection.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/collection.o $(DEFAULT) -o $(TESTS_DIR)/bin/collection
 
 

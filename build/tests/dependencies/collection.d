@@ -1,4 +1,4 @@
-build/tests/objects/whatever.o: tests/functions/whatever.c \
+build/tests/objects/collection.o: tests/types/collection.c \
  source/types/framework/framework.h source/types/table/table.h \
  source/functions/functions.h source/types/any/any.h \
  source/types/cdouble/cdouble.h source/types/cint/cint.h \

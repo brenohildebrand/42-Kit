@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any.h                                              :+:      :+:    :+:   */
+/*   cint.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/24 02:37:32 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/24 02:32:09 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/24 02:39:35 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANY_H
-# define ANY_H
+int	main(void)
+{
+	t_any	instance;
 
-typedef struct s_any	*t_any;
-
-union u_any {
-	int		cint;
-	double	cdouble;
-	char	*cstring;
-	void	*instance;
-};
-
-struct s_any {
-	t_type		type;
-	union u_any	value;
-};
-
-t_type	any(void);
-t_any	any_create(void);
-void	any_destroy(t_any instance);
-t_any	any_copy(t_any instance);
-int		any_as_cint(t_any instance);
-
-#endif
+	instance = cint_to_any(42);
+	assert(any_as_cint(instance) == 42);
+	return (0);
+}

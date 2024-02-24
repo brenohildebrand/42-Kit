@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any.h                                              :+:      :+:    :+:   */
+/*   collection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/24 02:37:32 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/24 02:27:33 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/24 02:34:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANY_H
-# define ANY_H
+int	main(void)
+{
+	// -- Lifecycle
+	t_collection	instance;
 
-typedef struct s_any	*t_any;
+	instance = create(collection);
+	delete(instance);
 
-union u_any {
-	int		cint;
-	double	cdouble;
-	char	*cstring;
-	void	*instance;
-};
+	// -- Operations
+	// -- 
 
-struct s_any {
-	t_type		type;
-	union u_any	value;
-};
+	// TODO
 
-t_type	any(void);
-t_any	any_create(void);
-void	any_destroy(t_any instance);
-t_any	any_copy(t_any instance);
-int		any_as_cint(t_any instance);
-
-#endif
+	return (0);
+}

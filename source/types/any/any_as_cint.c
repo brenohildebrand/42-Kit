@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   whatever.c                                         :+:      :+:    :+:   */
+/*   any_as_cint.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 18:38:31 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/24 01:45:01 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/24 02:37:41 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/24 02:38:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include "any.h"
 
-int	main(void)
+int	any_as_cint(t_any instance)
 {
-	t_collection	instance;
-
-	instance = create(collection);
-	destroy(instance);
-	return (0);
+	return (instance->value.cint);
 }

@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "trillian build",
+            "args": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+		{
+			"label": "test",
+			"type": "shell",
+			"command": "trillian test",
+			"args": [],
+			"group": {
+				"kind": "build",
+			}
+		}
+    ]
+}
