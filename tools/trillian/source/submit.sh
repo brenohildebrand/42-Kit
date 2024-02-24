@@ -6,6 +6,8 @@
 
 echo "TODO"
 
+exit 0
+
 PROJECT=$OLDPWD
 FRAMEWORK=$PWD
 

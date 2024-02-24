@@ -16,26 +16,27 @@ Display this information.
 $(echo -e "\e[1m")init:$(echo -e "\e[0m")
 Initialize the environment variables and create the folder structure for a new project.
 
-$(echo -e "\e[1m")run:$(echo -e "\e[0m")
-Build your code in debug mode and run it. You can provide arguments.
+$(echo -e "\e[1m")build:$(echo -e "\e[0m")
+Build your code.
 
-$(echo -e "\e[1m")check:$(echo -e "\e[0m")
+$(echo -e "\e[1m")norm:$(echo -e "\e[0m")
 Check if your code has norm errors.
 
-$(echo -e "\e[1m")debug:$(echo -e "\e[0m")
-Build your code in debug mode.
+$(echo -e "\e[1m")run:$(echo -e "\e[0m")
+Build your code and run it in the current mode. You can provide arguments.
 
-$(echo -e "\e[1m")build:$(echo -e "\e[0m")
-Build your code in default mode.
+$(echo -e "\e[1m")debug:$(echo -e "\e[0m")
+Run your code with gdb. You can provide arguments.
+If you are using vscode it will run the debugger inside it.
 
 $(echo -e "\e[1m")test:$(echo -e "\e[0m")
-Build the tests and run them.
-
-$(echo -e "\e[1m")submit:$(echo -e "\e[0m")
-Submit your code to vogsphere.
+Run the tests.
 
 $(echo -e "\e[1m")version:$(echo -e "\e[0m")
 Display the current version of the framework.
+
+$(echo -e "\e[1m")submit:$(echo -e "\e[0m")
+Submit your code to vogsphere.
 EOF
 
 # init

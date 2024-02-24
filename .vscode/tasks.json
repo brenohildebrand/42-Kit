@@ -10,15 +10,6 @@
                 "kind": "build",
                 "isDefault": true
             }
-        },
-		{
-			"label": "test",
-			"type": "shell",
-			"command": "trillian test",
-			"args": [],
-			"group": {
-				"kind": "build",
-			}
-		}
+        }
     ]
 }

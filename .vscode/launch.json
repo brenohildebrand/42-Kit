@@ -19,7 +19,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "test"
+            "preLaunchTask": "build"
         },
         {
             "name": "collection",
@@ -39,7 +39,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "test"
+            "preLaunchTask": "build"
         },
     ]
 }
