@@ -172,10 +172,10 @@ HEADER="\
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: $(printf "%-42s\n" "$ft_username <$ft_username@student.42.fr>") +#+  +:+       +#+         #
+#    By: $(printf "%-42s\n" "$username <$username@student.42.fr>") +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: $(date +'%Y/%m/%d %H:%M:%S') by $(printf "%-17s\n" "$ft_username") #+#    #+#              #
-#    Updated: $(date +'%Y/%m/%d %H:%M:%S') by $(printf "%-16s\n" "$ft_username") ###   ########.fr        #
+#    Created: $(date +'%Y/%m/%d %H:%M:%S') by $(printf "%-17s\n" "$username") #+#    #+#              #
+#    Updated: $(date +'%Y/%m/%d %H:%M:%S') by $(printf "%-16s\n" "$username") ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #"
 

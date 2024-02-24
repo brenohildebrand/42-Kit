@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Change to the framework directory.
-ROOT=$(dirname $(dirname $(dirname $(dirname $0))))
-cd $ROOT
+FRAMEWORK=$(dirname $(dirname $(dirname $(dirname $0))))
+cd $FRAMEWORK
 
 # If an argument was not provided show a hint.
 if [ $# -eq 0 ]; then
@@ -18,40 +18,11 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-# Look for a command matching the first argument.
-case $1 in
-    "build")
-        ./tools/trillian/source/build.sh "${@:2}"
-        ;;
-    "check")
-        ./tools/trillian/source/check.sh "${@:2}"
-        ;;
-    "debug")
-        ./tools/trillian/source/debug.sh "${@:2}"
-        ;;
-    "help")
-        ./tools/trillian/source/help.sh "${@:2}"
-        ;;
-    "init")
-        ./tools/trillian/source/init.sh "${@:2}"
-        ;;
-    "make")
-        ./tools/trillian/source/make.sh "${@:2}"
-        ;;
-    "run")
-        ./tools/trillian/source/run.sh "${@:2}"
-        ;;
-    "submit")
-        ./tools/trillian/source/submit.sh "${@:2}"
-        ;;
-    "test")
-        ./tools/trillian/source/test.sh "${@:2}"
-        ;;
-    "version")
-        ./tools/trillian/source/version.sh "${@:2}"
-        ;;
-    *)
-        echo "The command '$1' does not exist. Try 'trillian help'."
-        exit 1
-        ;;
-esac
+# Look for a file matching the command given and run it.
+command="./tools/trillian/source/$1.sh"
+if [ -f "$command" ]; then
+    $command
+else
+    echo "The command '$1' does not exist. Try 'trillian help'."
+    exit 1
+fi

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-echo "ft_framework-0.0.0"
+source config/.env
+echo "ft_framework-$version"
