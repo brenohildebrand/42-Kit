@@ -14,8 +14,8 @@ test()
 	fi
 	for test in $(find ./build/tests/bin -type f -exec echo {} \;); do
 		name=$(basename $test)
-		printf "%21s:\t" $name
-		bash $test
+		printf "%-16s " "$name:"
+		$test > /dev/null 2>&1
 		if [ $? -eq 0 ]; then
 			printf "\033[1;32mOK\033[0m\n"
 		else
@@ -41,7 +41,6 @@ load()
 	printf "\r\033[K"
 }
 
-test &
-load $! "Testing..."
+test
 
 exit 0

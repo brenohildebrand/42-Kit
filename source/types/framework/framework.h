@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 21:47:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 19:01:24 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 23:35:18 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ struct s_type;
 // -- Common resources to be used by the framework.
 #include "table.h"
 
-typedef struct s_framework	t_framework;
+typedef struct s_framework	*t_framework;
 
 struct s_framework {
 	t_memtree	memtree;

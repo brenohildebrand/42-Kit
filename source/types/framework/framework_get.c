@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:02:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 14:10:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 23:36:07 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ t_framework	framework_get()
 {
 	static struct s_framework	framework = {
 		.memtree = NULL,
-		.gtable = table_create(table);
+		.gtable = NULL,
 	};
 
+	if (framework.gtable == NULL)
+	{
+		framework.gtable = table_create();
+	}
 	return (&framework);
 }

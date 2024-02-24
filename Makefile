@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/23 18:57:36 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/23 19:00:57 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/24 01:50:06 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/24 01:50:06 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ DEBUG = ./build/debug/bin/libframework.a
 DEFAULT = ./build/default/bin/libframework.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c99
+CFLAGS = -Wall -Wextra -Werror -std=c99 -g
 CPATHS = \
 	-include framework.h \
 	-include functions.h \
@@ -268,6 +268,15 @@ DEPENDENCIES = \
 	table_hash.d \
 	table_set.d
 
+TESTS = \
+	build/tests/bin/whatever
+
+TESTS_OBJECTS = \
+	build/tests/objects/whatever.o
+
+TESTS_DEPENDENCIES = \
+	build/tests/dependencies/whatever.d
+
 DEBUG_DIR = ./build/debug
 DEFAULT_DIR = ./build/default
 TESTS_DIR = ./build/tests
@@ -278,15 +287,12 @@ DEBUG_DEPENDENCIES = $(addprefix $(DEBUG_DIR)/dependencies/, $(DEPENDENCIES))
 DEFAULT_OBJECTS = $(addprefix $(DEFAULT_DIR)/objects/, $(OBJECTS))
 DEFAULT_DEPENDENCIES = $(addprefix $(DEFAULT_DIR)/dependencies/, $(DEPENDENCIES))
 
-TESTS_OBJECTS = $(addprefix $(TESTS_DIR)/objects/, $(OBJECTS))
-TESTS_DEPENDENCIES = $(addprefix $(TESTS_DIR)/dependencies/, $(DEPENDENCIES))
-
 all: build
 
 $(NAME): build
 
 debug: $(DEBUG)
-$(DEBUG): CFLAGS += -DDEBUG -g
+$(DEBUG): CFLAGS += -DDEBUG
 $(DEBUG): $(DEBUG_OBJECTS) | $(DEBUG_DIR)
 	@ar rcs $(DEBUG_DIR)/bin/$(NAME) $?
 
@@ -302,10 +308,13 @@ clean:
 	@$(RM) $(DEBUG_DEPENDENCIES)
 	@$(RM) $(DEFAULT_OBJECTS)
 	@$(RM) $(DEFAULT_DEPENDENCIES)
+	@$(RM) $(TESTS_OBJECTS)
+	@$(RM) $(TESTS_DEPENDENCIES)
 
 fclean: clean
 	@$(RM) $(DEBUG_DIR)/bin/$(NAME)
 	@$(RM) $(DEFAULT_DIR)/bin/$(NAME)
+	@$(RM) $(TESTS)
 
 re: fclean all
 

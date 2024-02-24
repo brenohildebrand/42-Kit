@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 20:44:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 17:51:59 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 23:42:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ t_string	string_create(void)
 	instance->max_length = 16;
 	instance->content = allocate(instance->max_length * sizeof(char));
 	instance->length = 0;
-	return (string);
+	return (instance);
 }

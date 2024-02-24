@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:57:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 18:00:37 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/23 23:42:18 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ t_string	string_copy(t_string instance)
 	copy_content(instance, new_instance);
 	new_instance->length = instance->length;
 	new_instance->max_length = instance->max_length;
+	return (new_instance);
 }

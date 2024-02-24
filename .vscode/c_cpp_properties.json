@@ -8,9 +8,8 @@
                 "${workspaceFolder}/source/types/**",
             ],
 			"forcedInclude": [
-				"${workspaceFolder}/source/types/type/type.h",
-				"${workspaceFolder}/source/types/memtree/memtree.h",
-				"${workspaceFolder}/source/types/any/any.h"
+				"${workspaceFolder}/source/types/framework/framework.h",
+				"${workspaceFolder}/source/functions/functions.h",
 			],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

@@ -25,7 +25,7 @@ DEFAULT="./build/default/bin/$NAME"
 DEBUG="./build/debug/bin/$NAME"
 
 CC="gcc"
-CFLAGS="-Wall -Wextra -Werror -std=c99"
+CFLAGS="-Wall -Wextra -Werror -std=c99 -g"
 CPATHS="\\
 	-include framework.h \\
 $(find ./source -type f -name '*.h' -exec basename {} \; | sed 's/.*/\t-include & \\/' | sed '/framework\.h/d')
@@ -35,6 +35,9 @@ SOURCES="$(find ./source -type f -name "*.c" -exec echo {} \; | sed 's/.*/\t& \\
 HEADERS="$(find ./source -type f -name "*.h" -exec basename {} \; | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
 OBJECTS="$(find ./source -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.o/' | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
 DEPENDENCIES="$(find ./source -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.d/' | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+TESTS="$(find ./tests -type f -name "*.c" -exec basename {} \; | sed 's/\.c$//' | sed 's/.*/\tbuild\/tests\/bin\/& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+TESTS_OBJECTS="$(find ./tests -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.o/' | sed 's/.*/\tbuild\/tests\/objects\/& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+TESTS_DEPENDENCIES="$(find ./tests -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.d/' | sed 's/.*/\tbuild\/tests\/dependencies\/& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
 
 for source in $(find ./source -type f -name "*.c" -exec echo {} \;); do
 	object=$(basename $source | sed 's/\.c/.o/')
@@ -96,6 +99,12 @@ OBJECTS = $OBJECTS
 
 DEPENDENCIES = $DEPENDENCIES
 
+TESTS = $TESTS
+
+TESTS_OBJECTS = $TESTS_OBJECTS
+
+TESTS_DEPENDENCIES = $TESTS_DEPENDENCIES
+
 DEBUG_DIR = ./build/debug
 DEFAULT_DIR = ./build/default
 TESTS_DIR = ./build/tests
@@ -106,15 +115,12 @@ DEBUG_DEPENDENCIES = \$(addprefix \$(DEBUG_DIR)/dependencies/, \$(DEPENDENCIES))
 DEFAULT_OBJECTS = \$(addprefix \$(DEFAULT_DIR)/objects/, \$(OBJECTS))
 DEFAULT_DEPENDENCIES = \$(addprefix \$(DEFAULT_DIR)/dependencies/, \$(DEPENDENCIES))
 
-TESTS_OBJECTS = \$(addprefix \$(TESTS_DIR)/objects/, \$(OBJECTS))
-TESTS_DEPENDENCIES = \$(addprefix \$(TESTS_DIR)/dependencies/, \$(DEPENDENCIES))
-
 all: build
 
 \$(NAME): build
 
 debug: \$(DEBUG)
-\$(DEBUG): CFLAGS += -DDEBUG -g
+\$(DEBUG): CFLAGS += -DDEBUG
 \$(DEBUG): \$(DEBUG_OBJECTS) | \$(DEBUG_DIR)
 	@ar rcs \$(DEBUG_DIR)/bin/\$(NAME) \$?
 
@@ -130,10 +136,13 @@ clean:
 	@\$(RM) \$(DEBUG_DEPENDENCIES)
 	@\$(RM) \$(DEFAULT_OBJECTS)
 	@\$(RM) \$(DEFAULT_DEPENDENCIES)
+	@\$(RM) \$(TESTS_OBJECTS)
+	@\$(RM) \$(TESTS_DEPENDENCIES)
 
 fclean: clean
 	@\$(RM) \$(DEBUG_DIR)/bin/\$(NAME)
 	@\$(RM) \$(DEFAULT_DIR)/bin/\$(NAME)
+	@\$(RM) \$(TESTS)
 
 re: fclean all
 
