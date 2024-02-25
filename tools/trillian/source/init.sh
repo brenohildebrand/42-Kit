@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# This script will create all folders needed to start a new project with ft_framework.
-
 PROJECT=$OLDPWD
 FRAMEWORK=$PWD
 
@@ -44,4 +42,3 @@ This project was developed during my journey at [42 São Paulo](https://github.c
 
 </br>
 EOF
-fi

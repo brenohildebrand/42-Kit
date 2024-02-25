@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# This script will build the code in all modes.
-
 PROJECT=$OLDPWD
 FRAMEWORK=$PWD
 
@@ -9,7 +7,7 @@ FRAMEWORK=$PWD
 shopt -s nullglob
 
 for object in build/**/objects/*; do
-	name=$(basename $object)
+	name=$(basename $object | sed 's/.o$/.c/')
 	find source -type f -name "$name" | grep -q "."
 	if [ $? -ne 0 ]; then
 		rm -f $object
@@ -17,7 +15,7 @@ for object in build/**/objects/*; do
 done
 
 for dependency in build/**/dependencies/*; do
-	name=$(basename $dependency)
+	name=$(basename $dependency | sed 's/.d$/.c/')
 	find source -type f -name "$name" | grep -q "."
 	if [ $? -ne 0 ]; then
 		rm -f $dependency
@@ -25,7 +23,7 @@ for dependency in build/**/dependencies/*; do
 done
 
 for test in build/tests/bin/*; do
-	name=$(basename $test)
+	name=$(basename $test | sed 's/.*/&.c/')
 	find tests -type f -name "$name" | grep -q "."
 	if [ $? -ne 0 ]; then
 		rm -f $test
@@ -41,11 +39,11 @@ cat << EOF > .vscode/c_cpp_properties.json
         {
             "name": "Linux",
             "includePath": [
-				$(find source -type d -exec echo {} \ ; | sed "s/.*/\"\${workspaceFolder}\/&\",/")
+				$(find source -type d -exec echo {} \; | sed "s/.*/\t\t\t\t\"\${workspaceFolder}\/&\",/" | sed '1s/^\t\t\t\t//' | sed '$s/,$//')
             ],
 			"forcedInclude": [
 				"\${workspaceFolder}/source/types/framework/framework.h",
-				$(find source -type f -name "*.h" -exec echo {} \ ; | sed "s/.*/\"\${workspaceFolder}\/&\",/")
+				$(find source -type f -name "*.h" -exec echo {} \; | sed "s/.*/\t\t\t\t\"\${workspaceFolder}\/&\",/" | sed '1s/^\t\t\t\t//' | sed '$s/,$//')
 			],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
@@ -60,46 +58,26 @@ cat << EOF > .vscode/launch.json
 {
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": "cint",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/tests/bin/cint",
-            "args": [],
-            "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "build"
-        },
-        {
-            "name": "collection",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/tests/bin/collection",
-            "args": [],
-            "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "build"
-        },
+		$(find tests -type f -exec basename {} \; | sed "s/.c$//" | sed "s/.*/\t\t{\n\
+			\"name\": \"&\",\n\
+			\"type\": \"cppdbg\",\n\
+			\"request\": \"launch\",\n\
+			\"program\": \"\${workspaceFolder}\/build\/tests\/bin\/&\",\n\
+			\"args\": [],\n\
+			\"stopAtEntry\": true,\n\
+			\"cwd\": \"\${workspaceFolder}\",\n\
+			\"environment\": [],\n\
+            \"externalConsole\": false,\n\
+            \"MIMode\": \"gdb\",\n\
+            \"setupCommands\": [\n\
+                {\n\
+                    \"description\": \"Enable pretty-printing for gdb\",\n\
+                    \"text\": \"-enable-pretty-printing\",\n\
+                    \"ignoreFailures\": true\n\
+                }\n\
+            ],\n\
+            \"preLaunchTask\": \"build\"\n\
+		},/" | sed '1s/^\t\t//' | sed '$s/,$//')
     ]
 }
 EOF
@@ -246,7 +224,7 @@ build: \$(DEFAULT)
 \$(DEFAULT): \$(DEFAULT_OBJECTS) | \$(DEFAULT_DIR)
 	@ar rcs \$(DEFAULT_DIR)/bin/\$(NAME) \$?
 
-test: build \$(TESTS)
+tests: build \$(TESTS)
 \$(TESTS): \$(TESTS_OBJECTS) | \$(TESTS_DIR)
 
 clean:
@@ -276,9 +254,9 @@ $TESTS_RULES
 EOF
 
 # Build framework in all modes.
-make build 2>&1
-make debug 2>&1
-make tests 2>&1
+make build > /dev/null 2>&1
+make debug > /dev/null 2>&1
+make tests > /dev/null 2>&1
 
 # Exit if the project is actually the framework.
 if [ "$PROJECT" == "$FRAMEWORK" ]; then
@@ -465,6 +443,6 @@ $DEFAULT_RULES
 EOF
 
 # Build the project in all modes.
-make build 2>&1
-make debug 2>&1
-make tests 2>&1
+make build > /dev/null 2>&1
+make debug > /dev/null 2>&1
+make tests > /dev/null 2>&1

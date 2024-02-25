@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/24 03:02:51 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/24 03:02:51 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/24 21:26:55 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/24 21:26:55 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -306,7 +306,7 @@ build: $(DEFAULT)
 $(DEFAULT): $(DEFAULT_OBJECTS) | $(DEFAULT_DIR)
 	@ar rcs $(DEFAULT_DIR)/bin/$(NAME) $?
 
-test: build $(TESTS)
+tests: build $(TESTS)
 $(TESTS): $(TESTS_OBJECTS) | $(TESTS_DIR)
 
 clean:

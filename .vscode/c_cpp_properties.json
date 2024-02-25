@@ -3,31 +3,33 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/source/types/framework",
+				"${workspaceFolder}/source",
+				"${workspaceFolder}/source/functions",
+				"${workspaceFolder}/source/types",
 				"${workspaceFolder}/source/types/any",
 				"${workspaceFolder}/source/types/cdouble",
 				"${workspaceFolder}/source/types/cint",
 				"${workspaceFolder}/source/types/collection",
 				"${workspaceFolder}/source/types/cstring",
+				"${workspaceFolder}/source/types/framework",
 				"${workspaceFolder}/source/types/memtree",
 				"${workspaceFolder}/source/types/string",
 				"${workspaceFolder}/source/types/table",
-				"${workspaceFolder}/source/types/type",
-				"${workspaceFolder}/source/functions"
+				"${workspaceFolder}/source/types/type"
             ],
 			"forcedInclude": [
 				"${workspaceFolder}/source/types/framework/framework.h",
+				"${workspaceFolder}/source/functions/functions.h",
 				"${workspaceFolder}/source/types/any/any.h",
 				"${workspaceFolder}/source/types/cdouble/cdouble.h",
 				"${workspaceFolder}/source/types/cint/cint.h",
 				"${workspaceFolder}/source/types/collection/collection.h",
 				"${workspaceFolder}/source/types/cstring/cstring.h",
+				"${workspaceFolder}/source/types/framework/framework.h",
 				"${workspaceFolder}/source/types/memtree/memtree.h",
 				"${workspaceFolder}/source/types/string/string.h",
 				"${workspaceFolder}/source/types/table/table.h",
-				"${workspaceFolder}/source/types/type/type.h",
-				"${workspaceFolder}/source/functions/functions.h"
+				"${workspaceFolder}/source/types/type/type.h"
 			],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

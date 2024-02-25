@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# This script will show information about how to use trillian.
-
 cat << EOF
 $(echo -e "\e[1m")Usage:$(echo -e "\e[0m") trillian command [arguments]
 
@@ -38,16 +36,3 @@ Display the current version of the framework.
 $(echo -e "\e[1m")submit:$(echo -e "\e[0m")
 Submit your code to vogsphere.
 EOF
-
-# init
-# build (build everything)
-# norm (runs norminette)
-# run (flags --debug, --default, --valgrind, --norm, --all)
-# debug (run the vscode debugger if using vscode, otherwise run gdb)
-# test (run all tests or just the ones specified)
-# version
-
-# submit (run norm, run tests, then submit)
-# give a full really cool output making the coder feel their code is ready.
-
-# set 

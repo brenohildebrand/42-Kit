@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# run norm
+# run tests
+# then submit
+
 # This script will submit your code to vogsphere. It will create a folder
 # called submit and will put your code there. It will check for norminette
 # and will create a proper Makefile for you.

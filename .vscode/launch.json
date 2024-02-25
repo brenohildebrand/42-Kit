@@ -1,15 +1,15 @@
 {
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": "cint",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/tests/bin/cint",
-            "args": [],
-            "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
+		{
+			"name": "cint",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/tests/bin/cint",
+			"args": [],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
@@ -20,16 +20,16 @@
                 }
             ],
             "preLaunchTask": "build"
-        },
-        {
-            "name": "collection",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/build/tests/bin/collection",
-            "args": [],
-            "stopAtEntry": true,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
+		},
+		{
+			"name": "collection",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/tests/bin/collection",
+			"args": [],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
             "setupCommands": [
@@ -40,6 +40,6 @@
                 }
             ],
             "preLaunchTask": "build"
-        },
+		}
     ]
 }
