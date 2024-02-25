@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/24 21:26:55 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/24 21:26:55 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/25 12:06:33 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/25 12:06:33 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SOURCES = \
 	./source/functions/delete.c \
 	./source/functions/destroy.c \
 	./source/functions/error.c \
+	./source/functions/forkrun.c \
 	./source/functions/getg.c \
 	./source/functions/init.c \
 	./source/functions/new.c \
@@ -131,6 +132,7 @@ OBJECTS = \
 	delete.o \
 	destroy.o \
 	error.o \
+	forkrun.o \
 	getg.o \
 	init.o \
 	new.o \
@@ -206,6 +208,7 @@ DEPENDENCIES = \
 	delete.d \
 	destroy.d \
 	error.d \
+	forkrun.d \
 	getg.d \
 	init.d \
 	new.d \
@@ -272,14 +275,29 @@ DEPENDENCIES = \
 	table_set.d
 
 TESTS = \
+	build/tests/bin/allocate \
+	build/tests/bin/assert \
+	build/tests/bin/deallocate \
+	build/tests/bin/forkrun \
+	build/tests/bin/print \
 	build/tests/bin/cint \
 	build/tests/bin/collection
 
 TESTS_OBJECTS = \
+	build/tests/objects/allocate.o \
+	build/tests/objects/assert.o \
+	build/tests/objects/deallocate.o \
+	build/tests/objects/forkrun.o \
+	build/tests/objects/print.o \
 	build/tests/objects/cint.o \
 	build/tests/objects/collection.o
 
 TESTS_DEPENDENCIES = \
+	build/tests/dependencies/allocate.d \
+	build/tests/dependencies/assert.d \
+	build/tests/dependencies/deallocate.d \
+	build/tests/dependencies/forkrun.d \
+	build/tests/dependencies/print.d \
 	build/tests/dependencies/cint.d \
 	build/tests/dependencies/collection.d
 
@@ -308,6 +326,8 @@ $(DEFAULT): $(DEFAULT_OBJECTS) | $(DEFAULT_DIR)
 
 tests: build $(TESTS)
 $(TESTS): $(TESTS_OBJECTS) | $(TESTS_DIR)
+
+$(TESTS_OBJECTS): $(DEFAULT_OBJECTS)
 
 clean:
 	@$(RM) $(DEBUG_OBJECTS)
@@ -356,6 +376,9 @@ $(DEFAULT_DIR)/objects/destroy.o: ./source/functions/destroy.c
 
 $(DEFAULT_DIR)/objects/error.o: ./source/functions/error.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/error.d -c ./source/functions/error.c -o $(DEFAULT_DIR)/objects/error.o
+
+$(DEFAULT_DIR)/objects/forkrun.o: ./source/functions/forkrun.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/forkrun.d -c ./source/functions/forkrun.c -o $(DEFAULT_DIR)/objects/forkrun.o
 
 $(DEFAULT_DIR)/objects/getg.o: ./source/functions/getg.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/getg.d -c ./source/functions/getg.c -o $(DEFAULT_DIR)/objects/getg.o
@@ -577,6 +600,9 @@ $(DEBUG_DIR)/objects/destroy.o: ./source/functions/destroy.c
 $(DEBUG_DIR)/objects/error.o: ./source/functions/error.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/error.d -c ./source/functions/error.c -o $(DEBUG_DIR)/objects/error.o
 
+$(DEBUG_DIR)/objects/forkrun.o: ./source/functions/forkrun.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/forkrun.d -c ./source/functions/forkrun.c -o $(DEBUG_DIR)/objects/forkrun.o
+
 $(DEBUG_DIR)/objects/getg.o: ./source/functions/getg.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/getg.d -c ./source/functions/getg.c -o $(DEBUG_DIR)/objects/getg.o
 
@@ -769,6 +795,26 @@ $(DEBUG_DIR)/objects/table_hash.o: ./source/types/table/table_hash.c
 $(DEBUG_DIR)/objects/table_set.o: ./source/types/table/table_set.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_set.d -c ./source/types/table/table_set.c -o $(DEBUG_DIR)/objects/table_set.o
 
+
+$(TESTS_DIR)/objects/allocate.o: ./tests/functions/allocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/allocate.d -c ./tests/functions/allocate.c -o $(TESTS_DIR)/objects/allocate.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/allocate.o $(DEFAULT) -o $(TESTS_DIR)/bin/allocate
+
+$(TESTS_DIR)/objects/assert.o: ./tests/functions/assert.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/assert.d -c ./tests/functions/assert.c -o $(TESTS_DIR)/objects/assert.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/assert.o $(DEFAULT) -o $(TESTS_DIR)/bin/assert
+
+$(TESTS_DIR)/objects/deallocate.o: ./tests/functions/deallocate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/deallocate.d -c ./tests/functions/deallocate.c -o $(TESTS_DIR)/objects/deallocate.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/deallocate.o $(DEFAULT) -o $(TESTS_DIR)/bin/deallocate
+
+$(TESTS_DIR)/objects/forkrun.o: ./tests/functions/forkrun.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/forkrun.d -c ./tests/functions/forkrun.c -o $(TESTS_DIR)/objects/forkrun.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/forkrun.o $(DEFAULT) -o $(TESTS_DIR)/bin/forkrun
+
+$(TESTS_DIR)/objects/print.o: ./tests/functions/print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/print.d -c ./tests/functions/print.c -o $(TESTS_DIR)/objects/print.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/print.o $(DEFAULT) -o $(TESTS_DIR)/bin/print
 
 $(TESTS_DIR)/objects/cint.o: ./tests/types/cint.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/cint.d -c ./tests/types/cint.c -o $(TESTS_DIR)/objects/cint.o

@@ -227,6 +227,8 @@ build: \$(DEFAULT)
 tests: build \$(TESTS)
 \$(TESTS): \$(TESTS_OBJECTS) | \$(TESTS_DIR)
 
+\$(TESTS_OBJECTS): \$(DEFAULT_OBJECTS)
+
 clean:
 	@\$(RM) \$(DEBUG_OBJECTS)
 	@\$(RM) \$(DEBUG_DEPENDENCIES)
@@ -254,9 +256,21 @@ $TESTS_RULES
 EOF
 
 # Build framework in all modes.
-make build > /dev/null 2>&1
-make debug > /dev/null 2>&1
-make tests > /dev/null 2>&1
+output=$(make build 2>&1)
+if [ $? -ne 0 ]; then
+	echo "$output"
+	exit 1
+fi
+output=$(make debug 2>&1)
+if [ $? -ne 0 ]; then
+	echo "$output"
+	exit 1
+fi
+output=$(make tests 2>&1)
+if [ $? -ne 0 ]; then
+	echo "$output"
+	exit 1
+fi
 
 # Exit if the project is actually the framework.
 if [ "$PROJECT" == "$FRAMEWORK" ]; then

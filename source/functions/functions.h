@@ -6,13 +6,15 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:11:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 19:08:21 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/25 12:05:24 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
+# include <sys/types.h>
+# include <sys/wait.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -25,6 +27,7 @@ void	debug(char *cstring);
 void	delete(void *instance);
 void	destroy(void *instance);
 void	error(char *cstring);
+int		forkrun(int (*callback)(void));
 t_any	getg(t_any key);
 void	*init(void	*instance, t_any value);
 void	*new(t_type (*signature)(void));

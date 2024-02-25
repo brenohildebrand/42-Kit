@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/24 02:37:32 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/25 16:50:45 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 typedef struct s_any	*t_any;
 
 union u_any {
-	int		cint;
-	double	cdouble;
-	char	*cstring;
-	void	*instance;
+	int				cint;
+	long long int	clonglongint;
+	double			cdouble;
+	char			*cstring;
+	void			*instance;
 };
 
 struct s_any {

@@ -8,6 +8,9 @@ if [ "$FRAMEWORK" != "$PROJECT" ]; then
 fi
 
 trillian build
+if [ $? -ne 0 ]; then
+	exit 1
+fi
 for test in $(find ./build/tests/bin -type f -exec echo {} \;); do
 	name=$(basename $test)
 	printf "%-16s " "$name:"
