@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring.h                                          :+:      :+:    :+:   */
+/*   character.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:08:42 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 19:21:26 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/25 19:04:42 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/25 19:08:42 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CSTRING_H
-# define CSTRING_H
+#ifndef CHARACTER_H
+# define CHARACTER_H
 
-typedef char	*t_cstring;
+typedef char	*t_character;
 
-t_type	cstring(void);
-t_any	cstring_to_any(t_cstring literal);
+t_type	character(void);
+t_any	character_to_any(t_character instance);
 
 #endif

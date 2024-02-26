@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring.h                                          :+:      :+:    :+:   */
+/*   any_to_double.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:08:42 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 19:21:26 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/25 19:02:04 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/25 19:15:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CSTRING_H
-# define CSTRING_H
+#include "any.h"
 
-typedef char	*t_cstring;
+double	any_to_double(t_any instance)
+{
+	double	value;
 
-t_type	cstring(void);
-t_any	cstring_to_any(t_cstring literal);
-
-#endif
+	value = instance->value.cdouble;
+	any_destroy(instance);
+	return (value);
+}

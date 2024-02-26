@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 15:42:45 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 16:42:58 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/25 19:23:50 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,15 @@
 
 void	any_destroy(t_any instance)
 {
-	if (instance->type == cint())
+	if (instance->type == cchar())
+	{
+		delete(instance);
+	}
+	else if (instance->type == cint())
+	{
+		delete(instance);
+	}
+	else if (instance->type == cllint())
 	{
 		delete(instance);
 	}

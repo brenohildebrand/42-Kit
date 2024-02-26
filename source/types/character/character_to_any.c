@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any_as_cint.c                                      :+:      :+:    :+:   */
+/*   character_to_any.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 02:37:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/24 02:38:56 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/25 19:08:12 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/25 19:10:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "any.h"
+#include "character.h"
 
-int	any_as_cint(t_any instance)
+t_any	character_to_any(t_character instance)
 {
-	return (instance->value.cint);
+	t_any	new_instance;
+
+	new_instance = create(any);
+	new_instance->type = character();
+	new_instance->value.cchar = *instance;
+	return (new_instance);
 }

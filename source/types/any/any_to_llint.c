@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cdouble.h                                          :+:      :+:    :+:   */
+/*   any_to_llint.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:16:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 16:17:26 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/25 19:00:24 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/25 19:18:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CDOUBLE_H
-# define CDOUBLE_H
+#include "any.h"
 
-t_type	cdouble(void);
-t_any	cdouble_to_any(double value);
+long long int	any_to_llint(t_any instance)
+{
+	long long int	value;
 
-#endif
+	value = instance->value.cllint;
+	any_destroy(instance);
+	return (value);
+}

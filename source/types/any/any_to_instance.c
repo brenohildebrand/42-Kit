@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring.h                                          :+:      :+:    :+:   */
+/*   any_to_instance.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:08:42 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 19:21:26 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/25 19:02:38 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/25 19:17:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CSTRING_H
-# define CSTRING_H
+#include "any.h"
 
-typedef char	*t_cstring;
+void	*any_to_instance(t_any instance)
+{
+	void	*another_instance;
 
-t_type	cstring(void);
-t_any	cstring_to_any(t_cstring literal);
-
-#endif
+	another_instance = instance->value.instance;
+	delete(instance);
+	return (another_instance);
+}
