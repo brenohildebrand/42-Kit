@@ -21,7 +21,7 @@ fi
 # Look for a file matching the command given and run it.
 command="./tools/trillian/source/$1.sh"
 if [ -f "$command" ]; then
-    $command
+    $command "${@:2}"
 else
     echo "The command '$1' does not exist. Try 'trillian help'."
     exit 1

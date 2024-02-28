@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/28 13:46:50 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/28 13:46:50 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/28 20:54:34 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/28 20:54:34 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,18 +24,14 @@ CPATHS = \
 	-include framework.h \
 	-include functions.h \
 	-include any.h \
-	-include character.h \
 	-include cstring.h \
 	-include f64.h \
 	-include i32.h \
 	-include i64.h \
 	-include i8.h \
-	-include integer.h \
 	-include list.h \
 	-include map.h \
 	-include memtree.h \
-	-include string.h \
-	-include tree.h \
 	-include type.h \
 	-include u32.h \
 	-include u64.h \
@@ -44,25 +40,16 @@ CPATHS = \
 	-iquote ./source/functions \
 	-iquote ./source/types \
 	-iquote ./source/types/any \
-	-iquote ./source/types/character \
 	-iquote ./source/types/cstring \
-	-iquote ./source/types/decimal \
 	-iquote ./source/types/f64 \
 	-iquote ./source/types/framework \
 	-iquote ./source/types/graph \
 	-iquote ./source/types/i32 \
 	-iquote ./source/types/i64 \
 	-iquote ./source/types/i8 \
-	-iquote ./source/types/integer \
 	-iquote ./source/types/list \
 	-iquote ./source/types/map \
 	-iquote ./source/types/memtree \
-	-iquote ./source/types/queue \
-	-iquote ./source/types/set \
-	-iquote ./source/types/stack \
-	-iquote ./source/types/string \
-	-iquote ./source/types/tree \
-	-iquote ./source/types/trie \
 	-iquote ./source/types/type \
 	-iquote ./source/types/u32 \
 	-iquote ./source/types/u64 \
@@ -78,6 +65,7 @@ SOURCES = \
 	./source/functions/debug.c \
 	./source/functions/delete.c \
 	./source/functions/destroy.c \
+	./source/functions/display.c \
 	./source/functions/error.c \
 	./source/functions/filter.c \
 	./source/functions/find.c \
@@ -88,6 +76,7 @@ SOURCES = \
 	./source/functions/new.c \
 	./source/functions/print.c \
 	./source/functions/push.c \
+	./source/functions/quit.c \
 	./source/functions/range.c \
 	./source/functions/reduce.c \
 	./source/functions/repeat.c \
@@ -107,9 +96,8 @@ SOURCES = \
 	./source/types/any/any_to_u32.c \
 	./source/types/any/any_to_u64.c \
 	./source/types/any/any_to_u8.c \
-	./source/types/character/character.c \
-	./source/types/character/character_to_any.c \
 	./source/types/cstring/cstring.c \
+	./source/types/cstring/cstring_is_i32.c \
 	./source/types/cstring/cstring_to_any.c \
 	./source/types/f64/f64.c \
 	./source/types/f64/f64_to_any.c \
@@ -119,8 +107,12 @@ SOURCES = \
 	./source/types/i32/i32.c \
 	./source/types/i32/i32_to_any.c \
 	./source/types/i64/i64.c \
+	./source/types/i64/i64_is_i32.c \
 	./source/types/i64/i64_to_any.c \
 	./source/types/i8/i8.c \
+	./source/types/i8/i8_is_digit.c \
+	./source/types/i8/i8_is_signal.c \
+	./source/types/i8/i8_is_space.c \
 	./source/types/i8/i8_to_any.c \
 	./source/types/list/list.c \
 	./source/types/list/list_copy.c \
@@ -154,14 +146,6 @@ SOURCES = \
 	./source/types/memtree/memtree_rebalance.c \
 	./source/types/memtree/memtree_search.c \
 	./source/types/memtree/memtree_update_height.c \
-	./source/types/string/string.c \
-	./source/types/string/string_copy.c \
-	./source/types/string/string_create.c \
-	./source/types/string/string_destroy.c \
-	./source/types/string/string_get.c \
-	./source/types/string/string_init.c \
-	./source/types/string/string_is_cint.c \
-	./source/types/string/string_to_cint.c \
 	./source/types/u32/u32.c \
 	./source/types/u32/u32_to_any.c \
 	./source/types/u64/u64.c \
@@ -179,6 +163,7 @@ OBJECTS = \
 	debug.o \
 	delete.o \
 	destroy.o \
+	display.o \
 	error.o \
 	filter.o \
 	find.o \
@@ -189,6 +174,7 @@ OBJECTS = \
 	new.o \
 	print.o \
 	push.o \
+	quit.o \
 	range.o \
 	reduce.o \
 	repeat.o \
@@ -208,9 +194,8 @@ OBJECTS = \
 	any_to_u32.o \
 	any_to_u64.o \
 	any_to_u8.o \
-	character.o \
-	character_to_any.o \
 	cstring.o \
+	cstring_is_i32.o \
 	cstring_to_any.o \
 	f64.o \
 	f64_to_any.o \
@@ -220,8 +205,12 @@ OBJECTS = \
 	i32.o \
 	i32_to_any.o \
 	i64.o \
+	i64_is_i32.o \
 	i64_to_any.o \
 	i8.o \
+	i8_is_digit.o \
+	i8_is_signal.o \
+	i8_is_space.o \
 	i8_to_any.o \
 	list.o \
 	list_copy.o \
@@ -255,14 +244,6 @@ OBJECTS = \
 	memtree_rebalance.o \
 	memtree_search.o \
 	memtree_update_height.o \
-	string.o \
-	string_copy.o \
-	string_create.o \
-	string_destroy.o \
-	string_get.o \
-	string_init.o \
-	string_is_cint.o \
-	string_to_cint.o \
 	u32.o \
 	u32_to_any.o \
 	u64.o \
@@ -280,6 +261,7 @@ DEPENDENCIES = \
 	debug.d \
 	delete.d \
 	destroy.d \
+	display.d \
 	error.d \
 	filter.d \
 	find.d \
@@ -290,6 +272,7 @@ DEPENDENCIES = \
 	new.d \
 	print.d \
 	push.d \
+	quit.d \
 	range.d \
 	reduce.d \
 	repeat.d \
@@ -309,9 +292,8 @@ DEPENDENCIES = \
 	any_to_u32.d \
 	any_to_u64.d \
 	any_to_u8.d \
-	character.d \
-	character_to_any.d \
 	cstring.d \
+	cstring_is_i32.d \
 	cstring_to_any.d \
 	f64.d \
 	f64_to_any.d \
@@ -321,8 +303,12 @@ DEPENDENCIES = \
 	i32.d \
 	i32_to_any.d \
 	i64.d \
+	i64_is_i32.d \
 	i64_to_any.d \
 	i8.d \
+	i8_is_digit.d \
+	i8_is_signal.d \
+	i8_is_space.d \
 	i8_to_any.d \
 	list.d \
 	list_copy.d \
@@ -356,14 +342,6 @@ DEPENDENCIES = \
 	memtree_rebalance.d \
 	memtree_search.d \
 	memtree_update_height.d \
-	string.d \
-	string_copy.d \
-	string_create.d \
-	string_destroy.d \
-	string_get.d \
-	string_init.d \
-	string_is_cint.d \
-	string_to_cint.d \
 	u32.d \
 	u32_to_any.d \
 	u64.d \
@@ -510,6 +488,9 @@ $(DEFAULT_DIR)/objects/delete.o: ./source/functions/delete.c
 $(DEFAULT_DIR)/objects/destroy.o: ./source/functions/destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/destroy.d -c ./source/functions/destroy.c -o $(DEFAULT_DIR)/objects/destroy.o
 
+$(DEFAULT_DIR)/objects/display.o: ./source/functions/display.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/display.d -c ./source/functions/display.c -o $(DEFAULT_DIR)/objects/display.o
+
 $(DEFAULT_DIR)/objects/error.o: ./source/functions/error.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/error.d -c ./source/functions/error.c -o $(DEFAULT_DIR)/objects/error.o
 
@@ -539,6 +520,9 @@ $(DEFAULT_DIR)/objects/print.o: ./source/functions/print.c
 
 $(DEFAULT_DIR)/objects/push.o: ./source/functions/push.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/push.d -c ./source/functions/push.c -o $(DEFAULT_DIR)/objects/push.o
+
+$(DEFAULT_DIR)/objects/quit.o: ./source/functions/quit.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/quit.d -c ./source/functions/quit.c -o $(DEFAULT_DIR)/objects/quit.o
 
 $(DEFAULT_DIR)/objects/range.o: ./source/functions/range.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/range.d -c ./source/functions/range.c -o $(DEFAULT_DIR)/objects/range.o
@@ -597,14 +581,11 @@ $(DEFAULT_DIR)/objects/any_to_u64.o: ./source/types/any/any_to_u64.c
 $(DEFAULT_DIR)/objects/any_to_u8.o: ./source/types/any/any_to_u8.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_u8.d -c ./source/types/any/any_to_u8.c -o $(DEFAULT_DIR)/objects/any_to_u8.o
 
-$(DEFAULT_DIR)/objects/character.o: ./source/types/character/character.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/character.d -c ./source/types/character/character.c -o $(DEFAULT_DIR)/objects/character.o
-
-$(DEFAULT_DIR)/objects/character_to_any.o: ./source/types/character/character_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/character_to_any.d -c ./source/types/character/character_to_any.c -o $(DEFAULT_DIR)/objects/character_to_any.o
-
 $(DEFAULT_DIR)/objects/cstring.o: ./source/types/cstring/cstring.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cstring.d -c ./source/types/cstring/cstring.c -o $(DEFAULT_DIR)/objects/cstring.o
+
+$(DEFAULT_DIR)/objects/cstring_is_i32.o: ./source/types/cstring/cstring_is_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cstring_is_i32.d -c ./source/types/cstring/cstring_is_i32.c -o $(DEFAULT_DIR)/objects/cstring_is_i32.o
 
 $(DEFAULT_DIR)/objects/cstring_to_any.o: ./source/types/cstring/cstring_to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cstring_to_any.d -c ./source/types/cstring/cstring_to_any.c -o $(DEFAULT_DIR)/objects/cstring_to_any.o
@@ -633,11 +614,23 @@ $(DEFAULT_DIR)/objects/i32_to_any.o: ./source/types/i32/i32_to_any.c
 $(DEFAULT_DIR)/objects/i64.o: ./source/types/i64/i64.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i64.d -c ./source/types/i64/i64.c -o $(DEFAULT_DIR)/objects/i64.o
 
+$(DEFAULT_DIR)/objects/i64_is_i32.o: ./source/types/i64/i64_is_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i64_is_i32.d -c ./source/types/i64/i64_is_i32.c -o $(DEFAULT_DIR)/objects/i64_is_i32.o
+
 $(DEFAULT_DIR)/objects/i64_to_any.o: ./source/types/i64/i64_to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i64_to_any.d -c ./source/types/i64/i64_to_any.c -o $(DEFAULT_DIR)/objects/i64_to_any.o
 
 $(DEFAULT_DIR)/objects/i8.o: ./source/types/i8/i8.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8.d -c ./source/types/i8/i8.c -o $(DEFAULT_DIR)/objects/i8.o
+
+$(DEFAULT_DIR)/objects/i8_is_digit.o: ./source/types/i8/i8_is_digit.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_is_digit.d -c ./source/types/i8/i8_is_digit.c -o $(DEFAULT_DIR)/objects/i8_is_digit.o
+
+$(DEFAULT_DIR)/objects/i8_is_signal.o: ./source/types/i8/i8_is_signal.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_is_signal.d -c ./source/types/i8/i8_is_signal.c -o $(DEFAULT_DIR)/objects/i8_is_signal.o
+
+$(DEFAULT_DIR)/objects/i8_is_space.o: ./source/types/i8/i8_is_space.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_is_space.d -c ./source/types/i8/i8_is_space.c -o $(DEFAULT_DIR)/objects/i8_is_space.o
 
 $(DEFAULT_DIR)/objects/i8_to_any.o: ./source/types/i8/i8_to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_to_any.d -c ./source/types/i8/i8_to_any.c -o $(DEFAULT_DIR)/objects/i8_to_any.o
@@ -738,30 +731,6 @@ $(DEFAULT_DIR)/objects/memtree_search.o: ./source/types/memtree/memtree_search.c
 $(DEFAULT_DIR)/objects/memtree_update_height.o: ./source/types/memtree/memtree_update_height.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_update_height.d -c ./source/types/memtree/memtree_update_height.c -o $(DEFAULT_DIR)/objects/memtree_update_height.o
 
-$(DEFAULT_DIR)/objects/string.o: ./source/types/string/string.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string.d -c ./source/types/string/string.c -o $(DEFAULT_DIR)/objects/string.o
-
-$(DEFAULT_DIR)/objects/string_copy.o: ./source/types/string/string_copy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_copy.d -c ./source/types/string/string_copy.c -o $(DEFAULT_DIR)/objects/string_copy.o
-
-$(DEFAULT_DIR)/objects/string_create.o: ./source/types/string/string_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_create.d -c ./source/types/string/string_create.c -o $(DEFAULT_DIR)/objects/string_create.o
-
-$(DEFAULT_DIR)/objects/string_destroy.o: ./source/types/string/string_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_destroy.d -c ./source/types/string/string_destroy.c -o $(DEFAULT_DIR)/objects/string_destroy.o
-
-$(DEFAULT_DIR)/objects/string_get.o: ./source/types/string/string_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_get.d -c ./source/types/string/string_get.c -o $(DEFAULT_DIR)/objects/string_get.o
-
-$(DEFAULT_DIR)/objects/string_init.o: ./source/types/string/string_init.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_init.d -c ./source/types/string/string_init.c -o $(DEFAULT_DIR)/objects/string_init.o
-
-$(DEFAULT_DIR)/objects/string_is_cint.o: ./source/types/string/string_is_cint.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_is_cint.d -c ./source/types/string/string_is_cint.c -o $(DEFAULT_DIR)/objects/string_is_cint.o
-
-$(DEFAULT_DIR)/objects/string_to_cint.o: ./source/types/string/string_to_cint.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_to_cint.d -c ./source/types/string/string_to_cint.c -o $(DEFAULT_DIR)/objects/string_to_cint.o
-
 $(DEFAULT_DIR)/objects/u32.o: ./source/types/u32/u32.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/u32.d -c ./source/types/u32/u32.c -o $(DEFAULT_DIR)/objects/u32.o
 
@@ -808,6 +777,9 @@ $(DEBUG_DIR)/objects/delete.o: ./source/functions/delete.c
 $(DEBUG_DIR)/objects/destroy.o: ./source/functions/destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/destroy.d -c ./source/functions/destroy.c -o $(DEBUG_DIR)/objects/destroy.o
 
+$(DEBUG_DIR)/objects/display.o: ./source/functions/display.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/display.d -c ./source/functions/display.c -o $(DEBUG_DIR)/objects/display.o
+
 $(DEBUG_DIR)/objects/error.o: ./source/functions/error.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/error.d -c ./source/functions/error.c -o $(DEBUG_DIR)/objects/error.o
 
@@ -837,6 +809,9 @@ $(DEBUG_DIR)/objects/print.o: ./source/functions/print.c
 
 $(DEBUG_DIR)/objects/push.o: ./source/functions/push.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/push.d -c ./source/functions/push.c -o $(DEBUG_DIR)/objects/push.o
+
+$(DEBUG_DIR)/objects/quit.o: ./source/functions/quit.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/quit.d -c ./source/functions/quit.c -o $(DEBUG_DIR)/objects/quit.o
 
 $(DEBUG_DIR)/objects/range.o: ./source/functions/range.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/range.d -c ./source/functions/range.c -o $(DEBUG_DIR)/objects/range.o
@@ -895,14 +870,11 @@ $(DEBUG_DIR)/objects/any_to_u64.o: ./source/types/any/any_to_u64.c
 $(DEBUG_DIR)/objects/any_to_u8.o: ./source/types/any/any_to_u8.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_u8.d -c ./source/types/any/any_to_u8.c -o $(DEBUG_DIR)/objects/any_to_u8.o
 
-$(DEBUG_DIR)/objects/character.o: ./source/types/character/character.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/character.d -c ./source/types/character/character.c -o $(DEBUG_DIR)/objects/character.o
-
-$(DEBUG_DIR)/objects/character_to_any.o: ./source/types/character/character_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/character_to_any.d -c ./source/types/character/character_to_any.c -o $(DEBUG_DIR)/objects/character_to_any.o
-
 $(DEBUG_DIR)/objects/cstring.o: ./source/types/cstring/cstring.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cstring.d -c ./source/types/cstring/cstring.c -o $(DEBUG_DIR)/objects/cstring.o
+
+$(DEBUG_DIR)/objects/cstring_is_i32.o: ./source/types/cstring/cstring_is_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cstring_is_i32.d -c ./source/types/cstring/cstring_is_i32.c -o $(DEBUG_DIR)/objects/cstring_is_i32.o
 
 $(DEBUG_DIR)/objects/cstring_to_any.o: ./source/types/cstring/cstring_to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cstring_to_any.d -c ./source/types/cstring/cstring_to_any.c -o $(DEBUG_DIR)/objects/cstring_to_any.o
@@ -931,11 +903,23 @@ $(DEBUG_DIR)/objects/i32_to_any.o: ./source/types/i32/i32_to_any.c
 $(DEBUG_DIR)/objects/i64.o: ./source/types/i64/i64.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i64.d -c ./source/types/i64/i64.c -o $(DEBUG_DIR)/objects/i64.o
 
+$(DEBUG_DIR)/objects/i64_is_i32.o: ./source/types/i64/i64_is_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i64_is_i32.d -c ./source/types/i64/i64_is_i32.c -o $(DEBUG_DIR)/objects/i64_is_i32.o
+
 $(DEBUG_DIR)/objects/i64_to_any.o: ./source/types/i64/i64_to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i64_to_any.d -c ./source/types/i64/i64_to_any.c -o $(DEBUG_DIR)/objects/i64_to_any.o
 
 $(DEBUG_DIR)/objects/i8.o: ./source/types/i8/i8.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8.d -c ./source/types/i8/i8.c -o $(DEBUG_DIR)/objects/i8.o
+
+$(DEBUG_DIR)/objects/i8_is_digit.o: ./source/types/i8/i8_is_digit.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_is_digit.d -c ./source/types/i8/i8_is_digit.c -o $(DEBUG_DIR)/objects/i8_is_digit.o
+
+$(DEBUG_DIR)/objects/i8_is_signal.o: ./source/types/i8/i8_is_signal.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_is_signal.d -c ./source/types/i8/i8_is_signal.c -o $(DEBUG_DIR)/objects/i8_is_signal.o
+
+$(DEBUG_DIR)/objects/i8_is_space.o: ./source/types/i8/i8_is_space.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_is_space.d -c ./source/types/i8/i8_is_space.c -o $(DEBUG_DIR)/objects/i8_is_space.o
 
 $(DEBUG_DIR)/objects/i8_to_any.o: ./source/types/i8/i8_to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_to_any.d -c ./source/types/i8/i8_to_any.c -o $(DEBUG_DIR)/objects/i8_to_any.o
@@ -1035,30 +1019,6 @@ $(DEBUG_DIR)/objects/memtree_search.o: ./source/types/memtree/memtree_search.c
 
 $(DEBUG_DIR)/objects/memtree_update_height.o: ./source/types/memtree/memtree_update_height.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_update_height.d -c ./source/types/memtree/memtree_update_height.c -o $(DEBUG_DIR)/objects/memtree_update_height.o
-
-$(DEBUG_DIR)/objects/string.o: ./source/types/string/string.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string.d -c ./source/types/string/string.c -o $(DEBUG_DIR)/objects/string.o
-
-$(DEBUG_DIR)/objects/string_copy.o: ./source/types/string/string_copy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_copy.d -c ./source/types/string/string_copy.c -o $(DEBUG_DIR)/objects/string_copy.o
-
-$(DEBUG_DIR)/objects/string_create.o: ./source/types/string/string_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_create.d -c ./source/types/string/string_create.c -o $(DEBUG_DIR)/objects/string_create.o
-
-$(DEBUG_DIR)/objects/string_destroy.o: ./source/types/string/string_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_destroy.d -c ./source/types/string/string_destroy.c -o $(DEBUG_DIR)/objects/string_destroy.o
-
-$(DEBUG_DIR)/objects/string_get.o: ./source/types/string/string_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_get.d -c ./source/types/string/string_get.c -o $(DEBUG_DIR)/objects/string_get.o
-
-$(DEBUG_DIR)/objects/string_init.o: ./source/types/string/string_init.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_init.d -c ./source/types/string/string_init.c -o $(DEBUG_DIR)/objects/string_init.o
-
-$(DEBUG_DIR)/objects/string_is_cint.o: ./source/types/string/string_is_cint.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_is_cint.d -c ./source/types/string/string_is_cint.c -o $(DEBUG_DIR)/objects/string_is_cint.o
-
-$(DEBUG_DIR)/objects/string_to_cint.o: ./source/types/string/string_to_cint.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_to_cint.d -c ./source/types/string/string_to_cint.c -o $(DEBUG_DIR)/objects/string_to_cint.o
 
 $(DEBUG_DIR)/objects/u32.o: ./source/types/u32/u32.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/u32.d -c ./source/types/u32/u32.c -o $(DEBUG_DIR)/objects/u32.o

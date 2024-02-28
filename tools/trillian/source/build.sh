@@ -313,12 +313,70 @@ shopt -u nullglob
 
 # Update the .vscode configuration.
 cat << EOF > .vscode/c_cpp_properties.json
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+				$(find $FRAMEWORK/source -type d -exec echo {} \; | sed "s/.*/\t\t\t\t\"&\",/" | sed '1s/^\t\t\t\t//' | sed '$s/,$//')
+            ],
+			"forcedInclude": [
+				"$FRAMEWORK/source/types/framework/framework.h",
+				$(find $FRAMEWORK/source -type f -name "*.h" -exec echo {} \; | sed "s/.*/\t\t\t\t\"&\",/" | sed '1s/^\t\t\t\t//' | sed '$s/,$//')
+			],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c99"
+        }
+    ],
+    "version": 4
+}
 EOF
 
 cat << EOF > .vscode/launch.json
+{
+    "version": "0.2.0",
+    "configurations": [
+		$(find tests -type f -exec basename {} \; | sed "s/.c$//" | sed "s/.*/\t\t{\n\
+			\"name\": \"&\",\n\
+			\"type\": \"cppdbg\",\n\
+			\"request\": \"launch\",\n\
+			\"program\": \"\${workspaceFolder}\/build\/tests\/bin\/&\",\n\
+			\"args\": [],\n\
+			\"stopAtEntry\": true,\n\
+			\"cwd\": \"\${workspaceFolder}\",\n\
+			\"environment\": [],\n\
+            \"externalConsole\": false,\n\
+            \"MIMode\": \"gdb\",\n\
+            \"setupCommands\": [\n\
+                {\n\
+                    \"description\": \"Enable pretty-printing for gdb\",\n\
+                    \"text\": \"-enable-pretty-printing\",\n\
+                    \"ignoreFailures\": true\n\
+                }\n\
+            ],\n\
+            \"preLaunchTask\": \"build\"\n\
+		},/" | sed '1s/^\t\t//' | sed '$s/,$//')
+    ]
+}
 EOF
 
 cat << EOF > .vscode/tasks.json
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "trillian build",
+            "args": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
 EOF
 
 # Generate Makefile.
@@ -342,15 +400,14 @@ NAME=$(basename "$PROJECT" | sed 's/^ft_//')
 DEFAULT_LIBFRAMEWORK="$FRAMEWORK/build/default/bin/libframework.a"
 DEBUG_LIBFRAMEWORK="$FRAMEWORK/build/debug/bin/libframework.a"
 
-DEBUG="./build/debug/bin/$NAME"
 DEFAULT="./build/default/bin/$NAME"
+DEBUG="./build/debug/bin/$NAME"
 
 CC="gcc"
-CFLAGS="-Wall -Wextra -Werror -std=c99 -D$NAME=main"
+CFLAGS="-Wall -Wextra -Werror -std=c99 -D$NAME=main -g"
 CPATHS="\\
-	-include memtree.h \\
-	-include any.h \\
-$(find $FRAMEWORK/source -type f -name '*.h' -exec basename {} \; | sed 's/.*/\t-include & \\/' | sed '/memtree\.h/d' | sed '/any\.h/d')
+	-include framework.h \\
+$(find $FRAMEWORK/source -type f -name '*.h' -exec basename {} \; | sed 's/.*/\t-include & \\/' | sed '/framework\.h/d' )
 $(find $FRAMEWORK/source -type d -exec echo -e '\t'-iquote {} \\ \;)
 $(find $PROJECT/source -type d -exec echo -e '\t'-iquote {} \\ \; | sed '$s/ \\//')"
 
@@ -358,6 +415,9 @@ SOURCES="$(find ./source -type f -name "*.c" -exec echo {} \; | sed 's/.*/\t& \\
 HEADERS="$(find ./source -type f -name "*.h" -exec basename {} \; | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
 OBJECTS="$(find ./source -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.o/' | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
 DEPENDENCIES="$(find ./source -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.d/' | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+TESTS="$(find ./tests -type f -name "*.c" -exec basename {} \; | sed 's/\.c$//' | sed 's/.*/\tbuild\/tests\/bin\/& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+TESTS_OBJECTS="$(find ./tests -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.o/' | sed 's/.*/\tbuild\/tests\/objects\/& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+TESTS_DEPENDENCIES="$(find ./tests -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.d/' | sed 's/.*/\tbuild\/tests\/dependencies\/& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
 
 for source in $(find ./source -type f -name "*.c" -exec echo {} \;); do
 	object=$(basename $source | sed 's/\.c/.o/')
@@ -377,6 +437,23 @@ $default_object: $source
 	DEBUG_RULES+="\
 $debug_object: $source
 	@\$(CC) \$(CFLAGS) \$(CPATHS) -MMD -MF $debug_dependency -c $source -o $debug_object
+
+"
+done
+
+for test in $(find ./tests -type f -name "*.c" -exec echo {} \;); do
+	bin=$(basename $test | sed 's/\.c//')
+	object=$(basename $test | sed 's/\.c/.o/')
+	dependency=$(basename $test | sed 's/\.c/.d/')
+
+	test_bin="\$(TESTS_DIR)/bin/$bin"
+	test_object="\$(TESTS_DIR)/objects/$object"
+	test_dependency="\$(TESTS_DIR)/dependencies/$dependency"
+
+	TESTS_RULES+="\
+$test_object: $test
+	@\$(CC) \$(CFLAGS) \$(CPATHS) -MMD -MF $test_dependency -c $test -o $test_object
+	@\$(CC) \$(CFLAGS) \$(CPATHS) $test_object \$(DEFAULT_OBJECTS) \$(DEFAULT_LIBFRAMEWORK) -o $test_bin
 
 "
 done
@@ -407,8 +484,15 @@ OBJECTS = $OBJECTS
 
 DEPENDENCIES = $DEPENDENCIES
 
+TESTS = $TESTS
+
+TESTS_OBJECTS = $TESTS_OBJECTS
+
+TESTS_DEPENDENCIES = $TESTS_DEPENDENCIES
+
 DEBUG_DIR = ./build/debug
 DEFAULT_DIR = ./build/default
+TESTS_DIR = ./build/tests
 
 DEBUG_OBJECTS = \$(addprefix \$(DEBUG_DIR)/objects/, \$(OBJECTS))
 DEBUG_DEPENDENCIES = \$(addprefix \$(DEBUG_DIR)/dependencies/, \$(DEPENDENCIES))
@@ -435,15 +519,23 @@ build: \$(DEFAULT_LIBFRAMEWORK) \$(DEFAULT)
 \$(DEFAULT): \$(DEFAULT_OBJECTS) | \$(DEFAULT_DIR)
 	@\$(CC) \$(CFLAGS) -o \$(DEFAULT_DIR)/bin/\$(NAME) \$(DEFAULT_OBJECTS) \$(DEFAULT_LIBFRAMEWORK)
 
+tests: build \$(TESTS)
+\$(TESTS): \$(TESTS_OBJECTS) | \$(TESTS_DIR)
+
+\$(TESTS_OBJECTS): \$(DEFAULT_OBJECTS)
+
 clean:
 	@\$(RM) \$(DEBUG_OBJECTS)
 	@\$(RM) \$(DEBUG_DEPENDENCIES)
 	@\$(RM) \$(DEFAULT_OBJECTS)
 	@\$(RM) \$(DEFAULT_DEPENDENCIES)
+	@\$(RM) \$(TESTS_OBJECTS)
+	@\$(RM) \$(TESTS_DEPENDENCIES)
 
 fclean: clean
 	@\$(RM) \$(DEBUG_DIR)/bin/\$(NAME)
 	@\$(RM) \$(DEFAULT_DIR)/bin/\$(NAME)
+	@\$(RM) \$(TESTS)
 
 re: fclean all
 
@@ -451,12 +543,26 @@ re: fclean all
 
 -include \$(DEBUG_DEPENDENCIES)
 -include \$(DEFAULT_DEPENDENCIES)
+-include \$(TESTS_DEPENDENCIES)
 
 $DEBUG_RULES
 $DEFAULT_RULES
+$TESTS_RULES
 EOF
 
-# Build the project in all modes.
-make build > /dev/null 2>&1
-make debug > /dev/null 2>&1
-make tests > /dev/null 2>&1
+# Build project in all modes.
+output=$(make build 2>&1)
+if [ $? -ne 0 ]; then
+	echo "$output"
+	exit 1
+fi
+output=$(make debug 2>&1)
+if [ $? -ne 0 ]; then
+	echo "$output"
+	exit 1
+fi
+output=$(make tests 2>&1)
+if [ $? -ne 0 ]; then
+	echo "$output"
+	exit 1
+fi
