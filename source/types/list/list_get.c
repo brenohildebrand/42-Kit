@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collection_push.c                                  :+:      :+:    :+:   */
+/*   list_get.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 10:15:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:29:54 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/08 13:44:17 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:29:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection.h"
+#include "list.h"
 
-void	collection_push(t_collection collection, t_any value)
+t_any	list_get(t_list list, int index)
 {
-	if (collection->length + 1 > (collection->max_length * 3) / 4 || \
-		collection->end == collection->max_length - 1)
-	{
-		collection_expand(collection);
-	}
-	collection->end++;
-	collection->content[collection->end] = value;
-	collection->length++;
+	if (index >= list->length)
+		return (NULL);
+	return (list->content[list->start + index]);
 }

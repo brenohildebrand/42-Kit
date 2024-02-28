@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:09:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 18:11:19 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:56:22 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	range(int start, int end, void (*callback)(int))
 {
 	int	step;
-	
+
 	if (start > end)
 		step = -1;
 	else

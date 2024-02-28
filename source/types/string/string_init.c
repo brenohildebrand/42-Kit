@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:00:49 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 23:42:54 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:02:31 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 // 	int		i;
 // 	int		len;
 // 	char	*cstring;
-	
+
 // 	len = 0;
 // 	cstring = value->value.cstring;
 // 	while (cstring[len])

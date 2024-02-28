@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collection_get.c                                   :+:      :+:    :+:   */
+/*   list_get_length.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 13:44:17 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:29:43 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/10 15:45:51 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:29:39 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection.h"
+#include "list.h"
 
-t_any	collection_get(t_collection collection, int index)
+int	list_get_length(t_list list)
 {
-	if (index >= collection->length)
-		return (NULL);
-	return (collection->content[collection->start + index]);
+	return (list->length);
 }

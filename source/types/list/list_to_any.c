@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collection_set.c                                   :+:      :+:    :+:   */
+/*   list_to_any.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 13:46:21 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:30:03 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/23 16:21:16 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/23 16:25:16 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection.h"
+#include "list.h"
 
-void	collection_set(t_collection collection, int index, t_any value)
+t_any	list_to_any(t_list instance)
 {
-	if (index >= collection->length)
-		return ;
-	collection->content[collection->start + index] = value;
+	t_any	converted_instance;
+
+	converted_instance = create(any);
+	converted_instance->type = list();
+	converted_instance->value.instance = instance;
+	return (converted_instance);
 }

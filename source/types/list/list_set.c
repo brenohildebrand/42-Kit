@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   table_create.c                                     :+:      :+:    :+:   */
+/*   list_set.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 22:57:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 14:40:50 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/08 13:46:21 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:30:03 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "table.h"
+#include "list.h"
 
-t_table	table_create(void)
+void	list_set(t_list list, int index, t_any value)
 {
-	t_table	instance;
-
-	instance = (t_table)new(table);
-	instance->max_length = 16;
-	instance->entries = \
-		allocate(instance->max_length * sizeof(struct s_table_entry));
-	instance->length = 0;
-	return (instance);
+	if (index >= list->length)
+		return ;
+	list->content[list->start + index] = value;
 }

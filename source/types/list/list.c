@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collection_reverse.c                               :+:      :+:    :+:   */
+/*   list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/06 16:04:09 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:29:59 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 22:31:40 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/23 19:19:27 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection.h"
+#include "list.h"
 
-void	collection_reverse(t_collection collection)
+t_type	list(void)
 {
-	int	i;
+	static struct s_type	type = {
+		.name = "list",
+		.size = sizeof(struct s_list),
+		.create = (void *(*)(void))list_create,
+		.destroy = (void (*)(void *))list_destroy,
+		.copy = (void *(*)(void *))list_copy,
+		// .get
+		// .set
+		.push = (void (*)(void *, t_any))list_push,
+		.pop = (t_any (*)(void *))list_pop
+		// .shift
+		// .unshift
+	};
 
-	i = 0;
-	while (i < collection->length)
-	{
-		collection_push(collection, collection_shift(collection));
-		i++;
-	}
+	return (&type);
 }

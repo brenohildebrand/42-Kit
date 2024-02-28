@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   table.h                                            :+:      :+:    :+:   */
+/*   map.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TABLE_H
-# define TABLE_H
+#ifndef MAP_H
+# define MAP_H
 
-typedef struct s_table			*t_table;
-typedef struct s_table_entry	*t_table_entry;
+typedef struct s_map			*t_map;
+typedef struct s_map_entry		*t_map_entry;
 
-struct s_table {
-	struct s_table_entry	*entries;
-	int						length;
-	int						max_length;
+struct s_map {
+	struct s_map_entry	*entries;
+	int					length;
+	int					max_length;
 };
 
-struct s_table_entry {
+struct s_map_entry {
 	t_any	key;
 	t_any	value;
 };
 
-t_type	table(void);
-t_table	table_create(void);
-void	table_destroy(t_table instance);
-t_table	table_copy(t_table instancce);
-void	table_expand(t_table instance);
-int		table_hash(t_any key);
-void	table_set(t_table instance, t_any key, t_any value);
-t_any	table_get(t_table instance, t_any value);
+t_type	map(void);
+t_map	map_create(void);
+void	map_destroy(t_map instance);
+t_map	map_copy(t_map instancce);
+void	map_expand(t_map instance);
+int		map_hash(t_any key);
+void	map_set(t_map instance, t_any key, t_any value);
+t_any	map_get(t_map instance, t_any value);
 
 #endif

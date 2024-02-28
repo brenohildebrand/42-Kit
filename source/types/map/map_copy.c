@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collection_destroy.c                               :+:      :+:    :+:   */
+/*   map_copy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 01:09:43 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:29:29 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 23:03:14 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/23 23:46:49 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection.h"
+#include "map.h"
 
-void	collection_destroy(t_collection collection)
+static void	copy_entries(t_map instance, t_map new_instance)
 {
 	int	i;
 
-	i = collection->start;
-	while (i < collection->end)
+	i = 0;
+	while (i < instance->max_length)
 	{
-		any_destroy(collection->content[i]);
+		new_instance[i] = instance[i];
 		i++;
 	}
-	deallocate(collection->content);
-	delete(collection);
+}
+
+t_map	map_copy(t_map instance)
+{
+	t_map	new_instance;
+
+	new_instance = create(map);
+	copy_entries(instance, new_instance);
+	new_instance->length = instance->length;
+	new_instance->max_length = instance->max_length;
+	return (new_instance);
 }

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collection_unshift.c                               :+:      :+:    :+:   */
+/*   list_create.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 13:30:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:30:13 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 22:29:03 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/23 19:20:22 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection.h"
+#include "list.h"
 
-void	collection_unshift(t_collection collection, t_any value)
+t_list	list_create(void)
 {
-	if (collection->length + 1 > (collection->max_length * 3) / 4 || \
-		collection->start == 0)
-	{
-		collection_expand(collection);
-	}
-	collection->start--;
-	collection->content[collection->start] = value;
-	collection->length++;
+	t_list	instance;
+
+	instance = (t_list)new(list);
+	instance->max_length = 16;
+	instance->content = \
+		(t_any *)allocate(instance->max_length * sizeof(t_any));
+	instance->length = 0;
+	instance->start = instance->max_length / 2;
+	instance->end = instance->start - 1;
+	return (instance);
 }

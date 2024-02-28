@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collection_expand.c                                :+:      :+:    :+:   */
+/*   list_expand.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,27 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection.h"
+#include "list.h"
 
-void	collection_expand(t_collection collection)
+void	list_expand(t_list list)
 {
 	t_any	*new_content;
 	int		new_start;
 	int		new_end;
 	int		i;
 
-	collection->max_length = collection->max_length * 2;
-	new_start = (collection->max_length - collection->length) / 2;
-	new_end = new_start + collection->length - 1;
-	new_content = (t_any *)allocate(collection->max_length * sizeof(t_any));
+	list->max_length = list->max_length * 2;
+	new_start = (list->max_length - list->length) / 2;
+	new_end = new_start + list->length - 1;
+	new_content = (t_any *)allocate(list->max_length * sizeof(t_any));
 	i = 0;
-	while (i < collection->length)
+	while (i < list->length)
 	{
-		new_content[i + new_start] = collection->content[i + collection->start];
+		new_content[i + new_start] = list->content[i + list->start];
 		i++;
 	}
-	deallocate(collection->content);
-	collection->start = new_start;
-	collection->end = new_end;
-	collection->content = new_content;
+	deallocate(list->content);
+	list->start = new_start;
+	list->end = new_end;
+	list->content = new_content;
 }

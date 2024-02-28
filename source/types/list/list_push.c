@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   table.c                                            :+:      :+:    :+:   */
+/*   list_push.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 22:52:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 23:45:28 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/01/19 10:15:41 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:29:54 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "table.h"
+#include "list.h"
 
-t_type	table(void)
+void	list_push(t_list list, t_any value)
 {
-	static struct s_type	type = {
-		.name = "table",
-		.size = sizeof(struct s_table),
-		.create = (void *(*)(void))table_create,
-		.destroy = (void (*)(void *))table_destroy,
-		.copy = (void *(*)(void *))table_copy,
-		.get = (t_any (*)(void *, t_any))table_get,
-		.set = (void (*)(void *, t_any, t_any))table_set
-	};
-
-	return (&type);
+	if (list->length + 1 > (list->max_length * 3) / 4 || \
+		list->end == list->max_length - 1)
+	{
+		list_expand(list);
+	}
+	list->end++;
+	list->content[list->end] = value;
+	list->length++;
 }

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collection_shift.c                                 :+:      :+:    :+:   */
+/*   list_reverse.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 13:26:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:30:08 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/06 16:04:09 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:29:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection.h"
+#include "list.h"
 
-t_any	collection_shift(t_collection collection)
+void	list_reverse(t_list list)
 {
-	t_any	any;
+	int	i;
 
-	if (collection->end < collection->start)
-		return (NULL);
-	any = collection->content[collection->start];
-	collection->content[collection->start] = NULL;
-	collection->start++;
-	collection->length--;
-	return (any);
+	i = 0;
+	while (i < list->length)
+	{
+		list_push(list, list_shift(list));
+		i++;
+	}
 }

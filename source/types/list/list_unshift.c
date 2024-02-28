@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   table_hash.c                                       :+:      :+:    :+:   */
+/*   list_unshift.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 23:04:56 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 23:47:47 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/08 13:30:05 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/22 22:30:13 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "table.h"
+#include "list.h"
 
-// -- According to ChatGPT this algorithm is called 'djb2'.
-int	table_hash(t_any key)
+void	list_unshift(t_list list, t_any value)
 {
-	unsigned char	*buffer;
-	int				i;
-	int				hash;
-
-	hash = 5381;
-	buffer = (unsigned char *)&key;
-	i = 0;
-	while (i < (int)sizeof(t_any))
+	if (list->length + 1 > (list->max_length * 3) / 4 || \
+		list->start == 0)
 	{
-		hash = ((hash << 5) + hash) + buffer[i];
+		list_expand(list);
 	}
-	return (hash);
+	list->start--;
+	list->content[list->start] = value;
+	list->length++;
 }

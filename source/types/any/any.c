@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:57:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 00:45:21 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:56:27 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ t_type	any(void)
 		.create = (void *(*)(void))any_create,
 		.destroy = (void (*)(void *))any_destroy
 	};
-	
+
 	return (&type);
 }

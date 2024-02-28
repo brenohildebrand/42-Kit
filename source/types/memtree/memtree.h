@@ -25,7 +25,7 @@ typedef struct s_memtree		*t_memtree;
 struct s_memtree {
 	t_memtree		ltree;
 	t_memtree		rtree;
-	void *			address;
+	void			*address;
 	t_type			type;
 	int				height;
 };

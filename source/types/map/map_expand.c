@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   collection_to_any.c                                :+:      :+:    :+:   */
+/*   map_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:21:16 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 16:25:16 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/23 03:28:33 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/23 14:42:32 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "collection.h"
+#include "map.h"
 
-t_any	collection_to_any(t_collection instance)
+void	map_expand(t_map instance)
 {
-	t_any	converted_instance;
+	int					i;
+	struct s_map_entry	*new_entries;
 
-	converted_instance = create(any);
-	converted_instance->type = collection();
-	converted_instance->value.instance = instance;
-	return (converted_instance);
+	i = 0;
+	new_entries = \
+		allocate(instance->max_length * 2 * sizeof(struct s_map_entry));
+	while (i < instance->max_length)
+	{
+		new_entries[i] = instance->entries[i];
+		i++;
+	}
+	deallocate(instance->entries);
+	instance->entries = new_entries;
+	instance->max_length = instance->max_length * 2;
 }
