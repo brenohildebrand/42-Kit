@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:09:29 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 19:01:51 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:27:45 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 t_any	getg(t_any key)
 {
-	t_table	gtable;
+	t_map	map;
 
-	gtable = framework_get_gtable();
-	return (table_get(gtable, key));
+	map = framework_get_map();
+	return (map_get(map, key));
 }

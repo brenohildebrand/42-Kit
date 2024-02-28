@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 19:08:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 19:10:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:39:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ t_any	character_to_any(t_character instance)
 
 	new_instance = create(any);
 	new_instance->type = character();
-	new_instance->value.cchar = *instance;
+	new_instance->value.i8 = *instance;
 	return (new_instance);
 }

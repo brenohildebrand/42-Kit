@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:07:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 12:23:15 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:35:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_type	f64(void)
 {
 	static struct s_type	type = {
 		.name = "f64",
-		.size = sizeof(t_f64)
+		.size = sizeof(t_f64),
+		.is_literal = 1
 	};
 
 	return (&type);

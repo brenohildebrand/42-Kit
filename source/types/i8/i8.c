@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 12:22:25 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 12:33:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:34:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_type	i8(void)
 {
 	static struct s_type	type = {
 		.name = "i8",
-		.size = sizeof(t_i8)
+		.size = sizeof(t_i8),
+		.is_literal = 1
 	};
 
 	return (&type);

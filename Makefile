@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/25 12:06:33 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/25 12:06:33 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/28 13:46:50 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/28 13:46:50 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,31 +24,54 @@ CPATHS = \
 	-include framework.h \
 	-include functions.h \
 	-include any.h \
-	-include cdouble.h \
-	-include cint.h \
-	-include collection.h \
+	-include character.h \
 	-include cstring.h \
+	-include f64.h \
+	-include i32.h \
+	-include i64.h \
+	-include i8.h \
+	-include integer.h \
+	-include list.h \
+	-include map.h \
 	-include memtree.h \
 	-include string.h \
-	-include table.h \
+	-include tree.h \
 	-include type.h \
+	-include u32.h \
+	-include u64.h \
+	-include u8.h \
 	-iquote ./source \
 	-iquote ./source/functions \
 	-iquote ./source/types \
 	-iquote ./source/types/any \
-	-iquote ./source/types/cdouble \
-	-iquote ./source/types/cint \
-	-iquote ./source/types/collection \
+	-iquote ./source/types/character \
 	-iquote ./source/types/cstring \
+	-iquote ./source/types/decimal \
+	-iquote ./source/types/f64 \
 	-iquote ./source/types/framework \
+	-iquote ./source/types/graph \
+	-iquote ./source/types/i32 \
+	-iquote ./source/types/i64 \
+	-iquote ./source/types/i8 \
+	-iquote ./source/types/integer \
+	-iquote ./source/types/list \
+	-iquote ./source/types/map \
 	-iquote ./source/types/memtree \
+	-iquote ./source/types/queue \
+	-iquote ./source/types/set \
+	-iquote ./source/types/stack \
 	-iquote ./source/types/string \
-	-iquote ./source/types/table \
-	-iquote ./source/types/type
+	-iquote ./source/types/tree \
+	-iquote ./source/types/trie \
+	-iquote ./source/types/type \
+	-iquote ./source/types/u32 \
+	-iquote ./source/types/u64 \
+	-iquote ./source/types/u8
 
 SOURCES = \
 	./source/functions/allocate.c \
 	./source/functions/assert.c \
+	./source/functions/compare.c \
 	./source/functions/copy.c \
 	./source/functions/create.c \
 	./source/functions/deallocate.c \
@@ -56,6 +79,9 @@ SOURCES = \
 	./source/functions/delete.c \
 	./source/functions/destroy.c \
 	./source/functions/error.c \
+	./source/functions/filter.c \
+	./source/functions/find.c \
+	./source/functions/foreach.c \
 	./source/functions/forkrun.c \
 	./source/functions/getg.c \
 	./source/functions/init.c \
@@ -63,38 +89,61 @@ SOURCES = \
 	./source/functions/print.c \
 	./source/functions/push.c \
 	./source/functions/range.c \
+	./source/functions/reduce.c \
 	./source/functions/repeat.c \
 	./source/functions/setg.c \
+	./source/functions/slice.c \
 	./source/functions/warning.c \
 	./source/types/any/any.c \
-	./source/types/any/any_as_cint.c \
 	./source/types/any/any_copy.c \
 	./source/types/any/any_create.c \
 	./source/types/any/any_destroy.c \
-	./source/types/cdouble/cdouble.c \
-	./source/types/cdouble/cdouble_to_any.c \
-	./source/types/cint/cint.c \
-	./source/types/cint/cint_abs.c \
-	./source/types/cint/cint_to_any.c \
-	./source/types/collection/collection.c \
-	./source/types/collection/collection_copy.c \
-	./source/types/collection/collection_create.c \
-	./source/types/collection/collection_destroy.c \
-	./source/types/collection/collection_expand.c \
-	./source/types/collection/collection_get.c \
-	./source/types/collection/collection_get_length.c \
-	./source/types/collection/collection_pop.c \
-	./source/types/collection/collection_push.c \
-	./source/types/collection/collection_reverse.c \
-	./source/types/collection/collection_set.c \
-	./source/types/collection/collection_shift.c \
-	./source/types/collection/collection_to_any.c \
-	./source/types/collection/collection_unshift.c \
+	./source/types/any/any_to_cstring.c \
+	./source/types/any/any_to_f64.c \
+	./source/types/any/any_to_i32.c \
+	./source/types/any/any_to_i64.c \
+	./source/types/any/any_to_i8.c \
+	./source/types/any/any_to_instance.c \
+	./source/types/any/any_to_u32.c \
+	./source/types/any/any_to_u64.c \
+	./source/types/any/any_to_u8.c \
+	./source/types/character/character.c \
+	./source/types/character/character_to_any.c \
 	./source/types/cstring/cstring.c \
 	./source/types/cstring/cstring_to_any.c \
+	./source/types/f64/f64.c \
+	./source/types/f64/f64_to_any.c \
 	./source/types/framework/framework_get.c \
-	./source/types/framework/framework_get_gtable.c \
+	./source/types/framework/framework_get_map.c \
 	./source/types/framework/framework_get_memtree.c \
+	./source/types/i32/i32.c \
+	./source/types/i32/i32_to_any.c \
+	./source/types/i64/i64.c \
+	./source/types/i64/i64_to_any.c \
+	./source/types/i8/i8.c \
+	./source/types/i8/i8_to_any.c \
+	./source/types/list/list.c \
+	./source/types/list/list_copy.c \
+	./source/types/list/list_create.c \
+	./source/types/list/list_destroy.c \
+	./source/types/list/list_expand.c \
+	./source/types/list/list_get.c \
+	./source/types/list/list_get_length.c \
+	./source/types/list/list_pop.c \
+	./source/types/list/list_push.c \
+	./source/types/list/list_reverse.c \
+	./source/types/list/list_set.c \
+	./source/types/list/list_shift.c \
+	./source/types/list/list_to_any.c \
+	./source/types/list/list_unshift.c \
+	./source/types/map/map.c \
+	./source/types/map/map_copy.c \
+	./source/types/map/map_create.c \
+	./source/types/map/map_destroy.c \
+	./source/types/map/map_expand.c \
+	./source/types/map/map_get.c \
+	./source/types/map/map_hash.c \
+	./source/types/map/map_set.c \
 	./source/types/memtree/memtree_create.c \
 	./source/types/memtree/memtree_delete.c \
 	./source/types/memtree/memtree_destroy.c \
@@ -113,18 +162,17 @@ SOURCES = \
 	./source/types/string/string_init.c \
 	./source/types/string/string_is_cint.c \
 	./source/types/string/string_to_cint.c \
-	./source/types/table/table.c \
-	./source/types/table/table_copy.c \
-	./source/types/table/table_create.c \
-	./source/types/table/table_destroy.c \
-	./source/types/table/table_expand.c \
-	./source/types/table/table_get.c \
-	./source/types/table/table_hash.c \
-	./source/types/table/table_set.c
+	./source/types/u32/u32.c \
+	./source/types/u32/u32_to_any.c \
+	./source/types/u64/u64.c \
+	./source/types/u64/u64_to_any.c \
+	./source/types/u8/u8.c \
+	./source/types/u8/u8_to_any.c
 
 OBJECTS = \
 	allocate.o \
 	assert.o \
+	compare.o \
 	copy.o \
 	create.o \
 	deallocate.o \
@@ -132,6 +180,9 @@ OBJECTS = \
 	delete.o \
 	destroy.o \
 	error.o \
+	filter.o \
+	find.o \
+	foreach.o \
 	forkrun.o \
 	getg.o \
 	init.o \
@@ -139,38 +190,61 @@ OBJECTS = \
 	print.o \
 	push.o \
 	range.o \
+	reduce.o \
 	repeat.o \
 	setg.o \
+	slice.o \
 	warning.o \
 	any.o \
-	any_as_cint.o \
 	any_copy.o \
 	any_create.o \
 	any_destroy.o \
-	cdouble.o \
-	cdouble_to_any.o \
-	cint.o \
-	cint_abs.o \
-	cint_to_any.o \
-	collection.o \
-	collection_copy.o \
-	collection_create.o \
-	collection_destroy.o \
-	collection_expand.o \
-	collection_get.o \
-	collection_get_length.o \
-	collection_pop.o \
-	collection_push.o \
-	collection_reverse.o \
-	collection_set.o \
-	collection_shift.o \
-	collection_to_any.o \
-	collection_unshift.o \
+	any_to_cstring.o \
+	any_to_f64.o \
+	any_to_i32.o \
+	any_to_i64.o \
+	any_to_i8.o \
+	any_to_instance.o \
+	any_to_u32.o \
+	any_to_u64.o \
+	any_to_u8.o \
+	character.o \
+	character_to_any.o \
 	cstring.o \
 	cstring_to_any.o \
+	f64.o \
+	f64_to_any.o \
 	framework_get.o \
-	framework_get_gtable.o \
+	framework_get_map.o \
 	framework_get_memtree.o \
+	i32.o \
+	i32_to_any.o \
+	i64.o \
+	i64_to_any.o \
+	i8.o \
+	i8_to_any.o \
+	list.o \
+	list_copy.o \
+	list_create.o \
+	list_destroy.o \
+	list_expand.o \
+	list_get.o \
+	list_get_length.o \
+	list_pop.o \
+	list_push.o \
+	list_reverse.o \
+	list_set.o \
+	list_shift.o \
+	list_to_any.o \
+	list_unshift.o \
+	map.o \
+	map_copy.o \
+	map_create.o \
+	map_destroy.o \
+	map_expand.o \
+	map_get.o \
+	map_hash.o \
+	map_set.o \
 	memtree_create.o \
 	memtree_delete.o \
 	memtree_destroy.o \
@@ -189,18 +263,17 @@ OBJECTS = \
 	string_init.o \
 	string_is_cint.o \
 	string_to_cint.o \
-	table.o \
-	table_copy.o \
-	table_create.o \
-	table_destroy.o \
-	table_expand.o \
-	table_get.o \
-	table_hash.o \
-	table_set.o
+	u32.o \
+	u32_to_any.o \
+	u64.o \
+	u64_to_any.o \
+	u8.o \
+	u8_to_any.o
 
 DEPENDENCIES = \
 	allocate.d \
 	assert.d \
+	compare.d \
 	copy.d \
 	create.d \
 	deallocate.d \
@@ -208,6 +281,9 @@ DEPENDENCIES = \
 	delete.d \
 	destroy.d \
 	error.d \
+	filter.d \
+	find.d \
+	foreach.d \
 	forkrun.d \
 	getg.d \
 	init.d \
@@ -215,38 +291,61 @@ DEPENDENCIES = \
 	print.d \
 	push.d \
 	range.d \
+	reduce.d \
 	repeat.d \
 	setg.d \
+	slice.d \
 	warning.d \
 	any.d \
-	any_as_cint.d \
 	any_copy.d \
 	any_create.d \
 	any_destroy.d \
-	cdouble.d \
-	cdouble_to_any.d \
-	cint.d \
-	cint_abs.d \
-	cint_to_any.d \
-	collection.d \
-	collection_copy.d \
-	collection_create.d \
-	collection_destroy.d \
-	collection_expand.d \
-	collection_get.d \
-	collection_get_length.d \
-	collection_pop.d \
-	collection_push.d \
-	collection_reverse.d \
-	collection_set.d \
-	collection_shift.d \
-	collection_to_any.d \
-	collection_unshift.d \
+	any_to_cstring.d \
+	any_to_f64.d \
+	any_to_i32.d \
+	any_to_i64.d \
+	any_to_i8.d \
+	any_to_instance.d \
+	any_to_u32.d \
+	any_to_u64.d \
+	any_to_u8.d \
+	character.d \
+	character_to_any.d \
 	cstring.d \
 	cstring_to_any.d \
+	f64.d \
+	f64_to_any.d \
 	framework_get.d \
-	framework_get_gtable.d \
+	framework_get_map.d \
 	framework_get_memtree.d \
+	i32.d \
+	i32_to_any.d \
+	i64.d \
+	i64_to_any.d \
+	i8.d \
+	i8_to_any.d \
+	list.d \
+	list_copy.d \
+	list_create.d \
+	list_destroy.d \
+	list_expand.d \
+	list_get.d \
+	list_get_length.d \
+	list_pop.d \
+	list_push.d \
+	list_reverse.d \
+	list_set.d \
+	list_shift.d \
+	list_to_any.d \
+	list_unshift.d \
+	map.d \
+	map_copy.d \
+	map_create.d \
+	map_destroy.d \
+	map_expand.d \
+	map_get.d \
+	map_hash.d \
+	map_set.d \
 	memtree_create.d \
 	memtree_delete.d \
 	memtree_destroy.d \
@@ -265,41 +364,75 @@ DEPENDENCIES = \
 	string_init.d \
 	string_is_cint.d \
 	string_to_cint.d \
-	table.d \
-	table_copy.d \
-	table_create.d \
-	table_destroy.d \
-	table_expand.d \
-	table_get.d \
-	table_hash.d \
-	table_set.d
+	u32.d \
+	u32_to_any.d \
+	u64.d \
+	u64_to_any.d \
+	u8.d \
+	u8_to_any.d
 
 TESTS = \
 	build/tests/bin/allocate \
 	build/tests/bin/assert \
 	build/tests/bin/deallocate \
+	build/tests/bin/debug \
+	build/tests/bin/delete \
+	build/tests/bin/error \
 	build/tests/bin/forkrun \
+	build/tests/bin/new \
 	build/tests/bin/print \
-	build/tests/bin/cint \
-	build/tests/bin/collection
+	build/tests/bin/range \
+	build/tests/bin/repeat \
+	build/tests/bin/warning \
+	build/tests/bin/any \
+	build/tests/bin/cstring \
+	build/tests/bin/framework \
+	build/tests/bin/map \
+	build/tests/bin/memtree \
+	build/tests/bin/string \
+	build/tests/bin/type
 
 TESTS_OBJECTS = \
 	build/tests/objects/allocate.o \
 	build/tests/objects/assert.o \
 	build/tests/objects/deallocate.o \
+	build/tests/objects/debug.o \
+	build/tests/objects/delete.o \
+	build/tests/objects/error.o \
 	build/tests/objects/forkrun.o \
+	build/tests/objects/new.o \
 	build/tests/objects/print.o \
-	build/tests/objects/cint.o \
-	build/tests/objects/collection.o
+	build/tests/objects/range.o \
+	build/tests/objects/repeat.o \
+	build/tests/objects/warning.o \
+	build/tests/objects/any.o \
+	build/tests/objects/cstring.o \
+	build/tests/objects/framework.o \
+	build/tests/objects/map.o \
+	build/tests/objects/memtree.o \
+	build/tests/objects/string.o \
+	build/tests/objects/type.o
 
 TESTS_DEPENDENCIES = \
 	build/tests/dependencies/allocate.d \
 	build/tests/dependencies/assert.d \
 	build/tests/dependencies/deallocate.d \
+	build/tests/dependencies/debug.d \
+	build/tests/dependencies/delete.d \
+	build/tests/dependencies/error.d \
 	build/tests/dependencies/forkrun.d \
+	build/tests/dependencies/new.d \
 	build/tests/dependencies/print.d \
-	build/tests/dependencies/cint.d \
-	build/tests/dependencies/collection.d
+	build/tests/dependencies/range.d \
+	build/tests/dependencies/repeat.d \
+	build/tests/dependencies/warning.d \
+	build/tests/dependencies/any.d \
+	build/tests/dependencies/cstring.d \
+	build/tests/dependencies/framework.d \
+	build/tests/dependencies/map.d \
+	build/tests/dependencies/memtree.d \
+	build/tests/dependencies/string.d \
+	build/tests/dependencies/type.d
 
 DEBUG_DIR = ./build/debug
 DEFAULT_DIR = ./build/default
@@ -356,6 +489,9 @@ $(DEFAULT_DIR)/objects/allocate.o: ./source/functions/allocate.c
 $(DEFAULT_DIR)/objects/assert.o: ./source/functions/assert.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/assert.d -c ./source/functions/assert.c -o $(DEFAULT_DIR)/objects/assert.o
 
+$(DEFAULT_DIR)/objects/compare.o: ./source/functions/compare.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/compare.d -c ./source/functions/compare.c -o $(DEFAULT_DIR)/objects/compare.o
+
 $(DEFAULT_DIR)/objects/copy.o: ./source/functions/copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/copy.d -c ./source/functions/copy.c -o $(DEFAULT_DIR)/objects/copy.o
 
@@ -376,6 +512,15 @@ $(DEFAULT_DIR)/objects/destroy.o: ./source/functions/destroy.c
 
 $(DEFAULT_DIR)/objects/error.o: ./source/functions/error.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/error.d -c ./source/functions/error.c -o $(DEFAULT_DIR)/objects/error.o
+
+$(DEFAULT_DIR)/objects/filter.o: ./source/functions/filter.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/filter.d -c ./source/functions/filter.c -o $(DEFAULT_DIR)/objects/filter.o
+
+$(DEFAULT_DIR)/objects/find.o: ./source/functions/find.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/find.d -c ./source/functions/find.c -o $(DEFAULT_DIR)/objects/find.o
+
+$(DEFAULT_DIR)/objects/foreach.o: ./source/functions/foreach.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/foreach.d -c ./source/functions/foreach.c -o $(DEFAULT_DIR)/objects/foreach.o
 
 $(DEFAULT_DIR)/objects/forkrun.o: ./source/functions/forkrun.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/forkrun.d -c ./source/functions/forkrun.c -o $(DEFAULT_DIR)/objects/forkrun.o
@@ -398,20 +543,23 @@ $(DEFAULT_DIR)/objects/push.o: ./source/functions/push.c
 $(DEFAULT_DIR)/objects/range.o: ./source/functions/range.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/range.d -c ./source/functions/range.c -o $(DEFAULT_DIR)/objects/range.o
 
+$(DEFAULT_DIR)/objects/reduce.o: ./source/functions/reduce.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/reduce.d -c ./source/functions/reduce.c -o $(DEFAULT_DIR)/objects/reduce.o
+
 $(DEFAULT_DIR)/objects/repeat.o: ./source/functions/repeat.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/repeat.d -c ./source/functions/repeat.c -o $(DEFAULT_DIR)/objects/repeat.o
 
 $(DEFAULT_DIR)/objects/setg.o: ./source/functions/setg.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/setg.d -c ./source/functions/setg.c -o $(DEFAULT_DIR)/objects/setg.o
 
+$(DEFAULT_DIR)/objects/slice.o: ./source/functions/slice.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/slice.d -c ./source/functions/slice.c -o $(DEFAULT_DIR)/objects/slice.o
+
 $(DEFAULT_DIR)/objects/warning.o: ./source/functions/warning.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/warning.d -c ./source/functions/warning.c -o $(DEFAULT_DIR)/objects/warning.o
 
 $(DEFAULT_DIR)/objects/any.o: ./source/types/any/any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any.d -c ./source/types/any/any.c -o $(DEFAULT_DIR)/objects/any.o
-
-$(DEFAULT_DIR)/objects/any_as_cint.o: ./source/types/any/any_as_cint.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_cint.d -c ./source/types/any/any_as_cint.c -o $(DEFAULT_DIR)/objects/any_as_cint.o
 
 $(DEFAULT_DIR)/objects/any_copy.o: ./source/types/any/any_copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_copy.d -c ./source/types/any/any_copy.c -o $(DEFAULT_DIR)/objects/any_copy.o
@@ -422,62 +570,38 @@ $(DEFAULT_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 $(DEFAULT_DIR)/objects/any_destroy.o: ./source/types/any/any_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_destroy.d -c ./source/types/any/any_destroy.c -o $(DEFAULT_DIR)/objects/any_destroy.o
 
-$(DEFAULT_DIR)/objects/cdouble.o: ./source/types/cdouble/cdouble.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cdouble.d -c ./source/types/cdouble/cdouble.c -o $(DEFAULT_DIR)/objects/cdouble.o
+$(DEFAULT_DIR)/objects/any_to_cstring.o: ./source/types/any/any_to_cstring.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_cstring.d -c ./source/types/any/any_to_cstring.c -o $(DEFAULT_DIR)/objects/any_to_cstring.o
 
-$(DEFAULT_DIR)/objects/cdouble_to_any.o: ./source/types/cdouble/cdouble_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cdouble_to_any.d -c ./source/types/cdouble/cdouble_to_any.c -o $(DEFAULT_DIR)/objects/cdouble_to_any.o
+$(DEFAULT_DIR)/objects/any_to_f64.o: ./source/types/any/any_to_f64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_f64.d -c ./source/types/any/any_to_f64.c -o $(DEFAULT_DIR)/objects/any_to_f64.o
 
-$(DEFAULT_DIR)/objects/cint.o: ./source/types/cint/cint.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cint.d -c ./source/types/cint/cint.c -o $(DEFAULT_DIR)/objects/cint.o
+$(DEFAULT_DIR)/objects/any_to_i32.o: ./source/types/any/any_to_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_i32.d -c ./source/types/any/any_to_i32.c -o $(DEFAULT_DIR)/objects/any_to_i32.o
 
-$(DEFAULT_DIR)/objects/cint_abs.o: ./source/types/cint/cint_abs.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cint_abs.d -c ./source/types/cint/cint_abs.c -o $(DEFAULT_DIR)/objects/cint_abs.o
+$(DEFAULT_DIR)/objects/any_to_i64.o: ./source/types/any/any_to_i64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_i64.d -c ./source/types/any/any_to_i64.c -o $(DEFAULT_DIR)/objects/any_to_i64.o
 
-$(DEFAULT_DIR)/objects/cint_to_any.o: ./source/types/cint/cint_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cint_to_any.d -c ./source/types/cint/cint_to_any.c -o $(DEFAULT_DIR)/objects/cint_to_any.o
+$(DEFAULT_DIR)/objects/any_to_i8.o: ./source/types/any/any_to_i8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_i8.d -c ./source/types/any/any_to_i8.c -o $(DEFAULT_DIR)/objects/any_to_i8.o
 
-$(DEFAULT_DIR)/objects/collection.o: ./source/types/collection/collection.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection.d -c ./source/types/collection/collection.c -o $(DEFAULT_DIR)/objects/collection.o
+$(DEFAULT_DIR)/objects/any_to_instance.o: ./source/types/any/any_to_instance.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_instance.d -c ./source/types/any/any_to_instance.c -o $(DEFAULT_DIR)/objects/any_to_instance.o
 
-$(DEFAULT_DIR)/objects/collection_copy.o: ./source/types/collection/collection_copy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_copy.d -c ./source/types/collection/collection_copy.c -o $(DEFAULT_DIR)/objects/collection_copy.o
+$(DEFAULT_DIR)/objects/any_to_u32.o: ./source/types/any/any_to_u32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_u32.d -c ./source/types/any/any_to_u32.c -o $(DEFAULT_DIR)/objects/any_to_u32.o
 
-$(DEFAULT_DIR)/objects/collection_create.o: ./source/types/collection/collection_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_create.d -c ./source/types/collection/collection_create.c -o $(DEFAULT_DIR)/objects/collection_create.o
+$(DEFAULT_DIR)/objects/any_to_u64.o: ./source/types/any/any_to_u64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_u64.d -c ./source/types/any/any_to_u64.c -o $(DEFAULT_DIR)/objects/any_to_u64.o
 
-$(DEFAULT_DIR)/objects/collection_destroy.o: ./source/types/collection/collection_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_destroy.d -c ./source/types/collection/collection_destroy.c -o $(DEFAULT_DIR)/objects/collection_destroy.o
+$(DEFAULT_DIR)/objects/any_to_u8.o: ./source/types/any/any_to_u8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_u8.d -c ./source/types/any/any_to_u8.c -o $(DEFAULT_DIR)/objects/any_to_u8.o
 
-$(DEFAULT_DIR)/objects/collection_expand.o: ./source/types/collection/collection_expand.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_expand.d -c ./source/types/collection/collection_expand.c -o $(DEFAULT_DIR)/objects/collection_expand.o
+$(DEFAULT_DIR)/objects/character.o: ./source/types/character/character.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/character.d -c ./source/types/character/character.c -o $(DEFAULT_DIR)/objects/character.o
 
-$(DEFAULT_DIR)/objects/collection_get.o: ./source/types/collection/collection_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_get.d -c ./source/types/collection/collection_get.c -o $(DEFAULT_DIR)/objects/collection_get.o
-
-$(DEFAULT_DIR)/objects/collection_get_length.o: ./source/types/collection/collection_get_length.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_get_length.d -c ./source/types/collection/collection_get_length.c -o $(DEFAULT_DIR)/objects/collection_get_length.o
-
-$(DEFAULT_DIR)/objects/collection_pop.o: ./source/types/collection/collection_pop.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_pop.d -c ./source/types/collection/collection_pop.c -o $(DEFAULT_DIR)/objects/collection_pop.o
-
-$(DEFAULT_DIR)/objects/collection_push.o: ./source/types/collection/collection_push.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_push.d -c ./source/types/collection/collection_push.c -o $(DEFAULT_DIR)/objects/collection_push.o
-
-$(DEFAULT_DIR)/objects/collection_reverse.o: ./source/types/collection/collection_reverse.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_reverse.d -c ./source/types/collection/collection_reverse.c -o $(DEFAULT_DIR)/objects/collection_reverse.o
-
-$(DEFAULT_DIR)/objects/collection_set.o: ./source/types/collection/collection_set.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_set.d -c ./source/types/collection/collection_set.c -o $(DEFAULT_DIR)/objects/collection_set.o
-
-$(DEFAULT_DIR)/objects/collection_shift.o: ./source/types/collection/collection_shift.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_shift.d -c ./source/types/collection/collection_shift.c -o $(DEFAULT_DIR)/objects/collection_shift.o
-
-$(DEFAULT_DIR)/objects/collection_to_any.o: ./source/types/collection/collection_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_to_any.d -c ./source/types/collection/collection_to_any.c -o $(DEFAULT_DIR)/objects/collection_to_any.o
-
-$(DEFAULT_DIR)/objects/collection_unshift.o: ./source/types/collection/collection_unshift.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/collection_unshift.d -c ./source/types/collection/collection_unshift.c -o $(DEFAULT_DIR)/objects/collection_unshift.o
+$(DEFAULT_DIR)/objects/character_to_any.o: ./source/types/character/character_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/character_to_any.d -c ./source/types/character/character_to_any.c -o $(DEFAULT_DIR)/objects/character_to_any.o
 
 $(DEFAULT_DIR)/objects/cstring.o: ./source/types/cstring/cstring.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cstring.d -c ./source/types/cstring/cstring.c -o $(DEFAULT_DIR)/objects/cstring.o
@@ -485,14 +609,104 @@ $(DEFAULT_DIR)/objects/cstring.o: ./source/types/cstring/cstring.c
 $(DEFAULT_DIR)/objects/cstring_to_any.o: ./source/types/cstring/cstring_to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cstring_to_any.d -c ./source/types/cstring/cstring_to_any.c -o $(DEFAULT_DIR)/objects/cstring_to_any.o
 
+$(DEFAULT_DIR)/objects/f64.o: ./source/types/f64/f64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/f64.d -c ./source/types/f64/f64.c -o $(DEFAULT_DIR)/objects/f64.o
+
+$(DEFAULT_DIR)/objects/f64_to_any.o: ./source/types/f64/f64_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/f64_to_any.d -c ./source/types/f64/f64_to_any.c -o $(DEFAULT_DIR)/objects/f64_to_any.o
+
 $(DEFAULT_DIR)/objects/framework_get.o: ./source/types/framework/framework_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_get.d -c ./source/types/framework/framework_get.c -o $(DEFAULT_DIR)/objects/framework_get.o
 
-$(DEFAULT_DIR)/objects/framework_get_gtable.o: ./source/types/framework/framework_get_gtable.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_get_gtable.d -c ./source/types/framework/framework_get_gtable.c -o $(DEFAULT_DIR)/objects/framework_get_gtable.o
+$(DEFAULT_DIR)/objects/framework_get_map.o: ./source/types/framework/framework_get_map.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_get_map.d -c ./source/types/framework/framework_get_map.c -o $(DEFAULT_DIR)/objects/framework_get_map.o
 
 $(DEFAULT_DIR)/objects/framework_get_memtree.o: ./source/types/framework/framework_get_memtree.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_get_memtree.d -c ./source/types/framework/framework_get_memtree.c -o $(DEFAULT_DIR)/objects/framework_get_memtree.o
+
+$(DEFAULT_DIR)/objects/i32.o: ./source/types/i32/i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i32.d -c ./source/types/i32/i32.c -o $(DEFAULT_DIR)/objects/i32.o
+
+$(DEFAULT_DIR)/objects/i32_to_any.o: ./source/types/i32/i32_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i32_to_any.d -c ./source/types/i32/i32_to_any.c -o $(DEFAULT_DIR)/objects/i32_to_any.o
+
+$(DEFAULT_DIR)/objects/i64.o: ./source/types/i64/i64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i64.d -c ./source/types/i64/i64.c -o $(DEFAULT_DIR)/objects/i64.o
+
+$(DEFAULT_DIR)/objects/i64_to_any.o: ./source/types/i64/i64_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i64_to_any.d -c ./source/types/i64/i64_to_any.c -o $(DEFAULT_DIR)/objects/i64_to_any.o
+
+$(DEFAULT_DIR)/objects/i8.o: ./source/types/i8/i8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8.d -c ./source/types/i8/i8.c -o $(DEFAULT_DIR)/objects/i8.o
+
+$(DEFAULT_DIR)/objects/i8_to_any.o: ./source/types/i8/i8_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_to_any.d -c ./source/types/i8/i8_to_any.c -o $(DEFAULT_DIR)/objects/i8_to_any.o
+
+$(DEFAULT_DIR)/objects/list.o: ./source/types/list/list.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list.d -c ./source/types/list/list.c -o $(DEFAULT_DIR)/objects/list.o
+
+$(DEFAULT_DIR)/objects/list_copy.o: ./source/types/list/list_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_copy.d -c ./source/types/list/list_copy.c -o $(DEFAULT_DIR)/objects/list_copy.o
+
+$(DEFAULT_DIR)/objects/list_create.o: ./source/types/list/list_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_create.d -c ./source/types/list/list_create.c -o $(DEFAULT_DIR)/objects/list_create.o
+
+$(DEFAULT_DIR)/objects/list_destroy.o: ./source/types/list/list_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_destroy.d -c ./source/types/list/list_destroy.c -o $(DEFAULT_DIR)/objects/list_destroy.o
+
+$(DEFAULT_DIR)/objects/list_expand.o: ./source/types/list/list_expand.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_expand.d -c ./source/types/list/list_expand.c -o $(DEFAULT_DIR)/objects/list_expand.o
+
+$(DEFAULT_DIR)/objects/list_get.o: ./source/types/list/list_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_get.d -c ./source/types/list/list_get.c -o $(DEFAULT_DIR)/objects/list_get.o
+
+$(DEFAULT_DIR)/objects/list_get_length.o: ./source/types/list/list_get_length.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_get_length.d -c ./source/types/list/list_get_length.c -o $(DEFAULT_DIR)/objects/list_get_length.o
+
+$(DEFAULT_DIR)/objects/list_pop.o: ./source/types/list/list_pop.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_pop.d -c ./source/types/list/list_pop.c -o $(DEFAULT_DIR)/objects/list_pop.o
+
+$(DEFAULT_DIR)/objects/list_push.o: ./source/types/list/list_push.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_push.d -c ./source/types/list/list_push.c -o $(DEFAULT_DIR)/objects/list_push.o
+
+$(DEFAULT_DIR)/objects/list_reverse.o: ./source/types/list/list_reverse.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_reverse.d -c ./source/types/list/list_reverse.c -o $(DEFAULT_DIR)/objects/list_reverse.o
+
+$(DEFAULT_DIR)/objects/list_set.o: ./source/types/list/list_set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_set.d -c ./source/types/list/list_set.c -o $(DEFAULT_DIR)/objects/list_set.o
+
+$(DEFAULT_DIR)/objects/list_shift.o: ./source/types/list/list_shift.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_shift.d -c ./source/types/list/list_shift.c -o $(DEFAULT_DIR)/objects/list_shift.o
+
+$(DEFAULT_DIR)/objects/list_to_any.o: ./source/types/list/list_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_to_any.d -c ./source/types/list/list_to_any.c -o $(DEFAULT_DIR)/objects/list_to_any.o
+
+$(DEFAULT_DIR)/objects/list_unshift.o: ./source/types/list/list_unshift.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_unshift.d -c ./source/types/list/list_unshift.c -o $(DEFAULT_DIR)/objects/list_unshift.o
+
+$(DEFAULT_DIR)/objects/map.o: ./source/types/map/map.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map.d -c ./source/types/map/map.c -o $(DEFAULT_DIR)/objects/map.o
+
+$(DEFAULT_DIR)/objects/map_copy.o: ./source/types/map/map_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_copy.d -c ./source/types/map/map_copy.c -o $(DEFAULT_DIR)/objects/map_copy.o
+
+$(DEFAULT_DIR)/objects/map_create.o: ./source/types/map/map_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_create.d -c ./source/types/map/map_create.c -o $(DEFAULT_DIR)/objects/map_create.o
+
+$(DEFAULT_DIR)/objects/map_destroy.o: ./source/types/map/map_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_destroy.d -c ./source/types/map/map_destroy.c -o $(DEFAULT_DIR)/objects/map_destroy.o
+
+$(DEFAULT_DIR)/objects/map_expand.o: ./source/types/map/map_expand.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_expand.d -c ./source/types/map/map_expand.c -o $(DEFAULT_DIR)/objects/map_expand.o
+
+$(DEFAULT_DIR)/objects/map_get.o: ./source/types/map/map_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_get.d -c ./source/types/map/map_get.c -o $(DEFAULT_DIR)/objects/map_get.o
+
+$(DEFAULT_DIR)/objects/map_hash.o: ./source/types/map/map_hash.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_hash.d -c ./source/types/map/map_hash.c -o $(DEFAULT_DIR)/objects/map_hash.o
+
+$(DEFAULT_DIR)/objects/map_set.o: ./source/types/map/map_set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_set.d -c ./source/types/map/map_set.c -o $(DEFAULT_DIR)/objects/map_set.o
 
 $(DEFAULT_DIR)/objects/memtree_create.o: ./source/types/memtree/memtree_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_create.d -c ./source/types/memtree/memtree_create.c -o $(DEFAULT_DIR)/objects/memtree_create.o
@@ -548,29 +762,23 @@ $(DEFAULT_DIR)/objects/string_is_cint.o: ./source/types/string/string_is_cint.c
 $(DEFAULT_DIR)/objects/string_to_cint.o: ./source/types/string/string_to_cint.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/string_to_cint.d -c ./source/types/string/string_to_cint.c -o $(DEFAULT_DIR)/objects/string_to_cint.o
 
-$(DEFAULT_DIR)/objects/table.o: ./source/types/table/table.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table.d -c ./source/types/table/table.c -o $(DEFAULT_DIR)/objects/table.o
+$(DEFAULT_DIR)/objects/u32.o: ./source/types/u32/u32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/u32.d -c ./source/types/u32/u32.c -o $(DEFAULT_DIR)/objects/u32.o
 
-$(DEFAULT_DIR)/objects/table_copy.o: ./source/types/table/table_copy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_copy.d -c ./source/types/table/table_copy.c -o $(DEFAULT_DIR)/objects/table_copy.o
+$(DEFAULT_DIR)/objects/u32_to_any.o: ./source/types/u32/u32_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/u32_to_any.d -c ./source/types/u32/u32_to_any.c -o $(DEFAULT_DIR)/objects/u32_to_any.o
 
-$(DEFAULT_DIR)/objects/table_create.o: ./source/types/table/table_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_create.d -c ./source/types/table/table_create.c -o $(DEFAULT_DIR)/objects/table_create.o
+$(DEFAULT_DIR)/objects/u64.o: ./source/types/u64/u64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/u64.d -c ./source/types/u64/u64.c -o $(DEFAULT_DIR)/objects/u64.o
 
-$(DEFAULT_DIR)/objects/table_destroy.o: ./source/types/table/table_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_destroy.d -c ./source/types/table/table_destroy.c -o $(DEFAULT_DIR)/objects/table_destroy.o
+$(DEFAULT_DIR)/objects/u64_to_any.o: ./source/types/u64/u64_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/u64_to_any.d -c ./source/types/u64/u64_to_any.c -o $(DEFAULT_DIR)/objects/u64_to_any.o
 
-$(DEFAULT_DIR)/objects/table_expand.o: ./source/types/table/table_expand.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_expand.d -c ./source/types/table/table_expand.c -o $(DEFAULT_DIR)/objects/table_expand.o
+$(DEFAULT_DIR)/objects/u8.o: ./source/types/u8/u8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/u8.d -c ./source/types/u8/u8.c -o $(DEFAULT_DIR)/objects/u8.o
 
-$(DEFAULT_DIR)/objects/table_get.o: ./source/types/table/table_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_get.d -c ./source/types/table/table_get.c -o $(DEFAULT_DIR)/objects/table_get.o
-
-$(DEFAULT_DIR)/objects/table_hash.o: ./source/types/table/table_hash.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_hash.d -c ./source/types/table/table_hash.c -o $(DEFAULT_DIR)/objects/table_hash.o
-
-$(DEFAULT_DIR)/objects/table_set.o: ./source/types/table/table_set.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/table_set.d -c ./source/types/table/table_set.c -o $(DEFAULT_DIR)/objects/table_set.o
+$(DEFAULT_DIR)/objects/u8_to_any.o: ./source/types/u8/u8_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/u8_to_any.d -c ./source/types/u8/u8_to_any.c -o $(DEFAULT_DIR)/objects/u8_to_any.o
 
 
 $(DEBUG_DIR)/objects/allocate.o: ./source/functions/allocate.c
@@ -578,6 +786,9 @@ $(DEBUG_DIR)/objects/allocate.o: ./source/functions/allocate.c
 
 $(DEBUG_DIR)/objects/assert.o: ./source/functions/assert.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/assert.d -c ./source/functions/assert.c -o $(DEBUG_DIR)/objects/assert.o
+
+$(DEBUG_DIR)/objects/compare.o: ./source/functions/compare.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/compare.d -c ./source/functions/compare.c -o $(DEBUG_DIR)/objects/compare.o
 
 $(DEBUG_DIR)/objects/copy.o: ./source/functions/copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/copy.d -c ./source/functions/copy.c -o $(DEBUG_DIR)/objects/copy.o
@@ -600,6 +811,15 @@ $(DEBUG_DIR)/objects/destroy.o: ./source/functions/destroy.c
 $(DEBUG_DIR)/objects/error.o: ./source/functions/error.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/error.d -c ./source/functions/error.c -o $(DEBUG_DIR)/objects/error.o
 
+$(DEBUG_DIR)/objects/filter.o: ./source/functions/filter.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/filter.d -c ./source/functions/filter.c -o $(DEBUG_DIR)/objects/filter.o
+
+$(DEBUG_DIR)/objects/find.o: ./source/functions/find.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/find.d -c ./source/functions/find.c -o $(DEBUG_DIR)/objects/find.o
+
+$(DEBUG_DIR)/objects/foreach.o: ./source/functions/foreach.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/foreach.d -c ./source/functions/foreach.c -o $(DEBUG_DIR)/objects/foreach.o
+
 $(DEBUG_DIR)/objects/forkrun.o: ./source/functions/forkrun.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/forkrun.d -c ./source/functions/forkrun.c -o $(DEBUG_DIR)/objects/forkrun.o
 
@@ -621,20 +841,23 @@ $(DEBUG_DIR)/objects/push.o: ./source/functions/push.c
 $(DEBUG_DIR)/objects/range.o: ./source/functions/range.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/range.d -c ./source/functions/range.c -o $(DEBUG_DIR)/objects/range.o
 
+$(DEBUG_DIR)/objects/reduce.o: ./source/functions/reduce.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/reduce.d -c ./source/functions/reduce.c -o $(DEBUG_DIR)/objects/reduce.o
+
 $(DEBUG_DIR)/objects/repeat.o: ./source/functions/repeat.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/repeat.d -c ./source/functions/repeat.c -o $(DEBUG_DIR)/objects/repeat.o
 
 $(DEBUG_DIR)/objects/setg.o: ./source/functions/setg.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/setg.d -c ./source/functions/setg.c -o $(DEBUG_DIR)/objects/setg.o
 
+$(DEBUG_DIR)/objects/slice.o: ./source/functions/slice.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/slice.d -c ./source/functions/slice.c -o $(DEBUG_DIR)/objects/slice.o
+
 $(DEBUG_DIR)/objects/warning.o: ./source/functions/warning.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/warning.d -c ./source/functions/warning.c -o $(DEBUG_DIR)/objects/warning.o
 
 $(DEBUG_DIR)/objects/any.o: ./source/types/any/any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any.d -c ./source/types/any/any.c -o $(DEBUG_DIR)/objects/any.o
-
-$(DEBUG_DIR)/objects/any_as_cint.o: ./source/types/any/any_as_cint.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_cint.d -c ./source/types/any/any_as_cint.c -o $(DEBUG_DIR)/objects/any_as_cint.o
 
 $(DEBUG_DIR)/objects/any_copy.o: ./source/types/any/any_copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_copy.d -c ./source/types/any/any_copy.c -o $(DEBUG_DIR)/objects/any_copy.o
@@ -645,62 +868,38 @@ $(DEBUG_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 $(DEBUG_DIR)/objects/any_destroy.o: ./source/types/any/any_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_destroy.d -c ./source/types/any/any_destroy.c -o $(DEBUG_DIR)/objects/any_destroy.o
 
-$(DEBUG_DIR)/objects/cdouble.o: ./source/types/cdouble/cdouble.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cdouble.d -c ./source/types/cdouble/cdouble.c -o $(DEBUG_DIR)/objects/cdouble.o
+$(DEBUG_DIR)/objects/any_to_cstring.o: ./source/types/any/any_to_cstring.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_cstring.d -c ./source/types/any/any_to_cstring.c -o $(DEBUG_DIR)/objects/any_to_cstring.o
 
-$(DEBUG_DIR)/objects/cdouble_to_any.o: ./source/types/cdouble/cdouble_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cdouble_to_any.d -c ./source/types/cdouble/cdouble_to_any.c -o $(DEBUG_DIR)/objects/cdouble_to_any.o
+$(DEBUG_DIR)/objects/any_to_f64.o: ./source/types/any/any_to_f64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_f64.d -c ./source/types/any/any_to_f64.c -o $(DEBUG_DIR)/objects/any_to_f64.o
 
-$(DEBUG_DIR)/objects/cint.o: ./source/types/cint/cint.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cint.d -c ./source/types/cint/cint.c -o $(DEBUG_DIR)/objects/cint.o
+$(DEBUG_DIR)/objects/any_to_i32.o: ./source/types/any/any_to_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_i32.d -c ./source/types/any/any_to_i32.c -o $(DEBUG_DIR)/objects/any_to_i32.o
 
-$(DEBUG_DIR)/objects/cint_abs.o: ./source/types/cint/cint_abs.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cint_abs.d -c ./source/types/cint/cint_abs.c -o $(DEBUG_DIR)/objects/cint_abs.o
+$(DEBUG_DIR)/objects/any_to_i64.o: ./source/types/any/any_to_i64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_i64.d -c ./source/types/any/any_to_i64.c -o $(DEBUG_DIR)/objects/any_to_i64.o
 
-$(DEBUG_DIR)/objects/cint_to_any.o: ./source/types/cint/cint_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cint_to_any.d -c ./source/types/cint/cint_to_any.c -o $(DEBUG_DIR)/objects/cint_to_any.o
+$(DEBUG_DIR)/objects/any_to_i8.o: ./source/types/any/any_to_i8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_i8.d -c ./source/types/any/any_to_i8.c -o $(DEBUG_DIR)/objects/any_to_i8.o
 
-$(DEBUG_DIR)/objects/collection.o: ./source/types/collection/collection.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection.d -c ./source/types/collection/collection.c -o $(DEBUG_DIR)/objects/collection.o
+$(DEBUG_DIR)/objects/any_to_instance.o: ./source/types/any/any_to_instance.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_instance.d -c ./source/types/any/any_to_instance.c -o $(DEBUG_DIR)/objects/any_to_instance.o
 
-$(DEBUG_DIR)/objects/collection_copy.o: ./source/types/collection/collection_copy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_copy.d -c ./source/types/collection/collection_copy.c -o $(DEBUG_DIR)/objects/collection_copy.o
+$(DEBUG_DIR)/objects/any_to_u32.o: ./source/types/any/any_to_u32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_u32.d -c ./source/types/any/any_to_u32.c -o $(DEBUG_DIR)/objects/any_to_u32.o
 
-$(DEBUG_DIR)/objects/collection_create.o: ./source/types/collection/collection_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_create.d -c ./source/types/collection/collection_create.c -o $(DEBUG_DIR)/objects/collection_create.o
+$(DEBUG_DIR)/objects/any_to_u64.o: ./source/types/any/any_to_u64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_u64.d -c ./source/types/any/any_to_u64.c -o $(DEBUG_DIR)/objects/any_to_u64.o
 
-$(DEBUG_DIR)/objects/collection_destroy.o: ./source/types/collection/collection_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_destroy.d -c ./source/types/collection/collection_destroy.c -o $(DEBUG_DIR)/objects/collection_destroy.o
+$(DEBUG_DIR)/objects/any_to_u8.o: ./source/types/any/any_to_u8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_u8.d -c ./source/types/any/any_to_u8.c -o $(DEBUG_DIR)/objects/any_to_u8.o
 
-$(DEBUG_DIR)/objects/collection_expand.o: ./source/types/collection/collection_expand.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_expand.d -c ./source/types/collection/collection_expand.c -o $(DEBUG_DIR)/objects/collection_expand.o
+$(DEBUG_DIR)/objects/character.o: ./source/types/character/character.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/character.d -c ./source/types/character/character.c -o $(DEBUG_DIR)/objects/character.o
 
-$(DEBUG_DIR)/objects/collection_get.o: ./source/types/collection/collection_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_get.d -c ./source/types/collection/collection_get.c -o $(DEBUG_DIR)/objects/collection_get.o
-
-$(DEBUG_DIR)/objects/collection_get_length.o: ./source/types/collection/collection_get_length.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_get_length.d -c ./source/types/collection/collection_get_length.c -o $(DEBUG_DIR)/objects/collection_get_length.o
-
-$(DEBUG_DIR)/objects/collection_pop.o: ./source/types/collection/collection_pop.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_pop.d -c ./source/types/collection/collection_pop.c -o $(DEBUG_DIR)/objects/collection_pop.o
-
-$(DEBUG_DIR)/objects/collection_push.o: ./source/types/collection/collection_push.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_push.d -c ./source/types/collection/collection_push.c -o $(DEBUG_DIR)/objects/collection_push.o
-
-$(DEBUG_DIR)/objects/collection_reverse.o: ./source/types/collection/collection_reverse.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_reverse.d -c ./source/types/collection/collection_reverse.c -o $(DEBUG_DIR)/objects/collection_reverse.o
-
-$(DEBUG_DIR)/objects/collection_set.o: ./source/types/collection/collection_set.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_set.d -c ./source/types/collection/collection_set.c -o $(DEBUG_DIR)/objects/collection_set.o
-
-$(DEBUG_DIR)/objects/collection_shift.o: ./source/types/collection/collection_shift.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_shift.d -c ./source/types/collection/collection_shift.c -o $(DEBUG_DIR)/objects/collection_shift.o
-
-$(DEBUG_DIR)/objects/collection_to_any.o: ./source/types/collection/collection_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_to_any.d -c ./source/types/collection/collection_to_any.c -o $(DEBUG_DIR)/objects/collection_to_any.o
-
-$(DEBUG_DIR)/objects/collection_unshift.o: ./source/types/collection/collection_unshift.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/collection_unshift.d -c ./source/types/collection/collection_unshift.c -o $(DEBUG_DIR)/objects/collection_unshift.o
+$(DEBUG_DIR)/objects/character_to_any.o: ./source/types/character/character_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/character_to_any.d -c ./source/types/character/character_to_any.c -o $(DEBUG_DIR)/objects/character_to_any.o
 
 $(DEBUG_DIR)/objects/cstring.o: ./source/types/cstring/cstring.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cstring.d -c ./source/types/cstring/cstring.c -o $(DEBUG_DIR)/objects/cstring.o
@@ -708,14 +907,104 @@ $(DEBUG_DIR)/objects/cstring.o: ./source/types/cstring/cstring.c
 $(DEBUG_DIR)/objects/cstring_to_any.o: ./source/types/cstring/cstring_to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cstring_to_any.d -c ./source/types/cstring/cstring_to_any.c -o $(DEBUG_DIR)/objects/cstring_to_any.o
 
+$(DEBUG_DIR)/objects/f64.o: ./source/types/f64/f64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/f64.d -c ./source/types/f64/f64.c -o $(DEBUG_DIR)/objects/f64.o
+
+$(DEBUG_DIR)/objects/f64_to_any.o: ./source/types/f64/f64_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/f64_to_any.d -c ./source/types/f64/f64_to_any.c -o $(DEBUG_DIR)/objects/f64_to_any.o
+
 $(DEBUG_DIR)/objects/framework_get.o: ./source/types/framework/framework_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_get.d -c ./source/types/framework/framework_get.c -o $(DEBUG_DIR)/objects/framework_get.o
 
-$(DEBUG_DIR)/objects/framework_get_gtable.o: ./source/types/framework/framework_get_gtable.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_get_gtable.d -c ./source/types/framework/framework_get_gtable.c -o $(DEBUG_DIR)/objects/framework_get_gtable.o
+$(DEBUG_DIR)/objects/framework_get_map.o: ./source/types/framework/framework_get_map.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_get_map.d -c ./source/types/framework/framework_get_map.c -o $(DEBUG_DIR)/objects/framework_get_map.o
 
 $(DEBUG_DIR)/objects/framework_get_memtree.o: ./source/types/framework/framework_get_memtree.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_get_memtree.d -c ./source/types/framework/framework_get_memtree.c -o $(DEBUG_DIR)/objects/framework_get_memtree.o
+
+$(DEBUG_DIR)/objects/i32.o: ./source/types/i32/i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i32.d -c ./source/types/i32/i32.c -o $(DEBUG_DIR)/objects/i32.o
+
+$(DEBUG_DIR)/objects/i32_to_any.o: ./source/types/i32/i32_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i32_to_any.d -c ./source/types/i32/i32_to_any.c -o $(DEBUG_DIR)/objects/i32_to_any.o
+
+$(DEBUG_DIR)/objects/i64.o: ./source/types/i64/i64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i64.d -c ./source/types/i64/i64.c -o $(DEBUG_DIR)/objects/i64.o
+
+$(DEBUG_DIR)/objects/i64_to_any.o: ./source/types/i64/i64_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i64_to_any.d -c ./source/types/i64/i64_to_any.c -o $(DEBUG_DIR)/objects/i64_to_any.o
+
+$(DEBUG_DIR)/objects/i8.o: ./source/types/i8/i8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8.d -c ./source/types/i8/i8.c -o $(DEBUG_DIR)/objects/i8.o
+
+$(DEBUG_DIR)/objects/i8_to_any.o: ./source/types/i8/i8_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_to_any.d -c ./source/types/i8/i8_to_any.c -o $(DEBUG_DIR)/objects/i8_to_any.o
+
+$(DEBUG_DIR)/objects/list.o: ./source/types/list/list.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list.d -c ./source/types/list/list.c -o $(DEBUG_DIR)/objects/list.o
+
+$(DEBUG_DIR)/objects/list_copy.o: ./source/types/list/list_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_copy.d -c ./source/types/list/list_copy.c -o $(DEBUG_DIR)/objects/list_copy.o
+
+$(DEBUG_DIR)/objects/list_create.o: ./source/types/list/list_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_create.d -c ./source/types/list/list_create.c -o $(DEBUG_DIR)/objects/list_create.o
+
+$(DEBUG_DIR)/objects/list_destroy.o: ./source/types/list/list_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_destroy.d -c ./source/types/list/list_destroy.c -o $(DEBUG_DIR)/objects/list_destroy.o
+
+$(DEBUG_DIR)/objects/list_expand.o: ./source/types/list/list_expand.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_expand.d -c ./source/types/list/list_expand.c -o $(DEBUG_DIR)/objects/list_expand.o
+
+$(DEBUG_DIR)/objects/list_get.o: ./source/types/list/list_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_get.d -c ./source/types/list/list_get.c -o $(DEBUG_DIR)/objects/list_get.o
+
+$(DEBUG_DIR)/objects/list_get_length.o: ./source/types/list/list_get_length.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_get_length.d -c ./source/types/list/list_get_length.c -o $(DEBUG_DIR)/objects/list_get_length.o
+
+$(DEBUG_DIR)/objects/list_pop.o: ./source/types/list/list_pop.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_pop.d -c ./source/types/list/list_pop.c -o $(DEBUG_DIR)/objects/list_pop.o
+
+$(DEBUG_DIR)/objects/list_push.o: ./source/types/list/list_push.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_push.d -c ./source/types/list/list_push.c -o $(DEBUG_DIR)/objects/list_push.o
+
+$(DEBUG_DIR)/objects/list_reverse.o: ./source/types/list/list_reverse.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_reverse.d -c ./source/types/list/list_reverse.c -o $(DEBUG_DIR)/objects/list_reverse.o
+
+$(DEBUG_DIR)/objects/list_set.o: ./source/types/list/list_set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_set.d -c ./source/types/list/list_set.c -o $(DEBUG_DIR)/objects/list_set.o
+
+$(DEBUG_DIR)/objects/list_shift.o: ./source/types/list/list_shift.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_shift.d -c ./source/types/list/list_shift.c -o $(DEBUG_DIR)/objects/list_shift.o
+
+$(DEBUG_DIR)/objects/list_to_any.o: ./source/types/list/list_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_to_any.d -c ./source/types/list/list_to_any.c -o $(DEBUG_DIR)/objects/list_to_any.o
+
+$(DEBUG_DIR)/objects/list_unshift.o: ./source/types/list/list_unshift.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_unshift.d -c ./source/types/list/list_unshift.c -o $(DEBUG_DIR)/objects/list_unshift.o
+
+$(DEBUG_DIR)/objects/map.o: ./source/types/map/map.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map.d -c ./source/types/map/map.c -o $(DEBUG_DIR)/objects/map.o
+
+$(DEBUG_DIR)/objects/map_copy.o: ./source/types/map/map_copy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_copy.d -c ./source/types/map/map_copy.c -o $(DEBUG_DIR)/objects/map_copy.o
+
+$(DEBUG_DIR)/objects/map_create.o: ./source/types/map/map_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_create.d -c ./source/types/map/map_create.c -o $(DEBUG_DIR)/objects/map_create.o
+
+$(DEBUG_DIR)/objects/map_destroy.o: ./source/types/map/map_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_destroy.d -c ./source/types/map/map_destroy.c -o $(DEBUG_DIR)/objects/map_destroy.o
+
+$(DEBUG_DIR)/objects/map_expand.o: ./source/types/map/map_expand.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_expand.d -c ./source/types/map/map_expand.c -o $(DEBUG_DIR)/objects/map_expand.o
+
+$(DEBUG_DIR)/objects/map_get.o: ./source/types/map/map_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_get.d -c ./source/types/map/map_get.c -o $(DEBUG_DIR)/objects/map_get.o
+
+$(DEBUG_DIR)/objects/map_hash.o: ./source/types/map/map_hash.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_hash.d -c ./source/types/map/map_hash.c -o $(DEBUG_DIR)/objects/map_hash.o
+
+$(DEBUG_DIR)/objects/map_set.o: ./source/types/map/map_set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_set.d -c ./source/types/map/map_set.c -o $(DEBUG_DIR)/objects/map_set.o
 
 $(DEBUG_DIR)/objects/memtree_create.o: ./source/types/memtree/memtree_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_create.d -c ./source/types/memtree/memtree_create.c -o $(DEBUG_DIR)/objects/memtree_create.o
@@ -771,29 +1060,23 @@ $(DEBUG_DIR)/objects/string_is_cint.o: ./source/types/string/string_is_cint.c
 $(DEBUG_DIR)/objects/string_to_cint.o: ./source/types/string/string_to_cint.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/string_to_cint.d -c ./source/types/string/string_to_cint.c -o $(DEBUG_DIR)/objects/string_to_cint.o
 
-$(DEBUG_DIR)/objects/table.o: ./source/types/table/table.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table.d -c ./source/types/table/table.c -o $(DEBUG_DIR)/objects/table.o
+$(DEBUG_DIR)/objects/u32.o: ./source/types/u32/u32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/u32.d -c ./source/types/u32/u32.c -o $(DEBUG_DIR)/objects/u32.o
 
-$(DEBUG_DIR)/objects/table_copy.o: ./source/types/table/table_copy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_copy.d -c ./source/types/table/table_copy.c -o $(DEBUG_DIR)/objects/table_copy.o
+$(DEBUG_DIR)/objects/u32_to_any.o: ./source/types/u32/u32_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/u32_to_any.d -c ./source/types/u32/u32_to_any.c -o $(DEBUG_DIR)/objects/u32_to_any.o
 
-$(DEBUG_DIR)/objects/table_create.o: ./source/types/table/table_create.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_create.d -c ./source/types/table/table_create.c -o $(DEBUG_DIR)/objects/table_create.o
+$(DEBUG_DIR)/objects/u64.o: ./source/types/u64/u64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/u64.d -c ./source/types/u64/u64.c -o $(DEBUG_DIR)/objects/u64.o
 
-$(DEBUG_DIR)/objects/table_destroy.o: ./source/types/table/table_destroy.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_destroy.d -c ./source/types/table/table_destroy.c -o $(DEBUG_DIR)/objects/table_destroy.o
+$(DEBUG_DIR)/objects/u64_to_any.o: ./source/types/u64/u64_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/u64_to_any.d -c ./source/types/u64/u64_to_any.c -o $(DEBUG_DIR)/objects/u64_to_any.o
 
-$(DEBUG_DIR)/objects/table_expand.o: ./source/types/table/table_expand.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_expand.d -c ./source/types/table/table_expand.c -o $(DEBUG_DIR)/objects/table_expand.o
+$(DEBUG_DIR)/objects/u8.o: ./source/types/u8/u8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/u8.d -c ./source/types/u8/u8.c -o $(DEBUG_DIR)/objects/u8.o
 
-$(DEBUG_DIR)/objects/table_get.o: ./source/types/table/table_get.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_get.d -c ./source/types/table/table_get.c -o $(DEBUG_DIR)/objects/table_get.o
-
-$(DEBUG_DIR)/objects/table_hash.o: ./source/types/table/table_hash.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_hash.d -c ./source/types/table/table_hash.c -o $(DEBUG_DIR)/objects/table_hash.o
-
-$(DEBUG_DIR)/objects/table_set.o: ./source/types/table/table_set.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/table_set.d -c ./source/types/table/table_set.c -o $(DEBUG_DIR)/objects/table_set.o
+$(DEBUG_DIR)/objects/u8_to_any.o: ./source/types/u8/u8_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/u8_to_any.d -c ./source/types/u8/u8_to_any.c -o $(DEBUG_DIR)/objects/u8_to_any.o
 
 
 $(TESTS_DIR)/objects/allocate.o: ./tests/functions/allocate.c
@@ -808,20 +1091,68 @@ $(TESTS_DIR)/objects/deallocate.o: ./tests/functions/deallocate.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/deallocate.d -c ./tests/functions/deallocate.c -o $(TESTS_DIR)/objects/deallocate.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/deallocate.o $(DEFAULT) -o $(TESTS_DIR)/bin/deallocate
 
+$(TESTS_DIR)/objects/debug.o: ./tests/functions/debug.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/debug.d -c ./tests/functions/debug.c -o $(TESTS_DIR)/objects/debug.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/debug.o $(DEFAULT) -o $(TESTS_DIR)/bin/debug
+
+$(TESTS_DIR)/objects/delete.o: ./tests/functions/delete.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/delete.d -c ./tests/functions/delete.c -o $(TESTS_DIR)/objects/delete.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/delete.o $(DEFAULT) -o $(TESTS_DIR)/bin/delete
+
+$(TESTS_DIR)/objects/error.o: ./tests/functions/error.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/error.d -c ./tests/functions/error.c -o $(TESTS_DIR)/objects/error.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/error.o $(DEFAULT) -o $(TESTS_DIR)/bin/error
+
 $(TESTS_DIR)/objects/forkrun.o: ./tests/functions/forkrun.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/forkrun.d -c ./tests/functions/forkrun.c -o $(TESTS_DIR)/objects/forkrun.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/forkrun.o $(DEFAULT) -o $(TESTS_DIR)/bin/forkrun
+
+$(TESTS_DIR)/objects/new.o: ./tests/functions/new.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/new.d -c ./tests/functions/new.c -o $(TESTS_DIR)/objects/new.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/new.o $(DEFAULT) -o $(TESTS_DIR)/bin/new
 
 $(TESTS_DIR)/objects/print.o: ./tests/functions/print.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/print.d -c ./tests/functions/print.c -o $(TESTS_DIR)/objects/print.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/print.o $(DEFAULT) -o $(TESTS_DIR)/bin/print
 
-$(TESTS_DIR)/objects/cint.o: ./tests/types/cint.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/cint.d -c ./tests/types/cint.c -o $(TESTS_DIR)/objects/cint.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/cint.o $(DEFAULT) -o $(TESTS_DIR)/bin/cint
+$(TESTS_DIR)/objects/range.o: ./tests/functions/range.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/range.d -c ./tests/functions/range.c -o $(TESTS_DIR)/objects/range.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/range.o $(DEFAULT) -o $(TESTS_DIR)/bin/range
 
-$(TESTS_DIR)/objects/collection.o: ./tests/types/collection.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/collection.d -c ./tests/types/collection.c -o $(TESTS_DIR)/objects/collection.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/collection.o $(DEFAULT) -o $(TESTS_DIR)/bin/collection
+$(TESTS_DIR)/objects/repeat.o: ./tests/functions/repeat.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/repeat.d -c ./tests/functions/repeat.c -o $(TESTS_DIR)/objects/repeat.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/repeat.o $(DEFAULT) -o $(TESTS_DIR)/bin/repeat
+
+$(TESTS_DIR)/objects/warning.o: ./tests/functions/warning.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/warning.d -c ./tests/functions/warning.c -o $(TESTS_DIR)/objects/warning.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/warning.o $(DEFAULT) -o $(TESTS_DIR)/bin/warning
+
+$(TESTS_DIR)/objects/any.o: ./tests/types/any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/any.d -c ./tests/types/any.c -o $(TESTS_DIR)/objects/any.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/any.o $(DEFAULT) -o $(TESTS_DIR)/bin/any
+
+$(TESTS_DIR)/objects/cstring.o: ./tests/types/cstring.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/cstring.d -c ./tests/types/cstring.c -o $(TESTS_DIR)/objects/cstring.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/cstring.o $(DEFAULT) -o $(TESTS_DIR)/bin/cstring
+
+$(TESTS_DIR)/objects/framework.o: ./tests/types/framework.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/framework.d -c ./tests/types/framework.c -o $(TESTS_DIR)/objects/framework.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/framework.o $(DEFAULT) -o $(TESTS_DIR)/bin/framework
+
+$(TESTS_DIR)/objects/map.o: ./tests/types/map.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/map.d -c ./tests/types/map.c -o $(TESTS_DIR)/objects/map.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/map.o $(DEFAULT) -o $(TESTS_DIR)/bin/map
+
+$(TESTS_DIR)/objects/memtree.o: ./tests/types/memtree.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/memtree.d -c ./tests/types/memtree.c -o $(TESTS_DIR)/objects/memtree.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/memtree.o $(DEFAULT) -o $(TESTS_DIR)/bin/memtree
+
+$(TESTS_DIR)/objects/string.o: ./tests/types/string.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/string.d -c ./tests/types/string.c -o $(TESTS_DIR)/objects/string.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/string.o $(DEFAULT) -o $(TESTS_DIR)/bin/string
+
+$(TESTS_DIR)/objects/type.o: ./tests/types/type.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/type.d -c ./tests/types/type.c -o $(TESTS_DIR)/objects/type.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/type.o $(DEFAULT) -o $(TESTS_DIR)/bin/type
 
 

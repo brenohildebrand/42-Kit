@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 14:28:01 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:34:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ typedef struct s_type	*t_type;
 struct s_type {
 	char			*name;
 	unsigned int	size;
+	int				is_literal;
 	void			*(*create)(void);
 	void			(*destroy)(void *);
 	void			*(*init)(void *, t_any);
