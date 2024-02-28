@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cint_abs.c                                         :+:      :+:    :+:   */
+/*   i64.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:06:48 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 16:08:12 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/28 12:28:29 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/28 12:29:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cint.h"
+#include "i64.h"
 
-int	cint_abs(int value)
+t_type	i64(void)
 {
-	if (value < 0)
-		value *= -1;
-	return (value);
+	static struct s_type	type = {
+		.name = "i64",
+		.size = sizeof(t_i64)
+	};
+
+	return (&type);
 }

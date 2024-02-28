@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_to_any.c                                   :+:      :+:    :+:   */
+/*   u8.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:01:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 12:41:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/28 12:31:38 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/28 12:32:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "any.h"
+#ifndef U8_H
+# define U8_H
 
-t_any	cstring_to_any(t_cstring value)
-{
-	t_any	instance;
+typedef unsigned char	t_u8;
 
-	instance = create(any);
-	instance->type = cstring();
-	instance->value.cstring = value;
-	return (instance);
-}
+t_type	u8(void);
+t_any	u8_to_any(t_u8 value);
+
+#endif

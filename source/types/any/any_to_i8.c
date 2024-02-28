@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_to_any.c                                   :+:      :+:    :+:   */
+/*   any_to_i8.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:01:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 12:41:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/28 12:14:24 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/28 12:15:09 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "any.h"
 
-t_any	cstring_to_any(t_cstring value)
+t_i8	any_to_i8(t_any instance)
 {
-	t_any	instance;
+	t_i8	value;
 
-	instance = create(any);
-	instance->type = cstring();
-	instance->value.cstring = value;
-	return (instance);
+	value = instance->value.i8;
+	any_destroy(instance);
+	return (value);
 }

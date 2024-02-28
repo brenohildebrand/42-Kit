@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double.c                                           :+:      :+:    :+:   */
+/*   i64_to_any.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:17:34 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 19:22:36 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/28 12:29:48 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/28 12:30:49 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cdouble.h"
+#include "i64.h"
 
-t_type	cdouble(void)
+t_any	i64_to_any(t_i64 value)
 {
-	static struct s_type type = {
-		.name = "double",
-		.size = sizeof(double)
-	};
-	
-	return (&type);
+	t_any	instance;
+
+	instance = create(any);
+	instance->type = i64();
+	instance->value.i64 = value;
+	return (instance);
 }

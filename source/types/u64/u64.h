@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_to_any.c                                   :+:      :+:    :+:   */
+/*   u64.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:01:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 12:41:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/28 12:37:23 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/28 12:38:06 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "any.h"
+#ifndef U64_H
+# define U64_H
 
-t_any	cstring_to_any(t_cstring value)
-{
-	t_any	instance;
+typedef unsigned long long int	t_u64;
 
-	instance = create(any);
-	instance->type = cstring();
-	instance->value.cstring = value;
-	return (instance);
-}
+t_type	u64(void);
+t_any	u64_to_any(t_u64 value);
+
+#endif

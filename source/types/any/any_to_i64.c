@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any_to_int.c                                       :+:      :+:    :+:   */
+/*   any_to_i64.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 02:37:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 19:18:32 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/28 12:18:11 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/28 12:18:45 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "any.h"
 
-int	any_to_int(t_any instance)
+t_i64	any_to_i64(t_any instance)
 {
-	int	value;
+	t_i64	value;
 
-	value = instance->value.cint;
+	value = instance->value.i64;
 	any_destroy(instance);
 	return (value);
 }

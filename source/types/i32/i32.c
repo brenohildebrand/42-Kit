@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cstring_to_any.c                                   :+:      :+:    :+:   */
+/*   i32.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:01:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 12:41:15 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/28 12:25:26 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/28 12:26:12 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "any.h"
+#include "i32.h"
 
-t_any	cstring_to_any(t_cstring value)
+t_type	i32(void)
 {
-	t_any	instance;
+	static struct s_type	type = {
+		.name = "i32",
+		.size = sizeof(t_i32)
+	};
 
-	instance = create(any);
-	instance->type = cstring();
-	instance->value.cstring = value;
-	return (instance);
+	return (&type);
 }

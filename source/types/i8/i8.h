@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   double.h                                           :+:      :+:    :+:   */
+/*   i8.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 16:16:27 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 19:22:25 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/28 12:21:37 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/28 12:32:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CDOUBLE_H
-# define CDOUBLE_H
+#ifndef I8_H
+# define I8_H
 
-t_type	double(void);
-t_any	double_to_any(double value);
+typedef char	t_i8;
+
+t_type	i8(void);
+t_any	i8_to_any(t_i8 value);
 
 #endif

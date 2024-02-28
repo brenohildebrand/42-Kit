@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   any_to_llint.c                                     :+:      :+:    :+:   */
+/*   f64.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 19:00:24 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 19:18:58 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/28 12:07:44 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/28 12:23:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "any.h"
+#include "f64.h"
 
-long long int	any_to_llint(t_any instance)
+t_type	f64(void)
 {
-	long long int	value;
+	static struct s_type	type = {
+		.name = "f64",
+		.size = sizeof(t_f64)
+	};
 
-	value = instance->value.cllint;
-	any_destroy(instance);
-	return (value);
+	return (&type);
 }
