@@ -6,13 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:03:08 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 11:30:03 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:37:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "functions.h"
 
-int	forkrun(int (*callback)(void))
+int	forkrun(void (*callback)(void))
 {
 	pid_t	pid;
 	int		status;
@@ -21,7 +21,7 @@ int	forkrun(int (*callback)(void))
 	assert(pid >= 0);
 	if (pid == 0)
 	{
-		exit(callback());
+		callback();
 	}
 	else
 	{
@@ -29,5 +29,5 @@ int	forkrun(int (*callback)(void))
 		if (WIFEXITED(status))
 			return (WEXITSTATUS(status));
 	}
-	return (-1);
+	return (0);
 }

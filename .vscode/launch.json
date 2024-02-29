@@ -102,6 +102,26 @@
             "preLaunchTask": "build"
 		},
 		{
+			"name": "display",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/tests/bin/display",
+			"args": [],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
+		},
+		{
 			"name": "error",
 			"type": "cppdbg",
 			"request": "launch",
@@ -146,26 +166,6 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/build/tests/bin/new",
-			"args": [],
-			"stopAtEntry": true,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "build"
-		},
-		{
-			"name": "print",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/build/tests/bin/print",
 			"args": [],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",

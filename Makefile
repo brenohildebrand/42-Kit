@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/28 20:54:34 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/28 20:54:34 by bhildebr         ###   ########.fr        #
+#    Created: 2024/02/29 16:03:59 by bhildebr          #+#    #+#              #
+#    Updated: 2024/02/29 16:03:59 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,6 @@ SOURCES = \
 	./source/functions/find.c \
 	./source/functions/foreach.c \
 	./source/functions/forkrun.c \
-	./source/functions/getg.c \
 	./source/functions/init.c \
 	./source/functions/new.c \
 	./source/functions/print.c \
@@ -80,7 +79,8 @@ SOURCES = \
 	./source/functions/range.c \
 	./source/functions/reduce.c \
 	./source/functions/repeat.c \
-	./source/functions/setg.c \
+	./source/functions/retrieve.c \
+	./source/functions/share.c \
 	./source/functions/slice.c \
 	./source/functions/warning.c \
 	./source/types/any/any.c \
@@ -169,7 +169,6 @@ OBJECTS = \
 	find.o \
 	foreach.o \
 	forkrun.o \
-	getg.o \
 	init.o \
 	new.o \
 	print.o \
@@ -178,7 +177,8 @@ OBJECTS = \
 	range.o \
 	reduce.o \
 	repeat.o \
-	setg.o \
+	retrieve.o \
+	share.o \
 	slice.o \
 	warning.o \
 	any.o \
@@ -267,7 +267,6 @@ DEPENDENCIES = \
 	find.d \
 	foreach.d \
 	forkrun.d \
-	getg.d \
 	init.d \
 	new.d \
 	print.d \
@@ -276,7 +275,8 @@ DEPENDENCIES = \
 	range.d \
 	reduce.d \
 	repeat.d \
-	setg.d \
+	retrieve.d \
+	share.d \
 	slice.d \
 	warning.d \
 	any.d \
@@ -355,10 +355,10 @@ TESTS = \
 	build/tests/bin/deallocate \
 	build/tests/bin/debug \
 	build/tests/bin/delete \
+	build/tests/bin/display \
 	build/tests/bin/error \
 	build/tests/bin/forkrun \
 	build/tests/bin/new \
-	build/tests/bin/print \
 	build/tests/bin/range \
 	build/tests/bin/repeat \
 	build/tests/bin/warning \
@@ -376,10 +376,10 @@ TESTS_OBJECTS = \
 	build/tests/objects/deallocate.o \
 	build/tests/objects/debug.o \
 	build/tests/objects/delete.o \
+	build/tests/objects/display.o \
 	build/tests/objects/error.o \
 	build/tests/objects/forkrun.o \
 	build/tests/objects/new.o \
-	build/tests/objects/print.o \
 	build/tests/objects/range.o \
 	build/tests/objects/repeat.o \
 	build/tests/objects/warning.o \
@@ -397,10 +397,10 @@ TESTS_DEPENDENCIES = \
 	build/tests/dependencies/deallocate.d \
 	build/tests/dependencies/debug.d \
 	build/tests/dependencies/delete.d \
+	build/tests/dependencies/display.d \
 	build/tests/dependencies/error.d \
 	build/tests/dependencies/forkrun.d \
 	build/tests/dependencies/new.d \
-	build/tests/dependencies/print.d \
 	build/tests/dependencies/range.d \
 	build/tests/dependencies/repeat.d \
 	build/tests/dependencies/warning.d \
@@ -506,9 +506,6 @@ $(DEFAULT_DIR)/objects/foreach.o: ./source/functions/foreach.c
 $(DEFAULT_DIR)/objects/forkrun.o: ./source/functions/forkrun.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/forkrun.d -c ./source/functions/forkrun.c -o $(DEFAULT_DIR)/objects/forkrun.o
 
-$(DEFAULT_DIR)/objects/getg.o: ./source/functions/getg.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/getg.d -c ./source/functions/getg.c -o $(DEFAULT_DIR)/objects/getg.o
-
 $(DEFAULT_DIR)/objects/init.o: ./source/functions/init.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/init.d -c ./source/functions/init.c -o $(DEFAULT_DIR)/objects/init.o
 
@@ -533,8 +530,11 @@ $(DEFAULT_DIR)/objects/reduce.o: ./source/functions/reduce.c
 $(DEFAULT_DIR)/objects/repeat.o: ./source/functions/repeat.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/repeat.d -c ./source/functions/repeat.c -o $(DEFAULT_DIR)/objects/repeat.o
 
-$(DEFAULT_DIR)/objects/setg.o: ./source/functions/setg.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/setg.d -c ./source/functions/setg.c -o $(DEFAULT_DIR)/objects/setg.o
+$(DEFAULT_DIR)/objects/retrieve.o: ./source/functions/retrieve.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/retrieve.d -c ./source/functions/retrieve.c -o $(DEFAULT_DIR)/objects/retrieve.o
+
+$(DEFAULT_DIR)/objects/share.o: ./source/functions/share.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/share.d -c ./source/functions/share.c -o $(DEFAULT_DIR)/objects/share.o
 
 $(DEFAULT_DIR)/objects/slice.o: ./source/functions/slice.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/slice.d -c ./source/functions/slice.c -o $(DEFAULT_DIR)/objects/slice.o
@@ -795,9 +795,6 @@ $(DEBUG_DIR)/objects/foreach.o: ./source/functions/foreach.c
 $(DEBUG_DIR)/objects/forkrun.o: ./source/functions/forkrun.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/forkrun.d -c ./source/functions/forkrun.c -o $(DEBUG_DIR)/objects/forkrun.o
 
-$(DEBUG_DIR)/objects/getg.o: ./source/functions/getg.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/getg.d -c ./source/functions/getg.c -o $(DEBUG_DIR)/objects/getg.o
-
 $(DEBUG_DIR)/objects/init.o: ./source/functions/init.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/init.d -c ./source/functions/init.c -o $(DEBUG_DIR)/objects/init.o
 
@@ -822,8 +819,11 @@ $(DEBUG_DIR)/objects/reduce.o: ./source/functions/reduce.c
 $(DEBUG_DIR)/objects/repeat.o: ./source/functions/repeat.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/repeat.d -c ./source/functions/repeat.c -o $(DEBUG_DIR)/objects/repeat.o
 
-$(DEBUG_DIR)/objects/setg.o: ./source/functions/setg.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/setg.d -c ./source/functions/setg.c -o $(DEBUG_DIR)/objects/setg.o
+$(DEBUG_DIR)/objects/retrieve.o: ./source/functions/retrieve.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/retrieve.d -c ./source/functions/retrieve.c -o $(DEBUG_DIR)/objects/retrieve.o
+
+$(DEBUG_DIR)/objects/share.o: ./source/functions/share.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/share.d -c ./source/functions/share.c -o $(DEBUG_DIR)/objects/share.o
 
 $(DEBUG_DIR)/objects/slice.o: ./source/functions/slice.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/slice.d -c ./source/functions/slice.c -o $(DEBUG_DIR)/objects/slice.o
@@ -1059,6 +1059,10 @@ $(TESTS_DIR)/objects/delete.o: ./tests/functions/delete.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/delete.d -c ./tests/functions/delete.c -o $(TESTS_DIR)/objects/delete.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/delete.o $(DEFAULT) -o $(TESTS_DIR)/bin/delete
 
+$(TESTS_DIR)/objects/display.o: ./tests/functions/display.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/display.d -c ./tests/functions/display.c -o $(TESTS_DIR)/objects/display.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/display.o $(DEFAULT) -o $(TESTS_DIR)/bin/display
+
 $(TESTS_DIR)/objects/error.o: ./tests/functions/error.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/error.d -c ./tests/functions/error.c -o $(TESTS_DIR)/objects/error.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/error.o $(DEFAULT) -o $(TESTS_DIR)/bin/error
@@ -1070,10 +1074,6 @@ $(TESTS_DIR)/objects/forkrun.o: ./tests/functions/forkrun.c
 $(TESTS_DIR)/objects/new.o: ./tests/functions/new.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/new.d -c ./tests/functions/new.c -o $(TESTS_DIR)/objects/new.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/new.o $(DEFAULT) -o $(TESTS_DIR)/bin/new
-
-$(TESTS_DIR)/objects/print.o: ./tests/functions/print.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/print.d -c ./tests/functions/print.c -o $(TESTS_DIR)/objects/print.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/print.o $(DEFAULT) -o $(TESTS_DIR)/bin/print
 
 $(TESTS_DIR)/objects/range.o: ./tests/functions/range.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/range.d -c ./tests/functions/range.c -o $(TESTS_DIR)/objects/range.o

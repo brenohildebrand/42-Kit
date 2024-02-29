@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   setg.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 11:42:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 12:06:23 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/22 21:36:17 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/28 21:11:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
-{
-	int		stdout_backup;
-	int		pipefd[2];
-	char	buffer[100];
+#include "functions.h"
+#include "framework.h"
 
-	stdout_backup = dup(1);
-	pipe(pipefd);
-	dup2(pipefd[1], 1);
-	close(pipefd[1]);
-	print("hello, world!");
-	dup2(stdout_backup, 1);
-	read(pipefd[0], buffer, sizeof(buffer));
-	close(pipefd[0]);
-	// compare "hello, world!" with buffer
-	return (0);
+void	share(t_any key, t_any value)
+{
+	t_map	map;
+
+	map = framework_get_map();
+	map_set(map, key, value);
 }

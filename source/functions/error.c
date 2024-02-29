@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:22:16 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 01:44:06 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/29 11:14:21 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	error(char *cstring)
 	write(1, "\033[1;31m", 7);
 	write(1, "[ERROR] ", 8);
 	write(1, "\033[0m", 4);
-	print(cstring);
+	display(cstring);
 	memtree_destroy();
 	exit(1);
 }

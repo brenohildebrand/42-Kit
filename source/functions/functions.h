@@ -6,12 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:11:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 20:17:44 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:44:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
+
+# include "i32.h"
 
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -28,16 +30,16 @@ void	delete(void *instance);
 void	destroy(void *instance);
 void	display(char *cstring);
 void	error(char *cstring);
-int		forkrun(int (*callback)(void));
-t_any	getg(t_any key);
+int		forkrun(void (*callback)(void));
 void	*init(void	*instance, t_any value);
 void	*new(t_type (*signature)(void));
-void	print(char *cstring);
+void	print(t_any instance);
 void	push(void	*instance, t_any value);
-void	quit(void);
+void	quit(t_i32 exit_code);
 void	range(int start, int end, void (*callback)(int));
 void	repeat(int n, void (*callback)(void));
-void	setg(t_any key, t_any value);
+t_any	retrieve(t_any key);
+void	share(t_any key, t_any value);
 void	warning(char *cstring);
 
 #endif

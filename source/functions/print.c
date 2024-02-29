@@ -6,19 +6,18 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 04:50:03 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 01:44:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:03:25 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "functions.h"
 
-void	print(char *cstring)
+void	print(t_any instance)
 {
-	unsigned int	len;
+	t_type	type;
 
-	len = 0;
-	while (cstring[len])
-		len++;
-	write(1, cstring, len);
-	write(1, "\n", 1);
+	type = memtree_search(instance);
+	assert(type != NULL);
+	assert(type->push != NULL);
+	type->print(instance);
 }

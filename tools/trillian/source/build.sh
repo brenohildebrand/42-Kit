@@ -318,6 +318,7 @@ cat << EOF > .vscode/c_cpp_properties.json
         {
             "name": "Linux",
             "includePath": [
+				$(find $FRAMEWORK/source -type d -exec echo {} \; | sed "s/.*/\t\t\t\t\"&\",/" | sed '1s/^\t\t\t\t//')
 				$(find $FRAMEWORK/source -type d -exec echo {} \; | sed "s/.*/\t\t\t\t\"&\",/" | sed '1s/^\t\t\t\t//' | sed '$s/,$//')
             ],
 			"forcedInclude": [
@@ -404,8 +405,8 @@ DEFAULT="./build/default/bin/$NAME"
 DEBUG="./build/debug/bin/$NAME"
 
 CC="gcc"
-CFLAGS="-Wall -Wextra -Werror -std=c99 -D$NAME=main -g"
-CPATHS="\\
+CFLAGS="-Wall -Wextra -Werror -std=c99 -g"
+CPATHS="\
 	-include framework.h \\
 $(find $FRAMEWORK/source -type f -name '*.h' -exec basename {} \; | sed 's/.*/\t-include & \\/' | sed '/framework\.h/d' )
 $(find $FRAMEWORK/source -type d -exec echo -e '\t'-iquote {} \\ \;)
@@ -413,7 +414,9 @@ $(find $PROJECT/source -type d -exec echo -e '\t'-iquote {} \\ \; | sed '$s/ \\/
 
 SOURCES="$(find ./source -type f -name "*.c" -exec echo {} \; | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
 HEADERS="$(find ./source -type f -name "*.h" -exec basename {} \; | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
-OBJECTS="$(find ./source -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.o/' | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
+OBJECTS="$(find ./source -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.o/' | sed 's/.*/\t& \\/' | sed '0,/^/s//\\\n/')"
+OBJECTS+="
+	main.o"
 DEPENDENCIES="$(find ./source -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.d/' | sed 's/.*/\t& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
 TESTS="$(find ./tests -type f -name "*.c" -exec basename {} \; | sed 's/\.c$//' | sed 's/.*/\tbuild\/tests\/bin\/& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
 TESTS_OBJECTS="$(find ./tests -type f -name "*.c" -exec basename {} \; | sed 's/\.c$/.o/' | sed 's/.*/\tbuild\/tests\/objects\/& \\/' | sed '$s/ \\$//' | sed '0,/^/s//\\\n/')"
@@ -441,6 +444,18 @@ $debug_object: $source
 "
 done
 
+source=$(find ./source -type f -name "$NAME.c" -exec echo {} \;)
+DEFAULT_RULES+="\
+\$(DEFAULT_DIR)/objects/main.o: $source
+	@\$(CC) \$(CFLAGS) \$(CPATHS) -D$NAME=main -c $source -o \$(DEFAULT_DIR)/objects/main.o
+
+"
+DEBUG_RULES+="\
+\$(DEBUG_DIR)/objects/main.o: $source
+	@\$(CC) \$(CFLAGS) \$(CPATHS) -D$NAME=main -c $source -o \$(DEBUG_DIR)/objects/main.o
+
+"
+
 for test in $(find ./tests -type f -name "*.c" -exec echo {} \;); do
 	bin=$(basename $test | sed 's/\.c//')
 	object=$(basename $test | sed 's/\.c/.o/')
@@ -453,7 +468,7 @@ for test in $(find ./tests -type f -name "*.c" -exec echo {} \;); do
 	TESTS_RULES+="\
 $test_object: $test
 	@\$(CC) \$(CFLAGS) \$(CPATHS) -MMD -MF $test_dependency -c $test -o $test_object
-	@\$(CC) \$(CFLAGS) \$(CPATHS) $test_object \$(DEFAULT_OBJECTS) \$(DEFAULT_LIBFRAMEWORK) -o $test_bin
+	@\$(CC) \$(CFLAGS) \$(CPATHS) $test_object \$(filter-out \$(DEFAULT_DIR)/objects/main.o, \$(DEFAULT_OBJECTS)) \$(DEFAULT_LIBFRAMEWORK) -o $test_bin
 
 "
 done
@@ -512,12 +527,12 @@ all: build
 
 debug: \$(DEBUG_LIBFRAMEWORK) \$(DEBUG)
 \$(DEBUG): CFLAGS += -DDEBUG -g
-\$(DEBUG): \$(DEBUG_OBJECTS) | \$(DEBUG_DIR)
-	@\$(CC) \$(CFLAGS) -o \$(DEBUG_DIR)/bin/\$(NAME) \$(DEBUG_OBJECTS) \$(DEBUG_LIBFRAMEWORK)
+\$(DEBUG): \$(filter-out \$(DEBUG_DIR)/objects/$NAME.o, \$(DEBUG_OBJECTS)) | \$(DEBUG_DIR)
+	@\$(CC) \$(CFLAGS) -o \$(DEBUG_DIR)/bin/\$(NAME) \$(filter-out \$(DEBUG_DIR)/objects/$NAME.o, \$(DEBUG_OBJECTS)) \$(DEBUG_LIBFRAMEWORK)
 
 build: \$(DEFAULT_LIBFRAMEWORK) \$(DEFAULT)
-\$(DEFAULT): \$(DEFAULT_OBJECTS) | \$(DEFAULT_DIR)
-	@\$(CC) \$(CFLAGS) -o \$(DEFAULT_DIR)/bin/\$(NAME) \$(DEFAULT_OBJECTS) \$(DEFAULT_LIBFRAMEWORK)
+\$(DEFAULT): \$(filter-out \$(DEFAULT_DIR)/objects/$NAME.o, \$(DEFAULT_OBJECTS)) | \$(DEFAULT_DIR)
+	@\$(CC) \$(CFLAGS) -o \$(DEFAULT_DIR)/bin/\$(NAME) \$(filter-out \$(DEFAULT_DIR)/objects/$NAME.o, \$(DEFAULT_OBJECTS)) \$(DEFAULT_LIBFRAMEWORK)
 
 tests: build \$(TESTS)
 \$(TESTS): \$(TESTS_OBJECTS) | \$(TESTS_DIR)

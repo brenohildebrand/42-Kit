@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 18:35:02 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/28 21:03:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ struct s_type {
 	int				(*find)(void *, int (*)(t_any, t_i32));
 	void			(*slice)(void *, t_i32, t_i32);
 	int				(*compare)(t_any, t_any);
+	void			(*print)(t_any);
 	t_i8			(*to_i8)(t_any);
 	t_u8			(*to_u8)(t_any);
 	t_i32			(*to_i32)(t_any);

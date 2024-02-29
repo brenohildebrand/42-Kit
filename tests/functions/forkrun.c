@@ -6,26 +6,23 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:32:32 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 11:41:36 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:39:05 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	exitzero(void)
+void	exitzero(void)
 {
 	exit(0);
-	return (0);	
 }
 
-int	exitone(void)
+void	exitone(void)
 {
 	exit(1);
-	return (0);
 }
 
-int exitfortytwo(void)
+void	exitfortytwo(void)
 {
 	exit(42);
-	return (0);
 }
 
 int	main(void)

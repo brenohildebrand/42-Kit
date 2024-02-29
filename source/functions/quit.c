@@ -6,14 +6,14 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 17:20:57 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 17:21:25 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:50:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "functions.h"
 
-void	quit(void)
+void	quit(t_i32	exit_code)
 {
 	memtree_destroy();
-	exit(0);
+	exit(exit_code);
 }

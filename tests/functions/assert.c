@@ -6,20 +6,18 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 10:58:25 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 11:30:21 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:37:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	trueassert(void)
+void	trueassert(void)
 {
 	assert(1 + 1 == 2);
-	return (0);
 }
 
-int	falseassert(void)
+void	falseassert(void)
 {
 	assert(1 + 1 == 3);
-	return (0);
 }
 
 int	main(void)
