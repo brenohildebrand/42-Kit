@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:09:29 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/29 18:51:22 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:36:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 t_any	retrieve(t_i8 *key)
 {
-	t_map	map;
-
-	map = framework_get_map();
-	return (map_get(map, i8_sequence_to_any(key)));
+	return (map_get(framework_get()->map, i8_sequence_to_any(key)));
 }

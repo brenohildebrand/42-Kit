@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:02:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 13:41:02 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:00:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,5 @@ t_framework	framework_get(void)
 		.map = NULL,
 	};
 
-	if (framework.map == NULL)
-	{
-		framework.map = map_create();
-	}
 	return (&framework);
 }

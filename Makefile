@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/01 15:26:57 by bhildebr          #+#    #+#              #
-#    Updated: 2024/03/01 15:26:57 by bhildebr         ###   ########.fr        #
+#    Created: 2024/03/01 18:44:55 by bhildebr          #+#    #+#              #
+#    Updated: 2024/03/01 18:44:55 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,8 +109,8 @@ SOURCES = \
 	./source/types/f64/f64.c \
 	./source/types/f64/f64_to_any.c \
 	./source/types/framework/framework_get.c \
-	./source/types/framework/framework_get_map.c \
-	./source/types/framework/framework_get_memtree.c \
+	./source/types/framework/framework_setup.c \
+	./source/types/framework/framework_teardown.c \
 	./source/types/i32/i32.c \
 	./source/types/i32/i32_to_any.c \
 	./source/types/i64/i64.c \
@@ -220,8 +220,8 @@ OBJECTS = \
 	f64.o \
 	f64_to_any.o \
 	framework_get.o \
-	framework_get_map.o \
-	framework_get_memtree.o \
+	framework_setup.o \
+	framework_teardown.o \
 	i32.o \
 	i32_to_any.o \
 	i64.o \
@@ -331,8 +331,8 @@ DEPENDENCIES = \
 	f64.d \
 	f64_to_any.d \
 	framework_get.d \
-	framework_get_map.d \
-	framework_get_memtree.d \
+	framework_setup.d \
+	framework_teardown.d \
 	i32.d \
 	i32_to_any.d \
 	i64.d \
@@ -657,11 +657,11 @@ $(DEFAULT_DIR)/objects/f64_to_any.o: ./source/types/f64/f64_to_any.c
 $(DEFAULT_DIR)/objects/framework_get.o: ./source/types/framework/framework_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_get.d -c ./source/types/framework/framework_get.c -o $(DEFAULT_DIR)/objects/framework_get.o
 
-$(DEFAULT_DIR)/objects/framework_get_map.o: ./source/types/framework/framework_get_map.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_get_map.d -c ./source/types/framework/framework_get_map.c -o $(DEFAULT_DIR)/objects/framework_get_map.o
+$(DEFAULT_DIR)/objects/framework_setup.o: ./source/types/framework/framework_setup.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_setup.d -c ./source/types/framework/framework_setup.c -o $(DEFAULT_DIR)/objects/framework_setup.o
 
-$(DEFAULT_DIR)/objects/framework_get_memtree.o: ./source/types/framework/framework_get_memtree.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_get_memtree.d -c ./source/types/framework/framework_get_memtree.c -o $(DEFAULT_DIR)/objects/framework_get_memtree.o
+$(DEFAULT_DIR)/objects/framework_teardown.o: ./source/types/framework/framework_teardown.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/framework_teardown.d -c ./source/types/framework/framework_teardown.c -o $(DEFAULT_DIR)/objects/framework_teardown.o
 
 $(DEFAULT_DIR)/objects/i32.o: ./source/types/i32/i32.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i32.d -c ./source/types/i32/i32.c -o $(DEFAULT_DIR)/objects/i32.o
@@ -985,11 +985,11 @@ $(DEBUG_DIR)/objects/f64_to_any.o: ./source/types/f64/f64_to_any.c
 $(DEBUG_DIR)/objects/framework_get.o: ./source/types/framework/framework_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_get.d -c ./source/types/framework/framework_get.c -o $(DEBUG_DIR)/objects/framework_get.o
 
-$(DEBUG_DIR)/objects/framework_get_map.o: ./source/types/framework/framework_get_map.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_get_map.d -c ./source/types/framework/framework_get_map.c -o $(DEBUG_DIR)/objects/framework_get_map.o
+$(DEBUG_DIR)/objects/framework_setup.o: ./source/types/framework/framework_setup.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_setup.d -c ./source/types/framework/framework_setup.c -o $(DEBUG_DIR)/objects/framework_setup.o
 
-$(DEBUG_DIR)/objects/framework_get_memtree.o: ./source/types/framework/framework_get_memtree.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_get_memtree.d -c ./source/types/framework/framework_get_memtree.c -o $(DEBUG_DIR)/objects/framework_get_memtree.o
+$(DEBUG_DIR)/objects/framework_teardown.o: ./source/types/framework/framework_teardown.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/framework_teardown.d -c ./source/types/framework/framework_teardown.c -o $(DEBUG_DIR)/objects/framework_teardown.o
 
 $(DEBUG_DIR)/objects/i32.o: ./source/types/i32/i32.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i32.d -c ./source/types/i32/i32.c -o $(DEBUG_DIR)/objects/i32.o

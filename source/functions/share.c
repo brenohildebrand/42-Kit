@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 21:36:17 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/29 18:51:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:36:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,5 @@
 
 void	share(t_i8 *key, t_any value)
 {
-	t_map	map;
-
-	map = framework_get_map();
-	map_set(map, i8_sequence_to_any(key), value);
+	map_set(framework_get()->map, i8_sequence_to_any(key), value);
 }

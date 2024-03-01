@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 21:47:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 13:24:33 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/01 18:00:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ struct s_framework {
 	t_map		map;
 };
 
+void		framework_setup(void);
+void		framework_teardown(void);
 t_framework	framework_get(void);
-t_memtree	framework_get_memtree(void);
-t_map		framework_get_map(void);
 
 #endif

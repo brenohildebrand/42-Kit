@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:11:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/01 11:36:17 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/01 15:46:25 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 # define FUNCTIONS_H
 
 # include "i8.h"
+# include "u8.h"
 # include "i32.h"
+# include "u32.h"
+# include "i64.h"
+# include "u64.h"
 
 # include <sys/types.h>
 # include <sys/wait.h>
