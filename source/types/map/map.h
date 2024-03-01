@@ -18,8 +18,8 @@ typedef struct s_map_entry		*t_map_entry;
 
 struct s_map {
 	struct s_map_entry	*entries;
-	int					length;
-	int					max_length;
+	t_i32				length;
+	t_i32				max_length;
 };
 
 struct s_map_entry {

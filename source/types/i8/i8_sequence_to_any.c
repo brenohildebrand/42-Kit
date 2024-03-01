@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                            :+:      :+:    :+:   */
+/*   i8_sequence_to_any.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 22:52:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 23:45:28 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/29 19:52:26 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/29 19:53:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "i8.h"
 
-t_type	map(void)
+t_any	i8_sequence_to_any(t_i8 *sequence)
 {
-	static struct s_type	type = {
-		.name = "map",
-		.size = sizeof(struct s_map),
-		.create = (void *(*)(void))map_create,
-		.destroy = (void (*)(void *))map_destroy,
-		.copy = (void *(*)(void *))map_copy,
-		.get = (t_any (*)(void *, t_any))map_get,
-		.set = (void (*)(void *, t_any, t_any))map_set,
-		.is_instance = 1
-	};
+	t_any	instance;
 
-	return (&type);
+	instance = create(any);
+	instance->type = i8_sequence();
+	instance->value.sequence = sequence;
+	return (instance);	
 }

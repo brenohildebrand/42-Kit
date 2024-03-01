@@ -182,26 +182,6 @@
             "preLaunchTask": "build"
 		},
 		{
-			"name": "range",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/build/tests/bin/range",
-			"args": [],
-			"stopAtEntry": true,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "build"
-		},
-		{
 			"name": "repeat",
 			"type": "cppdbg",
 			"request": "launch",
@@ -246,26 +226,6 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/build/tests/bin/any",
-			"args": [],
-			"stopAtEntry": true,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
-            ],
-            "preLaunchTask": "build"
-		},
-		{
-			"name": "cstring",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/build/tests/bin/cstring",
 			"args": [],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",

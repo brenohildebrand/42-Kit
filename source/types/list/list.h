@@ -40,6 +40,6 @@ t_any	list_shift(t_list list);
 void	list_expand(t_list list);
 void	list_reverse(t_list list);
 int		list_get_length(t_list list);
-t_any	list_to_any(t_list instance);
+t_any	list_as_any(t_list instance);
 
 #endif

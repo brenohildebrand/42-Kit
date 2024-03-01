@@ -17,15 +17,17 @@ t_type	list(void)
 	static struct s_type	type = {
 		.name = "list",
 		.size = sizeof(struct s_list),
+		.is_instance = 1,
 		.create = (void *(*)(void))list_create,
 		.destroy = (void (*)(void *))list_destroy,
 		.copy = (void *(*)(void *))list_copy,
 		// .get
 		// .set
 		.push = (void (*)(void *, t_any))list_push,
-		.pop = (t_any (*)(void *))list_pop
+		.pop = (t_any (*)(void *))list_pop,
 		// .shift
 		// .unshift
+		.as_any = (t_any (*)(void *))list_as_any
 	};
 
 	return (&type);

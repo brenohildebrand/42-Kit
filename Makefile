@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/29 16:03:59 by bhildebr          #+#    #+#              #
-#    Updated: 2024/02/29 16:03:59 by bhildebr         ###   ########.fr        #
+#    Created: 2024/03/01 15:26:57 by bhildebr          #+#    #+#              #
+#    Updated: 2024/03/01 15:26:57 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ CPATHS = \
 	-include framework.h \
 	-include functions.h \
 	-include any.h \
-	-include cstring.h \
 	-include f64.h \
 	-include i32.h \
 	-include i64.h \
@@ -40,7 +39,6 @@ CPATHS = \
 	-iquote ./source/functions \
 	-iquote ./source/types \
 	-iquote ./source/types/any \
-	-iquote ./source/types/cstring \
 	-iquote ./source/types/f64 \
 	-iquote ./source/types/framework \
 	-iquote ./source/types/graph \
@@ -58,7 +56,9 @@ CPATHS = \
 SOURCES = \
 	./source/functions/allocate.c \
 	./source/functions/assert.c \
+	./source/functions/as_any.c \
 	./source/functions/compare.c \
+	./source/functions/conceal.c \
 	./source/functions/copy.c \
 	./source/functions/create.c \
 	./source/functions/deallocate.c \
@@ -82,23 +82,30 @@ SOURCES = \
 	./source/functions/retrieve.c \
 	./source/functions/share.c \
 	./source/functions/slice.c \
+	./source/functions/to_any.c \
 	./source/functions/warning.c \
 	./source/types/any/any.c \
+	./source/types/any/any_as_f64.c \
+	./source/types/any/any_as_i32.c \
+	./source/types/any/any_as_i64.c \
+	./source/types/any/any_as_i8.c \
+	./source/types/any/any_as_instance.c \
+	./source/types/any/any_as_sequence.c \
+	./source/types/any/any_as_u32.c \
+	./source/types/any/any_as_u64.c \
+	./source/types/any/any_as_u8.c \
 	./source/types/any/any_copy.c \
 	./source/types/any/any_create.c \
 	./source/types/any/any_destroy.c \
-	./source/types/any/any_to_cstring.c \
 	./source/types/any/any_to_f64.c \
 	./source/types/any/any_to_i32.c \
 	./source/types/any/any_to_i64.c \
 	./source/types/any/any_to_i8.c \
 	./source/types/any/any_to_instance.c \
+	./source/types/any/any_to_sequence.c \
 	./source/types/any/any_to_u32.c \
 	./source/types/any/any_to_u64.c \
 	./source/types/any/any_to_u8.c \
-	./source/types/cstring/cstring.c \
-	./source/types/cstring/cstring_is_i32.c \
-	./source/types/cstring/cstring_to_any.c \
 	./source/types/f64/f64.c \
 	./source/types/f64/f64_to_any.c \
 	./source/types/framework/framework_get.c \
@@ -113,8 +120,13 @@ SOURCES = \
 	./source/types/i8/i8_is_digit.c \
 	./source/types/i8/i8_is_signal.c \
 	./source/types/i8/i8_is_space.c \
+	./source/types/i8/i8_sequence.c \
+	./source/types/i8/i8_sequence_is_i32.c \
+	./source/types/i8/i8_sequence_to_any.c \
+	./source/types/i8/i8_sequence_to_i32.c \
 	./source/types/i8/i8_to_any.c \
 	./source/types/list/list.c \
+	./source/types/list/list_as_any.c \
 	./source/types/list/list_copy.c \
 	./source/types/list/list_create.c \
 	./source/types/list/list_destroy.c \
@@ -126,7 +138,6 @@ SOURCES = \
 	./source/types/list/list_reverse.c \
 	./source/types/list/list_set.c \
 	./source/types/list/list_shift.c \
-	./source/types/list/list_to_any.c \
 	./source/types/list/list_unshift.c \
 	./source/types/map/map.c \
 	./source/types/map/map_copy.c \
@@ -156,7 +167,9 @@ SOURCES = \
 OBJECTS = \
 	allocate.o \
 	assert.o \
+	as_any.o \
 	compare.o \
+	conceal.o \
 	copy.o \
 	create.o \
 	deallocate.o \
@@ -180,23 +193,30 @@ OBJECTS = \
 	retrieve.o \
 	share.o \
 	slice.o \
+	to_any.o \
 	warning.o \
 	any.o \
+	any_as_f64.o \
+	any_as_i32.o \
+	any_as_i64.o \
+	any_as_i8.o \
+	any_as_instance.o \
+	any_as_sequence.o \
+	any_as_u32.o \
+	any_as_u64.o \
+	any_as_u8.o \
 	any_copy.o \
 	any_create.o \
 	any_destroy.o \
-	any_to_cstring.o \
 	any_to_f64.o \
 	any_to_i32.o \
 	any_to_i64.o \
 	any_to_i8.o \
 	any_to_instance.o \
+	any_to_sequence.o \
 	any_to_u32.o \
 	any_to_u64.o \
 	any_to_u8.o \
-	cstring.o \
-	cstring_is_i32.o \
-	cstring_to_any.o \
 	f64.o \
 	f64_to_any.o \
 	framework_get.o \
@@ -211,8 +231,13 @@ OBJECTS = \
 	i8_is_digit.o \
 	i8_is_signal.o \
 	i8_is_space.o \
+	i8_sequence.o \
+	i8_sequence_is_i32.o \
+	i8_sequence_to_any.o \
+	i8_sequence_to_i32.o \
 	i8_to_any.o \
 	list.o \
+	list_as_any.o \
 	list_copy.o \
 	list_create.o \
 	list_destroy.o \
@@ -224,7 +249,6 @@ OBJECTS = \
 	list_reverse.o \
 	list_set.o \
 	list_shift.o \
-	list_to_any.o \
 	list_unshift.o \
 	map.o \
 	map_copy.o \
@@ -254,7 +278,9 @@ OBJECTS = \
 DEPENDENCIES = \
 	allocate.d \
 	assert.d \
+	as_any.d \
 	compare.d \
+	conceal.d \
 	copy.d \
 	create.d \
 	deallocate.d \
@@ -278,23 +304,30 @@ DEPENDENCIES = \
 	retrieve.d \
 	share.d \
 	slice.d \
+	to_any.d \
 	warning.d \
 	any.d \
+	any_as_f64.d \
+	any_as_i32.d \
+	any_as_i64.d \
+	any_as_i8.d \
+	any_as_instance.d \
+	any_as_sequence.d \
+	any_as_u32.d \
+	any_as_u64.d \
+	any_as_u8.d \
 	any_copy.d \
 	any_create.d \
 	any_destroy.d \
-	any_to_cstring.d \
 	any_to_f64.d \
 	any_to_i32.d \
 	any_to_i64.d \
 	any_to_i8.d \
 	any_to_instance.d \
+	any_to_sequence.d \
 	any_to_u32.d \
 	any_to_u64.d \
 	any_to_u8.d \
-	cstring.d \
-	cstring_is_i32.d \
-	cstring_to_any.d \
 	f64.d \
 	f64_to_any.d \
 	framework_get.d \
@@ -309,8 +342,13 @@ DEPENDENCIES = \
 	i8_is_digit.d \
 	i8_is_signal.d \
 	i8_is_space.d \
+	i8_sequence.d \
+	i8_sequence_is_i32.d \
+	i8_sequence_to_any.d \
+	i8_sequence_to_i32.d \
 	i8_to_any.d \
 	list.d \
+	list_as_any.d \
 	list_copy.d \
 	list_create.d \
 	list_destroy.d \
@@ -322,7 +360,6 @@ DEPENDENCIES = \
 	list_reverse.d \
 	list_set.d \
 	list_shift.d \
-	list_to_any.d \
 	list_unshift.d \
 	map.d \
 	map_copy.d \
@@ -359,11 +396,9 @@ TESTS = \
 	build/tests/bin/error \
 	build/tests/bin/forkrun \
 	build/tests/bin/new \
-	build/tests/bin/range \
 	build/tests/bin/repeat \
 	build/tests/bin/warning \
 	build/tests/bin/any \
-	build/tests/bin/cstring \
 	build/tests/bin/framework \
 	build/tests/bin/map \
 	build/tests/bin/memtree \
@@ -380,11 +415,9 @@ TESTS_OBJECTS = \
 	build/tests/objects/error.o \
 	build/tests/objects/forkrun.o \
 	build/tests/objects/new.o \
-	build/tests/objects/range.o \
 	build/tests/objects/repeat.o \
 	build/tests/objects/warning.o \
 	build/tests/objects/any.o \
-	build/tests/objects/cstring.o \
 	build/tests/objects/framework.o \
 	build/tests/objects/map.o \
 	build/tests/objects/memtree.o \
@@ -401,11 +434,9 @@ TESTS_DEPENDENCIES = \
 	build/tests/dependencies/error.d \
 	build/tests/dependencies/forkrun.d \
 	build/tests/dependencies/new.d \
-	build/tests/dependencies/range.d \
 	build/tests/dependencies/repeat.d \
 	build/tests/dependencies/warning.d \
 	build/tests/dependencies/any.d \
-	build/tests/dependencies/cstring.d \
 	build/tests/dependencies/framework.d \
 	build/tests/dependencies/map.d \
 	build/tests/dependencies/memtree.d \
@@ -467,8 +498,14 @@ $(DEFAULT_DIR)/objects/allocate.o: ./source/functions/allocate.c
 $(DEFAULT_DIR)/objects/assert.o: ./source/functions/assert.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/assert.d -c ./source/functions/assert.c -o $(DEFAULT_DIR)/objects/assert.o
 
+$(DEFAULT_DIR)/objects/as_any.o: ./source/functions/as_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/as_any.d -c ./source/functions/as_any.c -o $(DEFAULT_DIR)/objects/as_any.o
+
 $(DEFAULT_DIR)/objects/compare.o: ./source/functions/compare.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/compare.d -c ./source/functions/compare.c -o $(DEFAULT_DIR)/objects/compare.o
+
+$(DEFAULT_DIR)/objects/conceal.o: ./source/functions/conceal.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/conceal.d -c ./source/functions/conceal.c -o $(DEFAULT_DIR)/objects/conceal.o
 
 $(DEFAULT_DIR)/objects/copy.o: ./source/functions/copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/copy.d -c ./source/functions/copy.c -o $(DEFAULT_DIR)/objects/copy.o
@@ -539,11 +576,41 @@ $(DEFAULT_DIR)/objects/share.o: ./source/functions/share.c
 $(DEFAULT_DIR)/objects/slice.o: ./source/functions/slice.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/slice.d -c ./source/functions/slice.c -o $(DEFAULT_DIR)/objects/slice.o
 
+$(DEFAULT_DIR)/objects/to_any.o: ./source/functions/to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/to_any.d -c ./source/functions/to_any.c -o $(DEFAULT_DIR)/objects/to_any.o
+
 $(DEFAULT_DIR)/objects/warning.o: ./source/functions/warning.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/warning.d -c ./source/functions/warning.c -o $(DEFAULT_DIR)/objects/warning.o
 
 $(DEFAULT_DIR)/objects/any.o: ./source/types/any/any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any.d -c ./source/types/any/any.c -o $(DEFAULT_DIR)/objects/any.o
+
+$(DEFAULT_DIR)/objects/any_as_f64.o: ./source/types/any/any_as_f64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_f64.d -c ./source/types/any/any_as_f64.c -o $(DEFAULT_DIR)/objects/any_as_f64.o
+
+$(DEFAULT_DIR)/objects/any_as_i32.o: ./source/types/any/any_as_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_i32.d -c ./source/types/any/any_as_i32.c -o $(DEFAULT_DIR)/objects/any_as_i32.o
+
+$(DEFAULT_DIR)/objects/any_as_i64.o: ./source/types/any/any_as_i64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_i64.d -c ./source/types/any/any_as_i64.c -o $(DEFAULT_DIR)/objects/any_as_i64.o
+
+$(DEFAULT_DIR)/objects/any_as_i8.o: ./source/types/any/any_as_i8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_i8.d -c ./source/types/any/any_as_i8.c -o $(DEFAULT_DIR)/objects/any_as_i8.o
+
+$(DEFAULT_DIR)/objects/any_as_instance.o: ./source/types/any/any_as_instance.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_instance.d -c ./source/types/any/any_as_instance.c -o $(DEFAULT_DIR)/objects/any_as_instance.o
+
+$(DEFAULT_DIR)/objects/any_as_sequence.o: ./source/types/any/any_as_sequence.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_sequence.d -c ./source/types/any/any_as_sequence.c -o $(DEFAULT_DIR)/objects/any_as_sequence.o
+
+$(DEFAULT_DIR)/objects/any_as_u32.o: ./source/types/any/any_as_u32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_u32.d -c ./source/types/any/any_as_u32.c -o $(DEFAULT_DIR)/objects/any_as_u32.o
+
+$(DEFAULT_DIR)/objects/any_as_u64.o: ./source/types/any/any_as_u64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_u64.d -c ./source/types/any/any_as_u64.c -o $(DEFAULT_DIR)/objects/any_as_u64.o
+
+$(DEFAULT_DIR)/objects/any_as_u8.o: ./source/types/any/any_as_u8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_as_u8.d -c ./source/types/any/any_as_u8.c -o $(DEFAULT_DIR)/objects/any_as_u8.o
 
 $(DEFAULT_DIR)/objects/any_copy.o: ./source/types/any/any_copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_copy.d -c ./source/types/any/any_copy.c -o $(DEFAULT_DIR)/objects/any_copy.o
@@ -553,9 +620,6 @@ $(DEFAULT_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 
 $(DEFAULT_DIR)/objects/any_destroy.o: ./source/types/any/any_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_destroy.d -c ./source/types/any/any_destroy.c -o $(DEFAULT_DIR)/objects/any_destroy.o
-
-$(DEFAULT_DIR)/objects/any_to_cstring.o: ./source/types/any/any_to_cstring.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_cstring.d -c ./source/types/any/any_to_cstring.c -o $(DEFAULT_DIR)/objects/any_to_cstring.o
 
 $(DEFAULT_DIR)/objects/any_to_f64.o: ./source/types/any/any_to_f64.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_f64.d -c ./source/types/any/any_to_f64.c -o $(DEFAULT_DIR)/objects/any_to_f64.o
@@ -572,6 +636,9 @@ $(DEFAULT_DIR)/objects/any_to_i8.o: ./source/types/any/any_to_i8.c
 $(DEFAULT_DIR)/objects/any_to_instance.o: ./source/types/any/any_to_instance.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_instance.d -c ./source/types/any/any_to_instance.c -o $(DEFAULT_DIR)/objects/any_to_instance.o
 
+$(DEFAULT_DIR)/objects/any_to_sequence.o: ./source/types/any/any_to_sequence.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_sequence.d -c ./source/types/any/any_to_sequence.c -o $(DEFAULT_DIR)/objects/any_to_sequence.o
+
 $(DEFAULT_DIR)/objects/any_to_u32.o: ./source/types/any/any_to_u32.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_u32.d -c ./source/types/any/any_to_u32.c -o $(DEFAULT_DIR)/objects/any_to_u32.o
 
@@ -580,15 +647,6 @@ $(DEFAULT_DIR)/objects/any_to_u64.o: ./source/types/any/any_to_u64.c
 
 $(DEFAULT_DIR)/objects/any_to_u8.o: ./source/types/any/any_to_u8.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_u8.d -c ./source/types/any/any_to_u8.c -o $(DEFAULT_DIR)/objects/any_to_u8.o
-
-$(DEFAULT_DIR)/objects/cstring.o: ./source/types/cstring/cstring.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cstring.d -c ./source/types/cstring/cstring.c -o $(DEFAULT_DIR)/objects/cstring.o
-
-$(DEFAULT_DIR)/objects/cstring_is_i32.o: ./source/types/cstring/cstring_is_i32.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cstring_is_i32.d -c ./source/types/cstring/cstring_is_i32.c -o $(DEFAULT_DIR)/objects/cstring_is_i32.o
-
-$(DEFAULT_DIR)/objects/cstring_to_any.o: ./source/types/cstring/cstring_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/cstring_to_any.d -c ./source/types/cstring/cstring_to_any.c -o $(DEFAULT_DIR)/objects/cstring_to_any.o
 
 $(DEFAULT_DIR)/objects/f64.o: ./source/types/f64/f64.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/f64.d -c ./source/types/f64/f64.c -o $(DEFAULT_DIR)/objects/f64.o
@@ -632,11 +690,26 @@ $(DEFAULT_DIR)/objects/i8_is_signal.o: ./source/types/i8/i8_is_signal.c
 $(DEFAULT_DIR)/objects/i8_is_space.o: ./source/types/i8/i8_is_space.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_is_space.d -c ./source/types/i8/i8_is_space.c -o $(DEFAULT_DIR)/objects/i8_is_space.o
 
+$(DEFAULT_DIR)/objects/i8_sequence.o: ./source/types/i8/i8_sequence.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_sequence.d -c ./source/types/i8/i8_sequence.c -o $(DEFAULT_DIR)/objects/i8_sequence.o
+
+$(DEFAULT_DIR)/objects/i8_sequence_is_i32.o: ./source/types/i8/i8_sequence_is_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_sequence_is_i32.d -c ./source/types/i8/i8_sequence_is_i32.c -o $(DEFAULT_DIR)/objects/i8_sequence_is_i32.o
+
+$(DEFAULT_DIR)/objects/i8_sequence_to_any.o: ./source/types/i8/i8_sequence_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_sequence_to_any.d -c ./source/types/i8/i8_sequence_to_any.c -o $(DEFAULT_DIR)/objects/i8_sequence_to_any.o
+
+$(DEFAULT_DIR)/objects/i8_sequence_to_i32.o: ./source/types/i8/i8_sequence_to_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_sequence_to_i32.d -c ./source/types/i8/i8_sequence_to_i32.c -o $(DEFAULT_DIR)/objects/i8_sequence_to_i32.o
+
 $(DEFAULT_DIR)/objects/i8_to_any.o: ./source/types/i8/i8_to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/i8_to_any.d -c ./source/types/i8/i8_to_any.c -o $(DEFAULT_DIR)/objects/i8_to_any.o
 
 $(DEFAULT_DIR)/objects/list.o: ./source/types/list/list.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list.d -c ./source/types/list/list.c -o $(DEFAULT_DIR)/objects/list.o
+
+$(DEFAULT_DIR)/objects/list_as_any.o: ./source/types/list/list_as_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_as_any.d -c ./source/types/list/list_as_any.c -o $(DEFAULT_DIR)/objects/list_as_any.o
 
 $(DEFAULT_DIR)/objects/list_copy.o: ./source/types/list/list_copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_copy.d -c ./source/types/list/list_copy.c -o $(DEFAULT_DIR)/objects/list_copy.o
@@ -670,9 +743,6 @@ $(DEFAULT_DIR)/objects/list_set.o: ./source/types/list/list_set.c
 
 $(DEFAULT_DIR)/objects/list_shift.o: ./source/types/list/list_shift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_shift.d -c ./source/types/list/list_shift.c -o $(DEFAULT_DIR)/objects/list_shift.o
-
-$(DEFAULT_DIR)/objects/list_to_any.o: ./source/types/list/list_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_to_any.d -c ./source/types/list/list_to_any.c -o $(DEFAULT_DIR)/objects/list_to_any.o
 
 $(DEFAULT_DIR)/objects/list_unshift.o: ./source/types/list/list_unshift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_unshift.d -c ./source/types/list/list_unshift.c -o $(DEFAULT_DIR)/objects/list_unshift.o
@@ -756,8 +826,14 @@ $(DEBUG_DIR)/objects/allocate.o: ./source/functions/allocate.c
 $(DEBUG_DIR)/objects/assert.o: ./source/functions/assert.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/assert.d -c ./source/functions/assert.c -o $(DEBUG_DIR)/objects/assert.o
 
+$(DEBUG_DIR)/objects/as_any.o: ./source/functions/as_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/as_any.d -c ./source/functions/as_any.c -o $(DEBUG_DIR)/objects/as_any.o
+
 $(DEBUG_DIR)/objects/compare.o: ./source/functions/compare.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/compare.d -c ./source/functions/compare.c -o $(DEBUG_DIR)/objects/compare.o
+
+$(DEBUG_DIR)/objects/conceal.o: ./source/functions/conceal.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/conceal.d -c ./source/functions/conceal.c -o $(DEBUG_DIR)/objects/conceal.o
 
 $(DEBUG_DIR)/objects/copy.o: ./source/functions/copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/copy.d -c ./source/functions/copy.c -o $(DEBUG_DIR)/objects/copy.o
@@ -828,11 +904,41 @@ $(DEBUG_DIR)/objects/share.o: ./source/functions/share.c
 $(DEBUG_DIR)/objects/slice.o: ./source/functions/slice.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/slice.d -c ./source/functions/slice.c -o $(DEBUG_DIR)/objects/slice.o
 
+$(DEBUG_DIR)/objects/to_any.o: ./source/functions/to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/to_any.d -c ./source/functions/to_any.c -o $(DEBUG_DIR)/objects/to_any.o
+
 $(DEBUG_DIR)/objects/warning.o: ./source/functions/warning.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/warning.d -c ./source/functions/warning.c -o $(DEBUG_DIR)/objects/warning.o
 
 $(DEBUG_DIR)/objects/any.o: ./source/types/any/any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any.d -c ./source/types/any/any.c -o $(DEBUG_DIR)/objects/any.o
+
+$(DEBUG_DIR)/objects/any_as_f64.o: ./source/types/any/any_as_f64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_f64.d -c ./source/types/any/any_as_f64.c -o $(DEBUG_DIR)/objects/any_as_f64.o
+
+$(DEBUG_DIR)/objects/any_as_i32.o: ./source/types/any/any_as_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_i32.d -c ./source/types/any/any_as_i32.c -o $(DEBUG_DIR)/objects/any_as_i32.o
+
+$(DEBUG_DIR)/objects/any_as_i64.o: ./source/types/any/any_as_i64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_i64.d -c ./source/types/any/any_as_i64.c -o $(DEBUG_DIR)/objects/any_as_i64.o
+
+$(DEBUG_DIR)/objects/any_as_i8.o: ./source/types/any/any_as_i8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_i8.d -c ./source/types/any/any_as_i8.c -o $(DEBUG_DIR)/objects/any_as_i8.o
+
+$(DEBUG_DIR)/objects/any_as_instance.o: ./source/types/any/any_as_instance.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_instance.d -c ./source/types/any/any_as_instance.c -o $(DEBUG_DIR)/objects/any_as_instance.o
+
+$(DEBUG_DIR)/objects/any_as_sequence.o: ./source/types/any/any_as_sequence.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_sequence.d -c ./source/types/any/any_as_sequence.c -o $(DEBUG_DIR)/objects/any_as_sequence.o
+
+$(DEBUG_DIR)/objects/any_as_u32.o: ./source/types/any/any_as_u32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_u32.d -c ./source/types/any/any_as_u32.c -o $(DEBUG_DIR)/objects/any_as_u32.o
+
+$(DEBUG_DIR)/objects/any_as_u64.o: ./source/types/any/any_as_u64.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_u64.d -c ./source/types/any/any_as_u64.c -o $(DEBUG_DIR)/objects/any_as_u64.o
+
+$(DEBUG_DIR)/objects/any_as_u8.o: ./source/types/any/any_as_u8.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_as_u8.d -c ./source/types/any/any_as_u8.c -o $(DEBUG_DIR)/objects/any_as_u8.o
 
 $(DEBUG_DIR)/objects/any_copy.o: ./source/types/any/any_copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_copy.d -c ./source/types/any/any_copy.c -o $(DEBUG_DIR)/objects/any_copy.o
@@ -842,9 +948,6 @@ $(DEBUG_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 
 $(DEBUG_DIR)/objects/any_destroy.o: ./source/types/any/any_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_destroy.d -c ./source/types/any/any_destroy.c -o $(DEBUG_DIR)/objects/any_destroy.o
-
-$(DEBUG_DIR)/objects/any_to_cstring.o: ./source/types/any/any_to_cstring.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_cstring.d -c ./source/types/any/any_to_cstring.c -o $(DEBUG_DIR)/objects/any_to_cstring.o
 
 $(DEBUG_DIR)/objects/any_to_f64.o: ./source/types/any/any_to_f64.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_f64.d -c ./source/types/any/any_to_f64.c -o $(DEBUG_DIR)/objects/any_to_f64.o
@@ -861,6 +964,9 @@ $(DEBUG_DIR)/objects/any_to_i8.o: ./source/types/any/any_to_i8.c
 $(DEBUG_DIR)/objects/any_to_instance.o: ./source/types/any/any_to_instance.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_instance.d -c ./source/types/any/any_to_instance.c -o $(DEBUG_DIR)/objects/any_to_instance.o
 
+$(DEBUG_DIR)/objects/any_to_sequence.o: ./source/types/any/any_to_sequence.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_sequence.d -c ./source/types/any/any_to_sequence.c -o $(DEBUG_DIR)/objects/any_to_sequence.o
+
 $(DEBUG_DIR)/objects/any_to_u32.o: ./source/types/any/any_to_u32.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_u32.d -c ./source/types/any/any_to_u32.c -o $(DEBUG_DIR)/objects/any_to_u32.o
 
@@ -869,15 +975,6 @@ $(DEBUG_DIR)/objects/any_to_u64.o: ./source/types/any/any_to_u64.c
 
 $(DEBUG_DIR)/objects/any_to_u8.o: ./source/types/any/any_to_u8.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_u8.d -c ./source/types/any/any_to_u8.c -o $(DEBUG_DIR)/objects/any_to_u8.o
-
-$(DEBUG_DIR)/objects/cstring.o: ./source/types/cstring/cstring.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cstring.d -c ./source/types/cstring/cstring.c -o $(DEBUG_DIR)/objects/cstring.o
-
-$(DEBUG_DIR)/objects/cstring_is_i32.o: ./source/types/cstring/cstring_is_i32.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cstring_is_i32.d -c ./source/types/cstring/cstring_is_i32.c -o $(DEBUG_DIR)/objects/cstring_is_i32.o
-
-$(DEBUG_DIR)/objects/cstring_to_any.o: ./source/types/cstring/cstring_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/cstring_to_any.d -c ./source/types/cstring/cstring_to_any.c -o $(DEBUG_DIR)/objects/cstring_to_any.o
 
 $(DEBUG_DIR)/objects/f64.o: ./source/types/f64/f64.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/f64.d -c ./source/types/f64/f64.c -o $(DEBUG_DIR)/objects/f64.o
@@ -921,11 +1018,26 @@ $(DEBUG_DIR)/objects/i8_is_signal.o: ./source/types/i8/i8_is_signal.c
 $(DEBUG_DIR)/objects/i8_is_space.o: ./source/types/i8/i8_is_space.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_is_space.d -c ./source/types/i8/i8_is_space.c -o $(DEBUG_DIR)/objects/i8_is_space.o
 
+$(DEBUG_DIR)/objects/i8_sequence.o: ./source/types/i8/i8_sequence.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_sequence.d -c ./source/types/i8/i8_sequence.c -o $(DEBUG_DIR)/objects/i8_sequence.o
+
+$(DEBUG_DIR)/objects/i8_sequence_is_i32.o: ./source/types/i8/i8_sequence_is_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_sequence_is_i32.d -c ./source/types/i8/i8_sequence_is_i32.c -o $(DEBUG_DIR)/objects/i8_sequence_is_i32.o
+
+$(DEBUG_DIR)/objects/i8_sequence_to_any.o: ./source/types/i8/i8_sequence_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_sequence_to_any.d -c ./source/types/i8/i8_sequence_to_any.c -o $(DEBUG_DIR)/objects/i8_sequence_to_any.o
+
+$(DEBUG_DIR)/objects/i8_sequence_to_i32.o: ./source/types/i8/i8_sequence_to_i32.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_sequence_to_i32.d -c ./source/types/i8/i8_sequence_to_i32.c -o $(DEBUG_DIR)/objects/i8_sequence_to_i32.o
+
 $(DEBUG_DIR)/objects/i8_to_any.o: ./source/types/i8/i8_to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/i8_to_any.d -c ./source/types/i8/i8_to_any.c -o $(DEBUG_DIR)/objects/i8_to_any.o
 
 $(DEBUG_DIR)/objects/list.o: ./source/types/list/list.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list.d -c ./source/types/list/list.c -o $(DEBUG_DIR)/objects/list.o
+
+$(DEBUG_DIR)/objects/list_as_any.o: ./source/types/list/list_as_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_as_any.d -c ./source/types/list/list_as_any.c -o $(DEBUG_DIR)/objects/list_as_any.o
 
 $(DEBUG_DIR)/objects/list_copy.o: ./source/types/list/list_copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_copy.d -c ./source/types/list/list_copy.c -o $(DEBUG_DIR)/objects/list_copy.o
@@ -959,9 +1071,6 @@ $(DEBUG_DIR)/objects/list_set.o: ./source/types/list/list_set.c
 
 $(DEBUG_DIR)/objects/list_shift.o: ./source/types/list/list_shift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_shift.d -c ./source/types/list/list_shift.c -o $(DEBUG_DIR)/objects/list_shift.o
-
-$(DEBUG_DIR)/objects/list_to_any.o: ./source/types/list/list_to_any.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_to_any.d -c ./source/types/list/list_to_any.c -o $(DEBUG_DIR)/objects/list_to_any.o
 
 $(DEBUG_DIR)/objects/list_unshift.o: ./source/types/list/list_unshift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_unshift.d -c ./source/types/list/list_unshift.c -o $(DEBUG_DIR)/objects/list_unshift.o
@@ -1075,10 +1184,6 @@ $(TESTS_DIR)/objects/new.o: ./tests/functions/new.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/new.d -c ./tests/functions/new.c -o $(TESTS_DIR)/objects/new.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/new.o $(DEFAULT) -o $(TESTS_DIR)/bin/new
 
-$(TESTS_DIR)/objects/range.o: ./tests/functions/range.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/range.d -c ./tests/functions/range.c -o $(TESTS_DIR)/objects/range.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/range.o $(DEFAULT) -o $(TESTS_DIR)/bin/range
-
 $(TESTS_DIR)/objects/repeat.o: ./tests/functions/repeat.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/repeat.d -c ./tests/functions/repeat.c -o $(TESTS_DIR)/objects/repeat.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/repeat.o $(DEFAULT) -o $(TESTS_DIR)/bin/repeat
@@ -1090,10 +1195,6 @@ $(TESTS_DIR)/objects/warning.o: ./tests/functions/warning.c
 $(TESTS_DIR)/objects/any.o: ./tests/types/any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/any.d -c ./tests/types/any.c -o $(TESTS_DIR)/objects/any.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/any.o $(DEFAULT) -o $(TESTS_DIR)/bin/any
-
-$(TESTS_DIR)/objects/cstring.o: ./tests/types/cstring.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/cstring.d -c ./tests/types/cstring.c -o $(TESTS_DIR)/objects/cstring.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/cstring.o $(DEFAULT) -o $(TESTS_DIR)/bin/cstring
 
 $(TESTS_DIR)/objects/framework.o: ./tests/types/framework.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/framework.d -c ./tests/types/framework.c -o $(TESTS_DIR)/objects/framework.o

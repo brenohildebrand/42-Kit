@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.c                                            :+:      :+:    :+:   */
+/*   conceal.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 22:52:58 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 23:45:28 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/29 18:52:44 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/02/29 18:57:21 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "functions.h"
 
-t_type	map(void)
+void	conceal(t_i8 *key)
 {
-	static struct s_type	type = {
-		.name = "map",
-		.size = sizeof(struct s_map),
-		.create = (void *(*)(void))map_create,
-		.destroy = (void (*)(void *))map_destroy,
-		.copy = (void *(*)(void *))map_copy,
-		.get = (t_any (*)(void *, t_any))map_get,
-		.set = (void (*)(void *, t_any, t_any))map_set,
-		.is_instance = 1
-	};
-
-	return (&type);
+	share(key, NULL);
 }

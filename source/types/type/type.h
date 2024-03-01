@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 21:03:58 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/01 11:31:12 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,11 @@
 typedef struct s_type	*t_type;
 
 struct s_type {
-	t_cstring		name;
+	t_i8			*name;
 	t_u32			size;
-	t_i32			is_literal;
+	t_i32			is_value;
+	t_i32			is_sequence;
+	t_i32			is_instance;
 	void			*(*create)(void);
 	void			(*destroy)(void *);
 	void			*(*init)(void *, t_any);
@@ -51,6 +53,8 @@ struct s_type {
 	t_i64			(*to_i64)(t_any);
 	t_u64			(*to_u64)(t_any);
 	t_f64			(*to_f64)(t_any);
+	t_any			(*to_any)(void *);
+	t_any			(*as_any)(void *);
 };
 
 #endif

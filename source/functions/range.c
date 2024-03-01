@@ -6,13 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 18:09:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/28 12:56:22 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:00:57 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "functions.h"
 
-void	range(int start, int end, void (*callback)(int))
+void	loopinrange(int start, int end, void (*callback)(int))
 {
 	int	step;
 
