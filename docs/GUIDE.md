@@ -3,31 +3,18 @@
 Welcome stranger! 
 This is the official guide to the *ft_framework*. I hope you have a great time here.
 
-
-## I mean, why not?
-
-I was struggling with C. I wanted to use hash tables. Oh, but they don't exist. Dynamic arrays? Sorry, what's that? Maybe a string? Unfortunately that's not happening. Hmm. And what about memory management? Can I just exit the program and be happy? No, there may be a leak. Oh, so can I just call one function and be free? No, it's not how it works. Damn it!
-
-I wanted to be able to focus on the problem. I just hate it to keep paying attention to those nitty-gritty details that nobody cares about when using a more high level language like Python.
-
-So out of frustation I started looking for solutions. I experimented quite a lot before getting to something cool. I tried different approaches and tried to combine them in many ways. I even got inspired to create a programming language. It seems like a rewarding adventure. Maybe one day. Who knows? Anyways, I got to something I'm proud of.
-
-Welcome to **ft_framework**! Or, as I prefer to call it, **Trillian**. Enjoy!
-
-
 ## It works on my machine.
 
-Before getting to the deep dive, you should make it works on yours too. So get ready!
-
-The following code will download and run the installer. Just copy and paste it on your terminal. 
+Before getting to the deep dive, you should make it works on yours too. Start by cloning it to a comfortable folder on your computer.
 
 ```bash
-wget https://raw.githubusercontent.com/brenohildebrand/ft_framework/main/tools/installer/install.sh -q -O install.sh && ./install.sh; rm -rf install.sh
+git clone git@github.com:brenohildebrand/ft_framework.git
 ```
 
-This script will basically clone this git repository at your home folder and add a line to your ~/.bashrc or ~/.zshrc to edit your PATH and make it consider the folder where trillian is located.
+Now add `ft_framework/trillian/bin` to your `$PATH`. And that's it.
 
-You can also install it manually. Just clone the repository, update /config/.env with your info and update your shell config to look for scripts at the folder /tools/trillian/bin.
+> **Notice**  
+You may want to tinker the configuration files. You actually need to if you want this framework to work properly.
 
 ## Bring your best towel!
 
