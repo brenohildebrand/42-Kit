@@ -66,6 +66,7 @@ t_any	map_get(t_map instance, t_any key)
 		}
 		else if (are_keys_the_same(instance->entries[hash].key, key))
 		{
+			any_destroy(key);
 			return (instance->entries[hash].value);
 		}
 		else

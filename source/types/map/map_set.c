@@ -68,10 +68,12 @@ void	map_set(t_map instance, t_any key, t_any value)
 		{
 			instance->entries[hash].key = key;
 			instance->entries[hash].value = value;
+			instance->length++;
 			break ;
 		}
 		else if (are_keys_the_same(instance->entries[hash].key, key))
 		{
+			any_destroy(key);
 			instance->entries[hash].value = value;
 			break ;
 		}

@@ -17,7 +17,7 @@ void	list_destroy(t_list list)
 	int	i;
 
 	i = list->start;
-	while (i < list->end)
+	while (i <= list->end)
 	{
 		any_destroy(list->content[i]);
 		i++;

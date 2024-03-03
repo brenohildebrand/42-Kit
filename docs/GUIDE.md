@@ -1,7 +1,11 @@
 # Guide
 
 Welcome stranger! 
-This is the official guide to the *ft_framework*. I hope you have a great time here.
+This is the official guide to the *ft_framework*.
+
+## I mean, why not?
+
+
 
 ## It works on my machine.
 
