@@ -39,7 +39,14 @@ void	list_unshift(t_list list, t_any value);
 t_any	list_shift(t_list list);
 void	list_expand(t_list list);
 void	list_reverse(t_list list);
+void	list_rotate(t_list instance);
+void	list_reverse_rotate(t_list instance);
+void	list_swap(t_list instance);
 int		list_get_length(t_list list);
+t_i32	list_is_sorted(t_list instance);
 t_any	list_as_any(t_list instance);
+// rotate
+// reverse_rotate
+// swap
 
 #endif

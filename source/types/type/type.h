@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/01 11:31:12 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:51:04 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ struct s_type {
 	t_i32			is_value;
 	t_i32			is_sequence;
 	t_i32			is_instance;
+	t_i32			(*is_sorted)(void *);
 	void			*(*create)(void);
 	void			(*destroy)(void *);
 	void			*(*init)(void *, t_any);

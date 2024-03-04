@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   range.c                                            :+:      :+:    :+:   */
+/*   list_is_sorted.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 18:09:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/29 19:00:57 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/04 14:42:50 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/04 15:35:44 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "functions.h"
+#include "list.h"
 
-void	loopinrange(int start, int end, void (*callback)(int))
+// -- check if it's sorted in ascending order
+t_i32	list_is_sorted(t_list instance)
 {
-	int	step;
+	t_i32	i;
+	t_i32	is_sorted;
+	t_any	current;
+	t_any	previous;
 
-	if (start > end)
-		step = -1;
-	else
-		step = 1;
-	while (start != end)
+	is_sorted = 1;
+	i = 1;
+	while (i < instance->length)
 	{
-		callback(start);
-		start += step;
+		current = instance->content[instance->start + i];
+		previous = instance->content[instance->start + i - 1];
+		if (compare(previous, current) > 0)
+		{
+			is_sorted = 0;
+		}
+		i++;
 	}
+	return (is_sorted);
 }

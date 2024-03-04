@@ -162,6 +162,26 @@
             "preLaunchTask": "build"
 		},
 		{
+			"name": "list_is_sorted",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/tests/bin/list_is_sorted",
+			"args": [],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
+		},
+		{
 			"name": "list_push",
 			"type": "cppdbg",
 			"request": "launch",

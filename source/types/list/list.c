@@ -18,6 +18,7 @@ t_type	list(void)
 		.name = "list",
 		.size = sizeof(struct s_list),
 		.is_instance = 1,
+		.is_sorted = (t_i32 (*)(void *))list_is_sorted,
 		.create = (void *(*)(void))list_create,
 		.destroy = (void (*)(void *))list_destroy,
 		.copy = (void *(*)(void *))list_copy,

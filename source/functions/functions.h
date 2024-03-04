@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:11:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/01 15:46:25 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/04 17:55:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 void	*allocate(int size);
 t_any	as_any(void *instance);
 void	assert(int condition);
+void	call_if(int condition, void (*callback)(void));
+t_i32	compare(t_any instance, t_any another_instance);
 void	conceal(t_i8 *key);
 void	*copy(void	*instance);
 void	*create(t_type (*signature)(void));
@@ -40,10 +42,12 @@ void	error(char *cstring);
 int		forkrun(void (*callback)(void));
 void	*init(void	*instance, t_any value);
 void	*new(t_type (*signature)(void));
+void	pop(void *instance);
 void	print(t_any instance);
 void	push(void *instance, t_any value);
 void	quit(t_i32 exit_code);
-void	loopinrange(int start, int end, void (*callback)(int));
+t_i32	is_sorted(void *instance);
+void	loop_in_range(int start, int end, void (*callback)(int));
 void	repeat(int n, void (*callback)(void));
 t_any	retrieve(t_i8 *key);
 void	share(t_i8 *key, t_any value);
