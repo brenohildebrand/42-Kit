@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   forkrun.c                                          :+:      :+:    :+:   */
+/*   list_create.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 11:03:08 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/03 19:01:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/03 16:03:04 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/03 16:03:48 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "functions.h"
-
-int	forkrun(void (*callback)(void))
+int	main(void)
 {
-	pid_t	pid;
-	int		status;
+	t_list	instance;
 
-	pid = fork();
-	assert(pid >= 0);
-	if (pid == 0)
-	{
-		callback();
-		exit(0);
-	}
-	else
-	{
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-	}
+	instance = create(list);
+	destroy(instance);
 	return (0);
 }

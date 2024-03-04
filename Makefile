@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/03 13:49:30 by bhildebr          #+#    #+#              #
-#    Updated: 2024/03/03 13:49:30 by bhildebr         ###   ########.fr        #
+#    Created: 2024/03/03 21:33:21 by bhildebr          #+#    #+#              #
+#    Updated: 2024/03/03 21:33:21 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -393,8 +393,11 @@ TESTS = \
 	build/tests/bin/display \
 	build/tests/bin/forkrun \
 	build/tests/bin/share \
-	build/tests/bin/list \
-	build/tests/bin/map
+	build/tests/bin/list_create \
+	build/tests/bin/list_destroy \
+	build/tests/bin/list_push \
+	build/tests/bin/map_create \
+	build/tests/bin/map_destroy
 
 TESTS_OBJECTS = \
 	build/tests/objects/allocate.o \
@@ -403,8 +406,11 @@ TESTS_OBJECTS = \
 	build/tests/objects/display.o \
 	build/tests/objects/forkrun.o \
 	build/tests/objects/share.o \
-	build/tests/objects/list.o \
-	build/tests/objects/map.o
+	build/tests/objects/list_create.o \
+	build/tests/objects/list_destroy.o \
+	build/tests/objects/list_push.o \
+	build/tests/objects/map_create.o \
+	build/tests/objects/map_destroy.o
 
 TESTS_DEPENDENCIES = \
 	build/tests/dependencies/allocate.d \
@@ -413,8 +419,11 @@ TESTS_DEPENDENCIES = \
 	build/tests/dependencies/display.d \
 	build/tests/dependencies/forkrun.d \
 	build/tests/dependencies/share.d \
-	build/tests/dependencies/list.d \
-	build/tests/dependencies/map.d
+	build/tests/dependencies/list_create.d \
+	build/tests/dependencies/list_destroy.d \
+	build/tests/dependencies/list_push.d \
+	build/tests/dependencies/map_create.d \
+	build/tests/dependencies/map_destroy.d
 
 DEBUG_DIR = ./build/debug
 DEFAULT_DIR = ./build/default
@@ -1145,12 +1154,24 @@ $(TESTS_DIR)/objects/share.o: ./tests/functions/share.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/share.d -c ./tests/functions/share.c -o $(TESTS_DIR)/objects/share.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/share.o $(DEFAULT) -o $(TESTS_DIR)/bin/share
 
-$(TESTS_DIR)/objects/list.o: ./tests/types/list.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/list.d -c ./tests/types/list.c -o $(TESTS_DIR)/objects/list.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/list.o $(DEFAULT) -o $(TESTS_DIR)/bin/list
+$(TESTS_DIR)/objects/list_create.o: ./tests/types/list/list_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/list_create.d -c ./tests/types/list/list_create.c -o $(TESTS_DIR)/objects/list_create.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/list_create.o $(DEFAULT) -o $(TESTS_DIR)/bin/list_create
 
-$(TESTS_DIR)/objects/map.o: ./tests/types/map.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/map.d -c ./tests/types/map.c -o $(TESTS_DIR)/objects/map.o
-	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/map.o $(DEFAULT) -o $(TESTS_DIR)/bin/map
+$(TESTS_DIR)/objects/list_destroy.o: ./tests/types/list/list_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/list_destroy.d -c ./tests/types/list/list_destroy.c -o $(TESTS_DIR)/objects/list_destroy.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/list_destroy.o $(DEFAULT) -o $(TESTS_DIR)/bin/list_destroy
+
+$(TESTS_DIR)/objects/list_push.o: ./tests/types/list/list_push.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/list_push.d -c ./tests/types/list/list_push.c -o $(TESTS_DIR)/objects/list_push.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/list_push.o $(DEFAULT) -o $(TESTS_DIR)/bin/list_push
+
+$(TESTS_DIR)/objects/map_create.o: ./tests/types/map/map_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/map_create.d -c ./tests/types/map/map_create.c -o $(TESTS_DIR)/objects/map_create.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/map_create.o $(DEFAULT) -o $(TESTS_DIR)/bin/map_create
+
+$(TESTS_DIR)/objects/map_destroy.o: ./tests/types/map/map_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/map_destroy.d -c ./tests/types/map/map_destroy.c -o $(TESTS_DIR)/objects/map_destroy.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/map_destroy.o $(DEFAULT) -o $(TESTS_DIR)/bin/map_destroy
 
 
