@@ -12,9 +12,13 @@
 
 #include "list.h"
 
-t_any	list_get(t_list list, int index)
+t_any	list_get(t_list instance, t_any key)
 {
-	if (index >= list->length)
+	t_i32	index;
+	
+	index = any_as_i32(key);
+	any_destroy(key);
+	if (index >= instance->length)
 		return (NULL);
-	return (list->content[list->start + index]);
+	return (instance->content[instance->start + index]);
 }

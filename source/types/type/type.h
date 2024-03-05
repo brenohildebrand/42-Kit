@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/04 15:51:04 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:18:57 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ struct s_type {
 	t_any			(*pop)(void *);
 	void			(*unshift)(void *, t_any);
 	t_any			(*shift)(void *);
+	void			(*rotate)(void *);
+	void			(*reverse_rotate)(void *);
+	void			(*swap)(void *);
 	void			(*foreach)(void *, void (*)(t_any, t_i32));
 	void			(*filter)(void *, void (*)(t_any, t_i32));
 	t_any			(*reduce)(void *, t_any (*)(t_any, t_any, t_i32));
@@ -47,6 +50,7 @@ struct s_type {
 	void			(*slice)(void *, t_i32, t_i32);
 	int				(*compare)(t_any, t_any);
 	void			(*print)(t_any);
+	t_i32			(*get_length)(void *);
 	t_i8			(*to_i8)(t_any);
 	t_u8			(*to_u8)(t_any);
 	t_i32			(*to_i32)(t_any);

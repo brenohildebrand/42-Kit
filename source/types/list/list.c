@@ -22,12 +22,16 @@ t_type	list(void)
 		.create = (void *(*)(void))list_create,
 		.destroy = (void (*)(void *))list_destroy,
 		.copy = (void *(*)(void *))list_copy,
-		// .get
+		.get = (t_any (*)(void *, t_any))list_get,
 		// .set
 		.push = (void (*)(void *, t_any))list_push,
 		.pop = (t_any (*)(void *))list_pop,
+		.rotate = (void (*)(void *))list_rotate,
+		.reverse_rotate = (void (*)(void *))list_reverse_rotate,
+		.swap = (void (*)(void *))list_swap,
 		// .shift
 		// .unshift
+		.get_length = (t_i32 (*)(void *))list_get_length,
 		.as_any = (t_any (*)(void *))list_as_any
 	};
 

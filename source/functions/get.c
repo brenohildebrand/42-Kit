@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_unshift.c                               :+:      :+:    :+:   */
+/*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 13:30:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:30:13 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/05 09:28:58 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/05 09:31:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "functions.h"
 
-void	list_unshift(t_list instance, t_any value)
+t_any	get(void *instance, t_any key)
 {
-	if (instance->length + 1 > (instance->max_length * 3) / 4 || \
-		instance->start == 0)
-	{
-		list_expand(instance);
-	}
-	instance->start--;
-	instance->content[instance->start] = value;
-	instance->length++;
+	t_type	type;
+
+	type = memtree_search(instance);
+	assert(type != NULL);
+	assert(type->get != NULL);
+	return (type->get(instance, key));
 }

@@ -12,14 +12,14 @@
 
 #include "list.h"
 
-void	list_push(t_list list, t_any value)
+void	list_push(t_list instance, t_any value)
 {
-	if (list->length + 1 > (list->max_length * 3) / 4 || \
-		list->end == list->max_length - 1)
+	if (instance->length + 1 > (instance->max_length * 3) / 4 || \
+		instance->end == instance->max_length - 1)
 	{
-		list_expand(list);
+		list_expand(instance);
 	}
-	list->end++;
-	list->content[list->end] = value;
-	list->length++;
+	instance->end++;
+	instance->content[instance->end] = value;
+	instance->length++;
 }

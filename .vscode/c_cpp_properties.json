@@ -16,6 +16,7 @@
 				"${workspaceFolder}/source/types/list",
 				"${workspaceFolder}/source/types/map",
 				"${workspaceFolder}/source/types/memtree",
+				"${workspaceFolder}/source/types/string",
 				"${workspaceFolder}/source/types/type",
 				"${workspaceFolder}/source/types/u32",
 				"${workspaceFolder}/source/types/u64",

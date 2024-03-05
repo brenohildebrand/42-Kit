@@ -12,7 +12,7 @@
 
 #include "list.h"
 
-int	list_get_length(t_list list)
+int	list_get_length(t_list instance)
 {
-	return (list->length);
+	return (instance->length);
 }

@@ -29,24 +29,21 @@ struct s_list {
 
 t_type	list(void);
 t_list	list_create(void);
-void	list_destroy(t_list list);
-t_list	list_copy(t_list list);
-t_any	list_get(t_list list, int index);
-void	list_set(t_list list, int index, t_any value);
-void	list_push(t_list list, t_any value);
-t_any	list_pop(t_list list);
-void	list_unshift(t_list list, t_any value);
-t_any	list_shift(t_list list);
-void	list_expand(t_list list);
-void	list_reverse(t_list list);
+void	list_destroy(t_list instance);
+t_list	list_copy(t_list instance);
+t_any	list_get(t_list instance, t_any key);
+void	list_set(t_list instance, int index, t_any value);
+void	list_push(t_list instance, t_any value);
+t_any	list_pop(t_list instance);
+void	list_unshift(t_list instance, t_any value);
+t_any	list_shift(t_list instance);
+void	list_expand(t_list instance);
+void	list_reverse(t_list instance);
 void	list_rotate(t_list instance);
 void	list_reverse_rotate(t_list instance);
 void	list_swap(t_list instance);
-int		list_get_length(t_list list);
+int		list_get_length(t_list instance);
 t_i32	list_is_sorted(t_list instance);
 t_any	list_as_any(t_list instance);
-// rotate
-// reverse_rotate
-// swap
 
 #endif

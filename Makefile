@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/04 15:54:32 by bhildebr          #+#    #+#              #
-#    Updated: 2024/03/04 15:54:32 by bhildebr         ###   ########.fr        #
+#    Created: 2024/03/05 13:46:52 by bhildebr          #+#    #+#              #
+#    Updated: 2024/03/05 13:46:52 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ CPATHS = \
 	-iquote ./source/types/list \
 	-iquote ./source/types/map \
 	-iquote ./source/types/memtree \
+	-iquote ./source/types/string \
 	-iquote ./source/types/type \
 	-iquote ./source/types/u32 \
 	-iquote ./source/types/u64 \
@@ -72,19 +73,25 @@ SOURCES = \
 	./source/functions/find.c \
 	./source/functions/foreach.c \
 	./source/functions/forkrun.c \
+	./source/functions/get.c \
+	./source/functions/get_length.c \
 	./source/functions/init.c \
 	./source/functions/is_sorted.c \
 	./source/functions/loop_in_range.c \
 	./source/functions/loop_until.c \
 	./source/functions/new.c \
+	./source/functions/pop.c \
 	./source/functions/print.c \
 	./source/functions/push.c \
 	./source/functions/quit.c \
 	./source/functions/reduce.c \
 	./source/functions/repeat.c \
 	./source/functions/retrieve.c \
+	./source/functions/reverse_rotate.c \
+	./source/functions/rotate.c \
 	./source/functions/share.c \
 	./source/functions/slice.c \
+	./source/functions/swap.c \
 	./source/functions/to_any.c \
 	./source/functions/warning.c \
 	./source/types/any/any.c \
@@ -141,8 +148,11 @@ SOURCES = \
 	./source/types/list/list_pop.c \
 	./source/types/list/list_push.c \
 	./source/types/list/list_reverse.c \
+	./source/types/list/list_reverse_rotate.c \
+	./source/types/list/list_rotate.c \
 	./source/types/list/list_set.c \
 	./source/types/list/list_shift.c \
+	./source/types/list/list_swap.c \
 	./source/types/list/list_unshift.c \
 	./source/types/map/map.c \
 	./source/types/map/map_copy.c \
@@ -188,19 +198,25 @@ OBJECTS = \
 	find.o \
 	foreach.o \
 	forkrun.o \
+	get.o \
+	get_length.o \
 	init.o \
 	is_sorted.o \
 	loop_in_range.o \
 	loop_until.o \
 	new.o \
+	pop.o \
 	print.o \
 	push.o \
 	quit.o \
 	reduce.o \
 	repeat.o \
 	retrieve.o \
+	reverse_rotate.o \
+	rotate.o \
 	share.o \
 	slice.o \
+	swap.o \
 	to_any.o \
 	warning.o \
 	any.o \
@@ -257,8 +273,11 @@ OBJECTS = \
 	list_pop.o \
 	list_push.o \
 	list_reverse.o \
+	list_reverse_rotate.o \
+	list_rotate.o \
 	list_set.o \
 	list_shift.o \
+	list_swap.o \
 	list_unshift.o \
 	map.o \
 	map_copy.o \
@@ -304,19 +323,25 @@ DEPENDENCIES = \
 	find.d \
 	foreach.d \
 	forkrun.d \
+	get.d \
+	get_length.d \
 	init.d \
 	is_sorted.d \
 	loop_in_range.d \
 	loop_until.d \
 	new.d \
+	pop.d \
 	print.d \
 	push.d \
 	quit.d \
 	reduce.d \
 	repeat.d \
 	retrieve.d \
+	reverse_rotate.d \
+	rotate.d \
 	share.d \
 	slice.d \
+	swap.d \
 	to_any.d \
 	warning.d \
 	any.d \
@@ -373,8 +398,11 @@ DEPENDENCIES = \
 	list_pop.d \
 	list_push.d \
 	list_reverse.d \
+	list_reverse_rotate.d \
+	list_rotate.d \
 	list_set.d \
 	list_shift.d \
+	list_swap.d \
 	list_unshift.d \
 	map.d \
 	map_copy.d \
@@ -546,6 +574,12 @@ $(DEFAULT_DIR)/objects/foreach.o: ./source/functions/foreach.c
 $(DEFAULT_DIR)/objects/forkrun.o: ./source/functions/forkrun.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/forkrun.d -c ./source/functions/forkrun.c -o $(DEFAULT_DIR)/objects/forkrun.o
 
+$(DEFAULT_DIR)/objects/get.o: ./source/functions/get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/get.d -c ./source/functions/get.c -o $(DEFAULT_DIR)/objects/get.o
+
+$(DEFAULT_DIR)/objects/get_length.o: ./source/functions/get_length.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/get_length.d -c ./source/functions/get_length.c -o $(DEFAULT_DIR)/objects/get_length.o
+
 $(DEFAULT_DIR)/objects/init.o: ./source/functions/init.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/init.d -c ./source/functions/init.c -o $(DEFAULT_DIR)/objects/init.o
 
@@ -560,6 +594,9 @@ $(DEFAULT_DIR)/objects/loop_until.o: ./source/functions/loop_until.c
 
 $(DEFAULT_DIR)/objects/new.o: ./source/functions/new.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/new.d -c ./source/functions/new.c -o $(DEFAULT_DIR)/objects/new.o
+
+$(DEFAULT_DIR)/objects/pop.o: ./source/functions/pop.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/pop.d -c ./source/functions/pop.c -o $(DEFAULT_DIR)/objects/pop.o
 
 $(DEFAULT_DIR)/objects/print.o: ./source/functions/print.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/print.d -c ./source/functions/print.c -o $(DEFAULT_DIR)/objects/print.o
@@ -579,11 +616,20 @@ $(DEFAULT_DIR)/objects/repeat.o: ./source/functions/repeat.c
 $(DEFAULT_DIR)/objects/retrieve.o: ./source/functions/retrieve.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/retrieve.d -c ./source/functions/retrieve.c -o $(DEFAULT_DIR)/objects/retrieve.o
 
+$(DEFAULT_DIR)/objects/reverse_rotate.o: ./source/functions/reverse_rotate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/reverse_rotate.d -c ./source/functions/reverse_rotate.c -o $(DEFAULT_DIR)/objects/reverse_rotate.o
+
+$(DEFAULT_DIR)/objects/rotate.o: ./source/functions/rotate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/rotate.d -c ./source/functions/rotate.c -o $(DEFAULT_DIR)/objects/rotate.o
+
 $(DEFAULT_DIR)/objects/share.o: ./source/functions/share.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/share.d -c ./source/functions/share.c -o $(DEFAULT_DIR)/objects/share.o
 
 $(DEFAULT_DIR)/objects/slice.o: ./source/functions/slice.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/slice.d -c ./source/functions/slice.c -o $(DEFAULT_DIR)/objects/slice.o
+
+$(DEFAULT_DIR)/objects/swap.o: ./source/functions/swap.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/swap.d -c ./source/functions/swap.c -o $(DEFAULT_DIR)/objects/swap.o
 
 $(DEFAULT_DIR)/objects/to_any.o: ./source/functions/to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/to_any.d -c ./source/functions/to_any.c -o $(DEFAULT_DIR)/objects/to_any.o
@@ -753,11 +799,20 @@ $(DEFAULT_DIR)/objects/list_push.o: ./source/types/list/list_push.c
 $(DEFAULT_DIR)/objects/list_reverse.o: ./source/types/list/list_reverse.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_reverse.d -c ./source/types/list/list_reverse.c -o $(DEFAULT_DIR)/objects/list_reverse.o
 
+$(DEFAULT_DIR)/objects/list_reverse_rotate.o: ./source/types/list/list_reverse_rotate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_reverse_rotate.d -c ./source/types/list/list_reverse_rotate.c -o $(DEFAULT_DIR)/objects/list_reverse_rotate.o
+
+$(DEFAULT_DIR)/objects/list_rotate.o: ./source/types/list/list_rotate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_rotate.d -c ./source/types/list/list_rotate.c -o $(DEFAULT_DIR)/objects/list_rotate.o
+
 $(DEFAULT_DIR)/objects/list_set.o: ./source/types/list/list_set.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_set.d -c ./source/types/list/list_set.c -o $(DEFAULT_DIR)/objects/list_set.o
 
 $(DEFAULT_DIR)/objects/list_shift.o: ./source/types/list/list_shift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_shift.d -c ./source/types/list/list_shift.c -o $(DEFAULT_DIR)/objects/list_shift.o
+
+$(DEFAULT_DIR)/objects/list_swap.o: ./source/types/list/list_swap.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_swap.d -c ./source/types/list/list_swap.c -o $(DEFAULT_DIR)/objects/list_swap.o
 
 $(DEFAULT_DIR)/objects/list_unshift.o: ./source/types/list/list_unshift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_unshift.d -c ./source/types/list/list_unshift.c -o $(DEFAULT_DIR)/objects/list_unshift.o
@@ -889,6 +944,12 @@ $(DEBUG_DIR)/objects/foreach.o: ./source/functions/foreach.c
 $(DEBUG_DIR)/objects/forkrun.o: ./source/functions/forkrun.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/forkrun.d -c ./source/functions/forkrun.c -o $(DEBUG_DIR)/objects/forkrun.o
 
+$(DEBUG_DIR)/objects/get.o: ./source/functions/get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/get.d -c ./source/functions/get.c -o $(DEBUG_DIR)/objects/get.o
+
+$(DEBUG_DIR)/objects/get_length.o: ./source/functions/get_length.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/get_length.d -c ./source/functions/get_length.c -o $(DEBUG_DIR)/objects/get_length.o
+
 $(DEBUG_DIR)/objects/init.o: ./source/functions/init.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/init.d -c ./source/functions/init.c -o $(DEBUG_DIR)/objects/init.o
 
@@ -903,6 +964,9 @@ $(DEBUG_DIR)/objects/loop_until.o: ./source/functions/loop_until.c
 
 $(DEBUG_DIR)/objects/new.o: ./source/functions/new.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/new.d -c ./source/functions/new.c -o $(DEBUG_DIR)/objects/new.o
+
+$(DEBUG_DIR)/objects/pop.o: ./source/functions/pop.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/pop.d -c ./source/functions/pop.c -o $(DEBUG_DIR)/objects/pop.o
 
 $(DEBUG_DIR)/objects/print.o: ./source/functions/print.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/print.d -c ./source/functions/print.c -o $(DEBUG_DIR)/objects/print.o
@@ -922,11 +986,20 @@ $(DEBUG_DIR)/objects/repeat.o: ./source/functions/repeat.c
 $(DEBUG_DIR)/objects/retrieve.o: ./source/functions/retrieve.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/retrieve.d -c ./source/functions/retrieve.c -o $(DEBUG_DIR)/objects/retrieve.o
 
+$(DEBUG_DIR)/objects/reverse_rotate.o: ./source/functions/reverse_rotate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/reverse_rotate.d -c ./source/functions/reverse_rotate.c -o $(DEBUG_DIR)/objects/reverse_rotate.o
+
+$(DEBUG_DIR)/objects/rotate.o: ./source/functions/rotate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/rotate.d -c ./source/functions/rotate.c -o $(DEBUG_DIR)/objects/rotate.o
+
 $(DEBUG_DIR)/objects/share.o: ./source/functions/share.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/share.d -c ./source/functions/share.c -o $(DEBUG_DIR)/objects/share.o
 
 $(DEBUG_DIR)/objects/slice.o: ./source/functions/slice.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/slice.d -c ./source/functions/slice.c -o $(DEBUG_DIR)/objects/slice.o
+
+$(DEBUG_DIR)/objects/swap.o: ./source/functions/swap.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/swap.d -c ./source/functions/swap.c -o $(DEBUG_DIR)/objects/swap.o
 
 $(DEBUG_DIR)/objects/to_any.o: ./source/functions/to_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/to_any.d -c ./source/functions/to_any.c -o $(DEBUG_DIR)/objects/to_any.o
@@ -1096,11 +1169,20 @@ $(DEBUG_DIR)/objects/list_push.o: ./source/types/list/list_push.c
 $(DEBUG_DIR)/objects/list_reverse.o: ./source/types/list/list_reverse.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_reverse.d -c ./source/types/list/list_reverse.c -o $(DEBUG_DIR)/objects/list_reverse.o
 
+$(DEBUG_DIR)/objects/list_reverse_rotate.o: ./source/types/list/list_reverse_rotate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_reverse_rotate.d -c ./source/types/list/list_reverse_rotate.c -o $(DEBUG_DIR)/objects/list_reverse_rotate.o
+
+$(DEBUG_DIR)/objects/list_rotate.o: ./source/types/list/list_rotate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_rotate.d -c ./source/types/list/list_rotate.c -o $(DEBUG_DIR)/objects/list_rotate.o
+
 $(DEBUG_DIR)/objects/list_set.o: ./source/types/list/list_set.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_set.d -c ./source/types/list/list_set.c -o $(DEBUG_DIR)/objects/list_set.o
 
 $(DEBUG_DIR)/objects/list_shift.o: ./source/types/list/list_shift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_shift.d -c ./source/types/list/list_shift.c -o $(DEBUG_DIR)/objects/list_shift.o
+
+$(DEBUG_DIR)/objects/list_swap.o: ./source/types/list/list_swap.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_swap.d -c ./source/types/list/list_swap.c -o $(DEBUG_DIR)/objects/list_swap.o
 
 $(DEBUG_DIR)/objects/list_unshift.o: ./source/types/list/list_unshift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_unshift.d -c ./source/types/list/list_unshift.c -o $(DEBUG_DIR)/objects/list_unshift.o

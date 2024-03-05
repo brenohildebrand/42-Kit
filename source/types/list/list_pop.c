@@ -12,15 +12,15 @@
 
 #include "list.h"
 
-t_any	list_pop(t_list list)
+t_any	list_pop(t_list instance)
 {
 	t_any	any;
 
-	if (list->end < list->start)
+	if (instance->end < instance->start)
 		return (NULL);
-	any = list->content[list->end];
-	list->content[list->end] = NULL;
-	list->end--;
-	list->length--;
+	any = instance->content[instance->end];
+	instance->content[instance->end] = NULL;
+	instance->end--;
+	instance->length--;
 	return (any);
 }

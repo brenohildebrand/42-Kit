@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_unshift.c                               :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 13:30:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:30:13 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/05 07:58:00 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/05 08:09:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
+#include "functions.h"
 
-void	list_unshift(t_list instance, t_any value)
+void	reverse_rotate(void *instance)
 {
-	if (instance->length + 1 > (instance->max_length * 3) / 4 || \
-		instance->start == 0)
-	{
-		list_expand(instance);
-	}
-	instance->start--;
-	instance->content[instance->start] = value;
-	instance->length++;
+	t_type	type;
+
+	type = memtree_search(instance);
+	assert(type != NULL);
+	assert(type->reverse_rotate != NULL);
+	type->reverse_rotate(instance);
 }

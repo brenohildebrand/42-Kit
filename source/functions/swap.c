@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_unshift.c                               :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/08 13:30:05 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 22:30:13 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/05 07:58:17 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/05 08:06:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "list.h"
-
-void	list_unshift(t_list instance, t_any value)
+void	swap(void *instance)
 {
-	if (instance->length + 1 > (instance->max_length * 3) / 4 || \
-		instance->start == 0)
-	{
-		list_expand(instance);
-	}
-	instance->start--;
-	instance->content[instance->start] = value;
-	instance->length++;
+	t_type	type;
+
+	type = memtree_search(instance);
+	assert(type != NULL);
+	assert(type->swap != NULL);
+	type->swap(instance);
 }

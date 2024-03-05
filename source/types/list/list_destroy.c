@@ -12,16 +12,16 @@
 
 #include "list.h"
 
-void	list_destroy(t_list list)
+void	list_destroy(t_list instance)
 {
 	int	i;
 
-	i = list->start;
-	while (i <= list->end)
+	i = instance->start;
+	while (i <= instance->end)
 	{
-		any_destroy(list->content[i]);
+		any_destroy(instance->content[i]);
 		i++;
 	}
-	deallocate(list->content);
-	delete(list);
+	deallocate(instance->content);
+	delete(instance);
 }

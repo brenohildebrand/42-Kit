@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:11:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/04 17:55:20 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/05 09:31:18 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void	destroy(void *instance);
 void	display(char *cstring);
 void	error(char *cstring);
 int		forkrun(void (*callback)(void));
+t_i32	get_length(void *instance);
+t_any	get(void *instance, t_any key);
 void	*init(void	*instance, t_any value);
 void	*new(t_type (*signature)(void));
-void	pop(void *instance);
+t_any	pop(void *instance);
 void	print(t_any instance);
 void	push(void *instance, t_any value);
 void	quit(t_i32 exit_code);
@@ -50,8 +52,11 @@ t_i32	is_sorted(void *instance);
 void	loop_in_range(int start, int end, void (*callback)(int));
 void	repeat(int n, void (*callback)(void));
 t_any	retrieve(t_i8 *key);
+void	reverse_rotate(void *instance);
+void	rotate(void *instance);
 void	share(t_i8 *key, t_any value);
-void	warning(char *cstring);
+void	swap(void *instance);
 t_any	to_any(void *instance);
+void	warning(char *cstring);
 
 #endif

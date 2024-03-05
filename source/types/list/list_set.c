@@ -12,9 +12,9 @@
 
 #include "list.h"
 
-void	list_set(t_list list, int index, t_any value)
+void	list_set(t_list instance, int index, t_any value)
 {
-	if (index >= list->length)
+	if (index >= instance->length)
 		return ;
-	list->content[list->start + index] = value;
+	instance->content[instance->start + index] = value;
 }

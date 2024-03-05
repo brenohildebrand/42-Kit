@@ -12,15 +12,15 @@
 
 #include "list.h"
 
-t_any	list_shift(t_list list)
+t_any	list_shift(t_list instance)
 {
 	t_any	any;
 
-	if (list->end < list->start)
+	if (instance->end < instance->start)
 		return (NULL);
-	any = list->content[list->start];
-	list->content[list->start] = NULL;
-	list->start++;
-	list->length--;
+	any = instance->content[instance->start];
+	instance->content[instance->start] = NULL;
+	instance->start++;
+	instance->length--;
 	return (any);
 }
