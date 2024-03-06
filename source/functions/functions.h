@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:11:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/05 09:31:18 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/06 14:05:43 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	delete(void *instance);
 void	destroy(void *instance);
 void	display(char *cstring);
 void	error(char *cstring);
+void	for_each(void *instance, void (*callback)(t_any, int));
 int		forkrun(void (*callback)(void));
 t_i32	get_length(void *instance);
 t_any	get(void *instance, t_any key);
@@ -54,7 +55,9 @@ void	repeat(int n, void (*callback)(void));
 t_any	retrieve(t_i8 *key);
 void	reverse_rotate(void *instance);
 void	rotate(void *instance);
+void	set(void *instance, t_any key, t_any value);
 void	share(t_i8 *key, t_any value);
+void	sort(void *instance);
 void	swap(void *instance);
 t_any	to_any(void *instance);
 void	warning(char *cstring);

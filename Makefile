@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/05 13:46:52 by bhildebr          #+#    #+#              #
-#    Updated: 2024/03/05 13:46:52 by bhildebr         ###   ########.fr        #
+#    Created: 2024/03/06 12:13:50 by bhildebr          #+#    #+#              #
+#    Updated: 2024/03/06 12:13:50 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,7 @@ SOURCES = \
 	./source/functions/retrieve.c \
 	./source/functions/reverse_rotate.c \
 	./source/functions/rotate.c \
+	./source/functions/set.c \
 	./source/functions/share.c \
 	./source/functions/slice.c \
 	./source/functions/swap.c \
@@ -153,6 +154,7 @@ SOURCES = \
 	./source/types/list/list_set.c \
 	./source/types/list/list_shift.c \
 	./source/types/list/list_swap.c \
+	./source/types/list/list_to_any.c \
 	./source/types/list/list_unshift.c \
 	./source/types/map/map.c \
 	./source/types/map/map_copy.c \
@@ -214,6 +216,7 @@ OBJECTS = \
 	retrieve.o \
 	reverse_rotate.o \
 	rotate.o \
+	set.o \
 	share.o \
 	slice.o \
 	swap.o \
@@ -278,6 +281,7 @@ OBJECTS = \
 	list_set.o \
 	list_shift.o \
 	list_swap.o \
+	list_to_any.o \
 	list_unshift.o \
 	map.o \
 	map_copy.o \
@@ -339,6 +343,7 @@ DEPENDENCIES = \
 	retrieve.d \
 	reverse_rotate.d \
 	rotate.d \
+	set.d \
 	share.d \
 	slice.d \
 	swap.d \
@@ -403,6 +408,7 @@ DEPENDENCIES = \
 	list_set.d \
 	list_shift.d \
 	list_swap.d \
+	list_to_any.d \
 	list_unshift.d \
 	map.d \
 	map_copy.d \
@@ -622,6 +628,9 @@ $(DEFAULT_DIR)/objects/reverse_rotate.o: ./source/functions/reverse_rotate.c
 $(DEFAULT_DIR)/objects/rotate.o: ./source/functions/rotate.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/rotate.d -c ./source/functions/rotate.c -o $(DEFAULT_DIR)/objects/rotate.o
 
+$(DEFAULT_DIR)/objects/set.o: ./source/functions/set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/set.d -c ./source/functions/set.c -o $(DEFAULT_DIR)/objects/set.o
+
 $(DEFAULT_DIR)/objects/share.o: ./source/functions/share.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/share.d -c ./source/functions/share.c -o $(DEFAULT_DIR)/objects/share.o
 
@@ -814,6 +823,9 @@ $(DEFAULT_DIR)/objects/list_shift.o: ./source/types/list/list_shift.c
 $(DEFAULT_DIR)/objects/list_swap.o: ./source/types/list/list_swap.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_swap.d -c ./source/types/list/list_swap.c -o $(DEFAULT_DIR)/objects/list_swap.o
 
+$(DEFAULT_DIR)/objects/list_to_any.o: ./source/types/list/list_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_to_any.d -c ./source/types/list/list_to_any.c -o $(DEFAULT_DIR)/objects/list_to_any.o
+
 $(DEFAULT_DIR)/objects/list_unshift.o: ./source/types/list/list_unshift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_unshift.d -c ./source/types/list/list_unshift.c -o $(DEFAULT_DIR)/objects/list_unshift.o
 
@@ -991,6 +1003,9 @@ $(DEBUG_DIR)/objects/reverse_rotate.o: ./source/functions/reverse_rotate.c
 
 $(DEBUG_DIR)/objects/rotate.o: ./source/functions/rotate.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/rotate.d -c ./source/functions/rotate.c -o $(DEBUG_DIR)/objects/rotate.o
+
+$(DEBUG_DIR)/objects/set.o: ./source/functions/set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/set.d -c ./source/functions/set.c -o $(DEBUG_DIR)/objects/set.o
 
 $(DEBUG_DIR)/objects/share.o: ./source/functions/share.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/share.d -c ./source/functions/share.c -o $(DEBUG_DIR)/objects/share.o
@@ -1183,6 +1198,9 @@ $(DEBUG_DIR)/objects/list_shift.o: ./source/types/list/list_shift.c
 
 $(DEBUG_DIR)/objects/list_swap.o: ./source/types/list/list_swap.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_swap.d -c ./source/types/list/list_swap.c -o $(DEBUG_DIR)/objects/list_swap.o
+
+$(DEBUG_DIR)/objects/list_to_any.o: ./source/types/list/list_to_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_to_any.d -c ./source/types/list/list_to_any.c -o $(DEBUG_DIR)/objects/list_to_any.o
 
 $(DEBUG_DIR)/objects/list_unshift.o: ./source/types/list/list_unshift.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_unshift.d -c ./source/types/list/list_unshift.c -o $(DEBUG_DIR)/objects/list_unshift.o

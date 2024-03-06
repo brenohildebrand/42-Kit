@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   foreach.c                                          :+:      :+:    :+:   */
+/*   list_to_any.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 12:50:51 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/25 14:42:41 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/06 11:51:04 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/06 11:51:16 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "functions.h"
+#include "list.h"
 
-void	foreach(void *instance, void (*callback)(t_any, int))
+t_any	list_to_any(t_list instance)
 {
-	t_type	type;
+	t_any	converted_instance;
 
-	type = memtree_search(instance);
-	assert(type != NULL);
-	assert(type->foreach != NULL);
-	type->foreach(instance, callback);
+	converted_instance = create(any);
+	converted_instance->type = list();
+	converted_instance->value.instance = instance;
+	return (converted_instance);
 }
