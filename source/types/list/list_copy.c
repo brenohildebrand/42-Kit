@@ -16,10 +16,14 @@ static void	copy_content(t_list instance, t_list new_instance)
 {
 	int	i;
 
+	while (new_instance->max_length < instance->max_length)
+	{
+		list_expand(new_instance);
+	}
 	i = 0;
 	while (i < instance->max_length)
 	{
-		new_instance->content[i] = instance->content[i];
+		new_instance->content[i] = any_copy(instance->content[i]);
 		i++;
 	}
 }

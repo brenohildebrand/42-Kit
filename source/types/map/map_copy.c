@@ -16,10 +16,14 @@ static void	copy_entries(t_map instance, t_map new_instance)
 {
 	int	i;
 
+	while (new_instance->max_length < instance->max_length)
+	{
+		map_expand(new_instance);
+	}
 	i = 0;
 	while (i < instance->max_length)
 	{
-		new_instance[i] = instance[i];
+		new_instance->entries[i] = instance->entries[i];
 		i++;
 	}
 }

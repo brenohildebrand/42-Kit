@@ -16,13 +16,15 @@ t_type	map(void)
 {
 	static struct s_type	type = {
 		.name = "map",
+		.is_instance = 1,
 		.size = sizeof(struct s_map),
 		.create = (void *(*)(void))map_create,
 		.destroy = (void (*)(void *))map_destroy,
 		.copy = (void *(*)(void *))map_copy,
 		.get = (t_any (*)(void *, t_any))map_get,
 		.set = (void (*)(void *, t_any, t_any))map_set,
-		.is_instance = 1
+		.as_any = (t_any (*)(void *))map_as_any,
+		.to_any = (t_any (*)(void *))map_to_any
 	};
 
 	return (&type);

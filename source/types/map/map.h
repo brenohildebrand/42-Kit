@@ -35,5 +35,7 @@ void	map_expand(t_map instance);
 int		map_hash(t_any key);
 void	map_set(t_map instance, t_any key, t_any value);
 t_any	map_get(t_map instance, t_any value);
+t_any	map_as_any(t_map instance);
+t_any	map_to_any(t_map instance);
 
 #endif

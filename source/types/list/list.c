@@ -31,7 +31,7 @@ t_type	list(void)
 		.rotate = (void (*)(void *))list_rotate,
 		.reverse_rotate = (void (*)(void *))list_reverse_rotate,
 		.swap = (void (*)(void *))list_swap,
-		.foreach = (void (*)(void *, void (*)(t_any, t_i32)))list_for_each,
+		.for_each = (void (*)(void *, void (*)(t_any, t_i32)))list_for_each,
 		.sort = (void (*)(void *))list_sort,
 		.get_length = (t_i32 (*)(void *))list_get_length,
 		.as_any = (t_any (*)(void *))list_as_any,

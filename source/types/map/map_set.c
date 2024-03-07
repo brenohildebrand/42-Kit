@@ -39,7 +39,7 @@ static t_i32	are_keys_the_same(t_any key, t_any another_key)
 	{
 		i = 0;
 		key_sequence = key->value.sequence;
-		another_key_sequence = key->value.sequence;
+		another_key_sequence = another_key->value.sequence;
 		while (key_sequence[i] == another_key_sequence[i] && key_sequence[i])
 			i++;
 		if (key_sequence[i] == another_key_sequence[i] && !key_sequence[i])

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 14:07:10 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/06 16:00:18 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:24:51 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	swap_current_with_smallest(
 	t_any	current;
 	t_any	smallest;
 
-	current = list_get(instance, current_index);
-	smallest = list_get(instance, smallest_index);
+	current = list_get(instance, i32_to_any(current_index));
+	smallest = list_get(instance, i32_to_any(smallest_index));
 	list_set(instance, i32_to_any(current_index), smallest);
 	list_set(instance, i32_to_any(smallest_index), current);
 }
@@ -39,12 +39,12 @@ void	list_sort(t_list instance)
 	i = 0;
 	while (i < instance->length)
 	{
-		smallest = list_get(instance, i);
+		smallest = list_get(instance, i32_to_any(i));
 		smallest_index = i;
 		j = i + 1;
 		while (j < instance->length)
 		{
-			current = list_get(instance, j);
+			current = list_get(instance, i32_to_any(j));
 			if (compare(current, smallest) < 0)
 			{
 				smallest = current;
