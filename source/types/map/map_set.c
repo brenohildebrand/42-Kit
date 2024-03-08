@@ -16,9 +16,11 @@ static t_i32	are_values_the_same(t_any key, t_any another_key)
 {
 	t_i32	i;
 
+	i = 0;
 	while (i < (int)(sizeof(union u_any)))
 	{
-		if (key->value.buffer[i] != another_key->value.buffer[i])
+		if (((unsigned char *)(&key->value))[i] != \
+			((unsigned char *)(&another_key->value))[i])
 			return (0);
 		i++;
 	}
@@ -74,6 +76,10 @@ void	map_set(t_map instance, t_any key, t_any value)
 		else if (are_keys_the_same(instance->entries[hash].key, key))
 		{
 			any_destroy(key);
+			if (value == NULL)
+			{
+				any_destroy(instance->entries[hash].value);
+			}
 			instance->entries[hash].value = value;
 			break ;
 		}

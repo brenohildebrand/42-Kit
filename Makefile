@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/06 21:38:42 by bhildebr          #+#    #+#              #
-#    Updated: 2024/03/06 21:38:42 by bhildebr         ###   ########.fr        #
+#    Created: 2024/03/08 19:40:30 by bhildebr          #+#    #+#              #
+#    Updated: 2024/03/08 19:40:30 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -149,6 +149,7 @@ SOURCES = \
 	./source/types/list/list_get_length.c \
 	./source/types/list/list_is_sorted.c \
 	./source/types/list/list_pop.c \
+	./source/types/list/list_print.c \
 	./source/types/list/list_push.c \
 	./source/types/list/list_reverse.c \
 	./source/types/list/list_reverse_rotate.c \
@@ -281,6 +282,7 @@ OBJECTS = \
 	list_get_length.o \
 	list_is_sorted.o \
 	list_pop.o \
+	list_print.o \
 	list_push.o \
 	list_reverse.o \
 	list_reverse_rotate.o \
@@ -413,6 +415,7 @@ DEPENDENCIES = \
 	list_get_length.d \
 	list_is_sorted.d \
 	list_pop.d \
+	list_print.d \
 	list_push.d \
 	list_reverse.d \
 	list_reverse_rotate.d \
@@ -462,7 +465,9 @@ TESTS = \
 	build/tests/bin/list_is_sorted \
 	build/tests/bin/list_push \
 	build/tests/bin/map_create \
-	build/tests/bin/map_destroy
+	build/tests/bin/map_destroy \
+	build/tests/bin/map_get \
+	build/tests/bin/map_set
 
 TESTS_OBJECTS = \
 	build/tests/objects/allocate.o \
@@ -476,7 +481,9 @@ TESTS_OBJECTS = \
 	build/tests/objects/list_is_sorted.o \
 	build/tests/objects/list_push.o \
 	build/tests/objects/map_create.o \
-	build/tests/objects/map_destroy.o
+	build/tests/objects/map_destroy.o \
+	build/tests/objects/map_get.o \
+	build/tests/objects/map_set.o
 
 TESTS_DEPENDENCIES = \
 	build/tests/dependencies/allocate.d \
@@ -490,7 +497,9 @@ TESTS_DEPENDENCIES = \
 	build/tests/dependencies/list_is_sorted.d \
 	build/tests/dependencies/list_push.d \
 	build/tests/dependencies/map_create.d \
-	build/tests/dependencies/map_destroy.d
+	build/tests/dependencies/map_destroy.d \
+	build/tests/dependencies/map_get.d \
+	build/tests/dependencies/map_set.d
 
 DEBUG_DIR = ./build/debug
 DEFAULT_DIR = ./build/default
@@ -822,6 +831,9 @@ $(DEFAULT_DIR)/objects/list_is_sorted.o: ./source/types/list/list_is_sorted.c
 
 $(DEFAULT_DIR)/objects/list_pop.o: ./source/types/list/list_pop.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_pop.d -c ./source/types/list/list_pop.c -o $(DEFAULT_DIR)/objects/list_pop.o
+
+$(DEFAULT_DIR)/objects/list_print.o: ./source/types/list/list_print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_print.d -c ./source/types/list/list_print.c -o $(DEFAULT_DIR)/objects/list_print.o
 
 $(DEFAULT_DIR)/objects/list_push.o: ./source/types/list/list_push.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_push.d -c ./source/types/list/list_push.c -o $(DEFAULT_DIR)/objects/list_push.o
@@ -1214,6 +1226,9 @@ $(DEBUG_DIR)/objects/list_is_sorted.o: ./source/types/list/list_is_sorted.c
 $(DEBUG_DIR)/objects/list_pop.o: ./source/types/list/list_pop.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_pop.d -c ./source/types/list/list_pop.c -o $(DEBUG_DIR)/objects/list_pop.o
 
+$(DEBUG_DIR)/objects/list_print.o: ./source/types/list/list_print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_print.d -c ./source/types/list/list_print.c -o $(DEBUG_DIR)/objects/list_print.o
+
 $(DEBUG_DIR)/objects/list_push.o: ./source/types/list/list_push.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_push.d -c ./source/types/list/list_push.c -o $(DEBUG_DIR)/objects/list_push.o
 
@@ -1370,5 +1385,13 @@ $(TESTS_DIR)/objects/map_create.o: ./tests/types/map/map_create.c
 $(TESTS_DIR)/objects/map_destroy.o: ./tests/types/map/map_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/map_destroy.d -c ./tests/types/map/map_destroy.c -o $(TESTS_DIR)/objects/map_destroy.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/map_destroy.o $(DEFAULT) -o $(TESTS_DIR)/bin/map_destroy
+
+$(TESTS_DIR)/objects/map_get.o: ./tests/types/map/map_get.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/map_get.d -c ./tests/types/map/map_get.c -o $(TESTS_DIR)/objects/map_get.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/map_get.o $(DEFAULT) -o $(TESTS_DIR)/bin/map_get
+
+$(TESTS_DIR)/objects/map_set.o: ./tests/types/map/map_set.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/map_set.d -c ./tests/types/map/map_set.c -o $(TESTS_DIR)/objects/map_set.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/map_set.o $(DEFAULT) -o $(TESTS_DIR)/bin/map_set
 
 

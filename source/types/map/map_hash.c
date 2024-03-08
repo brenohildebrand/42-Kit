@@ -20,9 +20,9 @@ static t_i32	hash_for_value(t_any key)
 
 	hash = 5381;
 	i = 0;
-	while (i < (int)(sizeof(void *)))
+	while (i < (int)(sizeof(union u_any)))
 	{
-		hash = ((hash << 5) + hash) + key->value.buffer[i];
+		hash = ((hash << 5) + hash) + ((unsigned char *)(&key->value))[i];
 		i++;
 	}
 	return (hash);

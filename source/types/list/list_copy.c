@@ -23,7 +23,8 @@ static void	copy_content(t_list instance, t_list new_instance)
 	i = 0;
 	while (i < instance->max_length)
 	{
-		new_instance->content[i] = any_copy(instance->content[i]);
+		if (instance->content[i])
+			new_instance->content[i] = any_copy(instance->content[i]);
 		i++;
 	}
 }

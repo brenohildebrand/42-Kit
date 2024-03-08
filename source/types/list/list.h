@@ -44,6 +44,7 @@ void	list_reverse_rotate(t_list instance);
 void	list_swap(t_list instance);
 void	list_for_each(t_list instance, void (*callback)(t_any, int));
 void	list_sort(t_list instance);
+// void	list_print(t_list instance);
 int		list_get_length(t_list instance);
 t_i32	list_is_sorted(t_list instance);
 t_any	list_as_any(t_list instance);
