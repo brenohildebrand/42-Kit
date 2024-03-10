@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.h                                       :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 22:26:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 18:11:19 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/10 11:57:33 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/10 12:18:59 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	list_rotate(t_list instance);
 void	list_reverse_rotate(t_list instance);
 void	list_swap(t_list instance);
 void	list_for_each(t_list instance, void (*callback)(t_any, int));
+t_any	list_reduce(t_list instance, t_any accumulator, t_any (*callback)(t_any, t_any, int));
 void	list_sort(t_list instance);
 // void	list_print(t_list instance);
 int		list_get_length(t_list instance);

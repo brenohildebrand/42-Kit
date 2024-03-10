@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/06 14:04:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:13:13 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ struct s_type {
 	void			(*swap)(void *);
 	void			(*for_each)(void *, void (*)(t_any, t_i32));
 	void			(*filter)(void *, void (*)(t_any, t_i32));
-	t_any			(*reduce)(void *, t_any (*)(t_any, t_any, t_i32));
+	t_any			(*reduce)(void *, t_any accumulator, t_any (*)(t_any, t_any, t_i32));
 	int				(*find)(void *, int (*)(t_any, t_i32));
 	void			(*slice)(void *, t_i32, t_i32);
 	int				(*compare)(t_any, t_any);

@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:11:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/06 14:05:43 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:21:28 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_any	pop(void *instance);
 void	print(t_any instance);
 void	push(void *instance, t_any value);
 void	quit(t_i32 exit_code);
+t_any	reduce(void *instance, t_any accumulator, t_any (*callback)(t_any, t_any, int));
 t_i32	is_sorted(void *instance);
 void	loop_in_range(int start, int end, void (*callback)(int));
 void	repeat(int n, void (*callback)(void));
