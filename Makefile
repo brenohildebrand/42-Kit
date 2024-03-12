@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/11 21:38:08 by bhildebr          #+#    #+#              #
-#    Updated: 2024/03/11 21:38:08 by bhildebr         ###   ########.fr        #
+#    Created: 2024/03/12 16:40:46 by bhildebr          #+#    #+#              #
+#    Updated: 2024/03/12 16:40:46 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -153,11 +153,13 @@ SOURCES = \
 	./source/types/list/list_for_each.c \
 	./source/types/list/list_get.c \
 	./source/types/list/list_get_length.c \
+	./source/types/list/list_inflate.c \
 	./source/types/list/list_is_sorted.c \
 	./source/types/list/list_pop.c \
 	./source/types/list/list_print.c \
 	./source/types/list/list_push.c \
 	./source/types/list/list_reduce.c \
+	./source/types/list/list_resize.c \
 	./source/types/list/list_reverse.c \
 	./source/types/list/list_reverse_rotate.c \
 	./source/types/list/list_rotate.c \
@@ -173,7 +175,6 @@ SOURCES = \
 	./source/types/map/map_copy.c \
 	./source/types/map/map_create.c \
 	./source/types/map/map_destroy.c \
-	./source/types/map/map_expand.c \
 	./source/types/map/map_get.c \
 	./source/types/map/map_get_length.c \
 	./source/types/map/map_hash.c \
@@ -297,11 +298,13 @@ OBJECTS = \
 	list_for_each.o \
 	list_get.o \
 	list_get_length.o \
+	list_inflate.o \
 	list_is_sorted.o \
 	list_pop.o \
 	list_print.o \
 	list_push.o \
 	list_reduce.o \
+	list_resize.o \
 	list_reverse.o \
 	list_reverse_rotate.o \
 	list_rotate.o \
@@ -317,7 +320,6 @@ OBJECTS = \
 	map_copy.o \
 	map_create.o \
 	map_destroy.o \
-	map_expand.o \
 	map_get.o \
 	map_get_length.o \
 	map_hash.o \
@@ -441,11 +443,13 @@ DEPENDENCIES = \
 	list_for_each.d \
 	list_get.d \
 	list_get_length.d \
+	list_inflate.d \
 	list_is_sorted.d \
 	list_pop.d \
 	list_print.d \
 	list_push.d \
 	list_reduce.d \
+	list_resize.d \
 	list_reverse.d \
 	list_reverse_rotate.d \
 	list_rotate.d \
@@ -461,7 +465,6 @@ DEPENDENCIES = \
 	map_copy.d \
 	map_create.d \
 	map_destroy.d \
-	map_expand.d \
 	map_get.d \
 	map_get_length.d \
 	map_hash.d \
@@ -875,6 +878,9 @@ $(DEFAULT_DIR)/objects/list_get.o: ./source/types/list/list_get.c
 $(DEFAULT_DIR)/objects/list_get_length.o: ./source/types/list/list_get_length.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_get_length.d -c ./source/types/list/list_get_length.c -o $(DEFAULT_DIR)/objects/list_get_length.o
 
+$(DEFAULT_DIR)/objects/list_inflate.o: ./source/types/list/list_inflate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_inflate.d -c ./source/types/list/list_inflate.c -o $(DEFAULT_DIR)/objects/list_inflate.o
+
 $(DEFAULT_DIR)/objects/list_is_sorted.o: ./source/types/list/list_is_sorted.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_is_sorted.d -c ./source/types/list/list_is_sorted.c -o $(DEFAULT_DIR)/objects/list_is_sorted.o
 
@@ -889,6 +895,9 @@ $(DEFAULT_DIR)/objects/list_push.o: ./source/types/list/list_push.c
 
 $(DEFAULT_DIR)/objects/list_reduce.o: ./source/types/list/list_reduce.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_reduce.d -c ./source/types/list/list_reduce.c -o $(DEFAULT_DIR)/objects/list_reduce.o
+
+$(DEFAULT_DIR)/objects/list_resize.o: ./source/types/list/list_resize.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_resize.d -c ./source/types/list/list_resize.c -o $(DEFAULT_DIR)/objects/list_resize.o
 
 $(DEFAULT_DIR)/objects/list_reverse.o: ./source/types/list/list_reverse.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/list_reverse.d -c ./source/types/list/list_reverse.c -o $(DEFAULT_DIR)/objects/list_reverse.o
@@ -934,9 +943,6 @@ $(DEFAULT_DIR)/objects/map_create.o: ./source/types/map/map_create.c
 
 $(DEFAULT_DIR)/objects/map_destroy.o: ./source/types/map/map_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_destroy.d -c ./source/types/map/map_destroy.c -o $(DEFAULT_DIR)/objects/map_destroy.o
-
-$(DEFAULT_DIR)/objects/map_expand.o: ./source/types/map/map_expand.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_expand.d -c ./source/types/map/map_expand.c -o $(DEFAULT_DIR)/objects/map_expand.o
 
 $(DEFAULT_DIR)/objects/map_get.o: ./source/types/map/map_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_get.d -c ./source/types/map/map_get.c -o $(DEFAULT_DIR)/objects/map_get.o
@@ -1302,6 +1308,9 @@ $(DEBUG_DIR)/objects/list_get.o: ./source/types/list/list_get.c
 $(DEBUG_DIR)/objects/list_get_length.o: ./source/types/list/list_get_length.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_get_length.d -c ./source/types/list/list_get_length.c -o $(DEBUG_DIR)/objects/list_get_length.o
 
+$(DEBUG_DIR)/objects/list_inflate.o: ./source/types/list/list_inflate.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_inflate.d -c ./source/types/list/list_inflate.c -o $(DEBUG_DIR)/objects/list_inflate.o
+
 $(DEBUG_DIR)/objects/list_is_sorted.o: ./source/types/list/list_is_sorted.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_is_sorted.d -c ./source/types/list/list_is_sorted.c -o $(DEBUG_DIR)/objects/list_is_sorted.o
 
@@ -1316,6 +1325,9 @@ $(DEBUG_DIR)/objects/list_push.o: ./source/types/list/list_push.c
 
 $(DEBUG_DIR)/objects/list_reduce.o: ./source/types/list/list_reduce.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_reduce.d -c ./source/types/list/list_reduce.c -o $(DEBUG_DIR)/objects/list_reduce.o
+
+$(DEBUG_DIR)/objects/list_resize.o: ./source/types/list/list_resize.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_resize.d -c ./source/types/list/list_resize.c -o $(DEBUG_DIR)/objects/list_resize.o
 
 $(DEBUG_DIR)/objects/list_reverse.o: ./source/types/list/list_reverse.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/list_reverse.d -c ./source/types/list/list_reverse.c -o $(DEBUG_DIR)/objects/list_reverse.o
@@ -1361,9 +1373,6 @@ $(DEBUG_DIR)/objects/map_create.o: ./source/types/map/map_create.c
 
 $(DEBUG_DIR)/objects/map_destroy.o: ./source/types/map/map_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_destroy.d -c ./source/types/map/map_destroy.c -o $(DEBUG_DIR)/objects/map_destroy.o
-
-$(DEBUG_DIR)/objects/map_expand.o: ./source/types/map/map_expand.c
-	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_expand.d -c ./source/types/map/map_expand.c -o $(DEBUG_DIR)/objects/map_expand.o
 
 $(DEBUG_DIR)/objects/map_get.o: ./source/types/map/map_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_get.d -c ./source/types/map/map_get.c -o $(DEBUG_DIR)/objects/map_get.o

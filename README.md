@@ -1,12 +1,8 @@
 > **Notice**  
-This project was developed during my journey at [42 São Paulo](https://github.com/42sp).  
-You may want to [explore](https://github.com/brenohildebrand/42) them all.
+This project was developed during my journey at [42 São Paulo](https://github.com/42sp).  You may want to [see more](https://github.com/brenohildebrand/42).
 
-> **Warning**  
-Since you need full ownership of your projects, using this framework directly isn't possible. However, you can draw inspiration from it and develop your own version.
+# ft_framework
 
-## Huh?!
+This is `ft_framework`, a tool to harness the conveniences of higher-level languages in C programming. It simplifies memory management and includes essential data structures like lists and maps, sparing you the hassle of reinventing the wheel. It also comes with a CLI tool to help with building, testing and submitting your projects. Beware though, you can't use it directly due to ownership rules. However, you can draw inspiration from it and develop your own version, and I may help you do just that.
 
-This is the wannabe famous ft_framework. It's a tool to help me during the development of projects at 42.
-
-Read the [guide](docs/GUIDE.md) to learn more.
+Get started by reading the [guide](docs/GUIDE.md).

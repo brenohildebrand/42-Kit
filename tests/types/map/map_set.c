@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 14:43:22 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/08 19:26:05 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:27:17 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
+t_i32	main(void)
 {
 	t_map	instance;
 

@@ -6,16 +6,26 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 11:57:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/12 12:05:32 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:55:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// -- List
-// -- Represents a list of anything. Under the hood it's a dynamic arrray
-// -- that can hold any type, including multiple different types.
-
 #ifndef LIST_H
 # define LIST_H
+
+// -- The list type represents a list of anything. Under the hood it's a
+// -- dynamic array 
+
+/*
+	The list type represents a list of anything. Under the hood it's a dynamic
+	array that can hold any type.
+*/
+
+// The list type represents a list of anything. Under the hood it's a dynamic
+// array of pointers to t_any.
+
+// -- Represents a list of anything. Under the hood it's a dynamic arrray
+// -- that can hold any type, including multiple different types.
 
 typedef struct s_list	*t_list;
 

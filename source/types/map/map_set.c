@@ -48,3 +48,45 @@ void	map_set(t_map instance, t_any key, t_any value)
 		}
 	}
 }
+
+void	map_set(t_map instance, t_any key, t_any value)
+{
+	t_list		list;
+	t_i32		hash;
+	t_i32		index;
+	t_map_entry	new_entry;
+	t_map_entry current_entry;
+
+	list = map_get_list(key);
+	hash = map_hash(key);
+	if (list->length == list->max_length)
+	{
+		list_resize(list->length * 2);
+		list_inflate(list);
+		map_rehash(instance, list);
+	}
+	index = hash % get_length(list);
+	new_entry = map_entry_create();
+	new_entry->key = key;
+	new_entry->value = value;
+	while (1)
+	{
+		current_entry = list_get(i32_to_any(index));
+		if (current_entry->key == NULL)
+		{
+
+		}
+		else if (map_compare_keys(current_entry, new_entry))
+		{
+
+		}
+		else
+		{
+
+		}
+		index++;
+		if (index == list->length)
+			index = 0;
+	}
+	set(list, i32_to_any(hash % get_length(list)), value);
+}

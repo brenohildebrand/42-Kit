@@ -25,6 +25,7 @@ struct s_map_entry {
 	t_any	value;
 };
 
+
 t_type		map(void);
 t_map		map_create(void);
 void		map_destroy(t_map instance);
