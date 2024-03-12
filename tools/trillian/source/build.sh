@@ -274,6 +274,7 @@ fi
 
 # Exit if the project is actually the framework.
 if [ "$PROJECT" == "$FRAMEWORK" ]; then
+	aplay ./config/brasil.wav > /dev/null 2>&1 &
 	exit 0
 fi
 

@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/10 15:21:51 by bhildebr          #+#    #+#              #
-#    Updated: 2024/03/10 15:21:51 by bhildebr         ###   ########.fr        #
+#    Created: 2024/03/11 21:38:08 by bhildebr          #+#    #+#              #
+#    Updated: 2024/03/11 21:38:08 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,9 @@ CPATHS = \
 	-include list.h \
 	-include map.h \
 	-include memtree.h \
+	-include pair.h \
+	-include string.h \
+	-include tuple.h \
 	-include type.h \
 	-include u32.h \
 	-include u64.h \
@@ -41,14 +44,15 @@ CPATHS = \
 	-iquote ./source/types/any \
 	-iquote ./source/types/f64 \
 	-iquote ./source/types/framework \
-	-iquote ./source/types/graph \
 	-iquote ./source/types/i32 \
 	-iquote ./source/types/i64 \
 	-iquote ./source/types/i8 \
 	-iquote ./source/types/list \
 	-iquote ./source/types/map \
 	-iquote ./source/types/memtree \
+	-iquote ./source/types/pair \
 	-iquote ./source/types/string \
+	-iquote ./source/types/tuple \
 	-iquote ./source/types/type \
 	-iquote ./source/types/u32 \
 	-iquote ./source/types/u64 \
@@ -77,6 +81,7 @@ SOURCES = \
 	./source/functions/get_length.c \
 	./source/functions/init.c \
 	./source/functions/is_sorted.c \
+	./source/functions/join.c \
 	./source/functions/loop_in_range.c \
 	./source/functions/loop_until.c \
 	./source/functions/new.c \
@@ -93,6 +98,7 @@ SOURCES = \
 	./source/functions/share.c \
 	./source/functions/slice.c \
 	./source/functions/sort.c \
+	./source/functions/split.c \
 	./source/functions/swap.c \
 	./source/functions/to_any.c \
 	./source/functions/warning.c \
@@ -163,11 +169,13 @@ SOURCES = \
 	./source/types/list/list_unshift.c \
 	./source/types/map/map.c \
 	./source/types/map/map_as_any.c \
+	./source/types/map/map_compare_keys.c \
 	./source/types/map/map_copy.c \
 	./source/types/map/map_create.c \
 	./source/types/map/map_destroy.c \
 	./source/types/map/map_expand.c \
 	./source/types/map/map_get.c \
+	./source/types/map/map_get_length.c \
 	./source/types/map/map_hash.c \
 	./source/types/map/map_set.c \
 	./source/types/map/map_to_any.c \
@@ -181,6 +189,12 @@ SOURCES = \
 	./source/types/memtree/memtree_rebalance.c \
 	./source/types/memtree/memtree_search.c \
 	./source/types/memtree/memtree_update_height.c \
+	./source/types/tuple/tuple.c \
+	./source/types/tuple/tuple_as_any.c \
+	./source/types/tuple/tuple_create.c \
+	./source/types/tuple/tuple_destroy.c \
+	./source/types/tuple/tuple_get_map.c \
+	./source/types/tuple/tuple_init.c \
 	./source/types/u32/u32.c \
 	./source/types/u32/u32_to_any.c \
 	./source/types/u64/u64.c \
@@ -211,6 +225,7 @@ OBJECTS = \
 	get_length.o \
 	init.o \
 	is_sorted.o \
+	join.o \
 	loop_in_range.o \
 	loop_until.o \
 	new.o \
@@ -227,6 +242,7 @@ OBJECTS = \
 	share.o \
 	slice.o \
 	sort.o \
+	split.o \
 	swap.o \
 	to_any.o \
 	warning.o \
@@ -297,11 +313,13 @@ OBJECTS = \
 	list_unshift.o \
 	map.o \
 	map_as_any.o \
+	map_compare_keys.o \
 	map_copy.o \
 	map_create.o \
 	map_destroy.o \
 	map_expand.o \
 	map_get.o \
+	map_get_length.o \
 	map_hash.o \
 	map_set.o \
 	map_to_any.o \
@@ -315,6 +333,12 @@ OBJECTS = \
 	memtree_rebalance.o \
 	memtree_search.o \
 	memtree_update_height.o \
+	tuple.o \
+	tuple_as_any.o \
+	tuple_create.o \
+	tuple_destroy.o \
+	tuple_get_map.o \
+	tuple_init.o \
 	u32.o \
 	u32_to_any.o \
 	u64.o \
@@ -345,6 +369,7 @@ DEPENDENCIES = \
 	get_length.d \
 	init.d \
 	is_sorted.d \
+	join.d \
 	loop_in_range.d \
 	loop_until.d \
 	new.d \
@@ -361,6 +386,7 @@ DEPENDENCIES = \
 	share.d \
 	slice.d \
 	sort.d \
+	split.d \
 	swap.d \
 	to_any.d \
 	warning.d \
@@ -431,11 +457,13 @@ DEPENDENCIES = \
 	list_unshift.d \
 	map.d \
 	map_as_any.d \
+	map_compare_keys.d \
 	map_copy.d \
 	map_create.d \
 	map_destroy.d \
 	map_expand.d \
 	map_get.d \
+	map_get_length.d \
 	map_hash.d \
 	map_set.d \
 	map_to_any.d \
@@ -449,6 +477,12 @@ DEPENDENCIES = \
 	memtree_rebalance.d \
 	memtree_search.d \
 	memtree_update_height.d \
+	tuple.d \
+	tuple_as_any.d \
+	tuple_create.d \
+	tuple_destroy.d \
+	tuple_get_map.d \
+	tuple_init.d \
 	u32.d \
 	u32_to_any.d \
 	u64.d \
@@ -471,7 +505,8 @@ TESTS = \
 	build/tests/bin/map_create \
 	build/tests/bin/map_destroy \
 	build/tests/bin/map_get \
-	build/tests/bin/map_set
+	build/tests/bin/map_set \
+	build/tests/bin/tuple_create
 
 TESTS_OBJECTS = \
 	build/tests/objects/allocate.o \
@@ -488,7 +523,8 @@ TESTS_OBJECTS = \
 	build/tests/objects/map_create.o \
 	build/tests/objects/map_destroy.o \
 	build/tests/objects/map_get.o \
-	build/tests/objects/map_set.o
+	build/tests/objects/map_set.o \
+	build/tests/objects/tuple_create.o
 
 TESTS_DEPENDENCIES = \
 	build/tests/dependencies/allocate.d \
@@ -505,7 +541,8 @@ TESTS_DEPENDENCIES = \
 	build/tests/dependencies/map_create.d \
 	build/tests/dependencies/map_destroy.d \
 	build/tests/dependencies/map_get.d \
-	build/tests/dependencies/map_set.d
+	build/tests/dependencies/map_set.d \
+	build/tests/dependencies/tuple_create.d
 
 DEBUG_DIR = ./build/debug
 DEFAULT_DIR = ./build/default
@@ -622,6 +659,9 @@ $(DEFAULT_DIR)/objects/init.o: ./source/functions/init.c
 $(DEFAULT_DIR)/objects/is_sorted.o: ./source/functions/is_sorted.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/is_sorted.d -c ./source/functions/is_sorted.c -o $(DEFAULT_DIR)/objects/is_sorted.o
 
+$(DEFAULT_DIR)/objects/join.o: ./source/functions/join.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/join.d -c ./source/functions/join.c -o $(DEFAULT_DIR)/objects/join.o
+
 $(DEFAULT_DIR)/objects/loop_in_range.o: ./source/functions/loop_in_range.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/loop_in_range.d -c ./source/functions/loop_in_range.c -o $(DEFAULT_DIR)/objects/loop_in_range.o
 
@@ -669,6 +709,9 @@ $(DEFAULT_DIR)/objects/slice.o: ./source/functions/slice.c
 
 $(DEFAULT_DIR)/objects/sort.o: ./source/functions/sort.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/sort.d -c ./source/functions/sort.c -o $(DEFAULT_DIR)/objects/sort.o
+
+$(DEFAULT_DIR)/objects/split.o: ./source/functions/split.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/split.d -c ./source/functions/split.c -o $(DEFAULT_DIR)/objects/split.o
 
 $(DEFAULT_DIR)/objects/swap.o: ./source/functions/swap.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/swap.d -c ./source/functions/swap.c -o $(DEFAULT_DIR)/objects/swap.o
@@ -880,6 +923,9 @@ $(DEFAULT_DIR)/objects/map.o: ./source/types/map/map.c
 $(DEFAULT_DIR)/objects/map_as_any.o: ./source/types/map/map_as_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_as_any.d -c ./source/types/map/map_as_any.c -o $(DEFAULT_DIR)/objects/map_as_any.o
 
+$(DEFAULT_DIR)/objects/map_compare_keys.o: ./source/types/map/map_compare_keys.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_compare_keys.d -c ./source/types/map/map_compare_keys.c -o $(DEFAULT_DIR)/objects/map_compare_keys.o
+
 $(DEFAULT_DIR)/objects/map_copy.o: ./source/types/map/map_copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_copy.d -c ./source/types/map/map_copy.c -o $(DEFAULT_DIR)/objects/map_copy.o
 
@@ -894,6 +940,9 @@ $(DEFAULT_DIR)/objects/map_expand.o: ./source/types/map/map_expand.c
 
 $(DEFAULT_DIR)/objects/map_get.o: ./source/types/map/map_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_get.d -c ./source/types/map/map_get.c -o $(DEFAULT_DIR)/objects/map_get.o
+
+$(DEFAULT_DIR)/objects/map_get_length.o: ./source/types/map/map_get_length.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_get_length.d -c ./source/types/map/map_get_length.c -o $(DEFAULT_DIR)/objects/map_get_length.o
 
 $(DEFAULT_DIR)/objects/map_hash.o: ./source/types/map/map_hash.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/map_hash.d -c ./source/types/map/map_hash.c -o $(DEFAULT_DIR)/objects/map_hash.o
@@ -933,6 +982,24 @@ $(DEFAULT_DIR)/objects/memtree_search.o: ./source/types/memtree/memtree_search.c
 
 $(DEFAULT_DIR)/objects/memtree_update_height.o: ./source/types/memtree/memtree_update_height.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/memtree_update_height.d -c ./source/types/memtree/memtree_update_height.c -o $(DEFAULT_DIR)/objects/memtree_update_height.o
+
+$(DEFAULT_DIR)/objects/tuple.o: ./source/types/tuple/tuple.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/tuple.d -c ./source/types/tuple/tuple.c -o $(DEFAULT_DIR)/objects/tuple.o
+
+$(DEFAULT_DIR)/objects/tuple_as_any.o: ./source/types/tuple/tuple_as_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/tuple_as_any.d -c ./source/types/tuple/tuple_as_any.c -o $(DEFAULT_DIR)/objects/tuple_as_any.o
+
+$(DEFAULT_DIR)/objects/tuple_create.o: ./source/types/tuple/tuple_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/tuple_create.d -c ./source/types/tuple/tuple_create.c -o $(DEFAULT_DIR)/objects/tuple_create.o
+
+$(DEFAULT_DIR)/objects/tuple_destroy.o: ./source/types/tuple/tuple_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/tuple_destroy.d -c ./source/types/tuple/tuple_destroy.c -o $(DEFAULT_DIR)/objects/tuple_destroy.o
+
+$(DEFAULT_DIR)/objects/tuple_get_map.o: ./source/types/tuple/tuple_get_map.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/tuple_get_map.d -c ./source/types/tuple/tuple_get_map.c -o $(DEFAULT_DIR)/objects/tuple_get_map.o
+
+$(DEFAULT_DIR)/objects/tuple_init.o: ./source/types/tuple/tuple_init.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/tuple_init.d -c ./source/types/tuple/tuple_init.c -o $(DEFAULT_DIR)/objects/tuple_init.o
 
 $(DEFAULT_DIR)/objects/u32.o: ./source/types/u32/u32.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/u32.d -c ./source/types/u32/u32.c -o $(DEFAULT_DIR)/objects/u32.o
@@ -1019,6 +1086,9 @@ $(DEBUG_DIR)/objects/init.o: ./source/functions/init.c
 $(DEBUG_DIR)/objects/is_sorted.o: ./source/functions/is_sorted.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/is_sorted.d -c ./source/functions/is_sorted.c -o $(DEBUG_DIR)/objects/is_sorted.o
 
+$(DEBUG_DIR)/objects/join.o: ./source/functions/join.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/join.d -c ./source/functions/join.c -o $(DEBUG_DIR)/objects/join.o
+
 $(DEBUG_DIR)/objects/loop_in_range.o: ./source/functions/loop_in_range.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/loop_in_range.d -c ./source/functions/loop_in_range.c -o $(DEBUG_DIR)/objects/loop_in_range.o
 
@@ -1066,6 +1136,9 @@ $(DEBUG_DIR)/objects/slice.o: ./source/functions/slice.c
 
 $(DEBUG_DIR)/objects/sort.o: ./source/functions/sort.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/sort.d -c ./source/functions/sort.c -o $(DEBUG_DIR)/objects/sort.o
+
+$(DEBUG_DIR)/objects/split.o: ./source/functions/split.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/split.d -c ./source/functions/split.c -o $(DEBUG_DIR)/objects/split.o
 
 $(DEBUG_DIR)/objects/swap.o: ./source/functions/swap.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/swap.d -c ./source/functions/swap.c -o $(DEBUG_DIR)/objects/swap.o
@@ -1277,6 +1350,9 @@ $(DEBUG_DIR)/objects/map.o: ./source/types/map/map.c
 $(DEBUG_DIR)/objects/map_as_any.o: ./source/types/map/map_as_any.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_as_any.d -c ./source/types/map/map_as_any.c -o $(DEBUG_DIR)/objects/map_as_any.o
 
+$(DEBUG_DIR)/objects/map_compare_keys.o: ./source/types/map/map_compare_keys.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_compare_keys.d -c ./source/types/map/map_compare_keys.c -o $(DEBUG_DIR)/objects/map_compare_keys.o
+
 $(DEBUG_DIR)/objects/map_copy.o: ./source/types/map/map_copy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_copy.d -c ./source/types/map/map_copy.c -o $(DEBUG_DIR)/objects/map_copy.o
 
@@ -1291,6 +1367,9 @@ $(DEBUG_DIR)/objects/map_expand.o: ./source/types/map/map_expand.c
 
 $(DEBUG_DIR)/objects/map_get.o: ./source/types/map/map_get.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_get.d -c ./source/types/map/map_get.c -o $(DEBUG_DIR)/objects/map_get.o
+
+$(DEBUG_DIR)/objects/map_get_length.o: ./source/types/map/map_get_length.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_get_length.d -c ./source/types/map/map_get_length.c -o $(DEBUG_DIR)/objects/map_get_length.o
 
 $(DEBUG_DIR)/objects/map_hash.o: ./source/types/map/map_hash.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/map_hash.d -c ./source/types/map/map_hash.c -o $(DEBUG_DIR)/objects/map_hash.o
@@ -1330,6 +1409,24 @@ $(DEBUG_DIR)/objects/memtree_search.o: ./source/types/memtree/memtree_search.c
 
 $(DEBUG_DIR)/objects/memtree_update_height.o: ./source/types/memtree/memtree_update_height.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/memtree_update_height.d -c ./source/types/memtree/memtree_update_height.c -o $(DEBUG_DIR)/objects/memtree_update_height.o
+
+$(DEBUG_DIR)/objects/tuple.o: ./source/types/tuple/tuple.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/tuple.d -c ./source/types/tuple/tuple.c -o $(DEBUG_DIR)/objects/tuple.o
+
+$(DEBUG_DIR)/objects/tuple_as_any.o: ./source/types/tuple/tuple_as_any.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/tuple_as_any.d -c ./source/types/tuple/tuple_as_any.c -o $(DEBUG_DIR)/objects/tuple_as_any.o
+
+$(DEBUG_DIR)/objects/tuple_create.o: ./source/types/tuple/tuple_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/tuple_create.d -c ./source/types/tuple/tuple_create.c -o $(DEBUG_DIR)/objects/tuple_create.o
+
+$(DEBUG_DIR)/objects/tuple_destroy.o: ./source/types/tuple/tuple_destroy.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/tuple_destroy.d -c ./source/types/tuple/tuple_destroy.c -o $(DEBUG_DIR)/objects/tuple_destroy.o
+
+$(DEBUG_DIR)/objects/tuple_get_map.o: ./source/types/tuple/tuple_get_map.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/tuple_get_map.d -c ./source/types/tuple/tuple_get_map.c -o $(DEBUG_DIR)/objects/tuple_get_map.o
+
+$(DEBUG_DIR)/objects/tuple_init.o: ./source/types/tuple/tuple_init.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/tuple_init.d -c ./source/types/tuple/tuple_init.c -o $(DEBUG_DIR)/objects/tuple_init.o
 
 $(DEBUG_DIR)/objects/u32.o: ./source/types/u32/u32.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/u32.d -c ./source/types/u32/u32.c -o $(DEBUG_DIR)/objects/u32.o
@@ -1409,5 +1506,9 @@ $(TESTS_DIR)/objects/map_get.o: ./tests/types/map/map_get.c
 $(TESTS_DIR)/objects/map_set.o: ./tests/types/map/map_set.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/map_set.d -c ./tests/types/map/map_set.c -o $(TESTS_DIR)/objects/map_set.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/map_set.o $(DEFAULT) -o $(TESTS_DIR)/bin/map_set
+
+$(TESTS_DIR)/objects/tuple_create.o: ./tests/types/tuple/tuple_create.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/tuple_create.d -c ./tests/types/tuple/tuple_create.c -o $(TESTS_DIR)/objects/tuple_create.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/tuple_create.o $(DEFAULT) -o $(TESTS_DIR)/bin/tuple_create
 
 

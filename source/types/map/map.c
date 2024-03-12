@@ -23,6 +23,7 @@ t_type	map(void)
 		.copy = (void *(*)(void *))map_copy,
 		.get = (t_any (*)(void *, t_any))map_get,
 		.set = (void (*)(void *, t_any, t_any))map_set,
+		.get_length = (t_i32 (*)(void *))map_get_length,
 		.as_any = (t_any (*)(void *))map_as_any,
 		.to_any = (t_any (*)(void *))map_to_any
 	};

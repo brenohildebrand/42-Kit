@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.c                                       :+:      :+:    :+:   */
+/*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 22:31:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/23 19:19:27 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/11 01:48:30 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/11 16:50:51 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,18 @@ t_type	list(void)
 
 	return (&type);
 }
+
+// static void	init_type(void)
+// {
+// 	init_basic();
+// 	init_operations();
+// }
+
+// t_type	list(void)
+// {
+// 	static struct s_type	type = { .name = NULL };
+
+// 	if (type.name == NULL)
+// 		init_type(&type);
+// 	return (type);
+// }

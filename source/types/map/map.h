@@ -32,9 +32,11 @@ t_map	map_create(void);
 void	map_destroy(t_map instance);
 t_map	map_copy(t_map instancce);
 void	map_expand(t_map instance);
-int		map_hash(t_any key);
+t_i32	map_hash(t_any key);
+t_i32	map_compare_keys(t_any key, t_any another_key);
 void	map_set(t_map instance, t_any key, t_any value);
 t_any	map_get(t_map instance, t_any value);
+t_i32	map_get_length(t_map instance);
 t_any	map_as_any(t_map instance);
 t_any	map_to_any(t_map instance);
 
