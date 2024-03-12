@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 11:57:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/10 12:18:59 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:05:32 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_any	list_pop(t_list instance);
 void	list_unshift(t_list instance, t_any value);
 t_any	list_shift(t_list instance);
 void	list_expand(t_list instance);
+void	list_resize(t_list instance);
+void	list_inflate(t_list instance);
 void	list_reverse(t_list instance);
 void	list_rotate(t_list instance);
 void	list_reverse_rotate(t_list instance);

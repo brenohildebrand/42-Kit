@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_create.c                                       :+:      :+:    :+:   */
+/*   list_inflate.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/12 08:46:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/12 09:41:05 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/12 12:05:40 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/12 12:07:40 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
+#include "list.h"
 
-t_map	map_create(void)
+void	list_inflate(t_list instance)
 {
-	t_map	instance;
+	t_i32	i;
 
-	instance = (t_map)new(map);
-	instance->lists = create(list);
-	init(instance->lists, i32_to_any(128));
-	return (instance);
+	i = 0;
+	while (i < instance->length)
+	{
+		instance->content[i] = instance->content[instance->start + i];
+		instance->content[instance->start + i] = NULL;
+		i++;
+	}
+	instance->start = 0;
+	instance->end = instance->length;
+	instance->length = instance->max_length;
 }

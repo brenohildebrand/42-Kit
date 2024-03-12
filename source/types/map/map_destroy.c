@@ -14,18 +14,6 @@
 
 void	map_destroy(t_map instance)
 {
-	t_i32	i;
-
-	i = 0;
-	while (i < instance->max_length)
-	{
-		if (instance->entries[i].key != NULL)
-		{
-			any_destroy(instance->entries[i].key);
-			any_destroy(instance->entries[i].value);
-		}
-		i++;
-	}
-	deallocate(instance->entries);
+	destroy(instance->lists);
 	delete(instance);
 }

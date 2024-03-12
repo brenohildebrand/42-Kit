@@ -12,25 +12,27 @@
 
 #include "list.h"
 
-void	list_expand(t_list list)
+void	list_expand(t_list instance)
 {
 	t_any	*new_content;
-	int		new_start;
-	int		new_end;
-	int		i;
+	t_i32	new_max_length;
+	t_i32	new_start;
+	t_i32	new_end;
+	t_i32	i;
 
-	list->max_length = list->max_length * 2;
-	new_start = (list->max_length - list->length) / 2;
-	new_end = new_start + list->length - 1;
-	new_content = (t_any *)allocate(list->max_length * sizeof(t_any));
+	new_max_length = instance->max_length * 2;
+	new_start = (new_max_length - instance->length) / 2;
+	new_end = new_start + instance->length - 1;
+	new_content = (t_any *)allocate(new_max_length * sizeof(t_any));
 	i = 0;
-	while (i < list->length)
+	while (i < instance->length)
 	{
-		new_content[i + new_start] = list->content[i + list->start];
+		new_content[new_start + i] = instance->content[instance->start + i];
 		i++;
 	}
-	deallocate(list->content);
-	list->start = new_start;
-	list->end = new_end;
-	list->content = new_content;
+	deallocate(instance->content);
+	instance->max_length = new_max_length;
+	instance->start = new_start;
+	instance->end = new_end;
+	instance->content = new_content;
 }
