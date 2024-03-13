@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:58:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/01 18:01:21 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:59:31 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	framework_setup(void)
 {
-	t_framework	framework;
+	// t_framework	framework;
 
-	framework = framework_get();
-	framework->map = map_create();
+	// framework = framework_get();
+	// framework->map = map_create();
 }

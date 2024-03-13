@@ -4,33 +4,33 @@ PROJECT=$OLDPWD
 FRAMEWORK=$PWD
 
 # Clean up the deleted files.
-shopt -s nullglob
+# shopt -s nullglob
 
-for object in build/**/objects/*; do
-	name=$(basename $object | sed 's/.o$/.c/')
-	find source -type f -name "$name" | grep -q "."
-	if [ $? -ne 0 ]; then
-		rm -f $object
-	fi
-done
+# for object in build/**/objects/*; do
+# 	name=$(basename $object | sed 's/.o$/.c/')
+# 	find source -type f -name "$name" | grep -q "."
+# 	if [ $? -ne 0 ]; then
+# 		rm -f $object
+# 	fi
+# done
 
-for dependency in build/**/dependencies/*; do
-	name=$(basename $dependency | sed 's/.d$/.c/')
-	find source -type f -name "$name" | grep -q "."
-	if [ $? -ne 0 ]; then
-		rm -f $dependency
-	fi
-done
+# for dependency in build/**/dependencies/*; do
+# 	name=$(basename $dependency | sed 's/.d$/.c/')
+# 	find source -type f -name "$name" | grep -q "."
+# 	if [ $? -ne 0 ]; then
+# 		rm -f $dependency
+# 	fi
+# done
 
-for test in build/tests/bin/*; do
-	name=$(basename $test | sed 's/.*/&.c/')
-	find tests -type f -name "$name" | grep -q "."
-	if [ $? -ne 0 ]; then
-		rm -f $test
-	fi
-done
+# for test in build/tests/bin/*; do
+# 	name=$(basename $test | sed 's/.*/&.c/')
+# 	find tests -type f -name "$name" | grep -q "."
+# 	if [ $? -ne 0 ]; then
+# 		rm -f $test
+# 	fi
+# done
 
-shopt -u nullglob
+# shopt -u nullglob
 
 # Update the .vscode configuration.
 cat << EOF > .vscode/c_cpp_properties.json

@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/12 16:40:46 by bhildebr          #+#    #+#              #
-#    Updated: 2024/03/12 16:40:46 by bhildebr         ###   ########.fr        #
+#    Created: 2024/03/13 16:31:59 by bhildebr          #+#    #+#              #
+#    Updated: 2024/03/13 16:31:59 by bhildebr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ CPATHS = \
 	-include framework.h \
 	-include functions.h \
 	-include any.h \
+	-include chain.h \
 	-include f64.h \
 	-include i32.h \
 	-include i64.h \
@@ -42,6 +43,7 @@ CPATHS = \
 	-iquote ./source/functions \
 	-iquote ./source/types \
 	-iquote ./source/types/any \
+	-iquote ./source/types/chain \
 	-iquote ./source/types/f64 \
 	-iquote ./source/types/framework \
 	-iquote ./source/types/i32 \
@@ -51,6 +53,7 @@ CPATHS = \
 	-iquote ./source/types/map \
 	-iquote ./source/types/memtree \
 	-iquote ./source/types/pair \
+	-iquote ./source/types/set \
 	-iquote ./source/types/string \
 	-iquote ./source/types/tuple \
 	-iquote ./source/types/type \
@@ -115,6 +118,7 @@ SOURCES = \
 	./source/types/any/any_copy.c \
 	./source/types/any/any_create.c \
 	./source/types/any/any_destroy.c \
+	./source/types/any/any_print.c \
 	./source/types/any/any_to_f64.c \
 	./source/types/any/any_to_i32.c \
 	./source/types/any/any_to_i64.c \
@@ -260,6 +264,7 @@ OBJECTS = \
 	any_copy.o \
 	any_create.o \
 	any_destroy.o \
+	any_print.o \
 	any_to_f64.o \
 	any_to_i32.o \
 	any_to_i64.o \
@@ -405,6 +410,7 @@ DEPENDENCIES = \
 	any_copy.d \
 	any_create.d \
 	any_destroy.d \
+	any_print.d \
 	any_to_f64.d \
 	any_to_i32.d \
 	any_to_i64.d \
@@ -500,6 +506,7 @@ TESTS = \
 	build/tests/bin/display \
 	build/tests/bin/forkrun \
 	build/tests/bin/share \
+	build/tests/bin/list \
 	build/tests/bin/list_create \
 	build/tests/bin/list_destroy \
 	build/tests/bin/list_is_sorted \
@@ -518,6 +525,7 @@ TESTS_OBJECTS = \
 	build/tests/objects/display.o \
 	build/tests/objects/forkrun.o \
 	build/tests/objects/share.o \
+	build/tests/objects/list.o \
 	build/tests/objects/list_create.o \
 	build/tests/objects/list_destroy.o \
 	build/tests/objects/list_is_sorted.o \
@@ -536,6 +544,7 @@ TESTS_DEPENDENCIES = \
 	build/tests/dependencies/display.d \
 	build/tests/dependencies/forkrun.d \
 	build/tests/dependencies/share.d \
+	build/tests/dependencies/list.d \
 	build/tests/dependencies/list_create.d \
 	build/tests/dependencies/list_destroy.d \
 	build/tests/dependencies/list_is_sorted.d \
@@ -763,6 +772,9 @@ $(DEFAULT_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 
 $(DEFAULT_DIR)/objects/any_destroy.o: ./source/types/any/any_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_destroy.d -c ./source/types/any/any_destroy.c -o $(DEFAULT_DIR)/objects/any_destroy.o
+
+$(DEFAULT_DIR)/objects/any_print.o: ./source/types/any/any_print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_print.d -c ./source/types/any/any_print.c -o $(DEFAULT_DIR)/objects/any_print.o
 
 $(DEFAULT_DIR)/objects/any_to_f64.o: ./source/types/any/any_to_f64.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEFAULT_DIR)/dependencies/any_to_f64.d -c ./source/types/any/any_to_f64.c -o $(DEFAULT_DIR)/objects/any_to_f64.o
@@ -1194,6 +1206,9 @@ $(DEBUG_DIR)/objects/any_create.o: ./source/types/any/any_create.c
 $(DEBUG_DIR)/objects/any_destroy.o: ./source/types/any/any_destroy.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_destroy.d -c ./source/types/any/any_destroy.c -o $(DEBUG_DIR)/objects/any_destroy.o
 
+$(DEBUG_DIR)/objects/any_print.o: ./source/types/any/any_print.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_print.d -c ./source/types/any/any_print.c -o $(DEBUG_DIR)/objects/any_print.o
+
 $(DEBUG_DIR)/objects/any_to_f64.o: ./source/types/any/any_to_f64.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(DEBUG_DIR)/dependencies/any_to_f64.d -c ./source/types/any/any_to_f64.c -o $(DEBUG_DIR)/objects/any_to_f64.o
 
@@ -1479,6 +1494,10 @@ $(TESTS_DIR)/objects/forkrun.o: ./tests/functions/forkrun.c
 $(TESTS_DIR)/objects/share.o: ./tests/functions/share.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/share.d -c ./tests/functions/share.c -o $(TESTS_DIR)/objects/share.o
 	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/share.o $(DEFAULT) -o $(TESTS_DIR)/bin/share
+
+$(TESTS_DIR)/objects/list.o: ./tests/types/list/list.c
+	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/list.d -c ./tests/types/list/list.c -o $(TESTS_DIR)/objects/list.o
+	@$(CC) $(CFLAGS) $(CPATHS) $(TESTS_DIR)/objects/list.o $(DEFAULT) -o $(TESTS_DIR)/bin/list
 
 $(TESTS_DIR)/objects/list_create.o: ./tests/types/list/list_create.c
 	@$(CC) $(CFLAGS) $(CPATHS) -MMD -MF $(TESTS_DIR)/dependencies/list_create.d -c ./tests/types/list/list_create.c -o $(TESTS_DIR)/objects/list_create.o

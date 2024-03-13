@@ -14,12 +14,13 @@
 
 void	list_push(t_list instance, t_any value)
 {
-	if (instance->length + 1 > (instance->max_length * 3) / 4 || \
-		instance->end == instance->max_length - 1)
+	if (instance->length + 1 > (instance->capacity * 3) / 4 || \
+		instance->end == instance->capacity - 1)
 	{
 		list_expand(instance);
 	}
 	instance->end++;
 	instance->content[instance->end] = value;
 	instance->length++;
+	instance->size++;
 }

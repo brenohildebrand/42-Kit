@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 01:48:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/11 16:50:51 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:34:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ t_type	list(void)
 	static struct s_type	type = {
 		.name = "list",
 		.size = sizeof(struct s_list),
-		.is_instance = 1,
-		.is_sorted = (t_i32 (*)(void *))list_is_sorted,
+		.is_instance = TRUE,
+		.is_sequence = FALSE,
+		.is_value = FALSE,
 		.create = (void *(*)(void))list_create,
 		.destroy = (void (*)(void *))list_destroy,
 		.copy = (void *(*)(void *))list_copy,
@@ -31,11 +32,12 @@ t_type	list(void)
 		.rotate = (void (*)(void *))list_rotate,
 		.reverse_rotate = (void (*)(void *))list_reverse_rotate,
 		.swap = (void (*)(void *))list_swap,
+		.print = (void (*)(void *))list_print,
 		.for_each = (void (*)(void *, void (*)(t_any, t_i32)))list_for_each,
 		.reduce = (t_any (*)(void *, t_any, t_any (*)(t_any, t_any, t_i32)))list_reduce,
 		.sort = (void (*)(void *))list_sort,
 		.get_length = (t_i32 (*)(void *))list_get_length,
-		.as_any = (t_any (*)(void *))list_as_any,
+		.is_sorted = (t_i32 (*)(void *))list_is_sorted,
 		.to_any = (t_any (*)(void *))list_to_any
 	};
 

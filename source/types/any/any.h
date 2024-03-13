@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/04 14:54:45 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:47:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,28 @@ struct s_any {
 	union u_any	value;
 };
 
-t_type			any(void);
-t_any			any_create(void);
-void			any_destroy(t_any instance);
-t_any			any_copy(t_any instance);
-t_i8			any_to_i8(t_any instance);
-t_u8			any_to_u8(t_any instance);
-t_i32			any_to_i32(t_any instance);
-t_u32			any_to_u32(t_any instance);
-t_i64			any_to_i64(t_any instance);
-t_u64			any_to_u64(t_any instance);
-t_f64			any_to_f64(t_any instance);
-void			*any_to_sequence(t_any instance);
-void			*any_to_instance(t_any instance);
-t_i8			any_as_i8(t_any instance);
-t_u8			any_as_u8(t_any instance);
-t_i32			any_as_i32(t_any instance);
-t_u32			any_as_u32(t_any instance);
-t_i64			any_as_i64(t_any instance);
-t_u64			any_as_u64(t_any instance);
-t_f64			any_as_f64(t_any instance);
-void			*any_as_sequence(t_any instance);
-void			*any_as_instance(t_any instance);
+t_type	any(void);
+t_any	any_create(void);
+void	any_destroy(t_any instance);
+t_any	any_copy(t_any instance);
+void	any_print(t_any instance);
+t_i8	any_to_i8(t_any instance);
+t_u8	any_to_u8(t_any instance);
+t_i32	any_to_i32(t_any instance);
+t_u32	any_to_u32(t_any instance);
+t_i64	any_to_i64(t_any instance);
+t_u64	any_to_u64(t_any instance);
+t_f64	any_to_f64(t_any instance);
+void	*any_to_sequence(t_any instance);
+void	*any_to_instance(t_any instance);
+t_i8	any_as_i8(t_any instance);
+t_u8	any_as_u8(t_any instance);
+t_i32	any_as_i32(t_any instance);
+t_u32	any_as_u32(t_any instance);
+t_i64	any_as_i64(t_any instance);
+t_u64	any_as_u64(t_any instance);
+t_f64	any_as_f64(t_any instance);
+void	*any_as_sequence(t_any instance);
+void	*any_as_instance(t_any instance);
 
 #endif

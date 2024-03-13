@@ -16,8 +16,7 @@ t_any	list_get(t_list instance, t_any key)
 {
 	t_i32	index;
 	
-	index = any_as_i32(key);
-	any_destroy(key);
+	index = any_to_i32(key);
 	if (index >= instance->length)
 		return (NULL);
 	return (instance->content[instance->start + index]);

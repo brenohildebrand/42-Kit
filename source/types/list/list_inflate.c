@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 12:05:40 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/12 12:07:40 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:43:50 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	list_inflate(t_list instance)
 	}
 	instance->start = 0;
 	instance->end = instance->length;
-	instance->length = instance->max_length;
+	instance->length = instance->capacity;
 }

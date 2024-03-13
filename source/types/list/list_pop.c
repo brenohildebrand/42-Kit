@@ -14,13 +14,14 @@
 
 t_any	list_pop(t_list instance)
 {
-	t_any	any;
+	t_any	value;
 
 	if (instance->end < instance->start)
 		return (NULL);
-	any = instance->content[instance->end];
+	value = instance->content[instance->end];
 	instance->content[instance->end] = NULL;
 	instance->end--;
 	instance->length--;
-	return (any);
+	instance->size--;
+	return (value);
 }

@@ -15,15 +15,15 @@
 void	list_expand(t_list instance)
 {
 	t_any	*new_content;
-	t_i32	new_max_length;
+	t_i32	new_capacity;
 	t_i32	new_start;
 	t_i32	new_end;
 	t_i32	i;
 
-	new_max_length = instance->max_length * 2;
-	new_start = (new_max_length - instance->length) / 2;
+	new_capacity = instance->capacity * 2;
+	new_start = (new_capacity - instance->length) / 2;
 	new_end = new_start + instance->length - 1;
-	new_content = (t_any *)allocate(new_max_length * sizeof(t_any));
+	new_content = (t_any *)allocate(new_capacity * sizeof(t_any));
 	i = 0;
 	while (i < instance->length)
 	{
@@ -31,7 +31,7 @@ void	list_expand(t_list instance)
 		i++;
 	}
 	deallocate(instance->content);
-	instance->max_length = new_max_length;
+	instance->capacity = new_capacity;
 	instance->start = new_start;
 	instance->end = new_end;
 	instance->content = new_content;

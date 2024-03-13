@@ -14,7 +14,7 @@
 
 void	list_unshift(t_list instance, t_any value)
 {
-	if (instance->length + 1 > (instance->max_length * 3) / 4 || \
+	if (instance->length + 1 > (instance->capacity * 3) / 4 || \
 		instance->start == 0)
 	{
 		list_expand(instance);
@@ -22,4 +22,5 @@ void	list_unshift(t_list instance, t_any value)
 	instance->start--;
 	instance->content[instance->start] = value;
 	instance->length++;
+	instance->size++;
 }

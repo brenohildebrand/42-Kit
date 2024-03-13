@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:58:32 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/01 18:02:13 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:59:41 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	framework_teardown(void)
 {
-	t_framework	framework;
+	// t_framework	framework;
 
-	framework = framework_get();
-	map_destroy(framework->map);
+	// framework = framework_get();
+	// map_destroy(framework->map);
 }

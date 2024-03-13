@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 21:47:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/01 18:00:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:30:29 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 // -- Default standard headers.
 # include <stdlib.h>
 # include <unistd.h>
+
+// -- Definitions
+# define TRUE (1)
+# define FALSE (0)
 
 // -- Declarations for the essential types.
 // -- Memtree
@@ -39,7 +43,7 @@ typedef struct s_framework	*t_framework;
 
 struct s_framework {
 	t_memtree	memtree;
-	t_map		map;
+	// t_map		map;
 };
 
 void		framework_setup(void);

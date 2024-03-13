@@ -6,13 +6,13 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:52:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/29 18:57:21 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:58:25 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "functions.h"
+// #include "functions.h"
 
-void	conceal(t_i8 *key)
-{
-	share(key, NULL);
-}
+// void	conceal(t_i8 *key)
+// {
+// 	share(key, NULL);
+// }

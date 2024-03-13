@@ -14,13 +14,14 @@
 
 t_any	list_shift(t_list instance)
 {
-	t_any	any;
+	t_any	value;
 
 	if (instance->end < instance->start)
 		return (NULL);
-	any = instance->content[instance->start];
+	value = instance->content[instance->start];
 	instance->content[instance->start] = NULL;
 	instance->start++;
 	instance->length--;
-	return (any);
+	instance->size--;
+	return (value);
 }

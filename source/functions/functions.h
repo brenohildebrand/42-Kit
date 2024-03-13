@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:11:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/10 12:21:28 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:59:25 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ t_any	reduce(void *instance, t_any accumulator, t_any (*callback)(t_any, t_any, 
 t_i32	is_sorted(void *instance);
 void	loop_in_range(int start, int end, void (*callback)(int));
 void	repeat(int n, void (*callback)(void));
-t_any	retrieve(t_i8 *key);
+// t_any	retrieve(t_i8 *key);
 void	reverse_rotate(void *instance);
 void	rotate(void *instance);
 void	set(void *instance, t_any key, t_any value);
-void	share(t_i8 *key, t_any value);
+// void	share(t_i8 *key, t_any value);
 void	sort(void *instance);
 void	swap(void *instance);
 t_any	to_any(void *instance);
