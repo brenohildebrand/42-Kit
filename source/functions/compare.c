@@ -6,14 +6,24 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 14:34:52 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/04 15:19:14 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:48:42 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "functions.h"
 
-t_i32	compare(t_any instance, t_any another_instance)
+t_i32	compare(void *instance, void *another_instance)
 {
-	assert(instance->type->compare != NULL);
-	return (instance->type->compare(instance, another_instance));
+	t_type	type;
+	t_type	another_type;
+
+	type = memtree_search(instance);
+	assert(type != NULL);
+	another_type = memtree_search(another_instance);
+	assert(another_type != NULL);
+	if (type != another_type)
+	{
+		error("No way! You can't compare instances from two different types.");
+	}
+	return (type->compare(instance, another_instance));
 }

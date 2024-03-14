@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   i32.c                                              :+:      :+:    :+:   */
+/*   list_set.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 12:25:26 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 18:54:20 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/13 20:42:26 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/13 22:11:26 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "i32.h"
-
-t_type	i32(void)
+t_i32	main(void)
 {
-	static struct s_type	type = {
-		.name = "i32",
-		.size = sizeof(t_i32),
-		.is_value = TRUE,
-		.compare = (t_compare)i32_compare
-	};
-
-	return (&type);
+	t_list	instance;
+	
+	instance = create(list);
+	assert(get(instance, i32_to_any(42)) == NULL);
+	set(instance, i32_to_any(42), i32_to_any(42));
+	assert(any_as_i32(get(instance, i32_to_any(42))) == 42);
+	assert(any_as_i32(get(instance, i32_to_any(-1))) == 42);
+	destroy(instance);
+	return (0);
 }

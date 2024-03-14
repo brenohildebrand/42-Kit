@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:11:19 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 15:59:25 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:43:34 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@
 # include <unistd.h>
 
 void	*allocate(int size);
-t_any	as_any(void *instance);
 void	assert(int condition);
 void	call_if(int condition, void (*callback)(void));
-t_i32	compare(t_any instance, t_any another_instance);
+t_i32	compare(void *instance, void *another_instance);
 void	conceal(t_i8 *key);
 void	*copy(void	*instance);
 void	*create(t_type (*signature)(void));
@@ -43,7 +42,6 @@ void	for_each(void *instance, void (*callback)(t_any, int));
 int		forkrun(void (*callback)(void));
 t_i32	get_length(void *instance);
 t_any	get(void *instance, t_any key);
-void	*init(void	*instance, t_any value);
 void	*new(t_type (*signature)(void));
 t_any	pop(void *instance);
 void	print(t_any instance);

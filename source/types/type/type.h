@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 16:59:11 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:49:17 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef void	(*t_filter)(void *, void (*)(t_any, t_i32));
 typedef t_any	(*t_reduce)(void *, t_any accumulator, t_any (*)(t_any, t_any, t_i32));
 typedef int		(*t_find)(void *, int (*)(t_any, t_i32));
 typedef void	(*t_slice)(void *, t_i32, t_i32);
-typedef int		(*t_compare)(t_any, t_any);
+typedef int		(*t_compare)(void *, void *);
 typedef void	(*t_sort)(void *);
 typedef void	(*t_print)(void *);
 typedef t_i32	(*t_is_sorted)(void *);
@@ -81,6 +81,7 @@ struct s_type {
 	t_compare			compare;
 	t_sort				sort;
 	t_print				print;
+	t_is_sorted			is_sorted;
 	t_get_length		get_length;
 	t_to_i8				to_i8;
 	t_to_u8				to_u8;

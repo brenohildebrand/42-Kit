@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   list_pop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 15:38:53 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 17:46:49 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/13 22:29:02 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/13 23:24:46 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "functions.h"
-
-void	*init(void	*instance, t_any value)
+t_i32	main(void)
 {
-	t_type	type;
-
-	type = memtree_search(instance);
-	assert(type != NULL);
-	assert(type->init != NULL);
-	return (type->init(instance, value));
+	t_list	instance;
+	
+	instance = create(list);
+	list_push(instance, i32_to_any(1));
+	list_push(instance, i32_to_any(2));
+	list_push(instance, i32_to_any(3));
+	assert(any_to_i32(list_pop(instance)) == 3);
+	assert(any_to_i32(list_pop(instance)) == 2);
+	assert(any_to_i32(list_pop(instance)) == 1);
+	assert(list_pop(instance) == NULL);
+	destroy(instance);
+	return (0);	
 }

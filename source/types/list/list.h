@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 11:57:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 16:43:08 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:49:42 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_type	list(void);
 t_list	list_create(void);
 void	list_destroy(t_list instance);
 t_list	list_copy(t_list instance);
+t_i32	list_compare(t_list instance, t_list another_instance);
 t_any	list_get(t_list instance, t_any key);
 void	list_set(t_list instance, t_any key, t_any value);
 void	list_push(t_list instance, t_any value);

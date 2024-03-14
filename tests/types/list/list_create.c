@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 16:03:04 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 16:42:48 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:22:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
+t_i32	main(void)
 {
 	t_list	instance;
 

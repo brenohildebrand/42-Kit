@@ -17,12 +17,21 @@ void	list_set(t_list instance, t_any key, t_any value)
 	t_i32	index;
 
 	index = any_to_i32(key);
+	if (index < 0)
+	{
+		index = instance->length + index;
+	}
+	if (index < 0)
+	{
+		error("No way! You can't access an index on a list that is less than its negative length.");
+	}
 	if (index >= instance->capacity)
 	{
 		while (index >= instance->capacity)
 			list_expand(instance);
 		instance->length = index + 1;
-		instance->end = index;
+		instance->start = (instance->capacity - instance->length) / 2;
+		instance->end = instance->start + index;
 	}
 	if (instance->content[instance->start + index] != NULL)
 	{

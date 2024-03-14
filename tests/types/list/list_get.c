@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   as_any.c                                           :+:      :+:    :+:   */
+/*   list_get.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/01 11:35:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/01 11:36:00 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/13 20:03:31 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/13 20:40:16 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "functions.h"
-
-t_any	as_any(void *instance)
+t_i32	main(void)
 {
-	t_type	type;
-
-	type = memtree_search(instance);
-	assert(type != NULL);
-	assert(type->as_any != NULL);
-	return (type->as_any(instance));
+	t_list	instance;
+	
+	instance = create(list);
+	assert(get(instance, i32_to_any(42)) == NULL);
+	set(instance, i32_to_any(42), i32_to_any(42));
+	assert(any_as_i32(get(instance, i32_to_any(42))) == 42);
+	assert(any_as_i32(get(instance, i32_to_any(-1))) == 42);
+	destroy(instance);
+	return (0);
 }

@@ -16,6 +16,8 @@ void	list_destroy(t_list instance)
 {
 	int	i;
 
+	if (instance == NULL)
+		return ;
 	i = instance->start;
 	while (i <= instance->end)
 	{

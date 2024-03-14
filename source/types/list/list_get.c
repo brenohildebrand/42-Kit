@@ -17,6 +17,14 @@ t_any	list_get(t_list instance, t_any key)
 	t_i32	index;
 	
 	index = any_to_i32(key);
+	if (index < 0)
+	{
+		index = instance->length + index;
+	}
+	if (index < 0)
+	{
+		error("No way! You can't access an index on a list that is less than its negative length.");
+	}
 	if (index >= instance->length)
 		return (NULL);
 	return (instance->content[instance->start + index]);

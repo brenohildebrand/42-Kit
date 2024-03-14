@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:57:01 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 15:47:53 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/13 18:56:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_type	any(void);
 t_any	any_create(void);
 void	any_destroy(t_any instance);
 t_any	any_copy(t_any instance);
+t_i32	any_compare(t_any instance, t_any another_instance);
 void	any_print(t_any instance);
 t_i8	any_to_i8(t_any instance);
 t_u8	any_to_u8(t_any instance);
