@@ -302,10 +302,110 @@
             "preLaunchTask": "build"
 		},
 		{
+			"name": "list_reverse_rotate",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/tests/bin/list_reverse_rotate",
+			"args": [],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
+		},
+		{
+			"name": "list_rotate",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/tests/bin/list_rotate",
+			"args": [],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
+		},
+		{
 			"name": "list_set",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/build/tests/bin/list_set",
+			"args": [],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
+		},
+		{
+			"name": "list_shift",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/tests/bin/list_shift",
+			"args": [],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
+		},
+		{
+			"name": "list_swap",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/tests/bin/list_swap",
+			"args": [],
+			"stopAtEntry": true,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build"
+		},
+		{
+			"name": "list_unshift",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/tests/bin/list_unshift",
 			"args": [],
 			"stopAtEntry": true,
 			"cwd": "${workspaceFolder}",

@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   list_reverse_rotate.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 07:58:17 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/05 08:06:33 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/04 18:18:30 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/13 23:56:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	swap(void *instance)
-{
-	t_type	type;
+#include "list.h"
 
-	type = memtree_search(instance);
-	assert(type != NULL);
-	assert(type->swap != NULL);
-	type->swap(instance);
+void	list_reverse_rotate(t_list instance)
+{
+	if (instance->length == 0)
+		return ;
+	list_push(instance, list_shift(instance));
 }

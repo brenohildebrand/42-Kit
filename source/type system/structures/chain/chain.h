@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:02:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 22:36:58 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/14 19:32:35 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,14 @@ struct s_chain_node {
 	t_chain_node	next;
 	t_chain_node	previous;
 };
+
+t_type			chain(void);
+t_chain			chain_create(void);
+void			chain_destroy(t_chain instance);
+t_chain			chain_copy(t_chain instance);
+
+t_type			chain_node(void);
+t_chain_node	chain_node_create(void);
+t_chain_node	chain_node_copy(t_chain_node instance);
 
 #endif

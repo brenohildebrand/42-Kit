@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 11:57:33 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 17:49:42 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/14 00:02:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	list_unshift(t_list instance, t_any value);
 t_any	list_shift(t_list instance);
 void	list_rotate(t_list instance);
 void	list_reverse_rotate(t_list instance);
-void	list_swap(t_list instance);
+void	list_swap(t_list instance, t_any key, t_any another_key);
 void	list_print(t_list instance);
 void	list_for_each(t_list instance, void (*callback)(t_any, int));
 t_any	list_reduce(t_list instance, t_any accumulator, t_any (*callback)(t_any, t_any, int));

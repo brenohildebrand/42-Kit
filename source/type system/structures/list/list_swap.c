@@ -6,19 +6,28 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 18:19:21 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/04 18:33:56 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/14 00:22:21 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	list_swap(t_list instance)
+void	list_swap(t_list instance, t_any key, t_any another_key)
 {
-	t_any	last;
-	t_any	penultimate;
+	t_any	temp;
+	t_i32	index;
+	t_i32	another_index;
 
-	if (instance->length < 2)
-		return ;
-	last = list_pop(instance);
-	penultimate = list_pop(instance);
-	list_push(instance, last);
-	list_push(instance, penultimate);
+	index = any_to_i32(key);
+	another_index = any_to_i32(another_key);
+	if (index < 0)
+		index = instance->length + index;
+	if (another_index < 0)
+		another_index = instance->length + another_index;
+	if (index < 0 || index >= instance->length)
+		error("No way! You can't swap an invalid index.");
+	if (another_index < 0 || another_index >= instance->length)
+		error("No way! You can't swap an invalid index.");
+	temp = instance->content[instance->start + index];
+	instance->content[instance->start + index] = \
+		instance->content[instance->start + another_index];
+	instance->content[instance->start + another_index] = temp;
 }

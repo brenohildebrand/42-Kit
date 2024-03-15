@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type.h                                             :+:      :+:    :+:   */
+/*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 17:49:17 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:22:20 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_H
-# define TYPE_H
+#ifndef TYPES_H
+# define TYPES_H
 
 # include "i8.h"
 # include "u8.h"
@@ -34,7 +34,7 @@ typedef void	(*t_unshift)(void *, t_any);
 typedef t_any	(*t_shift)(void *);
 typedef void	(*t_rotate)(void *);
 typedef void	(*t_reverse_rotate)(void *);
-typedef void	(*t_swap)(void *);
+typedef void	(*t_swap)(void *, t_any, t_any);
 typedef void	(*t_for_each)(void *, void (*)(t_any, t_i32));
 typedef void	(*t_filter)(void *, void (*)(t_any, t_i32));
 typedef t_any	(*t_reduce)(void *, t_any accumulator, t_any (*)(t_any, t_any, t_i32));

@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_rotate.c                                      :+:      :+:    :+:   */
+/*   ensure.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/04 18:11:54 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/04 18:18:17 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/14 19:10:57 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/14 19:11:57 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	list_rotate(t_list instance)
+void	ensure(int condition, void (*callback)(void))
 {
-	list_unshift(instance, list_pop(instance));
+	if (condition == FALSE)
+	{
+		callback();	
+	}
 }

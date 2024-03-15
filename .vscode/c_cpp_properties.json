@@ -5,6 +5,11 @@
             "includePath": [
 				"${workspaceFolder}/source",
 				"${workspaceFolder}/source/functions",
+				"${workspaceFolder}/source/functions/core",
+				"${workspaceFolder}/source/libs",
+				"${workspaceFolder}/source/libs/containers",
+				"${workspaceFolder}/source/libs/core",
+				"${workspaceFolder}/source/libs/io",
 				"${workspaceFolder}/source/types",
 				"${workspaceFolder}/source/types/any",
 				"${workspaceFolder}/source/types/chain",
