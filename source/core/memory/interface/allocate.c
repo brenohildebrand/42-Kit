@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deallocate.c                                       :+:      :+:    :+:   */
+/*   allocate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/09 22:52:44 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 01:32:03 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/09 22:47:06 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/14 22:46:31 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "functions.h"
+#include "memory_management.h"
 
-void	deallocate(void *pointer)
+void	*allocate(int size)
 {
-	memtree_delete(pointer);
+	void	*pointer;
+	t_i32	i;
+
+	assert(size > 0);
+	pointer = malloc(size);
+	assert(pointer != NULL);
+	i = 0;
+	while (i < size)
+	{
+		((t_u8 *)pointer)[i] = 0;
+		i++;
+	}
+	memtree_insert(NULL, pointer);
+	return (pointer);
 }
