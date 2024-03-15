@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memtree.h"
+#include "memory.h"
 
 static t_type	yet_another_helper(t_memtree *memtree)
 {

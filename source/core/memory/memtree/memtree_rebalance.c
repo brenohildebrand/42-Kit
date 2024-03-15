@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 20:30:07 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/21 11:21:52 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:21:52 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memtree.h"
+#include "memory.h"
 
 static void	left_rotate(t_memtree *memtree)
 {

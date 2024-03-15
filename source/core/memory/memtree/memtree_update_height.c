@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:22:15 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/21 11:23:11 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:21:57 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memtree.h"
+#include "memory.h"
 
 void	memtree_update_height(t_memtree memtree)
 {

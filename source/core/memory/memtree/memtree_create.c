@@ -6,15 +6,15 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 13:34:02 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/21 11:26:08 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:28:48 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memtree.h"
+#include "memory.h"
 
-t_memtree	memtree_create(t_type type, void *address)
+t_memtree memtree_create(t_type type, void *address)
 {
-	t_memtree	memtree;
+	t_memtree memtree;
 
 	memtree = malloc(sizeof(struct s_memtree));
 	if (memtree == NULL)

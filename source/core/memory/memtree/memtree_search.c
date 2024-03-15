@@ -6,11 +6,11 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 09:31:41 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/21 11:24:23 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:21:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memtree.h"
+#include "memory.h"
 
 static t_type	helper(t_memtree memtree, void *address)
 {

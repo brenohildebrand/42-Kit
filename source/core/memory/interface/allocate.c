@@ -6,26 +6,35 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 22:47:06 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/14 22:46:31 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:16:33 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "memory_management.h"
+#include "memory.h"
 
-void	*allocate(int size)
+/**
+ * Allocates a block of memory of given size and initializes it to zero.
+ * 
+ * @param size The size in bytes of the memory block to allocate.
+ * @return A pointer to the allocated memory block.
+ */
+void	*allocate(unsigned int size)
 {
-	void	*pointer;
-	t_i32	i;
+	void			*address;
+	unsigned int	i;
 
-	assert(size > 0);
-	pointer = malloc(size);
-	assert(pointer != NULL);
+	address = malloc(size);
+	if (address == NULL)
+	{
+		memtree_destroy();
+		exit(1);
+	}
 	i = 0;
 	while (i < size)
 	{
-		((t_u8 *)pointer)[i] = 0;
+		((unsigned int *)address)[i] = 0;
 		i++;
 	}
-	memtree_insert(NULL, pointer);
-	return (pointer);
+	memtree_insert(NULL, address);
+	return (address);
 }
