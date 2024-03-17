@@ -1,9 +1,15 @@
-# Guide
+# Handbook
 
-Welcome stranger! 
-This is the official guide to *ft_framework*.
+This is the official handbook for ft_framework.
 
-## I mean, why not?
+## Summary
+
+* [Introduction](#introduction)
+* [Getting Started](#getting-started)
+* [Concepts](#concepts)
+* [Modules](#modules)
+
+## Introduction
 
 Just to give you some context and to explain my motivations.
 
@@ -13,7 +19,9 @@ I experimented quite a lot before getting to something cool. I tried different a
 
 Welcome to **ft_framework**!
 
-## It works on my machine.
+## Getting Started
+
+### It works on my machine.
 
 Before getting to the deep dive, you should make it works on yours too. Start by cloning it to a comfortable folder on your computer.
 
@@ -23,7 +31,7 @@ git clone git@github.com:brenohildebrand/ft_framework.git
 
 Now add `ft_framework/tools/trillian/bin` to your `$PATH`. And that's it.
 
-## Bring your best towel!
+## Concepts
 
 If you don't already know, a project using this framework can be initialized with ```trillian init```. It will create the directories needed and you can start coding right away.
 
@@ -48,3 +56,63 @@ if you want to avoid that check for whatever you need before calling the functio
 Congratulations for reading this far. Now you know how to use the wannabe famous *ft_framework*. Since you got the power you can do whatever you want with it. Make it better, make it yours. And if you fell like contributing just check out [this](./CONTRIBUTING.md).
 
 May your code be bug-free. See ya!
+
+
+## Modules
+
+### Memory
+
+#### Purpose
+
+The memory module is responsible for managing memory allocation and
+deallocation safely. It is also responsible for keeping track of the types
+associated with each allocated block.
+
+#### Usage
+
+The memory module provides two primary functions: 'allocate' and 'deallocate'.
+That's all you need from here.
+
+#### Examples
+
+```c
+void	*pointer;
+
+pointer = allocate(42);
+deallocate(pointer);
+```
+
+#### Implementation Details
+
+Initialized to zero.
+
+Under the hood it's a self balanced binary tree.
+Beware that you should use the 'new' and 'delete' functions instead of 'allocate' and 'deallocate' when creating and destroying types.
+If anything goes wrong here, the module will free every allocated memory and exit the program.
+
+
+### Types
+
+#### Purpose
+
+The types module defines the type system of ft_framework. It 
+
+#### Usage
+
+#### Notes
+
+### Console
+
+#### Purpose
+
+#### Usage
+
+#### Notes
+
+### Control
+
+#### Puurpose
+
+#### Usage
+
+#### Notes
