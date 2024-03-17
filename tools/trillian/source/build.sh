@@ -33,26 +33,26 @@ FRAMEWORK=$PWD
 # shopt -u nullglob
 
 # Update the .vscode configuration.
-cat << EOF > .vscode/c_cpp_properties.json
-{
-    "configurations": [
-        {
-            "name": "Linux",
-            "includePath": [
-				$(find source -type d -exec echo {} \; | sed "s/.*/\t\t\t\t\"\${workspaceFolder}\/&\",/" | sed '1s/^\t\t\t\t//' | sed '$s/,$//')
-            ],
-			"forcedInclude": [
-				"\${workspaceFolder}/source/types/framework/framework.h",
-				$(find source -type f -name "*.h" -exec echo {} \; | sed "s/.*/\t\t\t\t\"\${workspaceFolder}\/&\",/" | sed '1s/^\t\t\t\t//' | sed '$s/,$//')
-			],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c99"
-        }
-    ],
-    "version": 4
-}
-EOF
+# cat << EOF > .vscode/c_cpp_properties.json
+# {
+#     "configurations": [
+#         {
+#             "name": "Linux",
+#             "includePath": [
+# 				$(find source -type d -exec echo {} \; | sed "s/.*/\t\t\t\t\"\${workspaceFolder}\/&\",/" | sed '1s/^\t\t\t\t//' | sed '$s/,$//')
+#             ],
+# 			"forcedInclude": [
+# 				"\${workspaceFolder}/source/types/framework/framework.h",
+# 				$(find source -type f -name "*.h" -exec echo {} \; | sed "s/.*/\t\t\t\t\"\${workspaceFolder}\/&\",/" | sed '1s/^\t\t\t\t//' | sed '$s/,$//')
+# 			],
+#             "defines": [],
+#             "compilerPath": "/usr/bin/gcc",
+#             "cStandard": "c99"
+#         }
+#     ],
+#     "version": 4
+# }
+# EOF
 
 cat << EOF > .vscode/launch.json
 {

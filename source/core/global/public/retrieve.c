@@ -6,13 +6,22 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:09:29 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 15:56:28 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:43:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "functions.h"
+#include "global_map.h"
 
-// t_any	retrieve(t_i8 *key)
-// {
-// 	return (map_get(framework_get()->map, i8_sequence_to_any(key)));
-// }
+/**
+ * Retrieves the value of an entry from the global map.
+ * 
+ * @param key The key of the entry.
+ * @return The value of the entry.
+*/
+t_any	retrieve(t_any key)
+{
+	t_map	global_map;
+
+	global_map = global_map_get();
+	return (get(global_map, key));
+}

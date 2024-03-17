@@ -7,13 +7,16 @@
 				"${workspaceFolder}/source/core/memory/private/memtree",
 				"${workspaceFolder}/source/core/types/public",
 				"${workspaceFolder}/source/core/console/public",
-				"${workspaceFolder}/source/core/control/public"
+				"${workspaceFolder}/source/core/control/public",
+				"${workspaceFolder}/source/core/global/public",
+				"${workspaceFolder}/source/core/global/private/global_map"
 			],
 			"forcedInclude": [
 				"${workspaceFolder}/source/core/memory/public/memory.h",
 				"${workspaceFolder}/source/core/types/public/types.h",
 				"${workspaceFolder}/source/core/console/public/console.h",
-				"${workspaceFolder}/source/core/control/public/control.h"
+				"${workspaceFolder}/source/core/control/public/control.h",
+				"${workspaceFolder}/source/core/global/public/global.h"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

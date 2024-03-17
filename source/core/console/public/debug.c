@@ -6,13 +6,19 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 15:47:28 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 00:35:21 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/17 12:59:37 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifdef DEBUG
 
-void	debug(t_i8 *message)
+/**
+ * Writes a debug message to standard output prefixed with "[DEBUG]".
+ * The message is written in blue text. Only works in debug mode.
+ *
+ * @param message The debug message to write.
+ */
+void debug(t_i8 *message)
 {
 	write(1, "\033[1;34m", 7);
 	write(1, "[DEBUG] ", 8);
@@ -22,6 +28,12 @@ void	debug(t_i8 *message)
 
 #else
 
+/**
+ * Writes a debug message to standard output prefixed with "[DEBUG]".
+ * The message is written in blue text. Only works in debug mode.
+ *
+ * @param message The debug message to write.
+ */
 void	debug(t_i8 *message)
 {
 	(void)message;

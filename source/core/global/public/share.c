@@ -6,14 +6,22 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 21:36:17 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/13 15:56:40 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:45:36 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "functions.h"
-// #include "framework.h"
+#include "global_map.h"
 
-// void	share(t_i8 *key, t_any value)
-// {
-// 	map_set(framework_get()->map, i8_sequence_to_any(key), value);
-// }
+/**
+ * Inserts an entry in the global map.
+ * 
+ * @param key The key of the entry.
+ * @param value The value of the entry.
+ */
+void	share(t_any key, t_any value)
+{
+	t_map global_map;
+
+	global_map = global_map_get();
+	map_set(global_map, key, value);
+}
