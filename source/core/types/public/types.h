@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 01:06:46 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:58:37 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ struct							s_list;
 typedef struct s_map			*t_map;
 struct							s_map;
 
-typedef struct s_set			*t_set;
-struct							s_set;
+// typedef struct s_set			*t_set;
+// struct							s_set;
 
 typedef t_any					*t_tuple;
 
@@ -134,7 +134,7 @@ t_type	f64(void);
 t_type	chain(void);
 t_type	list(void);
 t_type	map(void);
-t_type	set(void);
+// t_type	set(void);
 t_type	tuple(void);
 
 t_i32	compare(void *instance, void *another_instance);

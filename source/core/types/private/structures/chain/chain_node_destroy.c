@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain.c                                            :+:      :+:    :+:   */
+/*   chain_node_destroy.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 19:15:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 18:47:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/17 18:50:38 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/17 18:51:48 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chain.h"
 
-static void	init_type(t_type type)
+void	chain_node_destroy(t_chain_node instance)
 {
-	type->name = "chain";
-	type->size = sizeof(struct s_chain);
-	type->create = (t_create)chain_create;
-	type->destroy = (t_destroy)chain_destroy;
-	type->copy = (t_copy)chain_copy;
-}
-
-t_type	chain(void)
-{
-	static struct s_type	type;
-	static t_i32			is_initialized = FALSE;
-	
-	if (!is_initialized)
+	if (instance == NULL)
+		return ;
+	if (instance->value)
 	{
-		init_type(&type);
-		is_initialized = TRUE;
+		any_destroy(instance->value);
 	}
-	return (&type);
+	delete(instance);
 }

@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain.c                                            :+:      :+:    :+:   */
+/*   console.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 19:15:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 18:47:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/02/28 20:17:11 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/17 14:58:07 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "chain.h"
-
-static void	init_type(t_type type)
+/**
+ * Logs a message to stdout.
+ *
+ * @param message The message string to log.
+ */
+void console(t_i8 *message)
 {
-	type->name = "chain";
-	type->size = sizeof(struct s_chain);
-	type->create = (t_create)chain_create;
-	type->destroy = (t_destroy)chain_destroy;
-	type->copy = (t_copy)chain_copy;
-}
+	t_u8 len;
 
-t_type	chain(void)
-{
-	static struct s_type	type;
-	static t_i32			is_initialized = FALSE;
-	
-	if (!is_initialized)
+	len = 0;
+	while (message[len])
 	{
-		init_type(&type);
-		is_initialized = TRUE;
+		len++;
 	}
-	return (&type);
+	write(1, message, len);
 }

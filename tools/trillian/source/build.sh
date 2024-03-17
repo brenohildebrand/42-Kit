@@ -123,7 +123,8 @@ DEBUG="./build/debug/bin/$NAME"
 CC="gcc"
 CFLAGS="-Wall -Wextra -Werror -std=c99 -g"
 CPATHS="\\
-	-include framework.h \\
+	-include memory.h \\
+	-include types.h \\
 $(find ./source -type f -name '*.h' -exec basename {} \; | sed 's/.*/\t-include & \\/' | sed '/framework\.h/d')
 $(find ./source -type d -exec echo -e '\t'-iquote {} \\ \; | sed 's/ .*ft_framework\// /' | sed '$s/ \\//')"
 

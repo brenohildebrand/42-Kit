@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain.c                                            :+:      :+:    :+:   */
+/*   chain_pop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 19:15:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 18:47:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/17 19:00:47 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/17 19:08:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chain.h"
 
-static void	init_type(t_type type)
+t_any	chain_pop(t_chain instance)
 {
-	type->name = "chain";
-	type->size = sizeof(struct s_chain);
-	type->create = (t_create)chain_create;
-	type->destroy = (t_destroy)chain_destroy;
-	type->copy = (t_copy)chain_copy;
-}
+	t_any			value;
 
-t_type	chain(void)
-{
-	static struct s_type	type;
-	static t_i32			is_initialized = FALSE;
-	
-	if (!is_initialized)
+	if (instance->length == 0)
 	{
-		init_type(&type);
-		is_initialized = TRUE;
+		return (NULL);
 	}
-	return (&type);
+	value = instance->tail->value;
+	delete(instance->tail);
+	if (instance->head == instance->tail)
+	{
+		instance->head = NULL;
+		instance->tail = NULL;
+	}
+	else
+	{
+		instance->tail = instance->tail->previous;
+		instance->tail->next = NULL;
+	}
+	instance->length--;
+	if (value != NULL)
+	{
+		instance->size--;
+	}
+	return (value);
 }

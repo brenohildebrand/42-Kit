@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:22:16 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 12:59:55 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/17 14:59:02 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void error(t_i8 *message)
 	write(1, "\033[1;31m", 7);
 	write(1, "[ERROR] ", 8);
 	write(1, "\033[0m", 4);
-	log(message);
+	console(message);
 	quit(1);
 }

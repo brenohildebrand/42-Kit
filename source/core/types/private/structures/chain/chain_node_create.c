@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   log.c                                              :+:      :+:    :+:   */
+/*   chain_node_create.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 20:17:11 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 13:00:52 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/17 18:48:59 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/17 18:50:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * Logs a message to stdout.
- *
- * @param message The message string to log.
- */
-void log(t_i8 *message)
-{
-	t_u8 len;
+#include "chain.h"
 
-	len = 0;
-	while (message[len])
-	{
-		len++;
-	}
-	write(1, message, len);
+t_chain_node	chain_node_create(void)
+{
+	t_chain_node	instance;
+
+	instance = (t_chain_node)new(chain_node);
+	instance->value = NULL;
+	instance->next = NULL;
+	instance->previous = NULL;
+	return (instance);
 }

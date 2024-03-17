@@ -6,14 +6,15 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:41:39 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 03:16:08 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/17 15:00:16 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTROL_H
 # define CONTROL_H
 
-#include "sys/types.h"
+#include <sys/types.h>
+#include <sys/wait.h>
 
 void	quit(t_i32 code);
 void	assert(t_i32 condition);

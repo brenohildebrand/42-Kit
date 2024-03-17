@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain.c                                            :+:      :+:    :+:   */
+/*   chain_push.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/14 19:15:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 18:47:38 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/17 18:57:39 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/17 19:14:01 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chain.h"
 
-static void	init_type(t_type type)
+void	chain_push(t_chain instance, t_any value)
 {
-	type->name = "chain";
-	type->size = sizeof(struct s_chain);
-	type->create = (t_create)chain_create;
-	type->destroy = (t_destroy)chain_destroy;
-	type->copy = (t_copy)chain_copy;
-}
+	t_chain_node	new_node;
 
-t_type	chain(void)
-{
-	static struct s_type	type;
-	static t_i32			is_initialized = FALSE;
-	
-	if (!is_initialized)
+	new_node = chain_node_create();
+	new_node->value = value;
+	if (instance->head == NULL)
 	{
-		init_type(&type);
-		is_initialized = TRUE;
+		instance->head = new_node;
+		instance->tail = new_node;
 	}
-	return (&type);
+	else
+	{
+		instance->tail->next = new_node;
+		new_node->previous = instance->tail;
+		instance->tail = new_node;
+	}
+	instance->length++;
+	if (value != NULL)
+	{
+		instance->size++;
+	}
 }
