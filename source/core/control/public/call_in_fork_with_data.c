@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   forkrun.c                                          :+:      :+:    :+:   */
+/*   call_in_fork_with_data.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/25 11:03:08 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/03 19:01:31 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/17 03:08:06 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/17 03:09:08 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "functions.h"
-
-int	forkrun(void (*callback)(void))
+/**
+ * Forks the current process and calls the provided callback function in the 
+ * child process, passing the given data pointer.
+ *
+ * @param callback The callback function to call in the child process.
+ * @param data Data pointer to pass to the callback function.
+ * @return The status of the child process.
+ */
+t_i32 call_in_fork_with_data(void (*callback)(void *), void *data)
 {
-	pid_t	pid;
-	int		status;
+	pid_t pid;
+	int status;
 
 	pid = fork();
 	assert(pid >= 0);
 	if (pid == 0)
 	{
-		callback();
+		callback(data);
 		exit(0);
 	}
 	else

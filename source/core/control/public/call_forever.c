@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   repeat.c                                           :+:      :+:    :+:   */
+/*   call_forever.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 18:11:30 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/02/22 18:12:18 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/17 03:17:08 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/17 03:17:34 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "functions.h"
-
-void	repeat(int n, void (*callback)(void))
+/**
+ * Calls the given callback function forever in an infinite loop.
+ * This can be used to implement a simple event loop or background task.
+ * 
+ * @param callback The callback function to call.
+ */
+void call_forever(void (*callback)(void))
 {
-	while (n--)
+	while (1)
+	{
 		callback();
+	}
 }
