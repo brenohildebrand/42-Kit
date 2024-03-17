@@ -1,7 +1,7 @@
 # Guide
 
 Welcome stranger! 
-This is the official guide to the *ft_framework*.
+This is the official guide to *ft_framework*.
 
 ## I mean, why not?
 

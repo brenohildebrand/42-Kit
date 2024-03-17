@@ -3,10 +3,19 @@
         {
             "name": "Linux",
             "includePath": [
-				"${workspaceFolder}/source/core/memory"
+				"${workspaceFolder}/source/core/memory/public",
+				"${workspaceFolder}/source/core/memory/private/memtree",
+				"${workspaceFolder}/source/core/types/public",
+				"${workspaceFolder}/source/core/console/public",
+				"${workspaceFolder}/source/core/control/public"
 			],
-			"forcedInclude": [],
-            "defines": [ "FRAMEWORK" ],
+			"forcedInclude": [
+				"${workspaceFolder}/source/core/memory/public/memory.h",
+				"${workspaceFolder}/source/core/types/public/types.h",
+				"${workspaceFolder}/source/core/console/public/console.h",
+				"${workspaceFolder}/source/core/control/public/control.h"
+            ],
+            "defines": [],
             "compilerPath": "/usr/bin/gcc",
             "cStandard": "c99"
         }
