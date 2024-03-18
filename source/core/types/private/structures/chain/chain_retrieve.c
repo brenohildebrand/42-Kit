@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   copy.c                                             :+:      :+:    :+:   */
+/*   chain_retrieve.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 17:46:32 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/18 15:52:25 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/18 15:19:01 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/18 15:19:54 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "types.h"
+#include "chain.h"
 
-/**
- * Copies an instance by looking up its type and calling the type's copy 
- * function.
- * 
- * @param instance The instance to copy.
- * @return A copy of the instance.
- */
-void	*copy(void *instance)
+t_any	chain_retrieve(t_chain instance, t_i32 index)
 {
-	t_type	type;
+	t_any	current;
 
-	type = memtree_search(instance);
-	assert(type != NULL);
-	assert(type->copy != NULL);
-	return (type->copy(instance));
+	if (index < 0)
+	{
+		index = instance->length + index;
+	}
+	if (index < 0 || index >= instance->length)
+	{
+		error("No way! The chain can't handle that.");
+	}
+	current = instance->head;
+	while (index--)
+	{
+		current = current->next;
+	}
+	return (current->value);
 }

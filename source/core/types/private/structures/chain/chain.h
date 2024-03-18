@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:02:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 20:01:30 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:28:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_type			chain(void);
 t_chain			chain_create(void);
 void			chain_destroy(t_chain instance);
 t_chain			chain_copy(t_chain instance);
-t_chain			chain_compare(t_chain instance, t_chain another_instance);
+t_i32			chain_compare(t_chain instance, t_chain another_instance);
 void			chain_push(t_chain instance, t_any value);
 t_any			chain_pop(t_chain instance);
 void			chain_unshift(t_chain instance, t_any value);
@@ -55,6 +55,7 @@ void			chain_reduce_with_data(t_chain instance);
 t_i32			chain_is_empty(t_chain instance);
 t_i32			chain_is_full(t_chain instance);
 t_i32			chain_is_sorted(t_chain instance);
+t_i32			chain_is_reverse_sorted(t_chain instance);
 t_i32			chain_get_length(t_chain instance);
 t_i32			chain_get_size(t_chain instance);
 t_any			chain_to_any(t_chain instance);

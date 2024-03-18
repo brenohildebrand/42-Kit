@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chain_remove.c                                     :+:      :+:    :+:   */
+/*   chain_assign.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/17 19:38:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/18 14:43:39 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/18 15:02:08 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/18 15:18:15 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "chain.h"
+#include "any.h"
 
-static t_any	remove(t_chain instance, t_i32 index)
+static void	update_size(t_chain instance, t_any new_value, t_any current_value)
 {
-	t_any			value;
-	t_chain_node	current;
-
-	current = instance->head;
-	while (index--)
+	if (value != NULL && current_value == NULL)
 	{
-		current = current->next;
+		instance->size++;
 	}
-	value = current->value;
-	current->previous->next = current->next;
-	current->next->previous = current->previous;
-	delete(current);
-	instance->length--;
-	if (value != NULL)
+	else if (value == NULL && current_value != NULL)
 	{
 		instance->size--;
 	}
-	return (value);
 }
 
-t_any	chain_remove(t_chain instance, t_i32 index)
+void	chain_assign(t_chain instance, t_any value, t_i32 index)
 {
-	t_any			value;
 	t_chain_node	current;
 
 	if (index < 0)
@@ -47,16 +37,15 @@ t_any	chain_remove(t_chain instance, t_i32 index)
 	{
 		error("No way! The chain can't handle that.");
 	}
-	if (index == 0)
+	current = instance->head;
+	while (index--)
 	{
-		return (chain_shift(instance));
+		current = current->next;
 	}
-	else if (index == instance->length - 1)
+	update_size(instance, value, current->value);
+	if (current->value != NULL)
 	{
-		return (chain_pop(instance));
+		any_destroy(current->value);
 	}
-	else
-	{
-		return (remove(instance, index));
-	}
+	current->value = value;
 }
