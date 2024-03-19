@@ -5,19 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/05 07:54:59 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 00:12:26 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/19 18:07:06 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/19 18:34:10 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
 
-void	rotate(void *instance)
+/**
+ * The last element will become the first.
+ * 
+ * @param instance The instance to be rotated.
+ */
+void rotate(void *instance)
 {
-	t_type	type;
+	t_type type;
 
 	type = memtree_search(instance);
-	assert(type != NULL);
-	assert(type->rotate != NULL);
+	assert(type != NULL, "Instance does not have a type.");
+	assert(type->rotate != NULL, "Type does not have the rotate function");
 	type->rotate(instance);
 }

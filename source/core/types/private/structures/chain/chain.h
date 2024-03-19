@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:02:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/18 15:28:56 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/18 16:28:55 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void			chain_push(t_chain instance, t_any value);
 t_any			chain_pop(t_chain instance);
 void			chain_unshift(t_chain instance, t_any value);
 t_any			chain_shift(t_chain instance);
-void			chain_insert(t_chain instance, t_any value, t_i32 index);
-t_any			chain_remove(t_chain instance, t_i32 index);
+void			chain_insert(t_chain instance, t_any key, t_any value);
+t_any			chain_remove(t_chain instance, t_any key);
 void			chain_assign(t_chain instance, t_any value, t_i32 index);
 t_any			chain_retrieve(t_chain instance, t_i32 index);
 void			chain_rotate(t_chain instance);

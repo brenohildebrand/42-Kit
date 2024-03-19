@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 01:50:24 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/18 15:49:11 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/18 15:57:03 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void *create(t_type (*signature)(void))
 	t_type type;
 
 	type = signature();
-	assert(type->create != NULL);
+	assert(type->create != NULL, "Type does not have the create function.");
 	return (type->create());
 }

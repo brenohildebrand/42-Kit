@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 00:41:39 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/17 15:00:16 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/19 18:08:30 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <sys/wait.h>
 
 void	quit(t_i32 code);
-void	assert(t_i32 condition);
+void	assert(t_i32 condition, t_i8 *message);
 t_i32	call_in_fork(void (*callback)(void));
 t_i32	call_in_fork_with_data(void (*callback)(void *), void *data);
 void	call_to_ensure(t_i32 condition, void (*callback)(void));

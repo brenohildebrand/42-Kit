@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/18 15:52:38 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/19 20:34:47 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ typedef struct s_type			*t_type;
 typedef void					*(*t_create)(void);
 typedef void					(*t_destroy)(void *);
 typedef void					*(*t_copy)(void *);
-typedef int						(*t_compare)(void *, void *);
+typedef t_i32					(*t_compare)(void *, void *);
 typedef void					(*t_push)(void *, t_any);
 typedef t_any					(*t_pop)(void *);
 typedef void					(*t_unshift)(void *, t_any);
 typedef t_any					(*t_shift)(void *);
-typedef void					(*t_insert)(void *, t_any, t_i32);
-typedef t_any					(*t_remove)(void *, t_i32);
+typedef void					(*t_insert)(void *, t_any, t_any);
+typedef t_any					(*t_remove)(void *, t_any);
 typedef void					(*t_assign)(void *, t_any, t_i32);
 typedef t_any					(*t_retrieve)(void *, t_i32);
 typedef void					(*t_rotate)(void *);
@@ -77,11 +77,11 @@ typedef void					(*t_for_each_with_data)(
 									void *);
 typedef t_any					(*t_reduce)(
 									void *,
-									t_any accumulator,
+									t_any,
 									t_any (*)(t_any, t_any, t_i32));
 typedef t_any					(*t_reduce_with_data)(
 									void *,
-									t_any accumulator,
+									t_any,
 									t_any (*)(t_any, t_any, t_i32, void *),
 									void *);
 typedef t_i32					(*t_is_empty)(void *);
@@ -177,6 +177,44 @@ t_any		u64_to_any(t_u64 value);
 void		*create(t_type (*signature)(void));
 void		destroy(void *instance);
 void		*copy(void *instance);
+t_i32		compare(void *instance, void *another_instance);
+void		push(void *instance, t_any value);
+t_any		pop(void *instance);
+void		unshift(void *instance, t_any value);
+t_any		shift(void *instance);
+void		insert(void *instance, t_any key, t_any value);
+t_any		remove(void *instance, t_any key);
+void		assign(void *instance, t_any key, t_any value);
+t_any		retrieve(void *instance, t_any key);
+void		rotate(void *instance);
+void		reverse_rotate(void *instance);
+void		swap(void *instance, t_any key, t_any another_key);
+void		print(void *instance);
+void		sort(void *instance);
+void		reverse_sort(void *instance);
+void		for_each(void *instance, void (*callback)(t_any, t_i32));
+void		for_each_with_data(
+				void *instance,
+				void (*callback)(t_any, t_i32, void *),
+				void *data);
+t_any		reduce(
+				void *instance,
+				t_any accumulator,
+				t_any (*callback)(t_any, t_any, t_i32));
+t_any		reduce_with_data(
+				void *instance,
+				t_any accumulator,
+				t_any (*callback)(t_any, t_any, t_i32, void *),
+				void *data);
+t_i32		is_empty(void *instance);
+t_i32		is_full(void *instance);
+t_i32		is_sorted(void *instance);
+t_i32		is_reverse_sorted(void *instance);
+t_i32		get_length(void *instance);
+t_i32		get_size(void *instance);
+t_any		to_any(void *instance);
+t_any		as_any(void *instance);
 
+// continues...
 
 #endif

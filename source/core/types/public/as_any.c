@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   as_any.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/19 19:17:47 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/19 19:19:13 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/19 20:36:46 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/19 20:38:00 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
 
 /**
- * Sorts in increasing order.
+ * Converts a copy of the type to any and returns it.
  * 
- * @param instance The instance to be sorted.
+ * @param instance The instance to convert.
 */
-void	sort(void *instance)
+t_any	as_any(void *instance)
 {
 	t_type	type;
 
 	type = memtree_search(instance);
 	assert(type != NULL, "Instance does not have a type.");
-	assert(type->sort != NULL, "Type does not have the sort function");
-	type->sort(instance);
+	assert(type->as_any != NULL, "Type does not have the as_any function");
+	return (type->as_any(instance));
 }
