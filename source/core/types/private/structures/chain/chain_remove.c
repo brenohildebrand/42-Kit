@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/17 19:38:37 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/18 14:43:39 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/20 01:44:23 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ static t_any	remove(t_chain instance, t_i32 index)
 	return (value);
 }
 
-t_any	chain_remove(t_chain instance, t_i32 index)
+t_any	chain_remove(t_chain instance, t_i32 key)
 {
+	t_i32			index;
 	t_any			value;
 	t_chain_node	current;
 
+	index = any_as_i32(key);
 	if (index < 0)
 	{
 		index = instance->length + index;
