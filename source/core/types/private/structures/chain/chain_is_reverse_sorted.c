@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   share.c                                            :+:      :+:    :+:   */
+/*   chain_is_reverse_sorted.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 21:36:17 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/19 21:16:56 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/20 01:35:46 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/20 01:36:36 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global_map.h"
+#include "chain.h"
 
-/**
- * Inserts an entry in the global map.
- * 
- * @param key The key of the entry.
- * @param value The value of the entry.
- */
-void	share(t_any key, t_any value)
+t_i32	chain_is_reverse_sorted(t_chain instance)
 {
-	t_map global_map;
+	t_chain_node	current;
+	t_chain_node	previous;
 
-	global_map = global_map_get();
-	map_insert(global_map, key, value);
+	if (instance->length <= 1)
+	{
+		return (TRUE);
+	}
+	previous = instance->head;
+	current = instance->head->next;
+	while (current)
+	{
+		if (any_compare(previous->value, current->value) < 0)
+		{
+			return (FALSE);
+		}
+		previous = current;
+		current = current->next;
+	}
+
+	return (TRUE);
 }

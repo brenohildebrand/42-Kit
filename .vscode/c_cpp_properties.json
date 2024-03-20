@@ -6,6 +6,7 @@
 				"${workspaceFolder}/source/core/memory/public",
 				"${workspaceFolder}/source/core/memory/private/memtree",
 				"${workspaceFolder}/source/core/types/public",
+				"${workspaceFolder}/source/core/types/private/primitives/any",
 				"${workspaceFolder}/source/core/console/public",
 				"${workspaceFolder}/source/core/control/public",
 				"${workspaceFolder}/source/core/global/public",

@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   share.c                                            :+:      :+:    :+:   */
+/*   chain_to_any.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/22 21:36:17 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/19 21:16:56 by bhildebr         ###   ########.fr       */
+/*   Created: 2024/03/20 01:38:33 by bhildebr          #+#    #+#             */
+/*   Updated: 2024/03/20 01:39:56 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "global_map.h"
+#include "chain.h"
+#include "any.h"
 
-/**
- * Inserts an entry in the global map.
- * 
- * @param key The key of the entry.
- * @param value The value of the entry.
- */
-void	share(t_any key, t_any value)
+t_any	chain_to_any(t_chain instance)
 {
-	t_map global_map;
+	t_any	new_instance;
 
-	global_map = global_map_get();
-	map_insert(global_map, key, value);
+	new_instance = any_create();
+	new_instance->type = chain();
+	new_instance->value.instance = instance;
+	return (new_instance);	
 }

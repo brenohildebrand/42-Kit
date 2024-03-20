@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 02:09:13 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/19 20:34:47 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/19 21:08:58 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,6 @@
 
 # define TRUE (1)
 # define FALSE (0)
-
-// first == second => == 0
-// first <= second => <= 0
-// first >= second => >= 0
-// first < second  => < 0
-// first > second  => > 0
 
 typedef struct s_any			*t_any;
 struct							s_any;
@@ -214,7 +208,5 @@ t_i32		get_length(void *instance);
 t_i32		get_size(void *instance);
 t_any		to_any(void *instance);
 t_any		as_any(void *instance);
-
-// continues...
 
 #endif

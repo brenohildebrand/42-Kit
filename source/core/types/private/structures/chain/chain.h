@@ -6,7 +6,7 @@
 /*   By: bhildebr <bhildebr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 01:02:12 by bhildebr          #+#    #+#             */
-/*   Updated: 2024/03/18 16:28:55 by bhildebr         ###   ########.fr       */
+/*   Updated: 2024/03/20 01:29:53 by bhildebr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,20 @@ void			chain_swap(t_chain instance, t_any key, t_any another_key);
 void			chain_print(t_chain instance);
 void			chain_sort(t_chain instance);
 void			chain_reverse_sort(t_chain instance);
-void			chain_for_each(t_chain instance);
-void			chain_for_each_with_data(t_chain instance);
-void			chain_reduce(t_chain instance);
-void			chain_reduce_with_data(t_chain instance);
+void			chain_for_each(t_chain instance, void (*callback)(t_any, t_i32));
+void			chain_for_each_with_data(
+					t_chain instance,
+					void (*callback)(t_any, t_i32, void *),
+					void *data);
+void			chain_reduce(
+					t_chain instance,
+					t_any accumulator,
+					t_any (*callback)(t_any, t_any, t_i32));
+void			chain_reduce_with_data(
+					t_chain instance,
+					t_any accumulator,
+					t_any (*callback)(t_any, t_any, t_i32, void *),
+					void *data);
 t_i32			chain_is_empty(t_chain instance);
 t_i32			chain_is_full(t_chain instance);
 t_i32			chain_is_sorted(t_chain instance);
